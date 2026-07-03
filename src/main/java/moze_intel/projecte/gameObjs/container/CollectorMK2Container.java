@@ -1,0 +1,37 @@
+package moze_intel.projecte.gameObjs.container;
+
+import moze_intel.projecte.gameObjs.block_entities.CollectorMK2BlockEntity;
+import moze_intel.projecte.gameObjs.container.slots.SlotGhost;
+import moze_intel.projecte.gameObjs.container.slots.SlotPredicates;
+import moze_intel.projecte.gameObjs.container.slots.ValidatedSlot;
+import moze_intel.projecte.gameObjs.registries.PEContainerTypes;
+import net.minecraft.world.entity.player.Inventory;
+import net.neoforged.neoforge.items.IItemHandler;
+
+public class CollectorMK2Container extends CollectorMK1Container {
+
+	public CollectorMK2Container(int windowId, Inventory playerInv, CollectorMK2BlockEntity collector) {
+		super(PEContainerTypes.COLLECTOR_MK2_CONTAINER, windowId, playerInv, collector);
+	}
+
+	@Override
+	void initSlots() {
+		IItemHandler aux = collector.getAux();
+		IItemHandler main = collector.getInput();
+
+		//Klein Star Slot
+		this.addSlot(new ValidatedSlot(aux, CollectorMK2BlockEntity.UPGRADING_SLOT, 140, 58, SlotPredicates.COLLECTOR_INV));
+		int counter = 0;
+		//Fuel Upgrade storage
+		for (int i = 2; i >= 0; i--) {
+			for (int j = 3; j >= 0; j--) {
+				this.addSlot(new ValidatedSlot(main, counter++, 18 + i * 18, 8 + j * 18, SlotPredicates.COLLECTOR_INV));
+			}
+		}
+		//Upgrade Result
+		this.addSlot(new ValidatedSlot(aux, CollectorMK2BlockEntity.UPGRADE_SLOT, 140, 13, SlotPredicates.ALWAYS_FALSE));
+		//Upgrade Target
+		this.addSlot(new SlotGhost(aux, CollectorMK2BlockEntity.LOCK_SLOT, 169, 36, SlotPredicates.COLLECTOR_LOCK));
+		addPlayerInventory(20, 84);
+	}
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "H": "projecte:harvest_goddess_band",
+    "I": "projecte:ignition_ring",
+    "M": "projecte:red_matter",
+    "S": "projecte:swiftwolf_rending_gale",
+    "Z": "projecte:zero_ring"
+  },
+  "pattern": [
+    "ZIH",
+    "SMM",
+    "MMM"
+  ],
+  "result": {
+    "count": 1,
+    "id": "projecte:arcana_ring"
+  }
+}

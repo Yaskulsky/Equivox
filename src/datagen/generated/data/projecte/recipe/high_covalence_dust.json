@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#c:gems/diamond",
+    "minecraft:coal"
+  ],
+  "result": {
+    "count": 40,
+    "id": "projecte:high_covalence_dust"
+  }
+}

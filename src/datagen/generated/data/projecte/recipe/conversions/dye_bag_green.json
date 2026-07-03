@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "#projecte:alchemical_bags",
+    "#c:dyes/green"
+  ],
+  "result": {
+    "count": 1,
+    "id": "projecte:green_alchemical_bag"
+  }
+}

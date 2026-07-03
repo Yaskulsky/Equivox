@@ -1,0 +1,32 @@
+{
+  "parent": "projecte:root",
+  "criteria": {
+    "dm": {
+      "conditions": {
+        "items": [
+          {
+            "items": "projecte:dark_matter"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.projecte.dark_matter.description"
+    },
+    "icon": {
+      "id": "projecte:dark_matter"
+    },
+    "title": {
+      "translate": "advancements.projecte.dark_matter"
+    }
+  },
+  "requirements": [
+    [
+      "dm"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

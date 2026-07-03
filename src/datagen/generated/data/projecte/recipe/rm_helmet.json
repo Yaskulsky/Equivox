@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "D": "projecte:dm_helmet",
+    "M": "projecte:red_matter"
+  },
+  "pattern": [
+    "MMM",
+    "MDM"
+  ],
+  "result": {
+    "id": "projecte:rm_helmet"
+  }
+}

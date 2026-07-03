@@ -1,0 +1,40 @@
+{
+  "criteria": {
+    "philstone_recipe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:glowstone_dust"
+          },
+          {
+            "items": "minecraft:diamond"
+          },
+          {
+            "items": "minecraft:redstone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png",
+    "description": {
+      "translate": "advancements.projecte.description"
+    },
+    "icon": {
+      "id": "projecte:philosophers_stone"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "misc.projecte.mod_name"
+    }
+  },
+  "requirements": [
+    [
+      "philstone_recipe"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

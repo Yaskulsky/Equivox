@@ -1,0 +1,32 @@
+modLoader="javafml"
+loaderVersion="${loader_version}"
+issueTrackerURL="https://github.com/Yaskulsky/projecte-26-port/issues"
+license="MIT"
+
+[[mods]]
+  modId="projecte"
+  version="${version}"
+  displayName="ProjectE (Unofficial 26.1)"
+  displayURL="https://github.com/Yaskulsky/projecte-26-port"
+  logoFile="logo.png"
+  authors="SinKillerJ, MaPePeR, williewillus, Lilylicious, pupnewfster"
+  credits="EE2 creator - x3n0ph0b3, EE2 GUI Textures - MidnightLightning, Former Texture Artist - Magic Banana. Unofficial 26.1.2 port by Yaskulsky. Upstream: github.com/sinkillerj/ProjectE"
+  description='''Unofficial community port of ProjectE for Minecraft 26.1.2 / NeoForge. A complete rewrite of EE2 for modern Minecraft versions.'''
+
+[[dependencies.projecte]]
+  modId="minecraft"
+  type="required"
+  versionRange="${mc_version}"
+  side="BOTH"
+[[dependencies.projecte]]
+  modId="neoforge"
+  type="required"
+  versionRange="${neo_version}"
+  side="BOTH"
+
+[[dependencies.projecte]]
+modId="mekanism"
+type="incompatible"
+reason="Requires an update to support changes to recipe mappers"
+versionRange="[,10.7.8]"
+side="BOTH"

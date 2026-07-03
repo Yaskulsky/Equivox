@@ -1,0 +1,10 @@
+{
+  "remove": [
+    "projecte:dm_sword",
+    "projecte:rm_sword",
+    "projecte:dm_axe",
+    "projecte:rm_axe",
+    "projecte:rm_katar"
+  ],
+  "values": []
+}

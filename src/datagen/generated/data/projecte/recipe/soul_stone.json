@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "G": "#c:dusts/glowstone",
+    "L": "#c:gems/lapis",
+    "R": "projecte:red_matter"
+  },
+  "pattern": [
+    "GGG",
+    "RLR",
+    "GGG"
+  ],
+  "result": {
+    "count": 1,
+    "id": "projecte:soul_stone"
+  }
+}

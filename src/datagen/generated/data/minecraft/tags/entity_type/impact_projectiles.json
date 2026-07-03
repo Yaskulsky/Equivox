@@ -1,0 +1,9 @@
+{
+  "values": [
+    "projecte:fire_projectile",
+    "projecte:lava_projectile",
+    "projecte:lens_projectile",
+    "projecte:swrg_projectile",
+    "projecte:water_projectile"
+  ]
+}

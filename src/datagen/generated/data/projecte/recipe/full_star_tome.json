@@ -1,0 +1,45 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "projecte:tome_enabled"
+    },
+    {
+      "type": "projecte:full_klein_stars"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "projecte:tome",
+  "key": {
+    "B": "minecraft:book",
+    "H": "projecte:high_covalence_dust",
+    "K": {
+      "neoforge:ingredient_type": "neoforge:components",
+      "components": {
+        "minecraft:attribute_modifiers": {
+          "modifiers": []
+        },
+        "minecraft:enchantments": {
+          "levels": {}
+        },
+        "minecraft:lore": [],
+        "minecraft:max_stack_size": 1,
+        "minecraft:rarity": "epic",
+        "minecraft:repair_cost": 0,
+        "projecte:stored_emc": 51200000
+      },
+      "items": "projecte:klein_star_omega"
+    },
+    "L": "projecte:low_covalence_dust",
+    "M": "projecte:medium_covalence_dust"
+  },
+  "pattern": [
+    "HML",
+    "KBK",
+    "LMH"
+  ],
+  "result": {
+    "count": 1,
+    "id": "projecte:tome"
+  }
+}

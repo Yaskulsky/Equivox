@@ -1,0 +1,8 @@
+{
+  "remove": [
+    "projecte:dm_chestplate",
+    "projecte:rm_chestplate",
+    "projecte:gem_chestplate"
+  ],
+  "values": []
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "projecte:dark_matter_pickaxe",
+  "criteria": {
+    "rm_pick": {
+      "conditions": {
+        "items": [
+          {
+            "items": "projecte:rm_pick"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.projecte.red_matter_pickaxe.description"
+    },
+    "icon": {
+      "id": "projecte:rm_pick"
+    },
+    "title": {
+      "translate": "advancements.projecte.red_matter_pickaxe"
+    }
+  },
+  "requirements": [
+    [
+      "rm_pick"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

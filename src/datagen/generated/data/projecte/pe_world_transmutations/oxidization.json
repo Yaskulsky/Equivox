@@ -1,0 +1,185 @@
+{
+  "comment": "Default world transmutations for oxidized copper.",
+  "transmutations": [
+    {
+      "alt_result": "minecraft:oxidized_copper",
+      "origin": "minecraft:copper_block",
+      "result": "minecraft:exposed_copper"
+    },
+    {
+      "alt_result": "minecraft:copper_block",
+      "origin": "minecraft:exposed_copper",
+      "result": "minecraft:weathered_copper"
+    },
+    {
+      "alt_result": "minecraft:exposed_copper",
+      "origin": "minecraft:weathered_copper",
+      "result": "minecraft:oxidized_copper"
+    },
+    {
+      "alt_result": "minecraft:weathered_copper",
+      "origin": "minecraft:oxidized_copper",
+      "result": "minecraft:copper_block"
+    },
+    {
+      "alt_result": "minecraft:oxidized_cut_copper",
+      "origin": "minecraft:cut_copper",
+      "result": "minecraft:exposed_cut_copper"
+    },
+    {
+      "alt_result": "minecraft:cut_copper",
+      "origin": "minecraft:exposed_cut_copper",
+      "result": "minecraft:weathered_cut_copper"
+    },
+    {
+      "alt_result": "minecraft:exposed_cut_copper",
+      "origin": "minecraft:weathered_cut_copper",
+      "result": "minecraft:oxidized_cut_copper"
+    },
+    {
+      "alt_result": "minecraft:weathered_cut_copper",
+      "origin": "minecraft:oxidized_cut_copper",
+      "result": "minecraft:cut_copper"
+    },
+    {
+      "alt_result": "minecraft:oxidized_chiseled_copper",
+      "origin": "minecraft:chiseled_copper",
+      "result": "minecraft:exposed_chiseled_copper"
+    },
+    {
+      "alt_result": "minecraft:chiseled_copper",
+      "origin": "minecraft:exposed_chiseled_copper",
+      "result": "minecraft:weathered_chiseled_copper"
+    },
+    {
+      "alt_result": "minecraft:exposed_chiseled_copper",
+      "origin": "minecraft:weathered_chiseled_copper",
+      "result": "minecraft:oxidized_chiseled_copper"
+    },
+    {
+      "alt_result": "minecraft:weathered_chiseled_copper",
+      "origin": "minecraft:oxidized_chiseled_copper",
+      "result": "minecraft:chiseled_copper"
+    },
+    {
+      "alt_result": "minecraft:oxidized_cut_copper_slab",
+      "origin": "minecraft:cut_copper_slab",
+      "result": "minecraft:exposed_cut_copper_slab"
+    },
+    {
+      "alt_result": "minecraft:cut_copper_slab",
+      "origin": "minecraft:exposed_cut_copper_slab",
+      "result": "minecraft:weathered_cut_copper_slab"
+    },
+    {
+      "alt_result": "minecraft:exposed_cut_copper_slab",
+      "origin": "minecraft:weathered_cut_copper_slab",
+      "result": "minecraft:oxidized_cut_copper_slab"
+    },
+    {
+      "alt_result": "minecraft:weathered_cut_copper_slab",
+      "origin": "minecraft:oxidized_cut_copper_slab",
+      "result": "minecraft:cut_copper_slab"
+    },
+    {
+      "alt_result": "minecraft:oxidized_cut_copper_stairs",
+      "origin": "minecraft:cut_copper_stairs",
+      "result": "minecraft:exposed_cut_copper_stairs"
+    },
+    {
+      "alt_result": "minecraft:cut_copper_stairs",
+      "origin": "minecraft:exposed_cut_copper_stairs",
+      "result": "minecraft:weathered_cut_copper_stairs"
+    },
+    {
+      "alt_result": "minecraft:exposed_cut_copper_stairs",
+      "origin": "minecraft:weathered_cut_copper_stairs",
+      "result": "minecraft:oxidized_cut_copper_stairs"
+    },
+    {
+      "alt_result": "minecraft:weathered_cut_copper_stairs",
+      "origin": "minecraft:oxidized_cut_copper_stairs",
+      "result": "minecraft:cut_copper_stairs"
+    },
+    {
+      "alt_result": "minecraft:oxidized_copper_door",
+      "origin": "minecraft:copper_door",
+      "result": "minecraft:exposed_copper_door"
+    },
+    {
+      "alt_result": "minecraft:copper_door",
+      "origin": "minecraft:exposed_copper_door",
+      "result": "minecraft:weathered_copper_door"
+    },
+    {
+      "alt_result": "minecraft:exposed_copper_door",
+      "origin": "minecraft:weathered_copper_door",
+      "result": "minecraft:oxidized_copper_door"
+    },
+    {
+      "alt_result": "minecraft:weathered_copper_door",
+      "origin": "minecraft:oxidized_copper_door",
+      "result": "minecraft:copper_door"
+    },
+    {
+      "alt_result": "minecraft:oxidized_copper_trapdoor",
+      "origin": "minecraft:copper_trapdoor",
+      "result": "minecraft:exposed_copper_trapdoor"
+    },
+    {
+      "alt_result": "minecraft:copper_trapdoor",
+      "origin": "minecraft:exposed_copper_trapdoor",
+      "result": "minecraft:weathered_copper_trapdoor"
+    },
+    {
+      "alt_result": "minecraft:exposed_copper_trapdoor",
+      "origin": "minecraft:weathered_copper_trapdoor",
+      "result": "minecraft:oxidized_copper_trapdoor"
+    },
+    {
+      "alt_result": "minecraft:weathered_copper_trapdoor",
+      "origin": "minecraft:oxidized_copper_trapdoor",
+      "result": "minecraft:copper_trapdoor"
+    },
+    {
+      "alt_result": "minecraft:oxidized_copper_grate",
+      "origin": "minecraft:copper_grate",
+      "result": "minecraft:exposed_copper_grate"
+    },
+    {
+      "alt_result": "minecraft:copper_grate",
+      "origin": "minecraft:exposed_copper_grate",
+      "result": "minecraft:weathered_copper_grate"
+    },
+    {
+      "alt_result": "minecraft:exposed_copper_grate",
+      "origin": "minecraft:weathered_copper_grate",
+      "result": "minecraft:oxidized_copper_grate"
+    },
+    {
+      "alt_result": "minecraft:weathered_copper_grate",
+      "origin": "minecraft:oxidized_copper_grate",
+      "result": "minecraft:copper_grate"
+    },
+    {
+      "alt_result": "minecraft:oxidized_copper_bulb",
+      "origin": "minecraft:copper_bulb",
+      "result": "minecraft:exposed_copper_bulb"
+    },
+    {
+      "alt_result": "minecraft:copper_bulb",
+      "origin": "minecraft:exposed_copper_bulb",
+      "result": "minecraft:weathered_copper_bulb"
+    },
+    {
+      "alt_result": "minecraft:exposed_copper_bulb",
+      "origin": "minecraft:weathered_copper_bulb",
+      "result": "minecraft:oxidized_copper_bulb"
+    },
+    {
+      "alt_result": "minecraft:weathered_copper_bulb",
+      "origin": "minecraft:oxidized_copper_bulb",
+      "result": "minecraft:copper_bulb"
+    }
+  ]
+}

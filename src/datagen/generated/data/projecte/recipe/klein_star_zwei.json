@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "projecte:klein_star_ein",
+    "projecte:klein_star_ein",
+    "projecte:klein_star_ein",
+    "projecte:klein_star_ein"
+  ],
+  "result": {
+    "count": 1,
+    "id": "projecte:klein_star_zwei"
+  }
+}

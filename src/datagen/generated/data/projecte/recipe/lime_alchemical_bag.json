@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": "projecte:alchemical_chest",
+    "C": "projecte:high_covalence_dust",
+    "W": "minecraft:lime_wool"
+  },
+  "pattern": [
+    "CCC",
+    "WAW",
+    "WWW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "projecte:lime_alchemical_bag"
+  }
+}

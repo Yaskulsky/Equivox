@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": "projecte:dark_matter_block",
+    "R": "projecte:red_matter"
+  },
+  "pattern": [
+    "RDR",
+    "RDR",
+    "DDD"
+  ],
+  "result": {
+    "count": 1,
+    "id": "projecte:dm_pedestal"
+  }
+}

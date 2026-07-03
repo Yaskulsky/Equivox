@@ -1,0 +1,10 @@
+{
+  "values": [
+    "#c:mineable/katar",
+    "#minecraft:mineable/axe",
+    "#minecraft:mineable/hoe",
+    "#projecte:mineable/shears",
+    "#projecte:mineable/sword",
+    "minecraft:cobweb"
+  ]
+}

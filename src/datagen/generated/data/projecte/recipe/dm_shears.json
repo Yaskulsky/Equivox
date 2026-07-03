@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "D": "#c:gems/diamond",
+    "M": "projecte:dark_matter"
+  },
+  "pattern": [
+    " M",
+    "D "
+  ],
+  "result": {
+    "id": "projecte:dm_shears"
+  }
+}

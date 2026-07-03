@@ -1,0 +1,22 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "projecte:full_klein_stars"
+      }
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "projecte:rm_leggings",
+    "projecte:black_hole_band",
+    "projecte:watch_of_flowing_time",
+    "projecte:klein_star_omega"
+  ],
+  "result": {
+    "count": 1,
+    "id": "projecte:gem_leggings"
+  }
+}

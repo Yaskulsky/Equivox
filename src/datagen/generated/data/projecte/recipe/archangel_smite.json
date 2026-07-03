@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": "minecraft:bow",
+    "F": "#c:feathers",
+    "I": "projecte:iron_band",
+    "M": "projecte:dark_matter"
+  },
+  "pattern": [
+    "BFB",
+    "MIM",
+    "BFB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "projecte:archangel_smite"
+  }
+}

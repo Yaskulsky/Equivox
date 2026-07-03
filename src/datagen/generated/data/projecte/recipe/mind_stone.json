@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": "minecraft:book",
+    "L": "#c:gems/lapis",
+    "R": "projecte:red_matter"
+  },
+  "pattern": [
+    "BBB",
+    "RLR",
+    "BBB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "projecte:mind_stone"
+  }
+}

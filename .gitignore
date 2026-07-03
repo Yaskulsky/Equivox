@@ -1,0 +1,30 @@
+# Build / Gradle
+.gradle/
+build/
+run/
+logs/
+out/
+bin/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Local port tooling (not needed to build)
+.mc-src/
+.mc-src-extract/
+.nf-src/
+net/
+
+# Debug logs
+compile-*.txt
+build-latest.txt

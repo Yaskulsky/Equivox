@@ -1,0 +1,144 @@
+{
+  "comment": "Default world transmutations for simple vanilla blocks.",
+  "transmutations": [
+    {
+      "alt_result": "minecraft:grass_block",
+      "origin": "minecraft:stone",
+      "result": "minecraft:cobblestone"
+    },
+    {
+      "alt_result": "minecraft:grass_block",
+      "origin": "minecraft:cobblestone",
+      "result": "minecraft:stone"
+    },
+    {
+      "alt_result": "minecraft:cobblestone",
+      "origin": "minecraft:grass_block",
+      "result": "minecraft:sand"
+    },
+    {
+      "alt_result": "minecraft:cobblestone",
+      "origin": "minecraft:sand",
+      "result": "minecraft:grass_block"
+    },
+    {
+      "alt_result": "minecraft:cobblestone",
+      "origin": "minecraft:dirt",
+      "result": "minecraft:sand"
+    },
+    {
+      "origin": "minecraft:gravel",
+      "result": "minecraft:sandstone"
+    },
+    {
+      "origin": "minecraft:sandstone",
+      "result": "minecraft:gravel"
+    },
+    {
+      "origin": "minecraft:ice",
+      "result": {
+        "Name": "minecraft:water",
+        "Properties": {
+          "level": "0"
+        }
+      }
+    },
+    {
+      "origin": {
+        "Name": "minecraft:water",
+        "Properties": {
+          "level": "0"
+        }
+      },
+      "result": "minecraft:ice"
+    },
+    {
+      "origin": "minecraft:obsidian",
+      "result": {
+        "Name": "minecraft:lava",
+        "Properties": {
+          "level": "0"
+        }
+      }
+    },
+    {
+      "origin": {
+        "Name": "minecraft:lava",
+        "Properties": {
+          "level": "0"
+        }
+      },
+      "result": "minecraft:obsidian"
+    },
+    {
+      "origin": "minecraft:melon",
+      "result": "minecraft:pumpkin"
+    },
+    {
+      "origin": "minecraft:pumpkin",
+      "result": "minecraft:melon"
+    },
+    {
+      "alt_result": "minecraft:andesite",
+      "origin": "minecraft:granite",
+      "result": "minecraft:diorite"
+    },
+    {
+      "alt_result": "minecraft:granite",
+      "origin": "minecraft:diorite",
+      "result": "minecraft:andesite"
+    },
+    {
+      "alt_result": "minecraft:diorite",
+      "origin": "minecraft:andesite",
+      "result": "minecraft:granite"
+    },
+    {
+      "origin": "minecraft:soul_sand",
+      "result": "minecraft:soul_soil"
+    },
+    {
+      "origin": "minecraft:soul_soil",
+      "result": "minecraft:soul_sand"
+    },
+    {
+      "alt_result": "minecraft:warped_nylium",
+      "origin": "minecraft:netherrack",
+      "result": "minecraft:crimson_nylium"
+    },
+    {
+      "alt_result": "minecraft:netherrack",
+      "origin": "minecraft:crimson_nylium",
+      "result": "minecraft:warped_nylium"
+    },
+    {
+      "alt_result": "minecraft:crimson_nylium",
+      "origin": "minecraft:warped_nylium",
+      "result": "minecraft:netherrack"
+    },
+    {
+      "origin": "minecraft:nether_wart_block",
+      "result": "minecraft:warped_wart_block"
+    },
+    {
+      "origin": "minecraft:warped_wart_block",
+      "result": "minecraft:nether_wart_block"
+    },
+    {
+      "origin": "minecraft:crimson_fungus",
+      "result": "minecraft:warped_fungus"
+    },
+    {
+      "origin": "minecraft:warped_fungus",
+      "result": "minecraft:crimson_fungus"
+    },
+    {
+      "origin": "minecraft:crimson_roots",
+      "result": "minecraft:warped_roots"
+    },
+    {
+      "origin": "minecraft:warped_roots",
+      "result": "minecraft:crimson_roots"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "L": "#c:gems/lapis",
+    "R": "projecte:red_matter",
+    "S": "minecraft:sugar"
+  },
+  "pattern": [
+    "SSS",
+    "RLR",
+    "SSS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "projecte:body_stone"
+  }
+}

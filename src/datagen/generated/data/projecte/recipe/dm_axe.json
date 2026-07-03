@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "D": "#c:gems/diamond",
+    "M": "projecte:dark_matter"
+  },
+  "pattern": [
+    "MM",
+    "MD",
+    " D"
+  ],
+  "result": {
+    "id": "projecte:dm_axe"
+  }
+}

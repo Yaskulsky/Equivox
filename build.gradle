@@ -1,0 +1,431 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
+import moze_intel.projecte.UpdateJson
+
+import java.util.function.Consumer
+
+plugins {
+    id('java')
+    id('eclipse')
+    id('idea')
+    id('maven-publish')
+    id('com.gradleup.shadow') version('8.3.9')
+    // https://projects.neoforged.net/neoforged/ModDevGradle
+    id('net.neoforged.moddev') version('2.0.141')
+}
+
+tasks.named('wrapper', Wrapper) {
+    //Define wrapper values here so as to not have to always do so when updating gradlew.properties
+    gradleVersion = '9.1.0'
+    distributionType = Wrapper.DistributionType.ALL
+}
+
+def enableOptionalIntegrations = (findProperty('enable_optional_integrations') ?: 'false').toBoolean()
+
+defaultTasks 'build'
+
+idea {
+    module {
+        //Exclude directories from being managed
+        for (String excludeDirName in ["run", "out", "logs", "gradle"]) {
+            excludeDirs.add(new File(projectDir, excludeDirName))
+        }
+    }
+}
+
+sourceSets {
+    api {
+        //The API has no resources
+        resources.srcDirs = []
+    }
+    main {
+        resources {
+            //Add the generated main module resources
+            srcDirs += 'src/datagen/generated'
+            //But exclude the cache of the generated data from what gets built
+            exclude '.cache'
+        }
+        compileClasspath += api.output
+        runtimeClasspath += api.output
+    }
+    datagen {
+        java.srcDirs = ['src/datagen/java']
+        resources.srcDirs = ['src/datagen/resources']
+        compileClasspath += api.output + main.output
+    }
+    test {
+        //The test module has no resources
+        resources.srcDirs = []
+        compileClasspath += api.output + main.output
+        runtimeClasspath += api.output + main.output
+    }
+
+    if (!enableOptionalIntegrations) {
+        main {
+            java {
+                exclude '**/integration/crafttweaker/**'
+                exclude '**/integration/recipe_viewer/**'
+                exclude '**/integration/jade/**'
+                exclude '**/integration/wthit/**'
+                exclude '**/integration/top/**'
+            }
+        }
+        datagen {
+            java {
+                exclude '**/client/integration/**'
+            }
+        }
+    }
+
+    // These source-sets only exist for the sake of assembling a dependency graph
+    // for IntelliJ. Each of these will become an IntelliJ module when the project is imported,
+    // and will be set as the "main module" for the IntelliJ runs. A compile dependency
+    // on the other source sets is enough, since runtime classpath is managed by MDG anyway.
+    runMain {
+        runtimeClasspath += main.runtimeClasspath + api.runtimeClasspath
+        compileClasspath += main.output + api.output
+    }
+    runData {
+        compileClasspath += runMain.compileClasspath + datagen.compileClasspath
+        runtimeClasspath += runMain.runtimeClasspath + datagen.runtimeClasspath
+    }
+}
+
+configurations { configContainer ->
+    //Make sure all our sub source set stuff extends the proper base methods so that
+    // they can see all the dependencies we have in dependencies including forge
+    extendConfigurations(implementation, apiImplementation, testImplementation, datagenImplementation)
+    extendConfigurations(compileOnly, apiCompileOnly, testCompileOnly, datagenCompileOnly)
+    extendConfigurations(runtimeOnly, apiRuntimeOnly, datagenRuntimeOnly)
+    extendConfigurations(localRuntime, apiLocalRuntime)
+    sourceSets.main.runtimeClasspath += localRuntime
+    sourceSets.runMain.runtimeClasspath += sourceSets.main.runtimeClasspath
+}
+
+static void extendConfigurations(Configuration base, Configuration... configurations) {
+    for (def configuration : configurations) {
+        configuration.extendsFrom(base)
+    }
+}
+
+def replaceResources = tasks.register("replaceResources", Copy) {
+    def versionProperties = ["version": projecte_version, "mc_version": minecraft_version_range, "neo_version": neo_version_range, "loader_version": loader_version_range]
+    inputs.properties(versionProperties)
+    def modsToml = copySpec {
+        from(sourceSets.main.resources) {
+            include "META-INF/neoforge.mods.toml"
+            expand versionProperties
+        }
+    }
+    //Copy it into the build dir
+    it.with modsToml
+    it.into layout.buildDirectory.dir('resources/main/')
+    //If IntelliJ's output dir exists, copy it there as well
+    if (new File("$rootDir/out/production/").exists()) {
+        copy {
+            with modsToml
+            into "$rootDir/out/production/"
+        }
+    }
+    //If Eclipse's output dir exists, copy it there as well
+    if (new File("$rootDir/bin/main/").exists()) {
+        copy {
+            with modsToml
+            into "$rootDir/bin/main/"
+        }
+    }
+}
+
+version = "${projecte_version}"
+group = "moze_intel.projecte"
+project.base.archivesName = "projecte"
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(25))
+    }
+    withSourcesJar()
+}
+
+neoForge {
+    enable {
+        version = neo_version
+        enabledSourceSets = sourceSets // All source sets use Minecraft code
+    }
+
+    accessTransformers.from(
+            file('src/main/resources/META-INF/accesstransformer.cfg'),
+            //Dev time only ATs so the file name doesn't have to match accesstransformer.cfg
+            file('src/datagen/resources/META-INF/datagen_ats.cfg')
+    )
+
+    mods {
+        projecte {
+            sourceSet(sourceSets.main)
+            sourceSet(sourceSets.api)
+        }
+        projecte_datagen {
+            sourceSet(sourceSets.main)
+            sourceSet(sourceSets.api)
+            sourceSet(sourceSets.datagen)
+        }
+    }
+
+    unitTest {
+        enable()
+        testedMod = mods.projecte
+        loadedMods = [mods.projecte]
+    }
+}
+
+neoForge.runs {
+    configureEach {
+        if (project.hasProperty('forge_force_ansi')) {
+            //Force ansi if declared as a gradle variable, as the auto detection doesn't detect IntelliJ properly
+            // or eclipse's plugin that adds support for ansi escape in console
+            systemProperties.put('terminal.ansi', (String) property('forge_force_ansi'))
+        }
+        systemProperties.put('projecte.skip_top', "true")
+
+        //if the selected toolchain is a JBR, enable DCEVM
+        if (javaToolchains.launcherFor(java.toolchain).map { it.metadata.vendor }.getOrElse('').contains('JetBrains')) {
+            jvmArguments.addAll('-XX:+IgnoreUnrecognizedVMOptions', '-XX:+AllowEnhancedClassRedefinition')
+        }
+
+        sourceSet = sourceSets.runMain
+    }
+    client {
+        client()
+        //Note: To enable logging into the client account, set the mc_devlogin property to true in your gradle user home
+        if (findProperty('mc_devlogin') ?: false) {
+            //If the property is present and set to true, enable dev login
+            devLogin = true
+        }
+    }
+    clientAlt {
+        client()
+        // Force a different username in case devlogin is not enabled for the main run
+        programArguments.addAll((String[]) ['--username', 'AltDev'])
+    }
+    server {
+        server()
+        programArgument('--nogui')
+    }
+    data {
+        serverData()
+        programArguments.addAll('--all', '--output', project.file('src/datagen/generated/').getAbsolutePath(),
+                '--mod', 'projecte', '--existing', project.file('src/main/resources/').getAbsolutePath())
+
+        sourceSet = sourceSets.runData
+        loadedMods = [neoForge.mods.projecte_datagen]
+    }
+    clientData {
+        clientData()
+        programArguments.addAll('--all', '--output', project.file('src/datagen/generated/').getAbsolutePath(),
+                '--mod', 'projecte', '--existing', project.file('src/main/resources/').getAbsolutePath())
+
+        sourceSet = sourceSets.runData
+        loadedMods = [neoForge.mods.projecte_datagen]
+    }
+}
+
+static void exclusiveRepo(RepositoryHandler handler, String url, String... groups) {
+    exclusiveRepo(handler, url, filter -> {
+        for (def group : groups) {
+            filter.includeGroup(group)
+        }
+    })
+}
+
+static void exclusiveRepo(RepositoryHandler handler, String url, Consumer<InclusiveRepositoryContentDescriptor> filterSetup) {
+    handler.exclusiveContent {
+        it.forRepositories(handler.maven {
+            setUrl(url)
+        })
+        it.filter { f -> filterSetup.accept(f) }
+    }
+}
+
+repositories { RepositoryHandler handler ->
+    exclusiveRepo(handler, 'https://maven.blamejared.com', filter -> {
+        filter.includeGroupAndSubgroups('com.blamejared')
+        filter.includeGroup('mezz.jei')
+        filter.includeGroup('org.openzen.zencode')
+    })
+    exclusiveRepo(handler, 'https://maven.terraformersmc.com/', 'dev.emi')
+    exclusiveRepo(handler, 'https://maven.theillusivec4.top/', 'top.theillusivec4.curios')
+    exclusiveRepo(handler, 'https://maven2.bai.lol', 'lol.bai', 'mcp.mobius.waila')//WTHIT
+    exclusiveRepo(handler, 'https://modmaven.dev/', 'mcjty.theoneprobe')
+    exclusiveRepo(handler, 'https://www.cursemaven.com', 'curse.maven')
+}
+
+test {
+    useJUnitPlatform()
+    enabled = false
+}
+
+dependencies {
+    testImplementation("org.junit.jupiter:junit-jupiter-api:${junit_version}")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junit_version}")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testImplementation("net.neoforged:testframework:${neo_version}") {
+        transitive = false
+    }
+
+    compileOnly("top.theillusivec4.curios:curios-neoforge:${curios_version}:api")
+
+    if (enableOptionalIntegrations) {
+        compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
+        if (recipe_viewer == 'jei' || recipe_viewer == 'hybrid') {
+            localRuntime("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
+        }
+
+        compileOnly("dev.emi:emi-neoforge:${emi_version}+${minecraft_version}:api")
+        def emi = "dev.emi:emi-neoforge:${emi_version}+${minecraft_version}"
+        datagenCompileOnly(emi)
+        if (recipe_viewer == 'emi' || recipe_viewer == 'hybrid') {
+            localRuntime(emi)
+        } else {
+            datagenRuntimeOnly(emi)
+        }
+
+        localRuntime("top.theillusivec4.curios:curios-neoforge:${curios_version}")
+
+        compileOnly("mcjty.theoneprobe:theoneprobe:${top_version}:api") {
+            transitive = false
+        }
+        localRuntime("mcjty.theoneprobe:theoneprobe:${top_version}") {
+            transitive = false
+        }
+        compileOnly("curse.maven:jade-api-324717:${jade_api_id}")
+        localRuntime("curse.maven:jade-324717:${jade_id}")
+        compileOnly("mcp.mobius.waila:wthit-api:forge-${wthit_version}")
+
+        def crt = "com.blamejared.crafttweaker:CraftTweaker-neoforge-${minecraft_version}:${crafttweaker_version}"
+        compileOnly(crt)
+        localRuntime(crt)
+    }
+
+    implementation(shadow(group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'))
+}
+
+//Set the various variables/settings for the different process resources tasks
+tasks.named('processResources', ProcessResources) {
+    duplicatesStrategy = DuplicatesStrategy.FAIL
+    exclude('META-INF/neoforge.mods.toml')
+    finalizedBy(replaceResources)
+    def files = fileTree(dir: outputs.files.asPath, includes: ['**/*.json', '**/*.mcmeta'])
+    doLast {
+        for (def file : files) {
+            file.text = JsonOutput.toJson(new JsonSlurper().parse(file))
+        }
+    }
+}
+
+//Make the various classes tasks depend on the corresponding replaceResources tasks in addition to the default processResources tasks they depend on
+tasks.named('classes') { dependsOn(replaceResources) }
+
+def getManifestAttributes() {
+    return [
+            "Specification-Title"     : "ProjectE",
+            "Specification-Vendor"    : "ProjectE",
+            "Specification-Version"   : "${project.projecte_version}",
+            "Implementation-Title"    : "ProjectE",
+            "Implementation-Version"  : "${project.projecte_version}",
+            "Implementation-Vendor"   : "ProjectE",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+            "Automatic-Module-Name"   : "projecte"
+    ]
+}
+
+tasks.named('jar', Jar) {
+    duplicatesStrategy = DuplicatesStrategy.FAIL
+    from([sourceSets.api.output, sourceSets.main.output])
+    manifest.attributes(getManifestAttributes())
+    finalizedBy(shadowJar)
+}
+
+tasks.named('sourcesJar', Jar) {
+    dependsOn(classes, apiClasses)
+    duplicatesStrategy = DuplicatesStrategy.FAIL
+    //Note: Already contains main source set's sources by default
+    from(sourceSets.api.allJava)
+    manifest.attributes(getManifestAttributes())
+}
+
+def apiJar = tasks.register('apiJar', Jar) {
+    duplicatesStrategy = DuplicatesStrategy.FAIL
+    archiveClassifier.set("api")
+    from(sourceSets.api.output)
+    manifest.attributes(getManifestAttributes())
+}
+
+def shadowJar = tasks.named('shadowJar', ShadowJar) {
+    //Note: We use the include duplicate strategy instead of FAIL as minimize causes
+    // the things to get "added" twice but it is filtered separately by the shadow
+    // plugin anyways
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    archiveClassifier.set('') // Replace the default JAR
+    from([sourceSets.api.output, sourceSets.main.output])
+
+    configurations = [project.configurations.shadow]
+    exclude('assets/org/**')
+    exclude('META-INF/maven/**')
+    exclude('META-INF/*.txt')
+    // Relocate apache commons-math3 to prevent conflicts with other mods that include it
+    relocate('org.apache.commons.math3', 'moze_intel.projecte.shaded.org.apache.commons.math3')
+    // Minimize the required files so we only include what is needed
+    minimize()
+}
+
+tasks.register('updateJSON', UpdateJson)
+
+tasks.withType(JavaCompile).configureEach({
+    options.encoding = 'UTF-8'
+    options.compilerArgs.addAll(['-Xmaxerrs', '100000'])
+})
+
+tasks.withType(Javadoc).configureEach({
+    options.encoding = 'UTF-8'
+    options.tags = [
+            'apiNote:a:<em>API Note:</em>',
+            'implSpec:a:<em>Implementation Requirements:</em>',
+            'implNote:a:<em>Implementation Note:</em>'
+    ]
+})
+
+artifacts {
+    archives(apiJar)
+    archives(shadowJar)
+    archives(sourcesJar)
+}
+
+publishing {
+    publications { PublicationContainer publicationContainer ->
+        shadow(MavenPublication) { MavenPublication publication ->
+            publication.from((SoftwareComponent) components.shadow)
+            publication.groupId = project.group
+            publication.version = project.version
+            publication.artifactId = 'ProjectE'
+            publication.artifacts = [apiJar, shadowJar, sourcesJar]
+            publication.pom {
+                name.set('ProjectE')
+                packaging = 'jar'
+                scm {
+                    url.set('https://github.com/sinkillerj/ProjectE.git')
+                }
+                issueManagement {
+                    system.set('github')
+                    url.set('https://github.com/sinkillerj/ProjectE/issues')
+                }
+                licenses {
+                    license {
+                        name.set('MIT')
+                        distribution.set('repo')
+                    }
+                }
+            }
+        }
+    }
+}

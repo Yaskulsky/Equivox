@@ -1,0 +1,22 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "projecte:full_klein_stars"
+      }
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "projecte:rm_helmet",
+    "projecte:evertide_amulet",
+    "projecte:soul_stone",
+    "projecte:klein_star_omega"
+  ],
+  "result": {
+    "count": 1,
+    "id": "projecte:gem_helmet"
+  }
+}

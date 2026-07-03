@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "projecte:arcana_ring",
+    "minecraft:dirt"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:grass_block"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "projecte:klein_star_ein",
+  "criteria": {
+    "klein_star": {
+      "conditions": {
+        "items": [
+          {
+            "items": "projecte:klein_star_omega"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.projecte.klein_star_big.description"
+    },
+    "icon": {
+      "id": "projecte:klein_star_omega"
+    },
+    "title": {
+      "translate": "advancements.projecte.klein_star_big"
+    }
+  },
+  "requirements": [
+    [
+      "klein_star"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

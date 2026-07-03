@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "projecte:volcanite_amulet",
+    "minecraft:bucket",
+    "#c:dusts/redstone"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:lava_bucket"
+  }
+}

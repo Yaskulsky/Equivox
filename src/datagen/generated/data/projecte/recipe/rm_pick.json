@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": "projecte:dark_matter",
+    "P": "projecte:dm_pick",
+    "R": "projecte:red_matter"
+  },
+  "pattern": [
+    "RRR",
+    " P ",
+    " M "
+  ],
+  "result": {
+    "id": "projecte:rm_pick"
+  }
+}

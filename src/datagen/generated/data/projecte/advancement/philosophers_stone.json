@@ -1,0 +1,32 @@
+{
+  "parent": "projecte:root",
+  "criteria": {
+    "philosophers_stone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "projecte:philosophers_stone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.projecte.philo_stone.description"
+    },
+    "icon": {
+      "id": "projecte:philosophers_stone"
+    },
+    "title": {
+      "translate": "advancements.projecte.philo_stone"
+    }
+  },
+  "requirements": [
+    [
+      "philosophers_stone"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

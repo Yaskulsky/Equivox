@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "projecte:catalytic_lens",
+  "key": {
+    "D": "projecte:destruction_catalyst",
+    "H": "projecte:hyperkinetic_lens",
+    "M": "projecte:dark_matter"
+  },
+  "pattern": [
+    "MMM",
+    "HMD",
+    "MMM"
+  ],
+  "result": {
+    "count": 1,
+    "id": "projecte:catalytic_lens"
+  }
+}

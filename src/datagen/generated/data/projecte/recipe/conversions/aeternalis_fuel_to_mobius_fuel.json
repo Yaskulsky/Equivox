@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "projecte:philosophers_stone",
+    "projecte:aeternalis_fuel"
+  ],
+  "result": {
+    "count": 4,
+    "id": "projecte:mobius_fuel"
+  }
+}

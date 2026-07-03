@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_aeternalis_fuel": {
+      "conditions": {
+        "items": [
+          {
+            "items": "projecte:aeternalis_fuel"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "projecte:aeternalis_fuel_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_aeternalis_fuel"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "projecte:aeternalis_fuel_block"
+    ]
+  }
+}

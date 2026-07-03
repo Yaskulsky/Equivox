@@ -1,0 +1,2163 @@
+﻿{
+  "comment": "Default values for vanilla items.",
+  "groups": {
+    "chainmail": {
+      "comment": "Propagate iron armor values to chainmail armor as they are close enough that their difficulties balance out.",
+      "conversions": [
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:iron_helmet"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:chainmail_helmet"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:iron_chestplate"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:chainmail_chestplate"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:iron_leggings"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:chainmail_leggings"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:iron_boots"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:chainmail_boots"
+          }
+        }
+      ]
+    },
+    "concrete_powder_to_block": {
+      "comment": "Propagate concrete powder values to concrete blocks.",
+      "conversions": [
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:white_concrete_powder"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:white_concrete"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:orange_concrete_powder"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:orange_concrete"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:magenta_concrete_powder"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:magenta_concrete"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:light_blue_concrete_powder"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:light_blue_concrete"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:yellow_concrete_powder"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:yellow_concrete"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:lime_concrete_powder"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:lime_concrete"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:pink_concrete_powder"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:pink_concrete"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:gray_concrete_powder"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:gray_concrete"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:light_gray_concrete_powder"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:light_gray_concrete"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:cyan_concrete_powder"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:cyan_concrete"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:purple_concrete_powder"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:purple_concrete"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:blue_concrete_powder"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:blue_concrete"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:brown_concrete_powder"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:brown_concrete"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:green_concrete_powder"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:green_concrete"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:red_concrete_powder"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:red_concrete"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:black_concrete_powder"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:black_concrete"
+          }
+        }
+      ]
+    },
+    "damaged_anvil": {
+      "comment": "Calculates values for chipped and damaged anvils based on the average of surviving for 25 uses.",
+      "conversions": [
+        {
+          "count": 25,
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "amount": 16,
+              "id": "minecraft:anvil"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:chipped_anvil"
+          }
+        },
+        {
+          "count": 25,
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "amount": 7,
+              "id": "minecraft:anvil"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:damaged_anvil"
+          }
+        }
+      ]
+    },
+    "default": {
+      "comment": "Default conversion group.",
+      "conversions": [
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "amount": 2,
+              "id": "minecraft:dirt"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:grass_block"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "amount": 2,
+              "id": "minecraft:dirt"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:podzol"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:dirt"
+            },
+            {
+              "type": "projecte:item",
+              "id": "minecraft:hanging_roots"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:rooted_dirt"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "amount": 2,
+              "id": "minecraft:dirt"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:mycelium"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:dirt"
+            },
+            {
+              "type": "projecte:item",
+              "data": {
+                "minecraft:potion_contents": {
+                  "potion": "minecraft:water"
+                }
+              },
+              "id": "minecraft:potion"
+            },
+            {
+              "type": "projecte:item",
+              "amount": -1,
+              "id": "minecraft:glass_bottle"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:mud"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "amount": 2,
+              "id": "minecraft:netherrack"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:crimson_nylium"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "amount": 2,
+              "id": "minecraft:netherrack"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:warped_nylium"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "amount": 8,
+              "tag": "c:ingots/iron"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:iron_horse_armor"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "amount": 8,
+              "tag": "c:ingots/gold"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:golden_horse_armor"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "amount": 8,
+              "tag": "c:gems/diamond"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:diamond_horse_armor"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:pumpkin"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:carved_pumpkin"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:torchflower"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:torchflower_seeds"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:pitcher_plant"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:pitcher_pod"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:writable_book"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:written_book"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:book"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:enchanted_book"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:apple"
+            },
+            {
+              "type": "projecte:item",
+              "amount": 8,
+              "tag": "c:storage_blocks/gold"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:enchanted_golden_apple"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:bamboo_block"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:stripped_bamboo_block"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "amount": 3,
+              "tag": "c:gems/emerald"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:globe_banner_pattern"
+          }
+        },
+        {
+          "count": 3,
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "amount": 3,
+              "id": "minecraft:paper"
+            },
+            {
+              "type": "projecte:item",
+              "id": "minecraft:nether_star"
+            },
+            {
+              "type": "projecte:item",
+              "amount": -4,
+              "id": "minecraft:soul_sand"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:skull_banner_pattern"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:gunpowder"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:firework_star"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:paper"
+            },
+            {
+              "type": "projecte:item",
+              "id": "minecraft:gunpowder"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:firework_rocket"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:gravel"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:suspicious_gravel"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:sand"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:suspicious_sand"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:sponge"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:wet_sponge"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "amount": 7,
+              "tag": "c:ingots/gold"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:bell"
+          }
+        },
+        {
+          "count": 3,
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:honey_bottle"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:honeycomb"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:bucket"
+            },
+            {
+              "type": "projecte:item",
+              "amount": 4,
+              "id": "minecraft:snow_block"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:powder_snow_bucket"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:ink_sac"
+            },
+            {
+              "type": "projecte:item",
+              "tag": "c:dusts/glowstone"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:glow_ink_sac"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "tag": "c:rods/wooden"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:hanging_roots"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:bowl"
+            },
+            {
+              "type": "projecte:item",
+              "id": "minecraft:brown_mushroom"
+            },
+            {
+              "type": "projecte:item",
+              "id": "minecraft:red_mushroom"
+            },
+            {
+              "type": "projecte:item",
+              "tag": "minecraft:small_flowers"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:suspicious_stew"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:water_bucket"
+            },
+            {
+              "type": "projecte:item",
+              "id": "minecraft:pufferfish"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:pufferfish_bucket"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:water_bucket"
+            },
+            {
+              "type": "projecte:item",
+              "id": "minecraft:salmon"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:salmon_bucket"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:water_bucket"
+            },
+            {
+              "type": "projecte:item",
+              "id": "minecraft:cod"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:cod_bucket"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:water_bucket"
+            },
+            {
+              "type": "projecte:item",
+              "id": "minecraft:tropical_fish"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:tropical_fish_bucket"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:glass_bottle"
+            },
+            {
+              "type": "projecte:fake",
+              "description": "single_emc"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:dragon_breath"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:soul_sand"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:soul_soil"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:nether_wart_block"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:warped_wart_block"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:glowstone_dust"
+            },
+            {
+              "type": "projecte:item",
+              "tag": "c:mushrooms"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:shroomlight"
+          }
+        },
+        {
+          "count": 3,
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:magma_cream"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:ochre_froglight"
+          }
+        },
+        {
+          "count": 3,
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:magma_cream"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:pearlescent_froglight"
+          }
+        },
+        {
+          "count": 3,
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:magma_cream"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:verdant_froglight"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "amount": 4,
+              "id": "minecraft:sculk_vein"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:sculk"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "amount": 4,
+              "id": "minecraft:comparator"
+            },
+            {
+              "type": "projecte:item",
+              "amount": 4,
+              "id": "minecraft:repeater"
+            },
+            {
+              "type": "projecte:item",
+              "id": "minecraft:sculk"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:sculk_sensor"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "amount": 4,
+              "id": "minecraft:sculk_catalyst"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:sculk_shrieker"
+          }
+        }
+      ]
+    },
+    "dirt_path": {
+      "comment": "Adds the various valid conversions into dirt paths.",
+      "conversions": [
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:grass_block"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:dirt_path"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:dirt"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:dirt_path"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:podzol"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:dirt_path"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:coarse_dirt"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:dirt_path"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:mycelium"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:dirt_path"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:rooted_dirt"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:dirt_path"
+          }
+        }
+      ]
+    },
+    "fluid": {
+      "comment": "Calculates the costs of filled buckets and some fluids.",
+      "conversions": [
+        {
+          "count": 1000,
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:obsidian"
+            }
+          ],
+          "output": {
+            "type": "projecte:fluid",
+            "tag": "minecraft:lava"
+          }
+        },
+        {
+          "count": 1000,
+          "ingredients": [
+            {
+              "type": "projecte:fake",
+              "amount": 16,
+              "description": "single_emc"
+            }
+          ],
+          "output": {
+            "type": "projecte:fluid",
+            "tag": "c:milk"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:bucket"
+            },
+            {
+              "type": "projecte:fluid",
+              "amount": 1000,
+              "tag": "minecraft:water"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:water_bucket"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:bucket"
+            },
+            {
+              "type": "projecte:fluid",
+              "amount": 1000,
+              "tag": "minecraft:lava"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:lava_bucket"
+          }
+        },
+        {
+          "ingredients": [
+            {
+              "type": "projecte:item",
+              "id": "minecraft:bucket"
+            },
+            {
+              "type": "projecte:fluid",
+              "amount": 1000,
+              "tag": "c:milk"
+            }
+          ],
+          "output": {
+            "type": "projecte:item",
+            "id": "minecraft:milk_bucket"
+          }
+        }
+      ]
+    }
+  },
+  "values": {
+    "before": [
+      {
+        "type": "projecte:fake",
+        "description": "single_emc",
+        "emc_value": 1
+      },
+      {
+        "type": "projecte:fluid",
+        "emc_value": "free",
+        "tag": "minecraft:water"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:cobblestone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "minecraft:granite"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "minecraft:diorite"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "minecraft:andesite"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "minecraft:pointed_dripstone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:end_stone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:netherrack"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 4,
+        "id": "minecraft:basalt"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 4,
+        "id": "minecraft:blackstone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 2,
+        "id": "minecraft:cobbled_deepslate"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 4,
+        "id": "minecraft:tuff"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32,
+        "id": "minecraft:calcite"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:dirt"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:sand"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:red_sand"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:snow"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:ice"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:dead_bush"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 4,
+        "id": "minecraft:gravel"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 8,
+        "id": "minecraft:cactus"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 8,
+        "id": "minecraft:vine"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 12,
+        "id": "minecraft:moss_block"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 12,
+        "id": "minecraft:cobweb"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 4,
+        "id": "minecraft:pink_petals"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "minecraft:lily_pad"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 24,
+        "id": "minecraft:small_dripleaf"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32,
+        "id": "minecraft:big_dripleaf"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "tag": "minecraft:small_flowers"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32,
+        "tag": "minecraft:tall_flowers"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32,
+        "id": "minecraft:red_mushroom"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32,
+        "id": "minecraft:brown_mushroom"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32,
+        "id": "minecraft:sugar_cane"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32,
+        "id": "minecraft:bamboo"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 49,
+        "id": "minecraft:soul_sand"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "id": "minecraft:obsidian"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 768,
+        "id": "minecraft:crying_obsidian"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 128,
+        "id": "minecraft:sponge"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:short_grass"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:seagrass"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:kelp"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "minecraft:sea_pickle"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:tall_grass"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:fern"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:large_fern"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 128,
+        "id": "minecraft:magma_block"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:nether_sprouts"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:crimson_roots"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:warped_roots"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 8,
+        "id": "minecraft:weeping_vines"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 8,
+        "id": "minecraft:twisting_vines"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 8,
+        "id": "minecraft:glow_lichen"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32,
+        "id": "minecraft:crimson_fungus"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32,
+        "id": "minecraft:warped_fungus"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "id": "minecraft:spore_blossom"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "id": "minecraft:tube_coral_block"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "id": "minecraft:brain_coral_block"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "id": "minecraft:bubble_coral_block"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "id": "minecraft:fire_coral_block"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "id": "minecraft:horn_coral_block"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 4,
+        "id": "minecraft:dead_tube_coral_block"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 4,
+        "id": "minecraft:dead_brain_coral_block"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 4,
+        "id": "minecraft:dead_bubble_coral_block"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 4,
+        "id": "minecraft:dead_fire_coral_block"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 4,
+        "id": "minecraft:dead_horn_coral_block"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "minecraft:tube_coral_fan"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "minecraft:brain_coral_fan"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "minecraft:bubble_coral_fan"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "minecraft:fire_coral_fan"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "minecraft:horn_coral_fan"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:dead_tube_coral_fan"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:dead_brain_coral_fan"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:dead_bubble_coral_fan"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:dead_fire_coral_fan"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:dead_horn_coral_fan"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "minecraft:tube_coral"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "minecraft:brain_coral"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "minecraft:bubble_coral"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "minecraft:fire_coral"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "minecraft:horn_coral"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:dead_tube_coral"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:dead_brain_coral"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:dead_bubble_coral"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:dead_fire_coral"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:dead_horn_coral"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "id": "minecraft:chorus_plant"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 96,
+        "id": "minecraft:chorus_flower"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 192,
+        "id": "minecraft:chorus_fruit"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 4,
+        "id": "minecraft:sculk_vein"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 8040,
+        "id": "minecraft:sculk_catalyst"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "tag": "c:seeds/wheat"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "tag": "c:seeds/beetroot"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "minecraft:melon_slice"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "minecraft:sweet_berries"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "minecraft:glow_berries"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 24,
+        "tag": "c:crops/wheat"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 24,
+        "tag": "c:crops/nether_wart"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 128,
+        "id": "minecraft:apple"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 144,
+        "tag": "c:pumpkins/normal"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 48,
+        "id": "minecraft:honey_bottle"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "id": "minecraft:porkchop"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "id": "minecraft:beef"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "id": "minecraft:chicken"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "id": "minecraft:rabbit"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "id": "minecraft:mutton"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "id": "minecraft:cod"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "id": "minecraft:salmon"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "id": "minecraft:tropical_fish"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "id": "minecraft:pufferfish"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "tag": "c:crops/carrot"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "tag": "c:crops/beetroot"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "tag": "c:crops/potato"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "id": "minecraft:poisonous_potato"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 12,
+        "id": "minecraft:string"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32,
+        "id": "minecraft:rotten_flesh"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32,
+        "id": "minecraft:slime_ball"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32,
+        "id": "minecraft:egg"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 96,
+        "id": "minecraft:turtle_scute"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 192,
+        "id": "minecraft:turtle_egg"
+      },
+      {
+        "type": "projecte:item",
+        "data": {
+          "minecraft:instrument": "minecraft:ponder_goat_horn"
+        },
+        "emc_value": 96,
+        "id": "minecraft:goat_horn"
+      },
+      {
+        "type": "projecte:item",
+        "data": {
+          "minecraft:instrument": "minecraft:sing_goat_horn"
+        },
+        "emc_value": 96,
+        "id": "minecraft:goat_horn"
+      },
+      {
+        "type": "projecte:item",
+        "data": {
+          "minecraft:instrument": "minecraft:seek_goat_horn"
+        },
+        "emc_value": 96,
+        "id": "minecraft:goat_horn"
+      },
+      {
+        "type": "projecte:item",
+        "data": {
+          "minecraft:instrument": "minecraft:feel_goat_horn"
+        },
+        "emc_value": 96,
+        "id": "minecraft:goat_horn"
+      },
+      {
+        "type": "projecte:item",
+        "data": {
+          "minecraft:instrument": "minecraft:admire_goat_horn"
+        },
+        "emc_value": 192,
+        "id": "minecraft:goat_horn"
+      },
+      {
+        "type": "projecte:item",
+        "data": {
+          "minecraft:instrument": "minecraft:call_goat_horn"
+        },
+        "emc_value": 192,
+        "id": "minecraft:goat_horn"
+      },
+      {
+        "type": "projecte:item",
+        "data": {
+          "minecraft:instrument": "minecraft:yearn_goat_horn"
+        },
+        "emc_value": 192,
+        "id": "minecraft:goat_horn"
+      },
+      {
+        "type": "projecte:item",
+        "data": {
+          "minecraft:instrument": "minecraft:dream_goat_horn"
+        },
+        "emc_value": 192,
+        "id": "minecraft:goat_horn"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 48,
+        "id": "minecraft:feather"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "minecraft:rabbit_hide"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 128,
+        "id": "minecraft:rabbit_foot"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 128,
+        "id": "minecraft:spider_eye"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 192,
+        "id": "minecraft:phantom_membrane"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 192,
+        "id": "minecraft:gunpowder"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "minecraft:skeleton_skull"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "minecraft:zombie_head"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "minecraft:creeper_head"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "minecraft:piglin_head"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 512,
+        "id": "minecraft:piglin_banner_pattern"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 20480,
+        "id": "minecraft:flow_banner_pattern"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 12224,
+        "id": "minecraft:guster_banner_pattern"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1024,
+        "id": "minecraft:ender_pearl"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1024,
+        "id": "minecraft:nautilus_shell"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1536,
+        "tag": "c:rods/blaze"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 2304,
+        "tag": "c:rods/breeze"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 2048,
+        "id": "minecraft:shulker_shell"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 2048,
+        "id": "minecraft:sniffer_egg"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 4096,
+        "id": "minecraft:ghast_tear"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16398,
+        "id": "minecraft:trident"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32768,
+        "id": "minecraft:heart_of_the_sea"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 40960,
+        "id": "minecraft:heavy_core"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 262144,
+        "id": "minecraft:dragon_egg"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 192,
+        "id": "minecraft:saddle"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 192,
+        "id": "minecraft:echo_shard"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 192,
+        "id": "minecraft:name_tag"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 2048,
+        "tag": "minecraft:creeper_drop_music_discs"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 192,
+        "id": "minecraft:disc_fragment_5"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 40960,
+        "id": "minecraft:music_disc_creator"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 8192,
+        "id": "minecraft:music_disc_creator_music_box"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 6144,
+        "id": "minecraft:music_disc_otherside"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 8192,
+        "id": "minecraft:music_disc_pigstep"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 12224,
+        "id": "minecraft:music_disc_precipice"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 10176,
+        "id": "minecraft:music_disc_relic"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 4,
+        "id": "minecraft:flint"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 128,
+        "id": "minecraft:coal"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "tag": "c:gems/quartz"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 256,
+        "id": "minecraft:prismarine_shard"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 512,
+        "id": "minecraft:prismarine_crystals"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "minecraft:ink_sac"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "id": "minecraft:cocoa_beans"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 864,
+        "id": "minecraft:lapis_lazuli"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16384,
+        "tag": "c:gems/emerald"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 139264,
+        "tag": "c:nether_stars"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 16,
+        "id": "minecraft:clay_ball"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 216,
+        "tag": "minecraft:decorated_pot_sherds"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 144,
+        "id": "minecraft:bone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "id": "minecraft:snowball"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1472,
+        "id": "minecraft:filled_map"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32,
+        "tag": "minecraft:logs"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 8,
+        "tag": "minecraft:planks"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 32,
+        "tag": "minecraft:saplings"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 4,
+        "tag": "c:rods/wooden"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 1,
+        "tag": "minecraft:leaves"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 4,
+        "id": "minecraft:mangrove_roots"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 48,
+        "tag": "minecraft:wool"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 48,
+        "id": "minecraft:armadillo_scute"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 12288,
+        "id": "minecraft:netherite_scrap"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 8192,
+        "tag": "c:gems/diamond"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 64,
+        "tag": "c:dusts/redstone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 384,
+        "tag": "c:dusts/glowstone"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 7497,
+        "id": "minecraft:netherite_upgrade_smithing_template"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 23017,
+        "id": "minecraft:eye_armor_trim_smithing_template"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 57345,
+        "id": "minecraft:sentry_armor_trim_smithing_template"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 53898,
+        "id": "minecraft:dune_armor_trim_smithing_template"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 51917,
+        "id": "minecraft:vex_armor_trim_smithing_template"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 42641,
+        "id": "minecraft:wild_armor_trim_smithing_template"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 39465,
+        "id": "minecraft:silence_armor_trim_smithing_template"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 22116,
+        "id": "minecraft:tide_armor_trim_smithing_template"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 19677,
+        "id": "minecraft:ward_armor_trim_smithing_template"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 18588,
+        "id": "minecraft:spire_armor_trim_smithing_template"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 12271,
+        "id": "minecraft:coast_armor_trim_smithing_template"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 10310,
+        "id": "minecraft:rib_armor_trim_smithing_template"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 10176,
+        "id": "minecraft:wayfinder_armor_trim_smithing_template"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 10176,
+        "id": "minecraft:shaper_armor_trim_smithing_template"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 10176,
+        "id": "minecraft:host_armor_trim_smithing_template"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 10176,
+        "id": "minecraft:raiser_armor_trim_smithing_template"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 7533,
+        "id": "minecraft:snout_armor_trim_smithing_template"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 30528,
+        "id": "minecraft:flow_armor_trim_smithing_template"
+      },
+      {
+        "type": "projecte:item",
+        "emc_value": 10176,
+        "id": "minecraft:bolt_armor_trim_smithing_template"
+      }
+    ]
+  }
+}

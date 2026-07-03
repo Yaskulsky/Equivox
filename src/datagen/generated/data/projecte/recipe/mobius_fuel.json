@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "projecte:philosophers_stone",
+    "projecte:alchemical_coal",
+    "projecte:alchemical_coal",
+    "projecte:alchemical_coal",
+    "projecte:alchemical_coal"
+  ],
+  "result": {
+    "id": "projecte:mobius_fuel"
+  }
+}

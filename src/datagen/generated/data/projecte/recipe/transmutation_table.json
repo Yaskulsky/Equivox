@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "O": "#c:obsidians/normal",
+    "P": "projecte:philosophers_stone",
+    "S": "#c:stones"
+  },
+  "pattern": [
+    "OSO",
+    "SPS",
+    "OSO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "projecte:transmutation_table"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#c:ingots/iron",
+    "#c:dusts/redstone"
+  ],
+  "result": {
+    "count": 40,
+    "id": "projecte:medium_covalence_dust"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    "projecte:nova_catalyst",
+    "projecte:aeternalis_fuel"
+  ],
+  "result": {
+    "count": 2,
+    "id": "projecte:nova_cataclysm"
+  }
+}

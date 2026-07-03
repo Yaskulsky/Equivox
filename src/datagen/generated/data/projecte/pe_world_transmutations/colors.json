@@ -1,0 +1,565 @@
+{
+  "comment": "Default world transmutations for various colored vanilla blocks.",
+  "transmutations": [
+    {
+      "alt_result": "minecraft:black_concrete",
+      "origin": "minecraft:white_concrete",
+      "result": "minecraft:orange_concrete"
+    },
+    {
+      "alt_result": "minecraft:white_concrete",
+      "origin": "minecraft:orange_concrete",
+      "result": "minecraft:magenta_concrete"
+    },
+    {
+      "alt_result": "minecraft:orange_concrete",
+      "origin": "minecraft:magenta_concrete",
+      "result": "minecraft:light_blue_concrete"
+    },
+    {
+      "alt_result": "minecraft:magenta_concrete",
+      "origin": "minecraft:light_blue_concrete",
+      "result": "minecraft:yellow_concrete"
+    },
+    {
+      "alt_result": "minecraft:light_blue_concrete",
+      "origin": "minecraft:yellow_concrete",
+      "result": "minecraft:lime_concrete"
+    },
+    {
+      "alt_result": "minecraft:yellow_concrete",
+      "origin": "minecraft:lime_concrete",
+      "result": "minecraft:pink_concrete"
+    },
+    {
+      "alt_result": "minecraft:lime_concrete",
+      "origin": "minecraft:pink_concrete",
+      "result": "minecraft:gray_concrete"
+    },
+    {
+      "alt_result": "minecraft:pink_concrete",
+      "origin": "minecraft:gray_concrete",
+      "result": "minecraft:light_gray_concrete"
+    },
+    {
+      "alt_result": "minecraft:gray_concrete",
+      "origin": "minecraft:light_gray_concrete",
+      "result": "minecraft:cyan_concrete"
+    },
+    {
+      "alt_result": "minecraft:light_gray_concrete",
+      "origin": "minecraft:cyan_concrete",
+      "result": "minecraft:purple_concrete"
+    },
+    {
+      "alt_result": "minecraft:cyan_concrete",
+      "origin": "minecraft:purple_concrete",
+      "result": "minecraft:blue_concrete"
+    },
+    {
+      "alt_result": "minecraft:purple_concrete",
+      "origin": "minecraft:blue_concrete",
+      "result": "minecraft:brown_concrete"
+    },
+    {
+      "alt_result": "minecraft:blue_concrete",
+      "origin": "minecraft:brown_concrete",
+      "result": "minecraft:green_concrete"
+    },
+    {
+      "alt_result": "minecraft:brown_concrete",
+      "origin": "minecraft:green_concrete",
+      "result": "minecraft:red_concrete"
+    },
+    {
+      "alt_result": "minecraft:green_concrete",
+      "origin": "minecraft:red_concrete",
+      "result": "minecraft:black_concrete"
+    },
+    {
+      "alt_result": "minecraft:red_concrete",
+      "origin": "minecraft:black_concrete",
+      "result": "minecraft:white_concrete"
+    },
+    {
+      "alt_result": "minecraft:black_concrete_powder",
+      "origin": "minecraft:white_concrete_powder",
+      "result": "minecraft:orange_concrete_powder"
+    },
+    {
+      "alt_result": "minecraft:white_concrete_powder",
+      "origin": "minecraft:orange_concrete_powder",
+      "result": "minecraft:magenta_concrete_powder"
+    },
+    {
+      "alt_result": "minecraft:orange_concrete_powder",
+      "origin": "minecraft:magenta_concrete_powder",
+      "result": "minecraft:light_blue_concrete_powder"
+    },
+    {
+      "alt_result": "minecraft:magenta_concrete_powder",
+      "origin": "minecraft:light_blue_concrete_powder",
+      "result": "minecraft:yellow_concrete_powder"
+    },
+    {
+      "alt_result": "minecraft:light_blue_concrete_powder",
+      "origin": "minecraft:yellow_concrete_powder",
+      "result": "minecraft:lime_concrete_powder"
+    },
+    {
+      "alt_result": "minecraft:yellow_concrete_powder",
+      "origin": "minecraft:lime_concrete_powder",
+      "result": "minecraft:pink_concrete_powder"
+    },
+    {
+      "alt_result": "minecraft:lime_concrete_powder",
+      "origin": "minecraft:pink_concrete_powder",
+      "result": "minecraft:gray_concrete_powder"
+    },
+    {
+      "alt_result": "minecraft:pink_concrete_powder",
+      "origin": "minecraft:gray_concrete_powder",
+      "result": "minecraft:light_gray_concrete_powder"
+    },
+    {
+      "alt_result": "minecraft:gray_concrete_powder",
+      "origin": "minecraft:light_gray_concrete_powder",
+      "result": "minecraft:cyan_concrete_powder"
+    },
+    {
+      "alt_result": "minecraft:light_gray_concrete_powder",
+      "origin": "minecraft:cyan_concrete_powder",
+      "result": "minecraft:purple_concrete_powder"
+    },
+    {
+      "alt_result": "minecraft:cyan_concrete_powder",
+      "origin": "minecraft:purple_concrete_powder",
+      "result": "minecraft:blue_concrete_powder"
+    },
+    {
+      "alt_result": "minecraft:purple_concrete_powder",
+      "origin": "minecraft:blue_concrete_powder",
+      "result": "minecraft:brown_concrete_powder"
+    },
+    {
+      "alt_result": "minecraft:blue_concrete_powder",
+      "origin": "minecraft:brown_concrete_powder",
+      "result": "minecraft:green_concrete_powder"
+    },
+    {
+      "alt_result": "minecraft:brown_concrete_powder",
+      "origin": "minecraft:green_concrete_powder",
+      "result": "minecraft:red_concrete_powder"
+    },
+    {
+      "alt_result": "minecraft:green_concrete_powder",
+      "origin": "minecraft:red_concrete_powder",
+      "result": "minecraft:black_concrete_powder"
+    },
+    {
+      "alt_result": "minecraft:red_concrete_powder",
+      "origin": "minecraft:black_concrete_powder",
+      "result": "minecraft:white_concrete_powder"
+    },
+    {
+      "alt_result": "minecraft:black_carpet",
+      "origin": "minecraft:white_carpet",
+      "result": "minecraft:orange_carpet"
+    },
+    {
+      "alt_result": "minecraft:white_carpet",
+      "origin": "minecraft:orange_carpet",
+      "result": "minecraft:magenta_carpet"
+    },
+    {
+      "alt_result": "minecraft:orange_carpet",
+      "origin": "minecraft:magenta_carpet",
+      "result": "minecraft:light_blue_carpet"
+    },
+    {
+      "alt_result": "minecraft:magenta_carpet",
+      "origin": "minecraft:light_blue_carpet",
+      "result": "minecraft:yellow_carpet"
+    },
+    {
+      "alt_result": "minecraft:light_blue_carpet",
+      "origin": "minecraft:yellow_carpet",
+      "result": "minecraft:lime_carpet"
+    },
+    {
+      "alt_result": "minecraft:yellow_carpet",
+      "origin": "minecraft:lime_carpet",
+      "result": "minecraft:pink_carpet"
+    },
+    {
+      "alt_result": "minecraft:lime_carpet",
+      "origin": "minecraft:pink_carpet",
+      "result": "minecraft:gray_carpet"
+    },
+    {
+      "alt_result": "minecraft:pink_carpet",
+      "origin": "minecraft:gray_carpet",
+      "result": "minecraft:light_gray_carpet"
+    },
+    {
+      "alt_result": "minecraft:gray_carpet",
+      "origin": "minecraft:light_gray_carpet",
+      "result": "minecraft:cyan_carpet"
+    },
+    {
+      "alt_result": "minecraft:light_gray_carpet",
+      "origin": "minecraft:cyan_carpet",
+      "result": "minecraft:purple_carpet"
+    },
+    {
+      "alt_result": "minecraft:cyan_carpet",
+      "origin": "minecraft:purple_carpet",
+      "result": "minecraft:blue_carpet"
+    },
+    {
+      "alt_result": "minecraft:purple_carpet",
+      "origin": "minecraft:blue_carpet",
+      "result": "minecraft:brown_carpet"
+    },
+    {
+      "alt_result": "minecraft:blue_carpet",
+      "origin": "minecraft:brown_carpet",
+      "result": "minecraft:green_carpet"
+    },
+    {
+      "alt_result": "minecraft:brown_carpet",
+      "origin": "minecraft:green_carpet",
+      "result": "minecraft:red_carpet"
+    },
+    {
+      "alt_result": "minecraft:green_carpet",
+      "origin": "minecraft:red_carpet",
+      "result": "minecraft:black_carpet"
+    },
+    {
+      "alt_result": "minecraft:red_carpet",
+      "origin": "minecraft:black_carpet",
+      "result": "minecraft:white_carpet"
+    },
+    {
+      "alt_result": "minecraft:black_wool",
+      "origin": "minecraft:white_wool",
+      "result": "minecraft:orange_wool"
+    },
+    {
+      "alt_result": "minecraft:white_wool",
+      "origin": "minecraft:orange_wool",
+      "result": "minecraft:magenta_wool"
+    },
+    {
+      "alt_result": "minecraft:orange_wool",
+      "origin": "minecraft:magenta_wool",
+      "result": "minecraft:light_blue_wool"
+    },
+    {
+      "alt_result": "minecraft:magenta_wool",
+      "origin": "minecraft:light_blue_wool",
+      "result": "minecraft:yellow_wool"
+    },
+    {
+      "alt_result": "minecraft:light_blue_wool",
+      "origin": "minecraft:yellow_wool",
+      "result": "minecraft:lime_wool"
+    },
+    {
+      "alt_result": "minecraft:yellow_wool",
+      "origin": "minecraft:lime_wool",
+      "result": "minecraft:pink_wool"
+    },
+    {
+      "alt_result": "minecraft:lime_wool",
+      "origin": "minecraft:pink_wool",
+      "result": "minecraft:gray_wool"
+    },
+    {
+      "alt_result": "minecraft:pink_wool",
+      "origin": "minecraft:gray_wool",
+      "result": "minecraft:light_gray_wool"
+    },
+    {
+      "alt_result": "minecraft:gray_wool",
+      "origin": "minecraft:light_gray_wool",
+      "result": "minecraft:cyan_wool"
+    },
+    {
+      "alt_result": "minecraft:light_gray_wool",
+      "origin": "minecraft:cyan_wool",
+      "result": "minecraft:purple_wool"
+    },
+    {
+      "alt_result": "minecraft:cyan_wool",
+      "origin": "minecraft:purple_wool",
+      "result": "minecraft:blue_wool"
+    },
+    {
+      "alt_result": "minecraft:purple_wool",
+      "origin": "minecraft:blue_wool",
+      "result": "minecraft:brown_wool"
+    },
+    {
+      "alt_result": "minecraft:blue_wool",
+      "origin": "minecraft:brown_wool",
+      "result": "minecraft:green_wool"
+    },
+    {
+      "alt_result": "minecraft:brown_wool",
+      "origin": "minecraft:green_wool",
+      "result": "minecraft:red_wool"
+    },
+    {
+      "alt_result": "minecraft:green_wool",
+      "origin": "minecraft:red_wool",
+      "result": "minecraft:black_wool"
+    },
+    {
+      "alt_result": "minecraft:red_wool",
+      "origin": "minecraft:black_wool",
+      "result": "minecraft:white_wool"
+    },
+    {
+      "alt_result": "minecraft:black_terracotta",
+      "origin": "minecraft:white_terracotta",
+      "result": "minecraft:orange_terracotta"
+    },
+    {
+      "alt_result": "minecraft:white_terracotta",
+      "origin": "minecraft:orange_terracotta",
+      "result": "minecraft:magenta_terracotta"
+    },
+    {
+      "alt_result": "minecraft:orange_terracotta",
+      "origin": "minecraft:magenta_terracotta",
+      "result": "minecraft:light_blue_terracotta"
+    },
+    {
+      "alt_result": "minecraft:magenta_terracotta",
+      "origin": "minecraft:light_blue_terracotta",
+      "result": "minecraft:yellow_terracotta"
+    },
+    {
+      "alt_result": "minecraft:light_blue_terracotta",
+      "origin": "minecraft:yellow_terracotta",
+      "result": "minecraft:lime_terracotta"
+    },
+    {
+      "alt_result": "minecraft:yellow_terracotta",
+      "origin": "minecraft:lime_terracotta",
+      "result": "minecraft:pink_terracotta"
+    },
+    {
+      "alt_result": "minecraft:lime_terracotta",
+      "origin": "minecraft:pink_terracotta",
+      "result": "minecraft:gray_terracotta"
+    },
+    {
+      "alt_result": "minecraft:pink_terracotta",
+      "origin": "minecraft:gray_terracotta",
+      "result": "minecraft:light_gray_terracotta"
+    },
+    {
+      "alt_result": "minecraft:gray_terracotta",
+      "origin": "minecraft:light_gray_terracotta",
+      "result": "minecraft:cyan_terracotta"
+    },
+    {
+      "alt_result": "minecraft:light_gray_terracotta",
+      "origin": "minecraft:cyan_terracotta",
+      "result": "minecraft:purple_terracotta"
+    },
+    {
+      "alt_result": "minecraft:cyan_terracotta",
+      "origin": "minecraft:purple_terracotta",
+      "result": "minecraft:blue_terracotta"
+    },
+    {
+      "alt_result": "minecraft:purple_terracotta",
+      "origin": "minecraft:blue_terracotta",
+      "result": "minecraft:brown_terracotta"
+    },
+    {
+      "alt_result": "minecraft:blue_terracotta",
+      "origin": "minecraft:brown_terracotta",
+      "result": "minecraft:green_terracotta"
+    },
+    {
+      "alt_result": "minecraft:brown_terracotta",
+      "origin": "minecraft:green_terracotta",
+      "result": "minecraft:red_terracotta"
+    },
+    {
+      "alt_result": "minecraft:green_terracotta",
+      "origin": "minecraft:red_terracotta",
+      "result": "minecraft:black_terracotta"
+    },
+    {
+      "alt_result": "minecraft:red_terracotta",
+      "origin": "minecraft:black_terracotta",
+      "result": "minecraft:white_terracotta"
+    },
+    {
+      "alt_result": "minecraft:black_stained_glass",
+      "origin": "minecraft:white_stained_glass",
+      "result": "minecraft:orange_stained_glass"
+    },
+    {
+      "alt_result": "minecraft:white_stained_glass",
+      "origin": "minecraft:orange_stained_glass",
+      "result": "minecraft:magenta_stained_glass"
+    },
+    {
+      "alt_result": "minecraft:orange_stained_glass",
+      "origin": "minecraft:magenta_stained_glass",
+      "result": "minecraft:light_blue_stained_glass"
+    },
+    {
+      "alt_result": "minecraft:magenta_stained_glass",
+      "origin": "minecraft:light_blue_stained_glass",
+      "result": "minecraft:yellow_stained_glass"
+    },
+    {
+      "alt_result": "minecraft:light_blue_stained_glass",
+      "origin": "minecraft:yellow_stained_glass",
+      "result": "minecraft:lime_stained_glass"
+    },
+    {
+      "alt_result": "minecraft:yellow_stained_glass",
+      "origin": "minecraft:lime_stained_glass",
+      "result": "minecraft:pink_stained_glass"
+    },
+    {
+      "alt_result": "minecraft:lime_stained_glass",
+      "origin": "minecraft:pink_stained_glass",
+      "result": "minecraft:gray_stained_glass"
+    },
+    {
+      "alt_result": "minecraft:pink_stained_glass",
+      "origin": "minecraft:gray_stained_glass",
+      "result": "minecraft:light_gray_stained_glass"
+    },
+    {
+      "alt_result": "minecraft:gray_stained_glass",
+      "origin": "minecraft:light_gray_stained_glass",
+      "result": "minecraft:cyan_stained_glass"
+    },
+    {
+      "alt_result": "minecraft:light_gray_stained_glass",
+      "origin": "minecraft:cyan_stained_glass",
+      "result": "minecraft:purple_stained_glass"
+    },
+    {
+      "alt_result": "minecraft:cyan_stained_glass",
+      "origin": "minecraft:purple_stained_glass",
+      "result": "minecraft:blue_stained_glass"
+    },
+    {
+      "alt_result": "minecraft:purple_stained_glass",
+      "origin": "minecraft:blue_stained_glass",
+      "result": "minecraft:brown_stained_glass"
+    },
+    {
+      "alt_result": "minecraft:blue_stained_glass",
+      "origin": "minecraft:brown_stained_glass",
+      "result": "minecraft:green_stained_glass"
+    },
+    {
+      "alt_result": "minecraft:brown_stained_glass",
+      "origin": "minecraft:green_stained_glass",
+      "result": "minecraft:red_stained_glass"
+    },
+    {
+      "alt_result": "minecraft:green_stained_glass",
+      "origin": "minecraft:red_stained_glass",
+      "result": "minecraft:black_stained_glass"
+    },
+    {
+      "alt_result": "minecraft:red_stained_glass",
+      "origin": "minecraft:black_stained_glass",
+      "result": "minecraft:white_stained_glass"
+    },
+    {
+      "alt_result": "minecraft:black_stained_glass_pane",
+      "origin": "minecraft:white_stained_glass_pane",
+      "result": "minecraft:orange_stained_glass_pane"
+    },
+    {
+      "alt_result": "minecraft:white_stained_glass_pane",
+      "origin": "minecraft:orange_stained_glass_pane",
+      "result": "minecraft:magenta_stained_glass_pane"
+    },
+    {
+      "alt_result": "minecraft:orange_stained_glass_pane",
+      "origin": "minecraft:magenta_stained_glass_pane",
+      "result": "minecraft:light_blue_stained_glass_pane"
+    },
+    {
+      "alt_result": "minecraft:magenta_stained_glass_pane",
+      "origin": "minecraft:light_blue_stained_glass_pane",
+      "result": "minecraft:yellow_stained_glass_pane"
+    },
+    {
+      "alt_result": "minecraft:light_blue_stained_glass_pane",
+      "origin": "minecraft:yellow_stained_glass_pane",
+      "result": "minecraft:lime_stained_glass_pane"
+    },
+    {
+      "alt_result": "minecraft:yellow_stained_glass_pane",
+      "origin": "minecraft:lime_stained_glass_pane",
+      "result": "minecraft:pink_stained_glass_pane"
+    },
+    {
+      "alt_result": "minecraft:lime_stained_glass_pane",
+      "origin": "minecraft:pink_stained_glass_pane",
+      "result": "minecraft:gray_stained_glass_pane"
+    },
+    {
+      "alt_result": "minecraft:pink_stained_glass_pane",
+      "origin": "minecraft:gray_stained_glass_pane",
+      "result": "minecraft:light_gray_stained_glass_pane"
+    },
+    {
+      "alt_result": "minecraft:gray_stained_glass_pane",
+      "origin": "minecraft:light_gray_stained_glass_pane",
+      "result": "minecraft:cyan_stained_glass_pane"
+    },
+    {
+      "alt_result": "minecraft:light_gray_stained_glass_pane",
+      "origin": "minecraft:cyan_stained_glass_pane",
+      "result": "minecraft:purple_stained_glass_pane"
+    },
+    {
+      "alt_result": "minecraft:cyan_stained_glass_pane",
+      "origin": "minecraft:purple_stained_glass_pane",
+      "result": "minecraft:blue_stained_glass_pane"
+    },
+    {
+      "alt_result": "minecraft:purple_stained_glass_pane",
+      "origin": "minecraft:blue_stained_glass_pane",
+      "result": "minecraft:brown_stained_glass_pane"
+    },
+    {
+      "alt_result": "minecraft:blue_stained_glass_pane",
+      "origin": "minecraft:brown_stained_glass_pane",
+      "result": "minecraft:green_stained_glass_pane"
+    },
+    {
+      "alt_result": "minecraft:brown_stained_glass_pane",
+      "origin": "minecraft:green_stained_glass_pane",
+      "result": "minecraft:red_stained_glass_pane"
+    },
+    {
+      "alt_result": "minecraft:green_stained_glass_pane",
+      "origin": "minecraft:red_stained_glass_pane",
+      "result": "minecraft:black_stained_glass_pane"
+    },
+    {
+      "alt_result": "minecraft:red_stained_glass_pane",
+      "origin": "minecraft:black_stained_glass_pane",
+      "result": "minecraft:white_stained_glass_pane"
+    }
+  ]
+}

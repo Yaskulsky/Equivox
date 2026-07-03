@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "projecte:philosophers_stone",
+    "projecte:alchemical_coal"
+  ],
+  "result": {
+    "count": 4,
+    "id": "minecraft:coal"
+  }
+}

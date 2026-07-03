@@ -1,0 +1,12 @@
+{
+  "values": [
+    "#minecraft:leaves",
+    "#minecraft:flowers",
+    "#c:pumpkins/normal",
+    "minecraft:melon",
+    "minecraft:bush",
+    "minecraft:cactus",
+    "minecraft:sugar_cane",
+    "minecraft:vine"
+  ]
+}

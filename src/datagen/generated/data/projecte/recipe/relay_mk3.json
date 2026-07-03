@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "O": "#c:obsidians/normal",
+    "P": "projecte:relay_mk2",
+    "U": "projecte:red_matter"
+  },
+  "pattern": [
+    "OUO",
+    "OPO",
+    "OOO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "projecte:relay_mk3"
+  }
+}

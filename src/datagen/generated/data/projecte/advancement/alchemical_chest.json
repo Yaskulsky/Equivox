@@ -1,0 +1,32 @@
+{
+  "parent": "projecte:root",
+  "criteria": {
+    "alch_chest": {
+      "conditions": {
+        "items": [
+          {
+            "items": "projecte:alchemical_chest"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.projecte.alch_chest.description"
+    },
+    "icon": {
+      "id": "projecte:alchemical_chest"
+    },
+    "title": {
+      "translate": "advancements.projecte.alch_chest"
+    }
+  },
+  "requirements": [
+    [
+      "alch_chest"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
