@@ -49,3 +49,7 @@ _retexture_extract/
 AGENTS.md
 .vscode/
 WRZUC-NA-GITHUB.txt
+
+# Python
+__pycache__/
+*.pyc

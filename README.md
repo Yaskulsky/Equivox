@@ -9,7 +9,7 @@ Transmutation tables, collectors, condensers, rings, EMC — full ProjectE / EE2
 
 | | |
 |---|---|
-| **Mod version** | 1.2.0 |
+| **Mod version** | 1.2.3 |
 | **Minecraft** | 26.1.2 |
 | **NeoForge** | 26.1.2.7-beta+ |
 | **License** | MIT |

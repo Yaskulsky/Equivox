@@ -1,0 +1,93 @@
+{
+  "comment": "Unofficial ATM / Powah EMC compat by Yaskulsky. Powah baseline: energized_steel = 2048 EMC (1×). See EMC_ATM_POWAH.md for multipliers. FE not read from NBT — cell EMC uses tier proxy (1000 FE = 1 EMC). Allthemodium ingot from PE Integration (122800).",
+  "values": {
+    "before": [
+      { "type": "projecte:item", "emc_value": 16, "id": "allthemodium:ancient_stone" },
+      { "type": "projecte:item", "emc_value": 16, "id": "allthemodium:ancient_leaves" },
+      { "type": "projecte:item", "emc_value": 16, "id": "allthemodium:ancient_sapling" },
+      { "type": "projecte:item", "emc_value": 64, "id": "allthemodium:ancient_debris" },
+      { "type": "projecte:item", "emc_value": 32, "id": "allthemodium:soul_stone" },
+
+      { "type": "projecte:item", "emc_value": 122800, "id": "allthemodium:allthemodium_ingot" },
+      { "type": "projecte:item", "emc_value": 13644, "id": "allthemodium:allthemodium_nugget" },
+      { "type": "projecte:item", "emc_value": 1105200, "id": "allthemodium:allthemodium_block" },
+      { "type": "projecte:item", "emc_value": 122800, "id": "allthemodium:allthemodium_dust" },
+      { "type": "projecte:item", "emc_value": 92200, "id": "allthemodium:raw_allthemodium" },
+
+      { "type": "projecte:item", "emc_value": 245600, "id": "allthemodium:vibranium_ingot" },
+      { "type": "projecte:item", "emc_value": 27289, "id": "allthemodium:vibranium_nugget" },
+      { "type": "projecte:item", "emc_value": 2210400, "id": "allthemodium:vibranium_block" },
+      { "type": "projecte:item", "emc_value": 245600, "id": "allthemodium:vibranium_dust" },
+      { "type": "projecte:item", "emc_value": 184400, "id": "allthemodium:raw_vibranium" },
+
+      { "type": "projecte:item", "emc_value": 491200, "id": "allthemodium:unobtainium_ingot" },
+      { "type": "projecte:item", "emc_value": 54578, "id": "allthemodium:unobtainium_nugget" },
+      { "type": "projecte:item", "emc_value": 4420800, "id": "allthemodium:unobtainium_block" },
+      { "type": "projecte:item", "emc_value": 491200, "id": "allthemodium:unobtainium_dust" },
+      { "type": "projecte:item", "emc_value": 368400, "id": "allthemodium:raw_unobtainium" },
+
+      { "type": "projecte:item", "emc_value": 1024, "id": "powah:dielectric_paste" },
+      { "type": "projecte:item", "emc_value": 1536, "id": "powah:dielectric_casing" },
+      { "type": "projecte:item", "emc_value": 4096, "id": "powah:uraninite" },
+      { "type": "projecte:item", "emc_value": 3072, "id": "powah:uraninite_raw" },
+      { "type": "projecte:item", "emc_value": 36864, "id": "powah:uraninite_block" },
+      { "type": "projecte:item", "emc_value": 2048, "id": "powah:energized_steel" },
+      { "type": "projecte:item", "emc_value": 18432, "id": "powah:energized_steel_block" },
+      { "type": "projecte:item", "emc_value": 16384, "id": "powah:blazing_crystal" },
+      { "type": "projecte:item", "emc_value": 65536, "id": "powah:niotic_crystal" },
+      { "type": "projecte:item", "emc_value": 262144, "id": "powah:spirited_crystal" },
+      { "type": "projecte:item", "emc_value": 1048576, "id": "powah:nitro_crystal" },
+
+      { "type": "projecte:item", "emc_value": 4096, "id": "powah:energy_cell_basic" },
+      { "type": "projecte:item", "emc_value": 16384, "id": "powah:energy_cell_hardened" },
+      { "type": "projecte:item", "emc_value": 65536, "id": "powah:energy_cell_blazing" },
+      { "type": "projecte:item", "emc_value": 262144, "id": "powah:energy_cell_niotic" },
+      { "type": "projecte:item", "emc_value": 1048576, "id": "powah:energy_cell_spirited" },
+      { "type": "projecte:item", "emc_value": 4194304, "id": "powah:energy_cell_nitro" },
+
+      { "type": "projecte:item", "emc_value": 2048, "id": "powah:battery_basic" },
+      { "type": "projecte:item", "emc_value": 8192, "id": "powah:battery_hardened" },
+      { "type": "projecte:item", "emc_value": 32768, "id": "powah:battery_blazing" },
+      { "type": "projecte:item", "emc_value": 131072, "id": "powah:battery_niotic" },
+      { "type": "projecte:item", "emc_value": 524288, "id": "powah:battery_spirited" },
+      { "type": "projecte:item", "emc_value": 2097152, "id": "powah:battery_nitro" }
+    ],
+    "conversion": [
+      {
+        "count": 9,
+        "ingredients": [{ "type": "projecte:item", "id": "allthemodium:allthemodium_nugget" }],
+        "output": { "type": "projecte:item", "id": "allthemodium:allthemodium_ingot" }
+      },
+      {
+        "ingredients": [{ "type": "projecte:item", "amount": 9, "id": "allthemodium:allthemodium_ingot" }],
+        "output": { "type": "projecte:item", "id": "allthemodium:allthemodium_block" }
+      },
+      {
+        "count": 9,
+        "ingredients": [{ "type": "projecte:item", "id": "allthemodium:vibranium_nugget" }],
+        "output": { "type": "projecte:item", "id": "allthemodium:vibranium_ingot" }
+      },
+      {
+        "ingredients": [{ "type": "projecte:item", "amount": 9, "id": "allthemodium:vibranium_ingot" }],
+        "output": { "type": "projecte:item", "id": "allthemodium:vibranium_block" }
+      },
+      {
+        "count": 9,
+        "ingredients": [{ "type": "projecte:item", "id": "allthemodium:unobtainium_nugget" }],
+        "output": { "type": "projecte:item", "id": "allthemodium:unobtainium_ingot" }
+      },
+      {
+        "ingredients": [{ "type": "projecte:item", "amount": 9, "id": "allthemodium:unobtainium_ingot" }],
+        "output": { "type": "projecte:item", "id": "allthemodium:unobtainium_block" }
+      },
+      {
+        "ingredients": [{ "type": "projecte:item", "amount": 9, "id": "powah:uraninite" }],
+        "output": { "type": "projecte:item", "id": "powah:uraninite_block" }
+      },
+      {
+        "ingredients": [{ "type": "projecte:item", "amount": 9, "id": "powah:energized_steel" }],
+        "output": { "type": "projecte:item", "id": "powah:energized_steel_block" }
+      }
+    ]
+  }
+}
