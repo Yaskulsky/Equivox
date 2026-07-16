@@ -1,0 +1,8 @@
+{
+  "type": "energizedpower:energizer",
+  "energy": 131072,
+  "ingredient": "#c:ingots/gold",
+  "result": {
+    "id": "energizedpower:energized_gold_ingot"
+  }
+}

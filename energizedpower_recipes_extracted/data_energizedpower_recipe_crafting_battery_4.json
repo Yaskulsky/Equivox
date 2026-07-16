@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "energizedpower:battery_3",
+    "C": "#c:plates/copper",
+    "I": "#c:plates/iron",
+    "S": "#c:silicon",
+    "T": "#c:nuggets/tin"
+  },
+  "pattern": [
+    "T T",
+    "CBC",
+    "SIS"
+  ],
+  "result": {
+    "id": "energizedpower:battery_4"
+  }
+}

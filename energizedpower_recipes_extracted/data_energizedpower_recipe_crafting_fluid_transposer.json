@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "#c:plates/copper",
+    "D": "energizedpower:fluid_drainer",
+    "F": "energizedpower:fluid_filler",
+    "H": "energizedpower:hardened_machine_frame",
+    "I": "#c:storage_blocks/iron",
+    "f": "energizedpower:fluid_tank_small",
+    "i": "#c:plates/iron"
+  },
+  "pattern": [
+    "CiC",
+    "DHF",
+    "IfI"
+  ],
+  "result": {
+    "id": "energizedpower:fluid_transposer"
+  }
+}

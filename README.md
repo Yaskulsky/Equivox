@@ -9,14 +9,14 @@ Transmutation tables, collectors, condensers, rings, EMC — full ProjectE / EE2
 
 | | |
 |---|---|
-| **Mod version** | 1.2.5 |
+| **Mod version** | 1.3.0 |
 | **Minecraft** | 26.1.2 |
 | **NeoForge** | 26.1.2.7-beta+ |
 | **License** | MIT |
 
 Base code: [ProjectE](https://github.com/sinkillerj/ProjectE) (MIT, Sin Tachikawa and contributors).
 
-**Textures:** Official ProjectE textures from [sinkillerj/ProjectE](https://github.com/sinkillerj/ProjectE) (MIT). Philosopher's Stone texture from Retro Exchange.
+**Textures:** Item/block retextures by **Bbublick** ([ProjectE Retexture](https://www.curseforge.com/minecraft/texture-packs/projecte-retexture) / Exchange Extended) — used with author permission. Philosopher's Stone retexture by **Retro Exchange**. Base code assets otherwise from [sinkillerj/ProjectE](https://github.com/sinkillerj/ProjectE) (MIT).
 
 ---
 

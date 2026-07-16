@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "energizedpower:basic_circuit",
+    "C": "#c:plates/copper",
+    "G": "#c:wires/gold"
+  },
+  "pattern": [
+    "GGG",
+    "CBC",
+    "CBC"
+  ],
+  "result": {
+    "id": "energizedpower:basic_upgrade_module"
+  }
+}

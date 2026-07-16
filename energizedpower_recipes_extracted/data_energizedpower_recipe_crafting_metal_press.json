@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "energizedpower:basic_machine_frame",
+    "I": "#c:storage_blocks/iron",
+    "P": "minecraft:piston",
+    "S": "#c:ingots/steel"
+  },
+  "pattern": [
+    "SPS",
+    "IBI",
+    "SIS"
+  ],
+  "result": {
+    "id": "energizedpower:metal_press"
+  }
+}

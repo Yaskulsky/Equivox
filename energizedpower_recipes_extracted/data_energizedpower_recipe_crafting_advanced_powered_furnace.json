@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "energizedpower:advanced_machine_frame",
+    "G": "#c:plates/energized_gold",
+    "P": "energizedpower:powered_furnace",
+    "S": "#c:silicon",
+    "a": "#c:plates/advanced_alloy"
+  },
+  "pattern": [
+    "GPG",
+    "SAS",
+    "aPa"
+  ],
+  "result": {
+    "id": "energizedpower:advanced_powered_furnace"
+  }
+}

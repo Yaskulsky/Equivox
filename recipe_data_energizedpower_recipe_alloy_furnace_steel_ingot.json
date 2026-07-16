@@ -1,0 +1,16 @@
+{
+  "type": "energizedpower:alloy_furnace",
+  "ingredients": [
+    {
+      "ingredient": "#c:ingots/iron"
+    },
+    {
+      "count": 3,
+      "ingredient": "#minecraft:coals"
+    }
+  ],
+  "result": {
+    "id": "energizedpower:steel_ingot"
+  },
+  "ticks": 350
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "energizedpower:basic_solar_cell",
+    "C": "#c:ingots/copper",
+    "G": "#c:glass_panes/colorless",
+    "I": "#c:ingots/iron",
+    "R": "#c:dusts/redstone"
+  },
+  "pattern": [
+    "GGG",
+    "BRB",
+    "ICI"
+  ],
+  "result": {
+    "id": "energizedpower:solar_panel_1"
+  }
+}

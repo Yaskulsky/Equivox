@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "#c:gems/amethyst",
+    "C": "energizedpower:energized_crystal_matrix",
+    "E": "#c:plates/energized_gold",
+    "P": "energizedpower:processing_unit",
+    "R": "energizedpower:reinforced_advanced_machine_frame",
+    "a": "#c:plates/advanced_alloy"
+  },
+  "pattern": [
+    "CAC",
+    "PRP",
+    "aEa"
+  ],
+  "result": {
+    "id": "energizedpower:weather_controller"
+  }
+}

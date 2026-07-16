@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "energizedpower:basic_machine_frame",
+    "I": "#c:plates/iron",
+    "S": "minecraft:stonecutter"
+  },
+  "pattern": [
+    "ISI",
+    "SBS",
+    "ISI"
+  ],
+  "result": {
+    "id": "energizedpower:pulverizer"
+  }
+}

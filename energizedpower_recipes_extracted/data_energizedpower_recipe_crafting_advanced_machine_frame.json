@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "#c:ingots/advanced_alloy",
+    "E": "#c:ingots/energized_copper",
+    "H": "energizedpower:hardened_machine_frame",
+    "S": "#c:silicon"
+  },
+  "pattern": [
+    "ESE",
+    "AHA",
+    "ESE"
+  ],
+  "result": {
+    "id": "energizedpower:advanced_machine_frame"
+  }
+}

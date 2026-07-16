@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "energizedpower:basic_machine_frame",
+    "I": "#c:plates/iron",
+    "P": "minecraft:piston"
+  },
+  "pattern": [
+    "IPI",
+    "PBP",
+    "IPI"
+  ],
+  "result": {
+    "id": "energizedpower:compressor"
+  }
+}

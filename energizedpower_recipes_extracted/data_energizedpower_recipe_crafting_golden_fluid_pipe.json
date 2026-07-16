@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": "#c:ingots/gold",
+    "g": "#c:plates/gold"
+  },
+  "pattern": [
+    "GgG",
+    "GgG",
+    "GgG"
+  ],
+  "result": {
+    "count": 12,
+    "id": "energizedpower:golden_fluid_pipe"
+  }
+}

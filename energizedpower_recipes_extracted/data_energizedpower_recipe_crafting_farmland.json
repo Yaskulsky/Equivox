@@ -1,0 +1,7 @@
+{
+  "type": "energizedpower:farmland_crafting",
+  "dirt": "minecraft:dirt",
+  "farmland": {
+    "id": "minecraft:farmland"
+  }
+}

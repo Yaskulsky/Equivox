@@ -1,0 +1,21 @@
+{
+  "type": "energizedpower:alloy_furnace",
+  "ingredients": [
+    {
+      "count": 3,
+      "ingredient": "#c:ingots/steel"
+    },
+    {
+      "count": 3,
+      "ingredient": "#c:ingots/copper"
+    },
+    {
+      "count": 3,
+      "ingredient": "#c:ingots/tin"
+    }
+  ],
+  "result": {
+    "id": "energizedpower:advanced_alloy_ingot"
+  },
+  "ticks": 2500
+}

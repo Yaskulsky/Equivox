@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": "energizedpower:good_fertilizer",
+    "M": "minecraft:red_mushroom",
+    "R": "minecraft:rose_bush",
+    "S": "minecraft:sweet_berries",
+    "T": "minecraft:red_tulip",
+    "r": "#c:dyes/red"
+  },
+  "pattern": [
+    "MGS",
+    "GrG",
+    "TGR"
+  ],
+  "result": {
+    "count": 4,
+    "id": "energizedpower:advanced_fertilizer"
+  }
+}

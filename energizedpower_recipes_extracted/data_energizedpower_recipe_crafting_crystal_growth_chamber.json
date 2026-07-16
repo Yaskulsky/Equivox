@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "energizedpower:advanced_machine_frame",
+    "E": "#c:plates/energized_copper",
+    "P": "#c:plates/advanced_alloy",
+    "a": "minecraft:amethyst_block"
+  },
+  "pattern": [
+    "aPa",
+    "EAE",
+    "aPa"
+  ],
+  "result": {
+    "id": "energizedpower:crystal_growth_chamber"
+  }
+}

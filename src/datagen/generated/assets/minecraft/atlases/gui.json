@@ -1,8 +1,0 @@
-{
-  "sources": [
-    {
-      "type": "minecraft:single",
-      "resource": "projecte:slot/empty_klein_star"
-    }
-  ]
-}

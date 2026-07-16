@@ -1,0 +1,23 @@
+{
+  "type": "energizedpower:assembling_machine",
+  "ingredients": [
+    {
+      "count": 6,
+      "ingredient": "#c:gems/amethyst"
+    },
+    {
+      "count": 2,
+      "ingredient": "#c:gems/diamond"
+    },
+    {
+      "count": 2,
+      "ingredient": "#c:gems/emerald"
+    },
+    {
+      "ingredient": "#c:ingots/redstone_alloy"
+    }
+  ],
+  "result": {
+    "id": "energizedpower:crystal_matrix"
+  }
+}

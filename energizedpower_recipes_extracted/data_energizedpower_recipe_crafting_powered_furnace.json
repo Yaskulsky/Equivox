@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "energizedpower:basic_machine_frame",
+    "C": "#c:plates/copper",
+    "F": "minecraft:furnace",
+    "I": "#c:plates/iron",
+    "S": "#c:silicon"
+  },
+  "pattern": [
+    "CFC",
+    "SBS",
+    "IFI"
+  ],
+  "result": {
+    "id": "energizedpower:powered_furnace"
+  }
+}

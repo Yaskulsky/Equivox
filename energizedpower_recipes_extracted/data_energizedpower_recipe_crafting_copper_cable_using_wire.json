@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "copper_cable",
+  "key": {
+    "I": "energizedpower:cable_insulator",
+    "W": "#c:wires/copper"
+  },
+  "pattern": [
+    "IWI",
+    "IWI",
+    "IWI"
+  ],
+  "result": {
+    "count": 6,
+    "id": "energizedpower:copper_cable"
+  }
+}

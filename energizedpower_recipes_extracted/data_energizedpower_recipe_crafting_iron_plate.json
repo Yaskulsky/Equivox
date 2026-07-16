@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#c:tools/hammers",
+    "#c:ingots/iron"
+  ],
+  "result": {
+    "id": "energizedpower:iron_plate"
+  }
+}

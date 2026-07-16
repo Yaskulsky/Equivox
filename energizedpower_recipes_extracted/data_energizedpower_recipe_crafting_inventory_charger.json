@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "energizedpower:charger",
+    "I": "#c:plates/iron",
+    "R": "#c:dusts/redstone",
+    "S": "#c:silicon",
+    "c": "#c:plates/copper"
+  },
+  "pattern": [
+    "SIS",
+    "RCR",
+    "cIc"
+  ],
+  "result": {
+    "id": "energizedpower:inventory_charger"
+  }
+}

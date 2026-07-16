@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "minecraft:iron_bars",
+    "G": "#c:glass_blocks/colorless",
+    "I": "#c:storage_blocks/iron",
+    "i": "#c:plates/iron"
+  },
+  "pattern": [
+    "IBI",
+    "iGi",
+    "IiI"
+  ],
+  "result": {
+    "id": "energizedpower:drain"
+  }
+}

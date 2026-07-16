@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#c:storage_blocks/raw_tin"
+  ],
+  "result": {
+    "count": 9,
+    "id": "energizedpower:raw_tin"
+  }
+}

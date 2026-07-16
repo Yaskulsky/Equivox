@@ -2,6 +2,15 @@
 
 All notable changes to [Yaskulsky/projecte-26-port](https://github.com/Yaskulsky/projecte-26-port) are documented here.
 
+## [1.3.0] — 2026-07-15
+
+### Changed
+- **Textures** — bundled **Bbublick** ProjectE Retexture / Exchange Extended assets (used with author permission). Philosopher's Stone credit: Retro Exchange.
+- Mod display name / creative tab: **ProjectEE** (no hardcoded version in item tooltips).
+- Version bump to **1.3.0** (Minecraft 26.1.2 / NeoForge).
+
+---
+
 ## [1.2.5] — 2026-07-11
 
 ### Fixed

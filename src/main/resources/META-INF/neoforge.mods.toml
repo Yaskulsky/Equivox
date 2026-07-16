@@ -6,7 +6,7 @@ license="MIT"
 [[mods]]
   modId="projecte"
   version="${version}"
-  displayName="ProjectEE v1.2.2"
+  displayName="ProjectEE"
   displayURL="https://github.com/Yaskulsky/projecte-26-port"
   logoFile="logo.png"
   authors="SinKillerJ, MaPePeR, williewillus, Lilylicious, pupnewfster"

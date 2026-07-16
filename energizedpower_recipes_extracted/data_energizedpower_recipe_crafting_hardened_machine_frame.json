@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "energizedpower:basic_machine_frame",
+    "I": "#c:gears/iron",
+    "R": "#c:rods/iron",
+    "S": "#c:silicon",
+    "s": "#c:ingots/steel"
+  },
+  "pattern": [
+    "IsR",
+    "SBS",
+    "RsI"
+  ],
+  "result": {
+    "id": "energizedpower:hardened_machine_frame"
+  }
+}

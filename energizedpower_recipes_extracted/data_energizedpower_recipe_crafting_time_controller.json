@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "#c:plates/advanced_alloy",
+    "C": "minecraft:clock",
+    "E": "#c:plates/energized_gold",
+    "P": "energizedpower:processing_unit",
+    "R": "energizedpower:reinforced_advanced_machine_frame",
+    "c": "energizedpower:energized_crystal_matrix"
+  },
+  "pattern": [
+    "cCc",
+    "PRP",
+    "AEA"
+  ],
+  "result": {
+    "id": "energizedpower:time_controller"
+  }
+}

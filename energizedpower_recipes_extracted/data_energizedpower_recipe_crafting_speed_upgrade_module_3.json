@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "energizedpower:advanced_upgrade_module",
+    "C": "#c:plates/copper",
+    "R": "#c:dusts/redstone",
+    "S": "#c:silicon",
+    "s": "energizedpower:speed_upgrade_module_2"
+  },
+  "pattern": [
+    "CSC",
+    "RAR",
+    "CsC"
+  ],
+  "result": {
+    "id": "energizedpower:speed_upgrade_module_3"
+  }
+}

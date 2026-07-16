@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#c:tools/hammers",
+    "#c:ingots/tin"
+  ],
+  "result": {
+    "id": "energizedpower:tin_plate"
+  }
+}

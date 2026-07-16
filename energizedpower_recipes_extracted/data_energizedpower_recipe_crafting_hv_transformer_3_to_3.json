@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": "#c:plates/energized_gold",
+    "M": "energizedpower:advanced_machine_frame",
+    "S": "#c:storage_blocks/silicon",
+    "T": "energizedpower:transformer_3_to_3"
+  },
+  "pattern": [
+    "GTG",
+    "SMS",
+    "GTG"
+  ],
+  "result": {
+    "id": "energizedpower:hv_transformer_3_to_3"
+  }
+}

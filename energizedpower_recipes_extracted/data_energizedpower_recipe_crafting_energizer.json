@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "energizedpower:advanced_machine_frame",
+    "E": "#c:plates/energized_copper",
+    "G": "#c:plates/gold",
+    "R": "#c:dusts/redstone",
+    "S": "#c:storage_blocks/silicon",
+    "a": "#c:plates/advanced_alloy"
+  },
+  "pattern": [
+    "RaR",
+    "GAG",
+    "ESE"
+  ],
+  "result": {
+    "id": "energizedpower:energizer"
+  }
+}

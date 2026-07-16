@@ -1,0 +1,24 @@
+{
+  "type": "energizedpower:assembling_machine",
+  "ingredients": [
+    {
+      "count": 4,
+      "ingredient": "energizedpower:basic_circuit"
+    },
+    {
+      "count": 4,
+      "ingredient": "#c:wires/energized_copper"
+    },
+    {
+      "count": 4,
+      "ingredient": "#c:silicon"
+    },
+    {
+      "count": 2,
+      "ingredient": "#c:dusts/redstone"
+    }
+  ],
+  "result": {
+    "id": "energizedpower:advanced_circuit"
+  }
+}

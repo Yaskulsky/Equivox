@@ -1,0 +1,23 @@
+{
+  "type": "energizedpower:assembling_machine",
+  "ingredients": [
+    {
+      "count": 2,
+      "ingredient": "energizedpower:basic_solar_cell"
+    },
+    {
+      "count": 4,
+      "ingredient": "#c:ingots/energized_copper"
+    },
+    {
+      "count": 2,
+      "ingredient": "#c:ingots/tin"
+    },
+    {
+      "ingredient": "#c:ingots/redstone_alloy"
+    }
+  ],
+  "result": {
+    "id": "energizedpower:advanced_solar_cell"
+  }
+}

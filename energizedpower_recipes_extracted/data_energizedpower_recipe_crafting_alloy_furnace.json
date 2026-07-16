@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "minecraft:bricks",
+    "F": "minecraft:furnace",
+    "I": "#c:plates/iron"
+  },
+  "pattern": [
+    "III",
+    "FIF",
+    "BBB"
+  ],
+  "result": {
+    "id": "energizedpower:alloy_furnace"
+  }
+}

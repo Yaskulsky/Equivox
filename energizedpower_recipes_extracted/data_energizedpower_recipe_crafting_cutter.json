@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": "#c:plates/iron",
+    "S": "#c:rods/wooden",
+    "i": "#c:nuggets/iron"
+  },
+  "pattern": [
+    "I I",
+    " i ",
+    "S S"
+  ],
+  "result": {
+    "id": "energizedpower:cutter"
+  }
+}
