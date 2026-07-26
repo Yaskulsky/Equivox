@@ -1,0 +1,6 @@
+{
+    "type": "apotheosis:boss_dungeon",
+    "config": {
+        "success_chance": 1.0
+    }
+}

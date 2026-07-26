@@ -1,0 +1,28 @@
+{
+    "type": "apotheosis:purity_upgrade",
+    "left": [
+        {
+            "count": 7,
+            "ingredient": "apotheosis:gem_dust"
+        }
+    ],
+    "purity": "normal",
+    "right": [
+        {
+            "count": 27,
+            "ingredient": "apotheosis:timeworn_fabric"
+        },
+        {
+            "count": 9,
+            "ingredient": "apotheosis:luminous_crystal_shard"
+        },
+        {
+            "count": 3,
+            "ingredient": "apotheosis:arcane_sands"
+        },
+        {
+            "count": 1,
+            "ingredient": "apotheosis:godforged_pearl"
+        }
+    ]
+}

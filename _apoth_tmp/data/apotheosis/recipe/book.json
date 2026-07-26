@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"neoforge:conditions": [{
+		"type": "neoforge:mod_loaded",
+		"modid": "patchouli"
+	}],
+	"group": "something",
+	"ingredients": [
+		"minecraft:book",
+		"#c:ingots/gold"
+	],
+	"result": {
+        "id": "patchouli:guide_book",
+        "count": 1,
+        "components": {
+            "patchouli:book": "apotheosis:apoth_chronicle"
+        }
+	}
+}

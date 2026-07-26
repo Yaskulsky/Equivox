@@ -32,4 +32,11 @@ public interface IDMPedestal {
 	 * @return Inclusive bounding box of all positions this pedestal should apply effects in
 	 */
 	AABB getEffectBounds();
+
+	/**
+	 * Bonus ticks applied by the Watch of Flowing Time on this pedestal (clamped to server max).
+	 */
+	default int getTimeBonusTicks() {
+		return 0;
+	}
 }

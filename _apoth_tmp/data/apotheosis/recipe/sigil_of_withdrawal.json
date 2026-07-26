@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "group": "apotheosis",
+    "key": {
+        "B": "minecraft:blaze_rod",
+        "E": "#c:ender_pearls",
+        "G": "apotheosis:gem_fused_slate",
+        "L": "minecraft:lava_bucket",
+        "M": "apotheosis:gem_dust"
+    },
+    "pattern": [
+        "GBG",
+        "ELE",
+        "GMG"
+    ],
+    "result": {
+        "count": 4,
+        "id": "apotheosis:sigil_of_withdrawal"
+    }
+}

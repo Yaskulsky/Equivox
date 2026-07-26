@@ -1,0 +1,20 @@
+{
+    "type": "apotheosis:salvaging",
+    "input": [
+        "minecraft:stone_sword",
+        "minecraft:stone_pickaxe",
+        "minecraft:stone_axe",
+        "minecraft:stone_shovel",
+        "minecraft:stone_hoe",
+        "minecraft:stone_spear"
+    ],
+    "outputs": [
+        {
+            "max_count": 1,
+            "min_count": 0,
+            "stack": {
+                "id": "minecraft:cobblestone"
+            }
+        }
+    ]
+}

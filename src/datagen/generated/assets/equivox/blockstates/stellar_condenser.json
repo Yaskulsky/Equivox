@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "equivox:block/stellar_condenser",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "equivox:block/stellar_condenser"
+    },
+    "facing=south": {
+      "model": "equivox:block/stellar_condenser",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "equivox:block/stellar_condenser",
+      "y": 270
+    }
+  }
+}

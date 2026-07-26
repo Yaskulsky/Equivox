@@ -1,0 +1,12 @@
+{
+    "type": "apotheosis:attribute",
+    "modifier": {
+        "attribute": "minecraft:luck",
+        "modifier_id": "apotheosis:ascent/luck",
+        "operation": "add_multiplied_total",
+        "value": 0.3
+    },
+    "sort_index": 200,
+    "target": "players",
+    "tier": "ascent"
+}

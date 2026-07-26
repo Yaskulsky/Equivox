@@ -114,6 +114,8 @@ public class PEJeiPlugin implements IModPlugin {
 	public void registerRecipeTransferHandlers(@NotNull IRecipeTransferRegistration registration) {
 		if (shouldLoad()) {
 			registration.addRecipeTransferHandler(PhilosStoneContainer.class, MenuType.CRAFTING, RecipeTypes.CRAFTING, 1, 9, 10, 36);
+			// Arcane Tablet: custom transfer that can pull from knowledge / EMC
+			registration.addRecipeTransferHandler(new ArcaneTabletRecipeTransferHandler(), RecipeTypes.CRAFTING);
 		}
 	}
 
@@ -121,6 +123,7 @@ public class PEJeiPlugin implements IModPlugin {
 	public void registerRecipeCatalysts(@NotNull IRecipeCatalystRegistration registry) {
 		if (shouldLoad()) {
 			registry.addRecipeCatalyst(PEItems.PHILOSOPHERS_STONE.asStack(), RecipeTypes.CRAFTING, WorldTransmuteRecipeCategory.RECIPE_TYPE);
+			registry.addRecipeCatalyst(PEItems.ARCANE_TABLET.asStack(), RecipeTypes.CRAFTING);
 			registry.addRecipeCatalyst(new ItemStack(PEBlocks.COLLECTOR), CollectorRecipeCategory.RECIPE_TYPE);
 			registry.addRecipeCatalyst(new ItemStack(PEBlocks.COLLECTOR_MK2), CollectorRecipeCategory.RECIPE_TYPE);
 			registry.addRecipeCatalyst(new ItemStack(PEBlocks.COLLECTOR_MK3), CollectorRecipeCategory.RECIPE_TYPE);

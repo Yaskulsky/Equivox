@@ -235,6 +235,10 @@ public class PELangProvider extends BaseLanguageProvider {
 		add(PEBlocks.MOBIUS_FUEL, "Mobius Fuel Block");
 		add(PEBlocks.AETERNALIS_FUEL, "Aeternalis Fuel Block");
 		add(PEBlocks.DARK_MATTER_PEDESTAL, "Dark Matter Pedestal");
+		add(PEBlocks.ENTROPY_SINK, "Entropy Sink");
+		add(PEBlocks.ENTROPY_SINK_DARK, "Dark Entropy Sink");
+		add(PEBlocks.ENTROPY_SINK_RED, "Red Entropy Sink");
+		add(PEBlocks.STELLAR_CONDENSER, "Stellar Condenser");
 	}
 
 	private void addCommands() {
@@ -508,8 +512,10 @@ public class PELangProvider extends BaseLanguageProvider {
 		add(PELang.PEDESTAL_SOUL_STONE_2, "Half a heart every %1$s");
 		add(PELang.PEDESTAL_SWRG_1, "Shoots lightning at nearby mobs");
 		add(PELang.PEDESTAL_SWRG_2, "Activates every %1$s");
-		add(PELang.PEDESTAL_TIME_WATCH_1, "Gives %1$s bonus ticks to nearby blocks every tick");
+		add(PELang.PEDESTAL_TIME_WATCH_1, "Up to %1$s bonus ticks to nearby blocks every tick");
 		add(PELang.PEDESTAL_TIME_WATCH_2, "Each tick, nearby mobs move %1$s times the speed");
+		add(PELang.PEDESTAL_TIME_WATCH_SCROLL, "Sneak + scroll on pedestal to set speed");
+		add(PELang.PEDESTAL_TIME_WATCH_BONUS, "Time bonus: %1$s / %2$s");
 		add(PELang.PEDESTAL_VOLCANITE_1, "Prevents rain/snow storms");
 		add(PELang.PEDESTAL_VOLCANITE_2, "Attempts to stop weather every %1$s");
 		add(PELang.PEDESTAL_ZERO_1, "Extinguishes entities");

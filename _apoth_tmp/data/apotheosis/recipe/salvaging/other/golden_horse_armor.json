@@ -1,0 +1,13 @@
+{
+    "type": "apotheosis:salvaging",
+    "input": "minecraft:golden_horse_armor",
+    "outputs": [
+        {
+            "max_count": 8,
+            "min_count": 3,
+            "stack": {
+                "id": "minecraft:gold_ingot"
+            }
+        }
+    ]
+}

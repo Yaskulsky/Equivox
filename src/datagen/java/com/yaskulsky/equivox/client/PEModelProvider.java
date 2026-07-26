@@ -73,6 +73,8 @@ public class PEModelProvider extends ModelProvider {
 		simpleBlocks(blockModels, PEBlocks.ALCHEMICAL_COAL, PEBlocks.MOBIUS_FUEL, PEBlocks.AETERNALIS_FUEL, PEBlocks.DARK_MATTER, PEBlocks.RED_MATTER);
 		registerTieredOrientable(blockModels, "collectors", PEBlocks.COLLECTOR, PEBlocks.COLLECTOR_MK2, PEBlocks.COLLECTOR_MK3);
 		registerTieredOrientable(blockModels, "relays", PEBlocks.RELAY, PEBlocks.RELAY_MK2, PEBlocks.RELAY_MK3);
+		registerTieredOrientable(blockModels, "collectors", PEBlocks.ENTROPY_SINK, PEBlocks.ENTROPY_SINK_DARK, PEBlocks.ENTROPY_SINK_RED);
+		registerOrientable(blockModels, PEBlocks.STELLAR_CONDENSER, "collectors", "top_3");
 		registerFurnace(blockModels, PEBlocks.DARK_MATTER_FURNACE, "dm", "dark_matter_block");
 		registerFurnace(blockModels, PEBlocks.RED_MATTER_FURNACE, "rm", "red_matter_block");
 		registerChests(blockModels);
@@ -86,7 +88,8 @@ public class PEModelProvider extends ModelProvider {
 		blockParentModel(itemModels, PEBlocks.ALCHEMICAL_COAL, PEBlocks.MOBIUS_FUEL, PEBlocks.AETERNALIS_FUEL, PEBlocks.DARK_MATTER, PEBlocks.RED_MATTER,
 				PEBlocks.DARK_MATTER_FURNACE, PEBlocks.RED_MATTER_FURNACE, PEBlocks.COLLECTOR, PEBlocks.COLLECTOR_MK2,
 				PEBlocks.COLLECTOR_MK3, PEBlocks.NOVA_CATALYST, PEBlocks.NOVA_CATACLYSM, PEBlocks.RELAY, PEBlocks.RELAY_MK2,
-				PEBlocks.RELAY_MK3);
+				PEBlocks.RELAY_MK3, PEBlocks.ENTROPY_SINK, PEBlocks.ENTROPY_SINK_DARK, PEBlocks.ENTROPY_SINK_RED,
+				PEBlocks.STELLAR_CONDENSER);
 		generated(itemModels, PEBlocks.DARK_MATTER_PEDESTAL.getBlock().asItem(), modLocation("item/dm_pedestal"));
 		generated(itemModels, PEBlocks.TRANSMUTATION_TABLE.getBlock().asItem(), modLocation("item/transmutation_table"));
 		registerGenerated(itemModels, PEItems.CATALYTIC_LENS, PEItems.DESTRUCTION_CATALYST, PEItems.LOW_DIVINING_ROD, PEItems.MEDIUM_DIVINING_ROD, PEItems.HIGH_DIVINING_ROD,
@@ -306,6 +309,16 @@ public class PEModelProvider extends ModelProvider {
 				.put(TextureSlot.TOP, texture("block/" + type + "/top_3"))
 				.put(TextureSlot.BOTTOM, side), ModelTemplates.CUBE_ORIENTABLE_TOP_BOTTOM);
 		blockModels.createHorizontallyRotatedBlock(mk3.getBlock(), mk3Provider);
+	}
+
+	private void registerOrientable(BlockModelGenerators blockModels, BlockRegistryObject<?, ?> block, String type, String topTexture) {
+		Material side = texture("block/" + type + "/other");
+		TexturedModel.Provider provider = TexturedModel.createDefault(b -> new TextureMapping()
+				.put(TextureSlot.SIDE, side)
+				.put(TextureSlot.FRONT, texture("block/" + type + "/front"))
+				.put(TextureSlot.TOP, texture("block/" + type + "/" + topTexture))
+				.put(TextureSlot.BOTTOM, side), ModelTemplates.CUBE_ORIENTABLE_TOP_BOTTOM);
+		blockModels.createHorizontallyRotatedBlock(block.getBlock(), provider);
 	}
 
 	private void blockParentModel(ItemModelGenerators itemModels, BlockRegistryObject<?, ?>... blocks) {

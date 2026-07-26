@@ -15,6 +15,7 @@ import com.yaskulsky.equivox.gameObjs.items.MercurialEye;
 import com.yaskulsky.equivox.gameObjs.items.PhilosophersStone;
 import com.yaskulsky.equivox.gameObjs.items.RepairTalisman;
 import com.yaskulsky.equivox.gameObjs.items.Tome;
+import com.yaskulsky.equivox.gameObjs.items.ArcaneTablet;
 import com.yaskulsky.equivox.gameObjs.items.TransmutationTablet;
 import com.yaskulsky.equivox.gameObjs.items.VolcaniteAmulet;
 import com.yaskulsky.equivox.gameObjs.items.armor.DMArmor;
@@ -156,6 +157,8 @@ public class PEItems {
 
 	public static final ItemRegistryObject<Tome> TOME_OF_KNOWLEDGE = ITEMS.registerNoStack("tome", properties -> new Tome(properties.rarity(Rarity.EPIC)));
 	public static final ItemRegistryObject<TransmutationTablet> TRANSMUTATION_TABLET = ITEMS.registerNoStackFireImmune("transmutation_tablet", TransmutationTablet::new);
+	public static final ItemRegistryObject<ArcaneTablet> ARCANE_TABLET = ITEMS.registerNoStackFireImmune("arcane_tablet",
+			properties -> new ArcaneTablet(properties.rarity(net.minecraft.world.item.Rarity.RARE)));
 
 	private static ItemRegistryObject<AlchemicalBag> registerBag(DyeColor color) {
 		return ITEMS.registerNoStack(color.getName() + "_alchemical_bag", properties -> new AlchemicalBag(properties, color));

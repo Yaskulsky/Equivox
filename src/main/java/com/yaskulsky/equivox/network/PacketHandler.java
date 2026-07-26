@@ -3,6 +3,7 @@ package com.yaskulsky.equivox.network;
 import com.yaskulsky.equivox.PECore;
 import com.yaskulsky.equivox.api.capabilities.IKnowledgeProvider;
 import com.yaskulsky.equivox.api.capabilities.PECapabilities;
+import com.yaskulsky.equivox.gameObjs.container.ArcaneTabletContainer;
 import com.yaskulsky.equivox.gameObjs.container.TransmutationContainer;
 import com.yaskulsky.equivox.gameObjs.items.rings.ArchangelSmite;
 import com.yaskulsky.equivox.gameObjs.registries.PEItems;
@@ -20,7 +21,10 @@ import com.yaskulsky.equivox.network.packets.to_client.knowledge.KnowledgeSyncCh
 import com.yaskulsky.equivox.network.packets.to_client.knowledge.KnowledgeSyncEmcPKT;
 import com.yaskulsky.equivox.network.packets.to_client.knowledge.KnowledgeSyncInputsAndLocksPKT;
 import com.yaskulsky.equivox.network.packets.to_client.knowledge.KnowledgeSyncPKT;
+import com.yaskulsky.equivox.network.packets.to_server.ArcaneTabletActionPKT;
+import com.yaskulsky.equivox.network.packets.to_server.ArcaneTabletRecipeTransferPKT;
 import com.yaskulsky.equivox.network.packets.to_server.KeyPressPKT;
+import com.yaskulsky.equivox.network.packets.to_server.PedestalTimeBonusPKT;
 import com.yaskulsky.equivox.network.packets.to_server.SearchUpdatePKT;
 import com.yaskulsky.equivox.network.packets.to_server.UpdateGemModePKT;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -71,6 +75,9 @@ public final class PacketHandler {
 		});
 		registrar.play(SearchUpdatePKT.TYPE, SearchUpdatePKT.STREAM_CODEC);
 		registrar.play(UpdateGemModePKT.TYPE, UpdateGemModePKT.STREAM_CODEC);
+		registrar.play(PedestalTimeBonusPKT.TYPE, PedestalTimeBonusPKT.STREAM_CODEC);
+		registrar.play(ArcaneTabletActionPKT.TYPE, ArcaneTabletActionPKT.STREAM_CODEC);
+		registrar.play(ArcaneTabletRecipeTransferPKT.TYPE, ArcaneTabletRecipeTransferPKT.STREAM_CODEC);
 	}
 
 	private void registerServerToClient(PacketRegistrar registrar) {
@@ -81,6 +88,8 @@ public final class PacketHandler {
 			if (knowledge != null) {
 				knowledge.clearKnowledge();
 				if (player.containerMenu instanceof TransmutationContainer container) {
+					container.transmutationInventory.updateClientTargets(false);
+				} else if (player.containerMenu instanceof ArcaneTabletContainer container) {
 					container.transmutationInventory.updateClientTargets(false);
 				}
 			}
@@ -99,6 +108,8 @@ public final class PacketHandler {
 		registrar.play(UpdateCondenserLockPKT.TYPE, UpdateCondenserLockPKT.STREAM_CODEC);
 		updateTransmutationTargets = registrar.playInstanced(PECore.rl("update_transmutation_targets"), (ignored, context) -> {
 			if (context.player().containerMenu instanceof TransmutationContainer container) {
+				container.transmutationInventory.updateClientTargets(false);
+			} else if (context.player().containerMenu instanceof ArcaneTabletContainer container) {
 				container.transmutationInventory.updateClientTargets(false);
 			}
 		});

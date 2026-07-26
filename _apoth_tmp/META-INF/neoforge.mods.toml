@@ -1,0 +1,80 @@
+modLoader="javafml"
+
+loaderVersion="[2,)"
+
+license="MIT License (code) / All Rights Reserved (assets)"
+
+[[mods]] #mandatory
+
+modId="apotheosis"
+
+version="9.0.3"
+
+displayName="Apotheosis"
+
+authors="Shadows_of_Fire"
+
+description='''All things that should have been'''
+
+logoFile="logo_transparent.png"
+
+displayURL="https://www.curseforge.com/minecraft/mc-mods/apotheosis"
+
+[[mixins]]
+config="apotheosis.mixins.json"
+
+[[dependencies.apotheosis]]
+    modId="minecraft"
+    type="required"
+    versionRange="[26.1,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.apotheosis]]
+    modId="neoforge"
+    type="required"
+    versionRange="[26.1.0.1-beta,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.apotheosis]]
+    modId="placebo"
+    type="required"
+    versionRange="[10.0.2,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.apotheosis]]
+    modId="apothic_attributes"
+    type="required"
+    versionRange="[3.0.1,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.apotheosis]]
+    modId="apothic_spawners"
+    type="required"
+    versionRange="[2.0.0,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.apotheosis]]
+    modId="apothic_enchanting"
+    type="required"
+    versionRange="[2.0.0,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.apotheosis]]
+    modId="gateways"
+    type="optional"
+    versionRange="[6.0.2,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.apotheosis]]
+    modId="patchouli"
+    type="optional"
+    versionRange="[26.1-94,)"
+    ordering="AFTER"
+    side="BOTH"

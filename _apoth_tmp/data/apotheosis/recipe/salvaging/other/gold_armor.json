@@ -1,0 +1,18 @@
+{
+    "type": "apotheosis:salvaging",
+    "input": [
+        "minecraft:golden_helmet",
+        "minecraft:golden_chestplate",
+        "minecraft:golden_leggings",
+        "minecraft:golden_boots"
+    ],
+    "outputs": [
+        {
+            "max_count": 3,
+            "min_count": 1,
+            "stack": {
+                "id": "minecraft:gold_ingot"
+            }
+        }
+    ]
+}

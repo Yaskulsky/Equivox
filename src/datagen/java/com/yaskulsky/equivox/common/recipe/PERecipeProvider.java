@@ -78,6 +78,8 @@ public class PERecipeProvider extends RecipeProvider {
 		addBagRecipes(recipeOutput);
 		addCollectorRecipes(recipeOutput);
 		addRelayRecipes(recipeOutput);
+		addEntropySinkRecipes(recipeOutput);
+		addStellarCondenserRecipes(recipeOutput);
 		addCondenserRecipes(recipeOutput);
 		addTransmutationTableRecipes(recipeOutput);
 		addNovaRecipes(recipeOutput);
@@ -531,6 +533,32 @@ public class PERecipeProvider extends RecipeProvider {
 				.define('P', previous)
 				.define('U', upgradeItem)
 				.unlockedBy("has_previous", has(previous))
+				.save(recipeOutput);
+	}
+
+	private void addEntropySinkRecipes(RecipeOutput recipeOutput) {
+		shaped(RecipeCategory.DECORATIONS, PEBlocks.ENTROPY_SINK)
+				.pattern("ODO")
+				.pattern("DFD")
+				.pattern("ODO")
+				.define('O', Tags.Items.OBSIDIANS_NORMAL)
+				.define('D', Tags.Items.GEMS_DIAMOND)
+				.define('F', Items.FURNACE)
+				.unlockedBy("has_diamond", has(Tags.Items.GEMS_DIAMOND))
+				.save(recipeOutput);
+		addCollectorUpgradeRecipes(recipeOutput, PEBlocks.ENTROPY_SINK_DARK, PEBlocks.ENTROPY_SINK, PEItems.DARK_MATTER);
+		addCollectorUpgradeRecipes(recipeOutput, PEBlocks.ENTROPY_SINK_RED, PEBlocks.ENTROPY_SINK_DARK, PEItems.RED_MATTER);
+	}
+
+	private void addStellarCondenserRecipes(RecipeOutput recipeOutput) {
+		shaped(RecipeCategory.DECORATIONS, PEBlocks.STELLAR_CONDENSER)
+				.pattern("GEG")
+				.pattern("EDE")
+				.pattern("GEG")
+				.define('G', Items.GLOWSTONE)
+				.define('E', Items.ENDER_EYE)
+				.define('D', Tags.Items.STORAGE_BLOCKS_DIAMOND)
+				.unlockedBy("has_ender_eye", has(Items.ENDER_EYE))
 				.save(recipeOutput);
 	}
 

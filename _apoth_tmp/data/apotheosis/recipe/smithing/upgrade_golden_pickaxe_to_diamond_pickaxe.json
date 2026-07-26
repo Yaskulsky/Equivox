@@ -1,0 +1,12 @@
+{
+    "type": "apotheosis:sized_upgrade_recipe",
+    "addition": {
+        "count": 4,
+        "ingredient": "#c:gems/diamond"
+    },
+    "base": "minecraft:golden_pickaxe",
+    "result": {
+        "id": "minecraft:diamond_pickaxe"
+    },
+    "template": "apotheosis:diamond_upgrade_smithing_template"
+}

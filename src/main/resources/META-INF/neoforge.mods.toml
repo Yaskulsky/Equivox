@@ -10,8 +10,8 @@ license="MIT"
   displayURL="https://github.com/Yaskulsky/projecte-26-port"
   logoFile="logo.png"
   authors="Yaskulsky"
-  credits="Based on MIT-licensed code originally by SinKillerJ, MaPePeR, williewillus, Lilylicious, pupnewfster et al. EE2 creator - x3n0ph0b3. Item/block retextures - Bbublick (ProjectE Retexture). Philosopher's Stone - Retro Exchange. Maintainer - Yaskulsky."
-  description='''Equivox for Minecraft 26.1.2 / NeoForge. Forked from the MIT-licensed ProjectE codebase (sinkillerj/ProjectE). Not affiliated with or endorsed by the ProjectE authors.'''
+  credits="Based on MIT-licensed code originally by SinKillerJ, MaPePeR, williewillus, Lilylicious, pupnewfster et al. EE2 creator - x3n0ph0b3. Item/block retextures - Bbublick (ProjectE Retexture). Philosopher's Stone - Retro Exchange. Arcane Tablet feature inspired by BruceDelta Arcane Tablet / ProjectEX-style tablet (MIT); GUI art adapted from ProjectExpansion (MIT). Maintainer - Yaskulsky."
+  description='''Equivox for Minecraft 26.1.2 / NeoForge. Forked from the MIT-licensed ProjectE codebase (sinkillerj/ProjectE). Not affiliated with or endorsed by the ProjectE authors. Includes an Arcane Tablet (portable transmutation + crafting) inspired by BruceDelta's MIT Arcane Tablet / ProjectEX-style design.'''
 
 [[dependencies.equivox]]
   modId="minecraft"

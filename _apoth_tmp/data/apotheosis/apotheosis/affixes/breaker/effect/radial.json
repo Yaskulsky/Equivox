@@ -1,0 +1,91 @@
+{
+    "type": "apotheosis:radial",
+    "categories": [
+        "apotheosis:breaker",
+        "apotheosis:shears"
+    ],
+    "definition": {
+        "affix_type": "basic_effect",
+        "exclusive_set": [],
+        "weights": {
+            "quality": 5.0,
+            "weight": 25
+        }
+    },
+    "values": {
+        "apotheosis:uncommon": [
+            {
+                "x": 1,
+                "xOff": 0,
+                "y": 2,
+                "yOff": 1
+            },
+            {
+                "x": 1,
+                "xOff": 0,
+                "y": 3,
+                "yOff": 0
+            },
+            {
+                "x": 3,
+                "xOff": 0,
+                "y": 2,
+                "yOff": 1
+            }
+        ],
+        "apotheosis:rare": [
+            {
+                "x": 1,
+                "xOff": 0,
+                "y": 3,
+                "yOff": 0
+            },
+            {
+                "x": 3,
+                "xOff": 0,
+                "y": 2,
+                "yOff": 1
+            }
+        ],
+        "apotheosis:epic": [
+            {
+                "x": 3,
+                "xOff": 0,
+                "y": 2,
+                "yOff": 1
+            },
+            {
+                "x": 3,
+                "xOff": 0,
+                "y": 3,
+                "yOff": 0
+            },
+            {
+                "x": 5,
+                "xOff": 0,
+                "y": 3,
+                "yOff": 0
+            }
+        ],
+        "apotheosis:mythic": [
+            {
+                "x": 3,
+                "xOff": 0,
+                "y": 3,
+                "yOff": 0
+            },
+            {
+                "x": 5,
+                "xOff": 0,
+                "y": 3,
+                "yOff": 0
+            },
+            {
+                "x": 5,
+                "xOff": 0,
+                "y": 5,
+                "yOff": 0
+            }
+        ]
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:block",
+    "pools": [
+        {
+            "bonus_rolls": 0.0,
+            "conditions": [
+                {
+                    "condition": "minecraft:survives_explosion"
+                }
+            ],
+            "entries": [
+                {
+                    "type": "minecraft:item",
+                    "name": "apotheosis:simple_reforging_table"
+                }
+            ],
+            "rolls": 1.0
+        }
+    ],
+    "random_sequence": "apotheosis:blocks/simple_reforging_table"
+}

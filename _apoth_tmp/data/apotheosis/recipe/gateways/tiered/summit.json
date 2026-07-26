@@ -1,0 +1,29 @@
+{
+    "neoforge:conditions": [
+        {
+            "type": "neoforge:mod_loaded",
+            "modid": "gateways"
+        }
+    ],
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "group": "apotheosis",
+    "key": {
+        "A": "apotheosis:arcane_sands",
+        "B": "minecraft:blaze_powder",
+        "E": "minecraft:ender_eye",
+        "G": "minecraft:ghast_tear",
+        "M": "apotheosis:gem_dust"
+    },
+    "pattern": [
+        "BGB",
+        "AEA",
+        "MMM"
+    ],
+    "result": {
+        "components": {
+            "gateways:gateway": "apotheosis:tiered/summit"
+        },
+        "id": "gateways:gate_pearl"
+    }
+}

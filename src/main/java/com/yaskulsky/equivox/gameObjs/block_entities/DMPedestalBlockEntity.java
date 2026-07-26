@@ -3,6 +3,7 @@ package com.yaskulsky.equivox.gameObjs.block_entities;
 import com.yaskulsky.equivox.api.block_entity.IDMPedestal;
 import com.yaskulsky.equivox.api.capabilities.PECapabilities;
 import com.yaskulsky.equivox.api.capabilities.item.IPedestalItem;
+import com.yaskulsky.equivox.config.EquivoxConfig;
 import com.yaskulsky.equivox.gameObjs.registries.PEBlockEntityTypes;
 import com.yaskulsky.equivox.gameObjs.registries.PESoundEvents;
 import com.yaskulsky.equivox.utils.Constants;
@@ -46,6 +47,8 @@ public class DMPedestalBlockEntity extends EmcBlockEntity implements IDMPedestal
 	private boolean isActive = false;
 	private int particleCooldown = 10;
 	private int activityCooldown = 0;
+	/** -1 = use server config default until first explicit set. */
+	private int timeBonusTicks = -1;
 	public boolean previousRedstoneState = false;
 
 	public DMPedestalBlockEntity(BlockPos pos, BlockState state) {
@@ -131,11 +134,32 @@ public class DMPedestalBlockEntity extends EmcBlockEntity implements IDMPedestal
 	}
 
 	@Override
+	public int getTimeBonusTicks() {
+		int max = EquivoxConfig.server.effects.timePedBonus.get();
+		if (timeBonusTicks < 0) {
+			return max;
+		}
+		return Math.min(Math.max(timeBonusTicks, 0), max);
+	}
+
+	public void setTimeBonusTicks(@NotNull Level level, @NotNull BlockPos pos, int bonus) {
+		int max = EquivoxConfig.server.effects.timePedBonus.get();
+		int clamped = Math.min(Math.max(bonus, 0), max);
+		if (timeBonusTicks != clamped) {
+			timeBonusTicks = clamped;
+			markDirty(level, pos, true);
+			BlockState state = getBlockState();
+			level.sendBlockUpdated(pos, state, state, Block.UPDATE_IMMEDIATE);
+		}
+	}
+
+	@Override
 	public void loadAdditional(@NotNull ValueInput input) {
 		super.loadAdditional(input);
 		inventory.deserialize(input);
 		isActive = input.getBooleanOr("active", false);
 		activityCooldown = input.getIntOr("activity_cooldown", 0);
+		timeBonusTicks = input.getIntOr("time_bonus", -1);
 		previousRedstoneState = input.getBooleanOr("powered", false);
 	}
 
@@ -145,6 +169,7 @@ public class DMPedestalBlockEntity extends EmcBlockEntity implements IDMPedestal
 		inventory.serialize(output);
 		output.putBoolean("active", getActive());
 		output.putInt("activity_cooldown", activityCooldown);
+		output.putInt("time_bonus", timeBonusTicks);
 		output.putBoolean("powered", previousRedstoneState);
 	}
 

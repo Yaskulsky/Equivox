@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "group": "apotheosis",
+    "key": {
+        "E": "apotheosis:gem_fused_slate",
+        "G": "apotheosis:gem_dust",
+        "O": "apotheosis:godforged_pearl"
+    },
+    "pattern": [
+        "GEG",
+        "EOE",
+        "GEG"
+    ],
+    "result": {
+        "count": 4,
+        "id": "apotheosis:sigil_of_enhancement"
+    }
+}

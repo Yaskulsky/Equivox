@@ -11,11 +11,15 @@ import com.yaskulsky.equivox.gameObjs.block_entities.CondenserMK2BlockEntity;
 import com.yaskulsky.equivox.gameObjs.block_entities.DMFurnaceBlockEntity;
 import com.yaskulsky.equivox.gameObjs.block_entities.DMPedestalBlockEntity;
 import com.yaskulsky.equivox.gameObjs.block_entities.EmcChestBlockEntity;
+import com.yaskulsky.equivox.gameObjs.block_entities.EntropySinkBlockEntity;
+import com.yaskulsky.equivox.gameObjs.block_entities.EntropySinkDarkBlockEntity;
+import com.yaskulsky.equivox.gameObjs.block_entities.EntropySinkRedBlockEntity;
 import com.yaskulsky.equivox.gameObjs.block_entities.InterdictionBlockEntity;
 import com.yaskulsky.equivox.gameObjs.block_entities.RMFurnaceBlockEntity;
 import com.yaskulsky.equivox.gameObjs.block_entities.RelayMK1BlockEntity;
 import com.yaskulsky.equivox.gameObjs.block_entities.RelayMK2BlockEntity;
 import com.yaskulsky.equivox.gameObjs.block_entities.RelayMK3BlockEntity;
+import com.yaskulsky.equivox.gameObjs.block_entities.StellarCondenserBlockEntity;
 import com.yaskulsky.equivox.gameObjs.registration.impl.BlockEntityTypeDeferredRegister;
 import com.yaskulsky.equivox.gameObjs.registration.impl.BlockEntityTypeRegistryObject;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -90,5 +94,24 @@ public class PEBlockEntityTypes {
 			.serverTicker(DMPedestalBlockEntity::tickServer)
 			.with(PECapabilities.EMC_STORAGE_CAPABILITY, (be, side) -> be)
 			.with(Capabilities.Item.BLOCK, DMPedestalBlockEntity.INVENTORY_PROVIDER)
+			.build();
+	public static final BlockEntityTypeRegistryObject<EntropySinkBlockEntity> ENTROPY_SINK = BLOCK_ENTITY_TYPES.builder(PEBlocks.ENTROPY_SINK, EntropySinkBlockEntity::new)
+			.serverTicker(EntropySinkBlockEntity::tickServer)
+			.with(PECapabilities.EMC_STORAGE_CAPABILITY, (be, side) -> be)
+			.with(Capabilities.Item.BLOCK, EntropySinkBlockEntity.INVENTORY_PROVIDER)
+			.build();
+	public static final BlockEntityTypeRegistryObject<EntropySinkDarkBlockEntity> ENTROPY_SINK_DARK = BLOCK_ENTITY_TYPES.builder(PEBlocks.ENTROPY_SINK_DARK, EntropySinkDarkBlockEntity::new)
+			.serverTicker(EntropySinkBlockEntity::tickServer)
+			.with(PECapabilities.EMC_STORAGE_CAPABILITY, (be, side) -> be)
+			.with(Capabilities.Item.BLOCK, EntropySinkBlockEntity.INVENTORY_PROVIDER)
+			.build();
+	public static final BlockEntityTypeRegistryObject<EntropySinkRedBlockEntity> ENTROPY_SINK_RED = BLOCK_ENTITY_TYPES.builder(PEBlocks.ENTROPY_SINK_RED, EntropySinkRedBlockEntity::new)
+			.serverTicker(EntropySinkBlockEntity::tickServer)
+			.with(PECapabilities.EMC_STORAGE_CAPABILITY, (be, side) -> be)
+			.with(Capabilities.Item.BLOCK, EntropySinkBlockEntity.INVENTORY_PROVIDER)
+			.build();
+	public static final BlockEntityTypeRegistryObject<StellarCondenserBlockEntity> STELLAR_CONDENSER = BLOCK_ENTITY_TYPES.builder(PEBlocks.STELLAR_CONDENSER, StellarCondenserBlockEntity::new)
+			.serverTicker(StellarCondenserBlockEntity::tickServer)
+			.with(PECapabilities.EMC_STORAGE_CAPABILITY, (be, side) -> be)
 			.build();
 }

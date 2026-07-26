@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "group": "apotheosis",
+    "key": {
+        "A": "apotheosis:arcane_sands",
+        "I": "#c:ingots/netherite",
+        "N": "minecraft:nether_bricks",
+        "S": "apotheosis:simple_reforging_table"
+    },
+    "pattern": [
+        " I ",
+        "ASA",
+        "NNN"
+    ],
+    "result": {
+        "id": "apotheosis:reforging_table"
+    }
+}

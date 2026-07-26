@@ -1,0 +1,11 @@
+{
+    "type": "apotheosis:reforging",
+    "level_cost": 2,
+    "material_cost": 1,
+    "rarity": "apotheosis:common",
+    "sigil_cost": 0,
+    "tables": [
+        "apotheosis:simple_reforging_table",
+        "apotheosis:reforging_table"
+    ]
+}

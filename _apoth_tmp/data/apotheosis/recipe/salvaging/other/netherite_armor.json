@@ -1,0 +1,18 @@
+{
+    "type": "apotheosis:salvaging",
+    "input": [
+        "minecraft:netherite_helmet",
+        "minecraft:netherite_chestplate",
+        "minecraft:netherite_leggings",
+        "minecraft:netherite_boots"
+    ],
+    "outputs": [
+        {
+            "max_count": 2,
+            "min_count": 0,
+            "stack": {
+                "id": "minecraft:netherite_scrap"
+            }
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "#c:chests/wooden",
+    "D": "equivox:dark_matter",
+    "R": "equivox:red_matter",
+    "T": "equivox:transmutation_tablet",
+    "W": "minecraft:crafting_table"
+  },
+  "pattern": [
+    "TWT",
+    "DRD",
+    "TCT"
+  ],
+  "result": {
+    "count": 1,
+    "id": "equivox:arcane_tablet"
+  }
+}

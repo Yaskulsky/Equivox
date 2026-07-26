@@ -1,0 +1,40 @@
+{
+    "type": "apotheosis:attribute",
+    "attribute": "apothic_attributes:overheal",
+    "categories": [
+        "apotheosis:melee_weapon"
+    ],
+    "definition": {
+        "affix_type": "stat",
+        "exclusive_set": [
+            "apotheosis:melee/attribute/vampiric"
+        ],
+        "weights": {
+            "quality": 0.1,
+            "weight": 25
+        }
+    },
+    "operation": "add_value",
+    "values": {
+        "apotheosis:common": {
+            "min": 0.05,
+            "max": 0.1
+        },
+        "apotheosis:uncommon": {
+            "min": 0.05,
+            "max": 0.1
+        },
+        "apotheosis:rare": {
+            "min": 0.1,
+            "max": 0.2
+        },
+        "apotheosis:epic": {
+            "min": 0.1,
+            "max": 0.2
+        },
+        "apotheosis:mythic": {
+            "min": 0.15,
+            "max": 0.25
+        }
+    }
+}

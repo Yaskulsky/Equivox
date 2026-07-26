@@ -1,0 +1,28 @@
+{
+    "type": "apotheosis:purity_upgrade",
+    "left": [
+        {
+            "count": 5,
+            "ingredient": "apotheosis:gem_dust"
+        }
+    ],
+    "purity": "flawed",
+    "right": [
+        {
+            "count": 27,
+            "ingredient": "apotheosis:mysterious_scrap_metal"
+        },
+        {
+            "count": 9,
+            "ingredient": "apotheosis:timeworn_fabric"
+        },
+        {
+            "count": 3,
+            "ingredient": "apotheosis:luminous_crystal_shard"
+        },
+        {
+            "count": 1,
+            "ingredient": "apotheosis:arcane_sands"
+        }
+    ]
+}

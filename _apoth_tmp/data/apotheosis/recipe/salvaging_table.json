@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "group": "apotheosis",
+    "key": {
+        "G": "apotheosis:gem_dust",
+        "I": "#c:ingots/copper",
+        "L": "minecraft:lava_bucket",
+        "O": "minecraft:iron_axe",
+        "R": "minecraft:iron_pickaxe",
+        "S": "minecraft:smithing_table"
+    },
+    "pattern": [
+        "III",
+        "RSO",
+        "GLG"
+    ],
+    "result": {
+        "id": "apotheosis:salvaging_table"
+    }
+}

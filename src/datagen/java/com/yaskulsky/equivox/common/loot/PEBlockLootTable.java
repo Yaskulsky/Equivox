@@ -31,11 +31,15 @@ public class PEBlockLootTable extends BlockLootSubProvider {
 				PEBlocks.DARK_MATTER.getSecondary(),
 				PEBlocks.DARK_MATTER_FURNACE.getSecondary(),
 				PEBlocks.DARK_MATTER_PEDESTAL.getSecondary(),
+				PEBlocks.ENTROPY_SINK.getSecondary(),
+				PEBlocks.ENTROPY_SINK_DARK.getSecondary(),
+				PEBlocks.ENTROPY_SINK_RED.getSecondary(),
 				PEBlocks.RED_MATTER.getSecondary(),
 				PEBlocks.RED_MATTER_FURNACE.getSecondary(),
 				PEBlocks.RELAY.getSecondary(),
 				PEBlocks.RELAY_MK2.getSecondary(),
-				PEBlocks.RELAY_MK3.getSecondary()
+				PEBlocks.RELAY_MK3.getSecondary(),
+				PEBlocks.STELLAR_CONDENSER.getSecondary()
 		), FeatureFlags.VANILLA_SET, registries);
 	}
 
@@ -52,6 +56,9 @@ public class PEBlockLootTable extends BlockLootSubProvider {
 		dropSelf(PEBlocks.DARK_MATTER.getBlock());
 		dropSelf(PEBlocks.DARK_MATTER_FURNACE.getBlock());
 		dropSelf(PEBlocks.DARK_MATTER_PEDESTAL.getBlock());
+		dropSelf(PEBlocks.ENTROPY_SINK.getBlock());
+		dropSelf(PEBlocks.ENTROPY_SINK_DARK.getBlock());
+		dropSelf(PEBlocks.ENTROPY_SINK_RED.getBlock());
 		dropSelf(PEBlocks.INTERDICTION_TORCH.getBlock());
 		dropSelf(PEBlocks.MOBIUS_FUEL.getBlock());
 		dropSelf(PEBlocks.RED_MATTER.getBlock());
@@ -59,6 +66,7 @@ public class PEBlockLootTable extends BlockLootSubProvider {
 		dropSelf(PEBlocks.RELAY.getBlock());
 		dropSelf(PEBlocks.RELAY_MK2.getBlock());
 		dropSelf(PEBlocks.RELAY_MK3.getBlock());
+		dropSelf(PEBlocks.STELLAR_CONDENSER.getBlock());
 		dropSelf(PEBlocks.TRANSMUTATION_TABLE.getBlock());
 
 		registerCustomTNT(PEBlocks.NOVA_CATACLYSM.getBlock());

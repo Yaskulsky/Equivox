@@ -14,6 +14,7 @@ import com.yaskulsky.equivox.gameObjs.gui.GUIRMFurnace;
 import com.yaskulsky.equivox.gameObjs.gui.GUIRelay.GUIRelayMK1;
 import com.yaskulsky.equivox.gameObjs.gui.GUIRelay.GUIRelayMK2;
 import com.yaskulsky.equivox.gameObjs.gui.GUIRelay.GUIRelayMK3;
+import com.yaskulsky.equivox.gameObjs.gui.GUIArcaneTablet;
 import com.yaskulsky.equivox.gameObjs.gui.GUITransmutation;
 import com.yaskulsky.equivox.gameObjs.gui.PEContainerScreen;
 import com.yaskulsky.equivox.gameObjs.registries.PEContainerTypes;
@@ -85,6 +86,7 @@ public class PEClient {
 		event.register(PEContainerTypes.ALCH_BAG_CONTAINER.get(), AlchBagScreen::new);
 		event.register(PEContainerTypes.ETERNAL_DENSITY_CONTAINER.get(), GUIEternalDensity::new);
 		event.register(PEContainerTypes.TRANSMUTATION_CONTAINER.get(), GUITransmutation::new);
+		event.register(PEContainerTypes.ARCANE_TABLET_CONTAINER.get(), GUIArcaneTablet::new);
 		event.register(PEContainerTypes.RELAY_MK1_CONTAINER.get(), GUIRelayMK1::new);
 		event.register(PEContainerTypes.RELAY_MK2_CONTAINER.get(), GUIRelayMK2::new);
 		event.register(PEContainerTypes.RELAY_MK3_CONTAINER.get(), GUIRelayMK3::new);

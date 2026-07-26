@@ -1,0 +1,6 @@
+{
+    "type": "apotheosis:rogue_spawner",
+    "config": {
+        "success_chance": 0.01
+    }
+}

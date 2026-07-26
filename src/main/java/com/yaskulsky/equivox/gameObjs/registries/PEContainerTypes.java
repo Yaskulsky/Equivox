@@ -26,6 +26,7 @@ import com.yaskulsky.equivox.gameObjs.container.RMFurnaceContainer;
 import com.yaskulsky.equivox.gameObjs.container.RelayMK1Container;
 import com.yaskulsky.equivox.gameObjs.container.RelayMK2Container;
 import com.yaskulsky.equivox.gameObjs.container.RelayMK3Container;
+import com.yaskulsky.equivox.gameObjs.container.ArcaneTabletContainer;
 import com.yaskulsky.equivox.gameObjs.container.TransmutationContainer;
 import com.yaskulsky.equivox.gameObjs.registration.impl.ContainerTypeDeferredRegister;
 import com.yaskulsky.equivox.gameObjs.registration.impl.ContainerTypeRegistryObject;
@@ -42,6 +43,7 @@ public class PEContainerTypes {
 	public static final ContainerTypeRegistryObject<AlchBagContainer> ALCH_BAG_CONTAINER = CONTAINER_TYPES.register("alchemical_bag", AlchBagContainer::fromNetwork);
 	public static final ContainerTypeRegistryObject<EternalDensityContainer> ETERNAL_DENSITY_CONTAINER = CONTAINER_TYPES.register(PEItems.GEM_OF_ETERNAL_DENSITY, EternalDensityContainer::fromNetwork);
 	public static final ContainerTypeRegistryObject<TransmutationContainer> TRANSMUTATION_CONTAINER = CONTAINER_TYPES.register(PEBlocks.TRANSMUTATION_TABLE, TransmutationContainer::fromNetwork);
+	public static final ContainerTypeRegistryObject<ArcaneTabletContainer> ARCANE_TABLET_CONTAINER = CONTAINER_TYPES.register("arcane_tablet", ArcaneTabletContainer::fromNetwork);
 	public static final ContainerTypeRegistryObject<RelayMK1Container> RELAY_MK1_CONTAINER = CONTAINER_TYPES.register(PEBlocks.RELAY, RelayMK1BlockEntity.class, RelayMK1Container::new);
 	public static final ContainerTypeRegistryObject<RelayMK2Container> RELAY_MK2_CONTAINER = CONTAINER_TYPES.register(PEBlocks.RELAY_MK2, RelayMK2BlockEntity.class, RelayMK2Container::new);
 	public static final ContainerTypeRegistryObject<RelayMK3Container> RELAY_MK3_CONTAINER = CONTAINER_TYPES.register(PEBlocks.RELAY_MK3, RelayMK3BlockEntity.class, RelayMK3Container::new);

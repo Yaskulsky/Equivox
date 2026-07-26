@@ -1,0 +1,38 @@
+{
+    "type": "apotheosis:attribute",
+    "attribute": "apothic_attributes:experience_gained",
+    "categories": [
+        "apotheosis:breaker"
+    ],
+    "definition": {
+        "affix_type": "stat",
+        "exclusive_set": [],
+        "weights": {
+            "quality": 0.1,
+            "weight": 25
+        }
+    },
+    "operation": "add_multiplied_total",
+    "values": {
+        "apotheosis:common": {
+            "min": 0.25,
+            "max": 0.4
+        },
+        "apotheosis:uncommon": {
+            "min": 0.25,
+            "max": 0.4
+        },
+        "apotheosis:rare": {
+            "min": 0.35,
+            "max": 0.5
+        },
+        "apotheosis:epic": {
+            "min": 0.35,
+            "max": 0.6
+        },
+        "apotheosis:mythic": {
+            "min": 0.55,
+            "max": 0.65
+        }
+    }
+}

@@ -23,6 +23,7 @@ public class PECreativeTabs {
 				output.accept(PEItems.REPAIR_TALISMAN);
 				output.accept(PEItems.TOME_OF_KNOWLEDGE);
 				output.accept(PEItems.TRANSMUTATION_TABLET);
+				output.accept(PEItems.ARCANE_TABLET);
 				output.accept(PEBlocks.TRANSMUTATION_TABLE);
 
 				output.accept(PEItems.LOW_COVALENCE_DUST);
@@ -128,6 +129,11 @@ public class PECreativeTabs {
 				output.accept(PEBlocks.RELAY_MK2);
 				output.accept(PEBlocks.RELAY_MK3);
 
+				output.accept(PEBlocks.ENTROPY_SINK);
+				output.accept(PEBlocks.ENTROPY_SINK_DARK);
+				output.accept(PEBlocks.ENTROPY_SINK_RED);
+				output.accept(PEBlocks.STELLAR_CONDENSER);
+
 				output.accept(PEBlocks.DARK_MATTER_PEDESTAL);
 				output.accept(PEBlocks.DARK_MATTER_FURNACE);
 				output.accept(PEBlocks.RED_MATTER_FURNACE);
@@ -180,6 +186,11 @@ public class PECreativeTabs {
 					PEBlocks.RELAY_MK2,
 					PEBlocks.RELAY_MK3,
 
+					PEBlocks.ENTROPY_SINK,
+					PEBlocks.ENTROPY_SINK_DARK,
+					PEBlocks.ENTROPY_SINK_RED,
+					PEBlocks.STELLAR_CONDENSER,
+
 					PEBlocks.DARK_MATTER_PEDESTAL,
 
 					PEBlocks.DARK_MATTER_FURNACE,
@@ -198,6 +209,11 @@ public class PECreativeTabs {
 					PEBlocks.RELAY,
 					PEBlocks.RELAY_MK2,
 					PEBlocks.RELAY_MK3,
+
+					PEBlocks.ENTROPY_SINK,
+					PEBlocks.ENTROPY_SINK_DARK,
+					PEBlocks.ENTROPY_SINK_RED,
+					PEBlocks.STELLAR_CONDENSER,
 
 					PEBlocks.DARK_MATTER_PEDESTAL,
 
@@ -230,6 +246,7 @@ public class PECreativeTabs {
 					PEItems.REPAIR_TALISMAN,
 					PEItems.TOME_OF_KNOWLEDGE,
 					PEItems.TRANSMUTATION_TABLET,
+					PEItems.ARCANE_TABLET,
 
 					PEItems.DESTRUCTION_CATALYST,
 

@@ -1,0 +1,26 @@
+{
+    "type": "apotheosis:gems",
+    "conditions": [
+        {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+                "type_specific": {
+                    "type": "apotheosis:is_monster"
+                }
+            }
+        },
+        {
+            "condition": "minecraft:killed_by_player"
+        }
+    ],
+    "entries": [
+        {
+            "chance": 0.005,
+            "pattern": {
+                "path_regex": ".*"
+            }
+        }
+    ],
+    "priority": 1050
+}

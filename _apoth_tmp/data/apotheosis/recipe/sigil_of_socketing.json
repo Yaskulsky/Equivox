@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "group": "apotheosis",
+    "key": {
+        "A": "minecraft:amethyst_shard",
+        "E": "apotheosis:gem_fused_slate",
+        "G": "apotheosis:gem_dust",
+        "U": "minecraft:gunpowder"
+    },
+    "pattern": [
+        "GUG",
+        "EEE",
+        "GAG"
+    ],
+    "result": {
+        "count": 3,
+        "id": "apotheosis:sigil_of_socketing"
+    }
+}

@@ -2,6 +2,24 @@
 
 All notable changes to [Yaskulsky/projecte-26-port](https://github.com/Yaskulsky/projecte-26-port) are documented here.
 
+## [1.2.0] — 2026-07-24
+
+### Added
+- **Entropy Sink** (Basic / Dark / Red) — hopper-fed block that burns EMC items into an internal buffer (pipe/relay extractable), with soft diminishing returns above ~1k EMC/s and optional learn-on-burn for the placing player.
+- **Stellar Condenser** — owner-bound radius machine that grants death-echo EMC (not item-drop EMC) from nearby mob kills into personal EMC when online, or buffers while offline. Soft per-minute cap and boss cooldown included.
+
+### Credits
+- Original feature ideas for Equivox EMC sources (Entropy Sink / Stellar Condenser).
+
+---
+
+## [1.1.0] — 2026-07-22
+
+### Added
+- **Arcane Tablet** — upgraded portable transmutation tablet with integrated 3x3 crafting that pulls from learned items / EMC (BruceDelta / ProjectEX-style, MIT credit). JEI recipe transfer stubbed until optional integrations are enabled for 26.1.
+
+---
+
 ## [1.0.0] — 2026-07-17
 
 Equivox public starting version (versioning restarted at 1.0 after the Equivox rebrand). Earlier fork builds used 1.2.x–1.5.0 numbering.

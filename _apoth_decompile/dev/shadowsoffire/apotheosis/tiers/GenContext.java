@@ -1,0 +1,77 @@
+package dev.shadowsoffire.apotheosis.tiers;
+
+import dev.shadowsoffire.apotheosis.compat.GameStagesCompat;
+import java.util.Set;
+import javax.annotation.Nullable;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.neoforged.neoforge.common.CommonHooks;
+
+public record GenContext(RandomSource rand, WorldTier tier, float luck, ResourceKey<Level> dimension, Holder<Biome> biome, Set<String> stages) {
+   public static GenContext forPlayerAtPos(RandomSource rand, Player player, BlockPos pos) {
+      Level level = player.level();
+      return new GenContext(rand, WorldTier.getTier(player), player.getLuck(), level.dimension(), level.getBiome(pos), GameStagesCompat.getStages(player));
+   }
+
+   public static GenContext forPlayer(RandomSource rand, Player player) {
+      return forPlayerAtPos(rand, player, player.blockPosition());
+   }
+
+   public static GenContext forPlayer(Player player) {
+      return forPlayer(player.getRandom(), player);
+   }
+
+   @Nullable
+   public static GenContext forLoot(LootContext ctx) {
+      Player player = findPlayer(ctx);
+      return player != null
+         ? new GenContext(
+            ctx.getRandom(),
+            WorldTier.getTier(player),
+            ctx.getLuck(),
+            ctx.getLevel().dimension(),
+            ctx.getLevel().getBiome(player.blockPosition()),
+            GameStagesCompat.getStages(player)
+         )
+         : null;
+   }
+
+   public static GenContext standalone(RandomSource rand, WorldTier tier, float luck, ServerLevel level, BlockPos pos) {
+      return new GenContext(rand, tier, luck, level.dimension(), level.getBiome(pos), Set.of());
+   }
+
+   public static GenContext dummy(RandomSource rand) {
+      return new GenContext(rand, WorldTier.HAVEN, 0.0F, Level.OVERWORLD, CommonHooks.resolveLookup(Registries.BIOME).getOrThrow(Biomes.PLAINS), Set.of());
+   }
+
+   @Nullable
+   public static Player findPlayer(LootContext ctx) {
+      if (ctx.getOptionalParameter(LootContextParams.THIS_ENTITY) instanceof Player p) {
+         return p;
+      } else if (ctx.getOptionalParameter(LootContextParams.ATTACKING_ENTITY) instanceof Player p) {
+         return p;
+      } else if (ctx.getOptionalParameter(LootContextParams.DIRECT_ATTACKING_ENTITY) instanceof Player p) {
+         return p;
+      } else {
+         return ctx.getOptionalParameter(LootContextParams.LAST_DAMAGE_PLAYER) != null
+            ? (Player)ctx.getOptionalParameter(LootContextParams.LAST_DAMAGE_PLAYER)
+            : null;
+      }
+   }
+
+   @Override
+   public final String toString() {
+      return "GenContext[tier=%s, luck=%s, dimension=%s, biome=%s, stages=%s]"
+         .formatted(this.tier.getSerializedName(), this.luck, this.dimension.identifier(), this.biome.getKey().identifier(), this.stages);
+   }
+}

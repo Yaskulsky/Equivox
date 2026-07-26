@@ -216,7 +216,7 @@ public class TimeWatch extends PEToggleItem implements IPedestalItem, IItemCharg
 		// Change from old EE2 behaviour (universally increased tickrate) for safety and impl reasons.
 		if (!level.isClientSide() && EquivoxConfig.server.items.enableTimeWatch.get()) {
 			AABB effectBounds = pedestal.getEffectBounds();
-			speedUpBlocks(level, EquivoxConfig.server.effects.timePedBonus.get(), effectBounds);
+			speedUpBlocks(level, pedestal.getTimeBonusTicks(), effectBounds);
 			slowMobs(level, effectBounds, EquivoxConfig.server.effects.timePedMobSlowness.get());
 		}
 		return false;
@@ -226,8 +226,10 @@ public class TimeWatch extends PEToggleItem implements IPedestalItem, IItemCharg
 	@Override
 	public List<Component> getPedestalDescription(float tickRate) {
 		List<Component> list = new ArrayList<>();
-		if (EquivoxConfig.server.effects.timePedBonus.get() > 0) {
-			list.add(PELang.PEDESTAL_TIME_WATCH_1.translateColored(ChatFormatting.BLUE, EquivoxConfig.server.effects.timePedBonus.get()));
+		int maxBonus = EquivoxConfig.server.effects.timePedBonus.get();
+		if (maxBonus > 0) {
+			list.add(PELang.PEDESTAL_TIME_WATCH_1.translateColored(ChatFormatting.BLUE, maxBonus));
+			list.add(PELang.PEDESTAL_TIME_WATCH_SCROLL.translateColored(ChatFormatting.BLUE));
 		}
 		if (EquivoxConfig.server.effects.timePedMobSlowness.get() < 1.0F) {
 			list.add(PELang.PEDESTAL_TIME_WATCH_2.translateColored(ChatFormatting.BLUE, String.format("%.3f", EquivoxConfig.server.effects.timePedMobSlowness.get())));

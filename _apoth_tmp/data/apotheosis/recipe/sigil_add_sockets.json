@@ -1,0 +1,5 @@
+{
+    "type": "apotheosis:add_sockets",
+    "input": "apotheosis:sigil_of_socketing",
+    "max_sockets": 2
+}

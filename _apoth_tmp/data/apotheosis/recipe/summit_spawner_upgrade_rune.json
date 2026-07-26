@@ -1,0 +1,26 @@
+{
+    "neoforge:conditions": [
+        {
+            "type": "neoforge:mod_loaded",
+            "modid": "apothic_spawners"
+        }
+    ],
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "group": "apotheosis",
+    "key": {
+        "A": "apotheosis:arcane_sands",
+        "I": "apotheosis:infused_spawner_rune",
+        "P": "minecraft:phantom_membrane",
+        "S": "apotheosis:sigil_of_malice",
+        "W": "apothic_enchanting:warden_tendril"
+    },
+    "pattern": [
+        "AWA",
+        "PIP",
+        "ASA"
+    ],
+    "result": {
+        "id": "apotheosis:summit_spawner_upgrade_rune"
+    }
+}

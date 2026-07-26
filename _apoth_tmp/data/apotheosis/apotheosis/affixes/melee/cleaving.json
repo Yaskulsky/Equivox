@@ -1,0 +1,37 @@
+{
+    "type": "apotheosis:cleaving",
+    "definition": {
+        "affix_type": "ability",
+        "exclusive_set": [],
+        "weights": {
+            "quality": 0.1,
+            "weight": 25
+        }
+    },
+    "values": {
+        "apotheosis:epic": {
+            "chance": {
+                "min": 0.3,
+                "max": 0.5,
+                "step": 0.05
+            },
+            "targets": {
+                "min": 2.0,
+                "max": 5.0,
+                "step": 1.0
+            }
+        },
+        "apotheosis:mythic": {
+            "chance": {
+                "min": 0.4,
+                "max": 0.6,
+                "step": 0.05
+            },
+            "targets": {
+                "min": 3.0,
+                "max": 6.0,
+                "step": 1.0
+            }
+        }
+    }
+}

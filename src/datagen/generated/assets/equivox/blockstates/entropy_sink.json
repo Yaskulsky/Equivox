@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "equivox:block/entropy_sink",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "equivox:block/entropy_sink"
+    },
+    "facing=south": {
+      "model": "equivox:block/entropy_sink",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "equivox:block/entropy_sink",
+      "y": 270
+    }
+  }
+}

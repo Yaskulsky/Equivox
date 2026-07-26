@@ -11,7 +11,7 @@ Transmutation tables, collectors, condensers, rings, EMC — EE2-style gameplay.
 
 | | |
 |---|---|
-| **Mod version** | 1.0.0 |
+| **Mod version** | 1.2.0 |
 | **modId** | `equivox` |
 | **Minecraft** | 26.1.2 |
 | **NeoForge** | 26.1.2.7-beta+ |
@@ -20,6 +20,8 @@ Transmutation tables, collectors, condensers, rings, EMC — EE2-style gameplay.
 **Upstream code (MIT):** [sinkillerj/ProjectE](https://github.com/sinkillerj/ProjectE) — Sin Tachikawa and contributors.
 
 **Textures:** Item/block retextures by **Bbublick** ([ProjectE Retexture](https://www.curseforge.com/minecraft/texture-packs/projecte-retexture) / Exchange Extended) — used with author permission. Philosopher's Stone retexture by **Retro Exchange**.
+
+**Arcane Tablet:** Feature inspired by [BruceDelta Arcane Tablet](https://www.curseforge.com/minecraft/mc-mods/arcane-tablet) / ProjectEX-style portable tablet (MIT). GUI/item art adapted from [ProjectExpansion](https://github.com/DonovanDMC/ProjectExpansion) (MIT). Not affiliated with ProjectE branding.
 
 > **World compatibility:** Current IDs are `equivox:…`. Registry aliases map `projecte:*` and `equivalence:*` → `equivox:*` for existing worlds. Config folder is `config/Equivox` (was `config/Equivalence` / `config/ProjectE`).
 

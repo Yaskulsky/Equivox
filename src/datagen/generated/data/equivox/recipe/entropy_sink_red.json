@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": "minecraft:glowstone",
+    "P": "equivox:entropy_sink_dark",
+    "U": "equivox:red_matter"
+  },
+  "pattern": [
+    "GUG",
+    "GPG",
+    "GGG"
+  ],
+  "result": {
+    "count": 1,
+    "id": "equivox:entropy_sink_red"
+  }
+}

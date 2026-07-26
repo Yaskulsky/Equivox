@@ -1,0 +1,24 @@
+{
+    "type": "apotheosis:purity_upgrade",
+    "left": [
+        {
+            "count": 3,
+            "ingredient": "apotheosis:gem_dust"
+        }
+    ],
+    "purity": "chipped",
+    "right": [
+        {
+            "count": 9,
+            "ingredient": "apotheosis:mysterious_scrap_metal"
+        },
+        {
+            "count": 3,
+            "ingredient": "apotheosis:timeworn_fabric"
+        },
+        {
+            "count": 1,
+            "ingredient": "apotheosis:luminous_crystal_shard"
+        }
+    ]
+}

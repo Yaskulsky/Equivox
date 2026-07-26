@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "bottom": "equivox:block/collectors/other",
+    "front": "equivox:block/collectors/front",
+    "side": "equivox:block/collectors/other",
+    "top": "equivox:block/collectors/top_1"
+  }
+}

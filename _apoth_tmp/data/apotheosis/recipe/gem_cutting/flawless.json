@@ -1,0 +1,24 @@
+{
+    "type": "apotheosis:purity_upgrade",
+    "left": [
+        {
+            "count": 9,
+            "ingredient": "apotheosis:gem_dust"
+        }
+    ],
+    "purity": "flawless",
+    "right": [
+        {
+            "count": 27,
+            "ingredient": "apotheosis:luminous_crystal_shard"
+        },
+        {
+            "count": 9,
+            "ingredient": "apotheosis:arcane_sands"
+        },
+        {
+            "count": 3,
+            "ingredient": "apotheosis:godforged_pearl"
+        }
+    ]
+}

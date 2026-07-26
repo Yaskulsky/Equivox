@@ -160,7 +160,7 @@ public final class ServerConfig extends BasePEConfig {
 		private Effects(IPEConfig config, ModConfigSpec.Builder builder) {
 			PEConfigTranslations.SERVER_EFFECTS.applyToBuilder(builder).push("effects");
 			timePedBonus = CachedIntValue.wrap(config, PEConfigTranslations.SERVER_EFFECTS_TIME_PEDESTAL_BONUS.applyToBuilder(builder)
-					.defineInRange("timePedBonus", 18, 0, 256));
+					.defineInRange("timePedBonus", 15, 0, 15));
 			timePedMobSlowness = CachedDoubleValue.wrap(config, PEConfigTranslations.SERVER_EFFECTS_TIME_PEDESTAL_MOB_SLOWNESS.applyToBuilder(builder)
 					.defineInRange("timePedMobSlowness", 0.10, 0, 1));
 			interdictionMode = CachedBooleanValue.wrap(config, PEConfigTranslations.SERVER_EFFECTS_INTERDICTION_MODE.applyToBuilder(builder)

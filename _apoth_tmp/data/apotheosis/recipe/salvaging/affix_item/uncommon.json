@@ -1,0 +1,16 @@
+{
+    "type": "apotheosis:salvaging",
+    "input": {
+        "neoforge:ingredient_type": "apotheosis:affix",
+        "rarity": "apotheosis:uncommon"
+    },
+    "outputs": [
+        {
+            "max_count": 4,
+            "min_count": 1,
+            "stack": {
+                "id": "apotheosis:timeworn_fabric"
+            }
+        }
+    ]
+}

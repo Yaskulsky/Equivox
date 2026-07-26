@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "group": "apotheosis",
+    "key": {
+        "G": "apotheosis:gem_fused_slate",
+        "M": "apotheosis:mysterious_scrap_metal",
+        "S": "minecraft:stone"
+    },
+    "pattern": [
+        " M ",
+        "SGS",
+        "SGS"
+    ],
+    "result": {
+        "count": 2,
+        "id": "apotheosis:iron_upgrade_smithing_template"
+    }
+}

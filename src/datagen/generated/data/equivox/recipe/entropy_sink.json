@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": "#c:gems/diamond",
+    "F": "minecraft:furnace",
+    "O": "#c:obsidians/normal"
+  },
+  "pattern": [
+    "ODO",
+    "DFD",
+    "ODO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "equivox:entropy_sink"
+  }
+}

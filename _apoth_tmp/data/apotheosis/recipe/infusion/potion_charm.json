@@ -1,0 +1,13 @@
+{
+    "type": "apotheosis:potion_charm_infusion",
+    "max_requirements": {
+        "arcana": 37.5,
+        "eterna": 100.0,
+        "quanta": 13.5
+    },
+    "requirements": {
+        "arcana": 32.5,
+        "eterna": 100.0,
+        "quanta": 8.5
+    }
+}

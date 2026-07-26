@@ -1,0 +1,27 @@
+{
+    "type": "minecraft:entity",
+    "pools": [
+        {
+            "bonus_rolls": 0.0,
+            "entries": [
+                {
+                    "type": "apotheosis:random_gem",
+                    "quality": 1,
+                    "weight": 30
+                },
+                {
+                    "type": "minecraft:item",
+                    "name": "apotheosis:sigil_of_malice",
+                    "quality": 1,
+                    "weight": 25
+                },
+                {
+                    "type": "minecraft:empty",
+                    "weight": 45
+                }
+            ],
+            "rolls": 1.0
+        }
+    ],
+    "random_sequence": "apotheosis:entity/boss_drops"
+}

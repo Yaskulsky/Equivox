@@ -85,7 +85,7 @@ public enum PEConfigTranslations implements IConfigTranslation {
 
 	SERVER_EFFECTS("server.effects", "Effect Settings", "Settings for configuring Effect options provided by Equivox.", true),
 	SERVER_EFFECTS_TIME_PEDESTAL_BONUS("server.effects.time_pedestal.bonus", "Time Pedestal Bonus",
-			"Bonus ticks given by the Watch of Flowing Time while in the pedestal. 0 = effectively no bonus."),
+			"Maximum bonus ticks the Watch of Flowing Time can apply while in a pedestal (0-15). Per-pedestal speed is set with sneak + scroll. 0 = no bonus."),
 	SERVER_EFFECTS_TIME_PEDESTAL_MOB_SLOWNESS("server.effects.time_pedestal.mob_slowness", "Time Pedestal Mob Slowness",
 			"Factor the Watch of Flowing Time slows down mobs by while in the pedestal. Set to 1.0 for no slowdown."),
 	SERVER_EFFECTS_INTERDICTION_MODE("server.effects.interdiction_mode", "Interdiction Mode",
