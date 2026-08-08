@@ -2,6 +2,16 @@
 
 All notable changes to [Yaskulsky/projecte-26-port](https://github.com/Yaskulsky/projecte-26-port) are documented here.
 
+## [1.0.1] — 2026-08-08
+
+### Fixed
+- **Philosopher's Stone crash on NeoForge 26.1.2.21-beta+** — `PlayerHelper.checkBreakPermission` now links against `CommonHooks.fireBlockBreak(..., Player, ...) → BreakBlockEvent` instead of the removed `ServerPlayer` / `BlockEvent.BreakEvent` signature (`NoSuchMethodError` when right-clicking dirt/sand/cobble).
+
+### Changed
+- Compile / minimum NeoForge bumped to **26.1.2.76** / **`[26.1.2.21-beta,)`**.
+
+---
+
 ## [1.0.0] — 2026-07-17
 
 Equivox public starting version (versioning restarted at 1.0 after the Equivox rebrand). Earlier fork builds used 1.2.x–1.5.0 numbering.
