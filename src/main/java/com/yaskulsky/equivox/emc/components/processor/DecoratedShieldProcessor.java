@@ -66,24 +66,7 @@ public class DecoratedShieldProcessor implements IDataComponentProcessor {
 	}
 
 	private static Item getBannerItem(DyeColor color) {
-		return switch (color) {
-			case WHITE -> Items.WHITE_BANNER;
-			case ORANGE -> Items.ORANGE_BANNER;
-			case MAGENTA -> Items.MAGENTA_BANNER;
-			case LIGHT_BLUE -> Items.LIGHT_BLUE_BANNER;
-			case YELLOW -> Items.YELLOW_BANNER;
-			case LIME -> Items.LIME_BANNER;
-			case PINK -> Items.PINK_BANNER;
-			case GRAY -> Items.GRAY_BANNER;
-			case LIGHT_GRAY -> Items.LIGHT_GRAY_BANNER;
-			case CYAN -> Items.CYAN_BANNER;
-			case PURPLE -> Items.PURPLE_BANNER;
-			case BLUE -> Items.BLUE_BANNER;
-			case BROWN -> Items.BROWN_BANNER;
-			case GREEN -> Items.GREEN_BANNER;
-			case RED -> Items.RED_BANNER;
-			case BLACK -> Items.BLACK_BANNER;
-		};
+		return Items.BANNER.pick(color);
 	}
 
 	@Override

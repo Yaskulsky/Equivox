@@ -11,6 +11,8 @@ import com.yaskulsky.equivox.PECore;
 
 import com.yaskulsky.equivox.gameObjs.EnumCollectorTier;
 
+import com.yaskulsky.equivox.gameObjs.EnumEntropySinkTier;
+
 import com.yaskulsky.equivox.gameObjs.EnumMatterType;
 
 import com.yaskulsky.equivox.gameObjs.EnumRelayTier;
@@ -22,6 +24,8 @@ import com.yaskulsky.equivox.gameObjs.blocks.Collector;
 import com.yaskulsky.equivox.gameObjs.blocks.Condenser;
 
 import com.yaskulsky.equivox.gameObjs.blocks.CondenserMK2;
+
+import com.yaskulsky.equivox.gameObjs.blocks.EntropySink;
 
 import com.yaskulsky.equivox.gameObjs.blocks.InterdictionTorchEntityBlock.InterdictionTorch;
 
@@ -38,6 +42,8 @@ import com.yaskulsky.equivox.gameObjs.blocks.EquivoxTNT;
 import com.yaskulsky.equivox.gameObjs.blocks.EquivoxTNT.TNTEntityCreator;
 
 import com.yaskulsky.equivox.gameObjs.blocks.Relay;
+
+import com.yaskulsky.equivox.gameObjs.blocks.StellarCondenser;
 
 import com.yaskulsky.equivox.gameObjs.blocks.TransmutationStone;
 
@@ -99,6 +105,17 @@ public class PEBlocks {
 
 	public static final BlockRegistryObject<Collector, PEBlockItem> COLLECTOR_MK3 = registerCollector("collector_mk3", EnumCollectorTier.MK3, state -> 15);
 
+	public static final BlockRegistryObject<EntropySink, PEBlockItem> ENTROPY_SINK = registerEntropySink(EnumEntropySinkTier.BASIC, state -> 7);
+
+	public static final BlockRegistryObject<EntropySink, PEBlockItem> ENTROPY_SINK_DARK = registerEntropySink(EnumEntropySinkTier.DARK, state -> 11);
+
+	public static final BlockRegistryObject<EntropySink, PEBlockItem> ENTROPY_SINK_RED = registerEntropySink(EnumEntropySinkTier.RED, state -> 15);
+
+	public static final BlockRegistryObject<StellarCondenser, PEBlockItem> STELLAR_CONDENSER = BLOCKS.register("stellar_condenser",
+			id -> new StellarCondenser(PERegistryUtil.blockProps(id).mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM)
+					.requiresCorrectToolForDrops().strength(10, 3_600_000)),
+			(block, props) -> new PEBlockItem(block, props, (stack, tooltip, flags) -> block.addTooltip(stack, tooltip)));
+
 	public static final BlockRegistryObject<Condenser, BlockItem> CONDENSER = registerCondenser("condenser_mk1", Condenser::new, (block, props) -> new BlockItem(block, props));
 
 	public static final BlockRegistryObject<CondenserMK2, BlockItem> CONDENSER_MK2 = registerCondenser("condenser_mk2", CondenserMK2::new, (block, props) -> new BlockItem(block, props.fireResistant()));
@@ -147,6 +164,12 @@ public class PEBlocks {
 
 				.lightLevel(lightLevel)), (block, props) -> new PEBlockItem(block, props, (stack, tooltip, flags) -> block.addTooltip(stack, tooltip)));
 
+	}
+
+	private static BlockRegistryObject<EntropySink, PEBlockItem> registerEntropySink(EnumEntropySinkTier tier, ToIntFunction<BlockState> lightLevel) {
+		return BLOCKS.register(tier.getSerializedName(), id -> new EntropySink(tier, PERegistryUtil.blockProps(id).mapColor(MapColor.SAND)
+				.instrument(NoteBlockInstrument.PLING).sound(SoundType.GLASS).requiresCorrectToolForDrops().strength(0.3F, 0.9F)
+				.lightLevel(lightLevel)), (block, props) -> new PEBlockItem(block, props, (stack, tooltip, flags) -> block.addTooltip(stack, tooltip)));
 	}
 
 

@@ -8,6 +8,7 @@ import net.minecraft.world.clock.WorldClock;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
@@ -44,7 +45,7 @@ public final class LevelHelper {
 
 	@NotNull
 	public static LightningBolt createLightning(@NotNull ServerLevel level, @NotNull Vec3 pos) {
-		LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(level, EntitySpawnReason.TRIGGERED);
+		LightningBolt lightning = EntityTypes.LIGHTNING_BOLT.create(level, EntitySpawnReason.TRIGGERED);
 		if (lightning == null) {
 			throw new IllegalStateException("Failed to create lightning bolt");
 		}

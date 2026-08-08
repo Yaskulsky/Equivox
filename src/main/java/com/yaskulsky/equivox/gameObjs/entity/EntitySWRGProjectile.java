@@ -57,7 +57,7 @@ public class EntitySWRGProjectile extends NoGravityThrowableProjectile {
 			ItemStack found = PlayerHelper.findFirstItem(player, fromArcana ? PEItems.ARCANA_RING : PEItems.SWIFTWOLF_RENDING_GALE);
 			if (!found.isEmpty() && ItemPE.consumeFuel(player, found, 768, true)) {
 				BlockPos pos = result.getBlockPos();
-				LightningBolt lightning = LevelHelper.createLightning(serverLevel, pos.getCenter());
+				LightningBolt lightning = LevelHelper.createLightning(serverLevel, Vec3.atCenterOf(pos));
 				lightning.setCause(player);
 				level().addFreshEntity(lightning);
 				if (level().isThundering()) {
@@ -81,12 +81,13 @@ public class EntitySWRGProjectile extends NoGravityThrowableProjectile {
 			ItemStack found = PlayerHelper.findFirstItem(player, fromArcana ? PEItems.ARCANA_RING : PEItems.SWIFTWOLF_RENDING_GALE);
 			if (!found.isEmpty() && ItemPE.consumeFuel(player, found, 64, true)) {
 				// Minor damage, so we count as the attacker for launching the mob
-				e.hurt(level().damageSources().playerAttack(player), 1F);
+				var src = level().damageSources().playerAttack(player);
+				e.hurt(src, 1F);
 
 				// Fake onGround before knockBack, so you can re-launch mobs that have already been launched
 				boolean oldOnGround = e.onGround();
 				e.setOnGround(true);
-				e.knockback(5F, -getDeltaMovement().x() * 0.25, -getDeltaMovement().z() * 0.25);
+				e.knockback(5.0, -getDeltaMovement().x() * 0.25, -getDeltaMovement().z() * 0.25, src, 1F);
 				e.setOnGround(oldOnGround);
 				e.setDeltaMovement(e.getDeltaMovement().multiply(1, 3, 1));
 			}

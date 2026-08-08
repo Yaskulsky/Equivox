@@ -127,9 +127,9 @@ public class MercurialEye extends ItemMode<MercurialEyeMode> implements IExtraFu
 		BlockPlaceContext context;
 		BlockHitResult hitResult;
 		if (facing == null) {
-			hitResult = new BlockHitResult(startingPos.getCenter(), Direction.UP, startingPos, true);
+			hitResult = new BlockHitResult(Vec3.atCenterOf(startingPos), Direction.UP, startingPos, true);
 		} else {
-			hitResult = new BlockHitResult(startingPos.relative(facing).getCenter(), facing, startingPos, false);
+			hitResult = new BlockHitResult(Vec3.atCenterOf(startingPos.relative(facing)), facing, startingPos, false);
 		}
 		if (!target.isEmpty()) {
 			context = new BlockPlaceContext(level, player, hand, target.copy(), hitResult);
