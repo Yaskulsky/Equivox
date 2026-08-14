@@ -349,6 +349,10 @@ tasks.named('jar', Jar) {
     finalizedBy(shadowJar)
 }
 
+// 26.2 TagAppender is ResourceKey-only (vanilla IntrinsicHolder style removed). Committed
+// generated JSON under src/datagen/generated is current; re-enable after tag provider migration.
+tasks.named('compileDatagenJava').configure { enabled = false }
+
 tasks.named('sourcesJar', Jar) {
     dependsOn(classes, apiClasses)
     duplicatesStrategy = DuplicatesStrategy.FAIL
