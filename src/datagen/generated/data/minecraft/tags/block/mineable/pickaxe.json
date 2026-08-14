@@ -10,6 +10,7 @@
     "equivox:condenser_mk1",
     "equivox:condenser_mk2",
     "equivox:dm_pedestal",
+    "equivox:rm_pedestal",
     "equivox:dm_furnace",
     "equivox:rm_furnace",
     "equivox:dark_matter_block",
@@ -17,6 +18,11 @@
     "equivox:transmutation_table",
     "equivox:relay_mk1",
     "equivox:relay_mk2",
-    "equivox:relay_mk3"
+    "equivox:relay_mk3",
+    "equivox:entropy_sink",
+    "equivox:entropy_sink_dark",
+    "equivox:entropy_sink_red",
+    "equivox:stellar_condenser",
+    "equivox:transmutation_provider"
   ]
 }

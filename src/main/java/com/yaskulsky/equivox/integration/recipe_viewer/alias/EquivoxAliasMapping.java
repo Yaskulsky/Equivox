@@ -20,6 +20,7 @@ public final class EquivoxAliasMapping implements IAliasMapping {
 		rv.addAliases(PEBlocks.ALCHEMICAL_CHEST, EquivoxAliases.ITEM_STORAGE);
 		rv.addAliases(PETags.Items.COLLECTORS, EquivoxAliases.EMC_GENERATOR);
 		rv.addAliases(PEBlocks.DARK_MATTER_PEDESTAL, EquivoxAliases.AOE, EquivoxAliases.AOE_LONG);
+		rv.addAliases(PEBlocks.RED_MATTER_PEDESTAL, EquivoxAliases.AOE, EquivoxAliases.AOE_LONG);
 		rv.addAliases(PETags.Items.RELAYS, EquivoxAliases.EMC_CHARGER, EquivoxAliases.EMC_TRANSFER);
 
 		rv.addAliases(PEBlocks.ALCHEMICAL_COAL, EquivoxAliases.BLOCK_ALCHEMICAL_COAL);

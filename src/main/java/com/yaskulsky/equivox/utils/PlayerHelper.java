@@ -156,7 +156,9 @@ public final class PlayerHelper {
 	}
 
 	public static boolean checkBreakPermission(ServerPlayer player, Level level, BlockPos pos) {
-		return !CommonHooks.fireBlockBreak(level, player.gameMode.getGameModeForPlayer(), player, pos, level.getBlockState(pos)).isCanceled();
+		// NeoForge 26.1.2.21-beta+: fireBlockBreak(Level, GameType, Player, ...) -> BreakBlockEvent
+		// (older signature used ServerPlayer / BlockEvent.BreakEvent and crashes with NoSuchMethodError)
+		return !CommonHooks.fireBlockBreak(level, player.gameMode.getGameModeForPlayer(), (Player) player, pos, level.getBlockState(pos)).isCanceled();
 	}
 
 	public static boolean hasEditPermission(Player player, Level level, BlockPos pos) {

@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,online=false": {
+      "model": "equivox:block/transmutation_provider_offline",
+      "y": 90
+    },
+    "facing=east,online=true": {
+      "model": "equivox:block/transmutation_provider",
+      "y": 90
+    },
+    "facing=north,online=false": {
+      "model": "equivox:block/transmutation_provider_offline"
+    },
+    "facing=north,online=true": {
+      "model": "equivox:block/transmutation_provider"
+    },
+    "facing=south,online=false": {
+      "model": "equivox:block/transmutation_provider_offline",
+      "y": 180
+    },
+    "facing=south,online=true": {
+      "model": "equivox:block/transmutation_provider",
+      "y": 180
+    },
+    "facing=west,online=false": {
+      "model": "equivox:block/transmutation_provider_offline",
+      "y": 270
+    },
+    "facing=west,online=true": {
+      "model": "equivox:block/transmutation_provider",
+      "y": 270
+    }
+  }
+}

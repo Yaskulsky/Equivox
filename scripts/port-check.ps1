@@ -9,17 +9,24 @@ $ErrorActionPreference = "Continue"
 $root = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
 Set-Location $root
 
-$jar = Get-ChildItem (Join-Path $root "build\libs") -Filter "equivox-*.jar" -ErrorAction SilentlyContinue |
+$libs = Join-Path $root "build\libs"
+$jar = Get-ChildItem -LiteralPath $libs -Filter "Equivox-*.jar" -ErrorAction SilentlyContinue |
     Where-Object { $_.Name -notmatch 'sources|api' } |
     Sort-Object LastWriteTime -Descending |
     Select-Object -First 1
 if (-not $jar) {
-    $jar = Get-ChildItem (Join-Path $root "build\libs") -Filter "projecte-*.jar" -ErrorAction SilentlyContinue |
+    $jar = Get-ChildItem -LiteralPath $libs -Filter "equivox-*.jar" -ErrorAction SilentlyContinue |
         Where-Object { $_.Name -notmatch 'sources|api' } |
         Sort-Object LastWriteTime -Descending |
         Select-Object -First 1
 }
-$jar = if ($jar) { $jar.FullName } else { Join-Path $root "build\libs\equivox-1.2.2.jar" }
+if (-not $jar) {
+    $jar = Get-ChildItem -LiteralPath $libs -Filter "projecte-*.jar" -ErrorAction SilentlyContinue |
+        Where-Object { $_.Name -notmatch 'sources|api' } |
+        Sort-Object LastWriteTime -Descending |
+        Select-Object -First 1
+}
+$jar = if ($jar) { $jar.FullName } else { Join-Path $libs "Equivox-26.1.2-1.3.0.jar" }
 $src = Join-Path $root "src\main\java"
 
 function Write-Finding($severity, $message) {

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "equivox:block/rm_pedestal"
+    }
+  }
+}

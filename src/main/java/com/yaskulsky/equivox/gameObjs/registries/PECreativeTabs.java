@@ -121,6 +121,7 @@ public class PECreativeTabs {
 				output.accept(PEBlocks.ALCHEMICAL_CHEST);
 				output.accept(PEBlocks.CONDENSER);
 				output.accept(PEBlocks.CONDENSER_MK2);
+				output.accept(PEBlocks.TRANSMUTATION_PROVIDER);
 
 				output.accept(PEBlocks.COLLECTOR);
 				output.accept(PEBlocks.COLLECTOR_MK2);
@@ -135,6 +136,7 @@ public class PECreativeTabs {
 				output.accept(PEBlocks.STELLAR_CONDENSER);
 
 				output.accept(PEBlocks.DARK_MATTER_PEDESTAL);
+				output.accept(PEBlocks.RED_MATTER_PEDESTAL);
 				output.accept(PEBlocks.DARK_MATTER_FURNACE);
 				output.accept(PEBlocks.RED_MATTER_FURNACE);
 				output.accept(PEBlocks.INTERDICTION_TORCH);
@@ -178,6 +180,7 @@ public class PECreativeTabs {
 					PEBlocks.ALCHEMICAL_CHEST,
 					PEBlocks.CONDENSER,
 					PEBlocks.CONDENSER_MK2,
+					PEBlocks.TRANSMUTATION_PROVIDER,
 
 					PEBlocks.COLLECTOR,
 					PEBlocks.COLLECTOR_MK2,
@@ -192,6 +195,7 @@ public class PECreativeTabs {
 					PEBlocks.STELLAR_CONDENSER,
 
 					PEBlocks.DARK_MATTER_PEDESTAL,
+					PEBlocks.RED_MATTER_PEDESTAL,
 
 					PEBlocks.DARK_MATTER_FURNACE,
 					PEBlocks.RED_MATTER_FURNACE
@@ -202,6 +206,7 @@ public class PECreativeTabs {
 					PEBlocks.ALCHEMICAL_CHEST,
 					PEBlocks.CONDENSER,
 					PEBlocks.CONDENSER_MK2,
+					PEBlocks.TRANSMUTATION_PROVIDER,
 
 					PEBlocks.COLLECTOR,
 					PEBlocks.COLLECTOR_MK2,
@@ -216,6 +221,7 @@ public class PECreativeTabs {
 					PEBlocks.STELLAR_CONDENSER,
 
 					PEBlocks.DARK_MATTER_PEDESTAL,
+					PEBlocks.RED_MATTER_PEDESTAL,
 
 					PEBlocks.DARK_MATTER_FURNACE,
 					PEBlocks.RED_MATTER_FURNACE,

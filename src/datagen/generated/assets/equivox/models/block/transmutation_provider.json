@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "bottom": "equivox:block/transmutation_provider/other",
+    "front": "equivox:block/transmutation_provider/front",
+    "side": "equivox:block/transmutation_provider/other",
+    "top": "equivox:block/transmutation_provider/top"
+  }
+}

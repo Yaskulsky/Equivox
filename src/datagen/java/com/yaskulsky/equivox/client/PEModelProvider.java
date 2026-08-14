@@ -2,6 +2,7 @@ package com.yaskulsky.equivox.client;
 
 import com.google.gson.JsonObject;
 import com.yaskulsky.equivox.PECore;
+import com.yaskulsky.equivox.gameObjs.blocks.TransmutationProvider;
 import com.yaskulsky.equivox.gameObjs.items.KleinStar.KleinTier;
 import com.yaskulsky.equivox.gameObjs.registration.INamedEntry;
 import com.yaskulsky.equivox.gameObjs.registration.impl.BlockRegistryObject;
@@ -73,8 +74,9 @@ public class PEModelProvider extends ModelProvider {
 		simpleBlocks(blockModels, PEBlocks.ALCHEMICAL_COAL, PEBlocks.MOBIUS_FUEL, PEBlocks.AETERNALIS_FUEL, PEBlocks.DARK_MATTER, PEBlocks.RED_MATTER);
 		registerTieredOrientable(blockModels, "collectors", PEBlocks.COLLECTOR, PEBlocks.COLLECTOR_MK2, PEBlocks.COLLECTOR_MK3);
 		registerTieredOrientable(blockModels, "relays", PEBlocks.RELAY, PEBlocks.RELAY_MK2, PEBlocks.RELAY_MK3);
-		registerTieredOrientable(blockModels, "collectors", PEBlocks.ENTROPY_SINK, PEBlocks.ENTROPY_SINK_DARK, PEBlocks.ENTROPY_SINK_RED);
-		registerOrientable(blockModels, PEBlocks.STELLAR_CONDENSER, "collectors", "top_3");
+		registerTieredOrientable(blockModels, "entropy_sink", PEBlocks.ENTROPY_SINK, PEBlocks.ENTROPY_SINK_DARK, PEBlocks.ENTROPY_SINK_RED);
+		registerOrientable(blockModels, PEBlocks.STELLAR_CONDENSER, "stellar_condenser", "top");
+		registerProviderOnline(blockModels);
 		registerFurnace(blockModels, PEBlocks.DARK_MATTER_FURNACE, "dm", "dark_matter_block");
 		registerFurnace(blockModels, PEBlocks.RED_MATTER_FURNACE, "rm", "red_matter_block");
 		registerChests(blockModels);
@@ -89,8 +91,9 @@ public class PEModelProvider extends ModelProvider {
 				PEBlocks.DARK_MATTER_FURNACE, PEBlocks.RED_MATTER_FURNACE, PEBlocks.COLLECTOR, PEBlocks.COLLECTOR_MK2,
 				PEBlocks.COLLECTOR_MK3, PEBlocks.NOVA_CATALYST, PEBlocks.NOVA_CATACLYSM, PEBlocks.RELAY, PEBlocks.RELAY_MK2,
 				PEBlocks.RELAY_MK3, PEBlocks.ENTROPY_SINK, PEBlocks.ENTROPY_SINK_DARK, PEBlocks.ENTROPY_SINK_RED,
-				PEBlocks.STELLAR_CONDENSER);
+				PEBlocks.STELLAR_CONDENSER, PEBlocks.TRANSMUTATION_PROVIDER);
 		generated(itemModels, PEBlocks.DARK_MATTER_PEDESTAL.getBlock().asItem(), modLocation("item/dm_pedestal"));
+		generated(itemModels, PEBlocks.RED_MATTER_PEDESTAL.getBlock().asItem(), modLocation("item/rm_pedestal"));
 		generated(itemModels, PEBlocks.TRANSMUTATION_TABLE.getBlock().asItem(), modLocation("item/transmutation_table"));
 		registerGenerated(itemModels, PEItems.CATALYTIC_LENS, PEItems.DESTRUCTION_CATALYST, PEItems.LOW_DIVINING_ROD, PEItems.MEDIUM_DIVINING_ROD, PEItems.HIGH_DIVINING_ROD,
 				PEItems.HYPERKINETIC_LENS, PEItems.MERCURIAL_EYE, PEItems.PHILOSOPHERS_STONE, PEItems.REPAIR_TALISMAN, PEItems.TOME_OF_KNOWLEDGE,
@@ -200,7 +203,12 @@ public class PEModelProvider extends ModelProvider {
 	}
 
 	private void registerPedestal(BlockModelGenerators blockModels) {
-		Material dm = texture("block/dark_matter_block");
+		registerPedestal(blockModels, PEBlocks.DARK_MATTER_PEDESTAL, "block/dark_matter_block");
+		registerPedestal(blockModels, PEBlocks.RED_MATTER_PEDESTAL, "block/red_matter_block");
+	}
+
+	private void registerPedestal(BlockModelGenerators blockModels, BlockRegistryObject<?, ?> pedestal, String texturePath) {
+		Material texture = texture(texturePath);
 		ExtendedModelTemplate model = ExtendedModelTemplateBuilder.builder()
 				.parent(modLocation("block/block"))
 				.requiredTextureSlot(PEDESTAL)
@@ -228,9 +236,31 @@ public class PEModelProvider extends ModelProvider {
 						.face(Direction.UP, face -> face.texture(PEDESTAL).uvs(6, 6, 6, 6))
 						.face(Direction.DOWN, face -> face.texture(PEDESTAL).uvs(6, 6, 6, 6)))
 				.build();
-		Identifier modelLoc = model.create(PEBlocks.DARK_MATTER_PEDESTAL.getBlock(),
-				new TextureMapping().put(PEDESTAL, dm).put(TextureSlot.PARTICLE, dm), blockModels.modelOutput);
-		blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(PEBlocks.DARK_MATTER_PEDESTAL.getBlock(), BlockModelGenerators.plainVariant(modelLoc)));
+		Identifier modelLoc = model.create(pedestal.getBlock(),
+				new TextureMapping().put(PEDESTAL, texture).put(TextureSlot.PARTICLE, texture), blockModels.modelOutput);
+		blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(pedestal.getBlock(), BlockModelGenerators.plainVariant(modelLoc)));
+	}
+
+	private void registerProviderOnline(BlockModelGenerators blockModels) {
+		Block block = PEBlocks.TRANSMUTATION_PROVIDER.getBlock();
+		TextureMapping online = new TextureMapping()
+				.put(TextureSlot.SIDE, texture("block/transmutation_provider/other"))
+				.put(TextureSlot.FRONT, texture("block/transmutation_provider/front"))
+				.put(TextureSlot.TOP, texture("block/transmutation_provider/top"))
+				.put(TextureSlot.BOTTOM, texture("block/transmutation_provider/other"));
+		TextureMapping offline = new TextureMapping()
+				.put(TextureSlot.SIDE, texture("block/transmutation_provider/other_offline"))
+				.put(TextureSlot.FRONT, texture("block/transmutation_provider/front_offline"))
+				.put(TextureSlot.TOP, texture("block/transmutation_provider/top_offline"))
+				.put(TextureSlot.BOTTOM, texture("block/transmutation_provider/other_offline"));
+		Identifier onlineModel = ModelTemplates.CUBE_ORIENTABLE_TOP_BOTTOM.create(block, online, blockModels.modelOutput);
+		Identifier offlineModel = ModelTemplates.CUBE_ORIENTABLE_TOP_BOTTOM.createWithSuffix(block, "_offline", offline, blockModels.modelOutput);
+		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+				.with(BlockModelGenerators.createBooleanModelDispatch(
+						TransmutationProvider.ONLINE,
+						BlockModelGenerators.plainVariant(onlineModel),
+						BlockModelGenerators.plainVariant(offlineModel)))
+				.with(BlockModelGenerators.ROTATION_HORIZONTAL_FACING));
 	}
 
 	private void registerTransmutationTable(BlockModelGenerators blockModels) {

@@ -34,7 +34,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class CondenserBlockEntity extends EmcChestBlockEntity {
 
-	public static final ICapabilityProvider<CondenserBlockEntity, @Nullable Direction, ResourceHandler<ItemResource>> INVENTORY_PROVIDER = (condenser, side) -> LegacyItemHandlerResourceHandler.of(condenser.automationInventory);
+	public static final ICapabilityProvider<CondenserBlockEntity, @Nullable Direction, ResourceHandler<ItemResource>> INVENTORY_PROVIDER =
+			(condenser, side) -> LegacyItemHandlerResourceHandler.of(condenser.getAutomationHandler(side));
 
 	protected final ItemStackHandler inputInventory = createInput();
 	private final ItemStackHandler outputInventory = createOutput();
@@ -54,6 +55,15 @@ public class CondenserBlockEntity extends EmcChestBlockEntity {
 	protected CondenserBlockEntity(BlockEntityTypeRegistryObject<? extends CondenserBlockEntity> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
 		this.automationInventory = createAutomationInventory();
+	}
+
+	/**
+	 * Exposed to hoppers / AE2 / RS. MK1 uses one shared handler on all sides.
+	 * MK2 routes vertical faces to output and horizontal faces to input.
+	 */
+	@NotNull
+	protected IItemHandler getAutomationHandler(@Nullable Direction side) {
+		return automationInventory;
 	}
 
 	@Override

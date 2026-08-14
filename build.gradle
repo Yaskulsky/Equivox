@@ -66,7 +66,7 @@ sourceSets {
             java {
                 exclude '**/integration/crafttweaker/**'
                 exclude '**/integration/recipe_viewer/**'
-                exclude '**/integration/jade/**'
+                // Jade stays compiled: soft-dep for Device Online/Offline look-at (AE2-style)
                 exclude '**/integration/wthit/**'
                 exclude '**/integration/top/**'
             }
@@ -139,7 +139,8 @@ def replaceResources = tasks.register("replaceResources", Copy) {
 
 version = "${equivox_version}"
 group = "com.yaskulsky.equivox"
-project.base.archivesName = "equivox"
+// Deploy name: Equivox-<mc>-<mod>.jar (e.g. Equivox-26.1.2-1.3.0.jar)
+project.base.archivesName = "Equivox-${minecraft_version}"
 
 java {
     toolchain {
@@ -275,6 +276,9 @@ dependencies {
 
     compileOnly("top.theillusivec4.curios:curios-neoforge:${curios_version}:api")
 
+    // Jade: always compile (optional at runtime) so Provider shows Device Online/Offline in the same tooltip as AE2
+    compileOnly("curse.maven:jade-324717:${jade_id}")
+
     if (enableOptionalIntegrations) {
         compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
         if (recipe_viewer == 'jei' || recipe_viewer == 'hybrid') {
@@ -298,7 +302,6 @@ dependencies {
         localRuntime("mcjty.theoneprobe:theoneprobe:${top_version}") {
             transitive = false
         }
-        compileOnly("curse.maven:jade-api-324717:${jade_api_id}")
         localRuntime("curse.maven:jade-324717:${jade_id}")
         compileOnly("mcp.mobius.waila:wthit-api:forge-${wthit_version}")
 

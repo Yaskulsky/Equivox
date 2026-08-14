@@ -20,6 +20,7 @@ import com.yaskulsky.equivox.gameObjs.block_entities.RelayMK1BlockEntity;
 import com.yaskulsky.equivox.gameObjs.block_entities.RelayMK2BlockEntity;
 import com.yaskulsky.equivox.gameObjs.block_entities.RelayMK3BlockEntity;
 import com.yaskulsky.equivox.gameObjs.block_entities.StellarCondenserBlockEntity;
+import com.yaskulsky.equivox.gameObjs.block_entities.TransmutationProviderBlockEntity;
 import com.yaskulsky.equivox.gameObjs.registration.impl.BlockEntityTypeDeferredRegister;
 import com.yaskulsky.equivox.gameObjs.registration.impl.BlockEntityTypeRegistryObject;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -90,6 +91,7 @@ public class PEBlockEntityTypes {
 			.commonTicker(InterdictionBlockEntity::tick)
 			.build();
 	public static final BlockEntityTypeRegistryObject<DMPedestalBlockEntity> DARK_MATTER_PEDESTAL = BLOCK_ENTITY_TYPES.builder(PEBlocks.DARK_MATTER_PEDESTAL, DMPedestalBlockEntity::new)
+			.alsoValid(PEBlocks.RED_MATTER_PEDESTAL)
 			.clientTicker(DMPedestalBlockEntity::tickClient)
 			.serverTicker(DMPedestalBlockEntity::tickServer)
 			.with(PECapabilities.EMC_STORAGE_CAPABILITY, (be, side) -> be)
@@ -113,5 +115,9 @@ public class PEBlockEntityTypes {
 	public static final BlockEntityTypeRegistryObject<StellarCondenserBlockEntity> STELLAR_CONDENSER = BLOCK_ENTITY_TYPES.builder(PEBlocks.STELLAR_CONDENSER, StellarCondenserBlockEntity::new)
 			.serverTicker(StellarCondenserBlockEntity::tickServer)
 			.with(PECapabilities.EMC_STORAGE_CAPABILITY, (be, side) -> be)
+			.build();
+	public static final BlockEntityTypeRegistryObject<TransmutationProviderBlockEntity> TRANSMUTATION_PROVIDER = BLOCK_ENTITY_TYPES.builder(PEBlocks.TRANSMUTATION_PROVIDER, TransmutationProviderBlockEntity::new)
+			.serverTicker(TransmutationProviderBlockEntity::tickServer)
+			.with(Capabilities.Item.BLOCK, TransmutationProviderBlockEntity.INVENTORY_PROVIDER)
 			.build();
 }

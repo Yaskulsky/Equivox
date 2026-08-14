@@ -30,3 +30,9 @@ type="incompatible"
 reason="Requires an update to support changes to recipe mappers"
 versionRange="[,10.7.8]"
 side="BOTH"
+
+[[dependencies.equivox]]
+modId="jade"
+type="optional"
+versionRange="*"
+side="CLIENT"

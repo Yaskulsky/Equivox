@@ -12,6 +12,7 @@ import java.util.function.Supplier;
 import com.yaskulsky.equivox.gameObjs.registration.PEDeferredRegister;
 import com.yaskulsky.equivox.gameObjs.registration.impl.BlockEntityTypeRegistryObject.CapabilityData;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -63,6 +64,7 @@ public class BlockEntityTypeDeferredRegister extends PEDeferredRegister<BlockEnt
 
 		private final BlockRegistryObject<?, ?> block;
 		private final BlockEntitySupplier<? extends BE> factory;
+		private final List<BlockRegistryObject<?, ?>> extraBlocks = new ArrayList<>();
 		private final List<CapabilityData<BE, ?, ?>> capabilityProviders = new ArrayList<>();
 		@Nullable
 		private BlockEntityTicker<BE> clientTicker;
@@ -72,6 +74,11 @@ public class BlockEntityTypeDeferredRegister extends PEDeferredRegister<BlockEnt
 		BlockEntityTypeBuilder(BlockRegistryObject<?, ?> block, BlockEntitySupplier<? extends BE> factory) {
 			this.block = block;
 			this.factory = factory;
+		}
+
+		public BlockEntityTypeBuilder<BE> alsoValid(BlockRegistryObject<?, ?>... blocks) {
+			extraBlocks.addAll(Arrays.asList(blocks));
+			return this;
 		}
 
 		public <CAP, CONTEXT> BlockEntityTypeBuilder<BE> withSimple(BlockCapability<CAP, CONTEXT> capability) {
@@ -134,7 +141,13 @@ public class BlockEntityTypeDeferredRegister extends PEDeferredRegister<BlockEnt
 		@SuppressWarnings("ConstantConditions")
 		public BlockEntityTypeRegistryObject<BE> build() {
 			//Note: There is no data fixer type as forge does not currently have a way exposing data fixers to mods yet
-			BlockEntityTypeRegistryObject<BE> holder = registerPE(block.getName(), () -> new BlockEntityType<>(factory, Set.copyOf(Arrays.asList(block.getBlocks()))));
+			BlockEntityTypeRegistryObject<BE> holder = registerPE(block.getName(), () -> {
+				List<Block> valid = new ArrayList<>(Arrays.asList(block.getBlocks()));
+				for (BlockRegistryObject<?, ?> extra : extraBlocks) {
+					valid.addAll(Arrays.asList(extra.getBlocks()));
+				}
+				return new BlockEntityType<>(factory, Set.copyOf(valid));
+			});
 			holder.tickers(clientTicker, serverTicker);
 			holder.capabilities(capabilityProviders.isEmpty() ? null : capabilityProviders);
 			return holder;
