@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.function.Consumer;
 import com.yaskulsky.equivox.api.capabilities.PECapabilities;
 import com.yaskulsky.equivox.api.capabilities.item.IPedestalItem;
-import com.yaskulsky.equivox.gameObjs.EnumMatterType;
 import com.yaskulsky.equivox.gameObjs.IMatterType;
 import com.yaskulsky.equivox.gameObjs.block_entities.DMPedestalBlockEntity;
 import com.yaskulsky.equivox.gameObjs.registration.impl.BlockEntityTypeRegistryObject;
@@ -52,8 +51,11 @@ public class Pedestal extends Block implements SimpleWaterloggedBlock, PEEntityB
 			)
 	);
 
-	public Pedestal(Properties props) {
+	private final IMatterType matterType;
+
+	public Pedestal(Properties props, IMatterType matterType) {
 		super(props);
+		this.matterType = matterType;
 		this.registerDefaultState(getStateDefinition().any().setValue(BlockStateProperties.WATERLOGGED, false));
 	}
 
@@ -222,6 +224,6 @@ public class Pedestal extends Block implements SimpleWaterloggedBlock, PEEntityB
 
 	@Override
 	public IMatterType getMatterType() {
-		return EnumMatterType.DARK_MATTER;
+		return matterType;
 	}
 }

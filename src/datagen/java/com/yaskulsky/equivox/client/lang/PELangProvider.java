@@ -235,10 +235,21 @@ public class PELangProvider extends BaseLanguageProvider {
 		add(PEBlocks.MOBIUS_FUEL, "Mobius Fuel Block");
 		add(PEBlocks.AETERNALIS_FUEL, "Aeternalis Fuel Block");
 		add(PEBlocks.DARK_MATTER_PEDESTAL, "Dark Matter Pedestal");
+		add(PEBlocks.RED_MATTER_PEDESTAL, "Red Matter Pedestal");
 		add(PEBlocks.ENTROPY_SINK, "Entropy Sink");
 		add(PEBlocks.ENTROPY_SINK_DARK, "Dark Entropy Sink");
 		add(PEBlocks.ENTROPY_SINK_RED, "Red Entropy Sink");
 		add(PEBlocks.STELLAR_CONDENSER, "Stellar Condenser");
+		add(PEBlocks.TRANSMUTATION_PROVIDER, "Transmutation Provider");
+		add(PELang.TRANSMUTATION_PROVIDER_TOOLTIP, "Place under a Transmutation Table. Storage buses see your learned items (paid from EMC). Owner must be online.");
+		add(PELang.TRANSMUTATION_PROVIDER_ONLINE, "Device Online");
+		add(PELang.TRANSMUTATION_PROVIDER_OFFLINE, "Device Offline");
+		add(PELang.TRANSMUTATION_PROVIDER_LINKED, "Linked to table above");
+		add(PELang.TRANSMUTATION_PROVIDER_UNLINKED, "Needs Transmutation Table above");
+		add(PELang.TRANSMUTATION_PROVIDER_OWNER_ONLINE, "Owner online");
+		add(PELang.TRANSMUTATION_PROVIDER_OWNER_OFFLINE, "Owner offline");
+		add(PELang.TRANSMUTATION_PROVIDER_EXPOSED, "Exposed learned items: %s");
+		add(PELang.TRANSMUTATION_PROVIDER_TOME, "Tome of Knowledge: too many items to index");
 	}
 
 	private void addCommands() {

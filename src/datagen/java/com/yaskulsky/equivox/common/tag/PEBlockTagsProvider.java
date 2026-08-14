@@ -102,7 +102,8 @@ public class PEBlockTagsProvider extends BlockTagsProvider {
 		);
 		tag(PETags.Blocks.NEEDS_RED_MATTER_TOOL).add(
 				PEBlocks.RED_MATTER.getBlock(),
-				PEBlocks.RED_MATTER_FURNACE.getBlock()
+				PEBlocks.RED_MATTER_FURNACE.getBlock(),
+				PEBlocks.RED_MATTER_PEDESTAL.getBlock()
 		);
 		tag(PETags.Blocks.INCORRECT_FOR_RED_MATTER_TOOL);
 		tag(PETags.Blocks.INCORRECT_FOR_DARK_MATTER_TOOL).addTags(PETags.Blocks.NEEDS_RED_MATTER_TOOL);
@@ -124,6 +125,7 @@ public class PEBlockTagsProvider extends BlockTagsProvider {
 				PEBlocks.CONDENSER.getBlock(),
 				PEBlocks.CONDENSER_MK2.getBlock(),
 				PEBlocks.DARK_MATTER_PEDESTAL.getBlock(),
+				PEBlocks.RED_MATTER_PEDESTAL.getBlock(),
 				PEBlocks.DARK_MATTER_FURNACE.getBlock(),
 				PEBlocks.RED_MATTER_FURNACE.getBlock(),
 				PEBlocks.DARK_MATTER.getBlock(),
@@ -168,6 +170,7 @@ public class PEBlockTagsProvider extends BlockTagsProvider {
 				PEBlocks.DARK_MATTER.getBlock(),
 				PEBlocks.DARK_MATTER_FURNACE.getBlock(),
 				PEBlocks.DARK_MATTER_PEDESTAL.getBlock(),
+				PEBlocks.RED_MATTER_PEDESTAL.getBlock(),
 				PEBlocks.RED_MATTER.getBlock(),
 				PEBlocks.RED_MATTER_FURNACE.getBlock(),
 				PEBlocks.CONDENSER_MK2.getBlock()

@@ -1,9 +1,9 @@
 {
   "parent": "minecraft:block/orientable_with_bottom",
   "textures": {
-    "bottom": "equivox:block/collectors/other",
-    "front": "equivox:block/collectors/front",
-    "side": "equivox:block/collectors/other",
-    "top": "equivox:block/collectors/top_3"
+    "bottom": "equivox:block/stellar_condenser/other",
+    "front": "equivox:block/stellar_condenser/front",
+    "side": "equivox:block/stellar_condenser/other",
+    "top": "equivox:block/stellar_condenser/top"
   }
 }

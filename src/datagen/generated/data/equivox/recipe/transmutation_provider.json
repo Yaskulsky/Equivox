@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": "minecraft:diamond",
+    "H": "minecraft:hopper",
+    "T": "equivox:transmutation_table",
+    "G": "minecraft:glass"
+  },
+  "pattern": [
+    "GHG",
+    "DTD",
+    "GGG"
+  ],
+  "result": {
+    "count": 1,
+    "id": "equivox:transmutation_provider"
+  }
+}

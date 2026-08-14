@@ -7,6 +7,7 @@ import com.yaskulsky.equivox.gameObjs.registries.PEBlockEntityTypes;
 import com.yaskulsky.equivox.gameObjs.registries.PEBlocks;
 import com.yaskulsky.equivox.utils.text.TextComponentUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.network.chat.Component;
@@ -20,8 +21,13 @@ import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class CondenserMK2BlockEntity extends CondenserBlockEntity {
+
+	private IItemHandler automationInput;
+	private IItemHandler automationOutput;
+	private IItemHandler automationJoined;
 
 	public CondenserMK2BlockEntity(BlockPos pos, BlockState state) {
 		super(PEBlockEntityTypes.CONDENSER_MK2, pos, state);
@@ -30,15 +36,28 @@ public class CondenserMK2BlockEntity extends CondenserBlockEntity {
 	@NotNull
 	@Override
 	protected IItemHandler createAutomationInventory() {
-		IItemHandlerModifiable automationInput = new WrappedItemHandler(getInput(), WrappedItemHandler.WriteMode.IN) {
+		this.automationInput = new WrappedItemHandler(getInput(), WrappedItemHandler.WriteMode.IN) {
 			@NotNull
 			@Override
 			public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
 				return SlotPredicates.HAS_EMC.test(stack) && !isStackEqualToLock(stack) ? super.insertItem(slot, stack, simulate) : stack;
 			}
 		};
-		IItemHandlerModifiable automationOutput = new WrappedItemHandler(getOutput(), WrappedItemHandler.WriteMode.OUT);
-		return new CombinedInvWrapper(automationInput, automationOutput);
+		this.automationOutput = new WrappedItemHandler(getOutput(), WrappedItemHandler.WriteMode.OUT);
+		this.automationJoined = new CombinedInvWrapper(
+				(IItemHandlerModifiable) automationInput,
+				(IItemHandlerModifiable) automationOutput);
+		return automationJoined;
+	}
+
+	@NotNull
+	@Override
+	protected IItemHandler getAutomationHandler(@Nullable Direction side) {
+		if (side == null) {
+			return automationJoined;
+		}
+		// Top/bottom = extract products; sides = insert fuel items (AE2/RS friendly)
+		return side.getAxis().isVertical() ? automationOutput : automationInput;
 	}
 
 	@Override

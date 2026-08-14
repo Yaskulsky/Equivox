@@ -2,6 +2,28 @@
 
 All notable changes to [Yaskulsky/projecte-26-port](https://github.com/Yaskulsky/projecte-26-port) are documented here.
 
+## [1.3.0] — 2026-08-14
+
+### Added
+- **Transmutation Provider** — place under a Transmutation Table; AE2/RS storage buses see the owner's learned items paid from personal EMC (`KnowledgeExportHandler` / `KnowledgeProvideHelper`).
+- **Transmutation Provider ONLINE** — blockstate + dim textures when offline; table linked, owner online, export active.
+- **Red Matter Pedestal** — craftable upgrade from Dark Matter Pedestal (textures/recipe/JEI).
+- **Entropy Sink / Stellar Condenser texture folders** — own `textures/block/entropy_sink/` and `stellar_condenser/` (no longer share collectors).
+- **AUTOMATION.md** — packer notes for Condenser / Provider / Arcane Tablet.
+- **Jade** — soft-dep plugin ships in the JAR (optional at runtime).
+
+### Changed
+- **Energy Condenser MK2** — side-aware automation: horizontal faces insert, top/bottom extract (friendlier for AE2/RS).
+- **Arcane Tablet JEI transfer** — clearer inventory/EMC satisfaction checks when optional integrations are enabled.
+- **Transmutation Provider** — requires table above; virtual knowledge export instead of single lock + 3×3 buffer.
+
+### Fixed
+- **Transmutation Provider GUI** — status panel (link / owner / exposed count) instead of mistaken Collector layout; correct 256×256 texture blit.
+- **AE2 Storage Bus** — export extract is transaction-safe so extractable-only scans no longer drain personal EMC / hide learned items.
+- **Jade look-at** — `Device Online` / `Device Offline` as a gray line in the same tooltip (AE2-style); removed separate HUD overlay.
+
+---
+
 ## [1.2.1] — 2026-08-08
 
 ### Fixed

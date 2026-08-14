@@ -3,8 +3,11 @@ package com.yaskulsky.equivox.integration.recipe_viewer.jei;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import com.yaskulsky.equivox.api.capabilities.IKnowledgeProvider;
+import com.yaskulsky.equivox.api.capabilities.PECapabilities;
 import com.yaskulsky.equivox.api.proxy.IEMCProxy;
 import com.yaskulsky.equivox.gameObjs.container.ArcaneTabletContainer;
+import com.yaskulsky.equivox.gameObjs.container.slots.arcane.ArcaneTabletHelper;
 import com.yaskulsky.equivox.gameObjs.registries.PEContainerTypes;
 import com.yaskulsky.equivox.network.packets.to_server.ArcaneTabletRecipeTransferPKT;
 import mezz.jei.api.constants.RecipeTypes;
@@ -46,10 +49,6 @@ public class ArcaneTabletRecipeTransferHandler implements IRecipeTransferHandler
 	@Override
 	public IRecipeTransferError transferRecipe(ArcaneTabletContainer container, RecipeHolder<CraftingRecipe> recipe,
 			IRecipeSlotsView recipeSlots, Player player, boolean maxTransfer, boolean doTransfer) {
-		if (!doTransfer) {
-			// Cosmetic missing-slot highlighting can be added later; allow transfer attempt.
-			return null;
-		}
 		List<List<ItemStack>> stacks = new ArrayList<>();
 		List<ItemStack> empty = List.of(ItemStack.EMPTY);
 		List<IRecipeSlotView> views = recipeSlots.getSlotViews();
@@ -62,7 +61,40 @@ public class ArcaneTabletRecipeTransferHandler implements IRecipeTransferHandler
 				stacks.add(options);
 			}
 		}
+		if (!doTransfer) {
+			// Preview: still allow the button; server rejects / no-ops missing ingredients.
+			// Prefer inventory matches, then learned items with enough personal EMC.
+			for (List<ItemStack> options : stacks) {
+				if (!options.isEmpty() && !ItemStack.EMPTY.equals(options.getFirst()) && !canSatisfy(player, options)) {
+					// Keep transfer enabled — Arcane Tablet can still fill partial grids.
+					break;
+				}
+			}
+			return null;
+		}
 		ClientPacketDistributor.sendToServer(new ArcaneTabletRecipeTransferPKT(stacks, maxTransfer));
 		return null;
+	}
+
+	private static boolean canSatisfy(Player player, List<ItemStack> options) {
+		for (ItemStack option : options) {
+			ItemStack cleaned = ArcaneTabletHelper.cleanStack(option);
+			if (cleaned.isEmpty()) {
+				continue;
+			}
+			for (ItemStack inv : player.getInventory().getNonEquipmentItems()) {
+				if (ArcaneTabletHelper.areStacksEqual(cleaned, ArcaneTabletHelper.cleanStack(inv))) {
+					return true;
+				}
+			}
+			IKnowledgeProvider knowledge = player.getCapability(PECapabilities.KNOWLEDGE_CAPABILITY);
+			if (knowledge != null && knowledge.hasKnowledge(cleaned)) {
+				long value = IEMCProxy.INSTANCE.getValue(cleaned);
+				if (value > 0 && knowledge.getEmc().compareTo(java.math.BigInteger.valueOf(value)) >= 0) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }

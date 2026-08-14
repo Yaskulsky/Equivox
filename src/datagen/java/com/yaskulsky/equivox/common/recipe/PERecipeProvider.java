@@ -80,6 +80,7 @@ public class PERecipeProvider extends RecipeProvider {
 		addRelayRecipes(recipeOutput);
 		addEntropySinkRecipes(recipeOutput);
 		addStellarCondenserRecipes(recipeOutput);
+		addTransmutationProviderRecipes(recipeOutput);
 		addCondenserRecipes(recipeOutput);
 		addTransmutationTableRecipes(recipeOutput);
 		addNovaRecipes(recipeOutput);
@@ -171,6 +172,15 @@ public class PERecipeProvider extends RecipeProvider {
 				.define('R', PEItems.RED_MATTER)
 				.define('D', PEBlocks.DARK_MATTER)
 				.unlockedBy("has_matter", has(PEItems.RED_MATTER))
+				.save(recipeOutput);
+		//Red Matter Pedestal
+		shaped(RecipeCategory.DECORATIONS, PEBlocks.RED_MATTER_PEDESTAL)
+				.pattern("RRR")
+				.pattern("RPR")
+				.pattern("RRR")
+				.define('R', PEItems.RED_MATTER)
+				.define('P', PEBlocks.DARK_MATTER_PEDESTAL)
+				.unlockedBy("has_pedestal", has(PEBlocks.DARK_MATTER_PEDESTAL))
 				.save(recipeOutput);
 		//Red Matter
 		redMatterRecipe(recipeOutput, false);
@@ -559,6 +569,19 @@ public class PERecipeProvider extends RecipeProvider {
 				.define('E', Items.ENDER_EYE)
 				.define('D', Tags.Items.STORAGE_BLOCKS_DIAMOND)
 				.unlockedBy("has_ender_eye", has(Items.ENDER_EYE))
+				.save(recipeOutput);
+	}
+
+	private void addTransmutationProviderRecipes(RecipeOutput recipeOutput) {
+		shaped(RecipeCategory.DECORATIONS, PEBlocks.TRANSMUTATION_PROVIDER)
+				.pattern("GHG")
+				.pattern("DTD")
+				.pattern("GGG")
+				.define('G', Tags.Items.GLASS_BLOCKS)
+				.define('H', Items.HOPPER)
+				.define('D', Tags.Items.GEMS_DIAMOND)
+				.define('T', PEBlocks.TRANSMUTATION_TABLE)
+				.unlockedBy("has_table", has(PEBlocks.TRANSMUTATION_TABLE))
 				.save(recipeOutput);
 	}
 

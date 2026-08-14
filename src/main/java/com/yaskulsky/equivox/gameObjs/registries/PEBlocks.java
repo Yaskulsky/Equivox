@@ -23,6 +23,8 @@ import com.yaskulsky.equivox.gameObjs.blocks.Condenser;
 
 import com.yaskulsky.equivox.gameObjs.blocks.CondenserMK2;
 
+import com.yaskulsky.equivox.gameObjs.blocks.EntropySink;
+
 import com.yaskulsky.equivox.gameObjs.blocks.InterdictionTorchEntityBlock.InterdictionTorch;
 
 import com.yaskulsky.equivox.gameObjs.blocks.InterdictionTorchEntityBlock.InterdictionTorchWall;
@@ -39,7 +41,13 @@ import com.yaskulsky.equivox.gameObjs.blocks.EquivoxTNT.TNTEntityCreator;
 
 import com.yaskulsky.equivox.gameObjs.blocks.Relay;
 
+import com.yaskulsky.equivox.gameObjs.blocks.StellarCondenser;
+
+import com.yaskulsky.equivox.gameObjs.blocks.TransmutationProvider;
+
 import com.yaskulsky.equivox.gameObjs.blocks.TransmutationStone;
+
+import com.yaskulsky.equivox.gameObjs.EnumEntropySinkTier;
 
 import com.yaskulsky.equivox.gameObjs.entity.EntityNovaCataclysmPrimed;
 
@@ -103,7 +111,30 @@ public class PEBlocks {
 
 	public static final BlockRegistryObject<CondenserMK2, BlockItem> CONDENSER_MK2 = registerCondenser("condenser_mk2", CondenserMK2::new, (block, props) -> new BlockItem(block, props.fireResistant()));
 
-	public static final BlockRegistryObject<Pedestal, PEBlockItem> DARK_MATTER_PEDESTAL = BLOCKS.register("dm_pedestal", id -> new Pedestal(PERegistryUtil.blockProps(id).mapColor(MapColor.COLOR_BLACK).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1_000_000, 3_000_000).lightLevel(state -> 12)), (block, props) -> new PEBlockItem(block, props.fireResistant(), (stack, tooltip, flags) -> block.addTooltip(stack, tooltip)));
+	public static final BlockRegistryObject<EntropySink, PEBlockItem> ENTROPY_SINK = registerEntropySink("entropy_sink", EnumEntropySinkTier.BASIC);
+	public static final BlockRegistryObject<EntropySink, PEBlockItem> ENTROPY_SINK_DARK = registerEntropySink("entropy_sink_dark", EnumEntropySinkTier.DARK);
+	public static final BlockRegistryObject<EntropySink, PEBlockItem> ENTROPY_SINK_RED = registerEntropySink("entropy_sink_red", EnumEntropySinkTier.RED);
+
+	public static final BlockRegistryObject<StellarCondenser, PEBlockItem> STELLAR_CONDENSER = BLOCKS.register("stellar_condenser",
+			id -> new StellarCondenser(PERegistryUtil.blockProps(id).mapColor(MapColor.COLOR_PURPLE).instrument(NoteBlockInstrument.BASEDRUM)
+					.requiresCorrectToolForDrops().strength(10, 30).lightLevel(state -> 7)),
+			(block, props) -> new PEBlockItem(block, props.fireResistant(), (stack, tooltip, flags) -> block.addTooltip(stack, tooltip)));
+
+	public static final BlockRegistryObject<TransmutationProvider, PEBlockItem> TRANSMUTATION_PROVIDER = BLOCKS.register("transmutation_provider",
+			id -> new TransmutationProvider(PERegistryUtil.blockProps(id).mapColor(MapColor.COLOR_CYAN).instrument(NoteBlockInstrument.BASEDRUM)
+					.requiresCorrectToolForDrops().strength(10, 30)
+					.lightLevel(state -> state.getValue(TransmutationProvider.ONLINE) ? 9 : 2)),
+			(block, props) -> new PEBlockItem(block, props.fireResistant(), (stack, tooltip, flags) -> block.addTooltip(stack, tooltip)));
+
+	public static final BlockRegistryObject<Pedestal, PEBlockItem> DARK_MATTER_PEDESTAL = BLOCKS.register("dm_pedestal",
+			id -> new Pedestal(PERegistryUtil.blockProps(id).mapColor(MapColor.COLOR_BLACK).instrument(NoteBlockInstrument.BASEDRUM)
+					.requiresCorrectToolForDrops().strength(1_000_000, 3_000_000).lightLevel(state -> 12), EnumMatterType.DARK_MATTER),
+			(block, props) -> new PEBlockItem(block, props.fireResistant(), (stack, tooltip, flags) -> block.addTooltip(stack, tooltip)));
+
+	public static final BlockRegistryObject<Pedestal, PEBlockItem> RED_MATTER_PEDESTAL = BLOCKS.register("rm_pedestal",
+			id -> new Pedestal(PERegistryUtil.blockProps(id).mapColor(MapColor.COLOR_RED).instrument(NoteBlockInstrument.BASEDRUM)
+					.requiresCorrectToolForDrops().strength(2_000_000, 6_000_000).lightLevel(state -> 15), EnumMatterType.RED_MATTER),
+			(block, props) -> new PEBlockItem(block, props.fireResistant(), (stack, tooltip, flags) -> block.addTooltip(stack, tooltip)));
 
 	public static final BlockRegistryObject<MatterFurnace, BlockItem> DARK_MATTER_FURNACE = registerFurnace("dm_furnace", EnumMatterType.DARK_MATTER, 1_000_000, 3_000_000);
 
@@ -155,6 +186,12 @@ public class PEBlocks {
 			Function<BlockBehaviour.Properties, CONDENSER> condenserFunction, BiFunction<CONDENSER, Item.Properties, BlockItem> itemCreator) {
 		return BLOCKS.register(name, id -> condenserFunction.apply(PERegistryUtil.blockProps(id).mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM)
 				.requiresCorrectToolForDrops().strength(10, 3_600_000)), itemCreator);
+	}
+
+	private static BlockRegistryObject<EntropySink, PEBlockItem> registerEntropySink(String name, EnumEntropySinkTier tier) {
+		return BLOCKS.register(name, id -> new EntropySink(tier, PERegistryUtil.blockProps(id).mapColor(MapColor.COLOR_BLACK)
+						.instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(10, 30).lightLevel(state -> 7)),
+				(block, props) -> new PEBlockItem(block, props.fireResistant(), (stack, tooltip, flags) -> block.addTooltip(stack, tooltip)));
 	}
 
 
