@@ -22,6 +22,8 @@ import com.yaskulsky.equivox.gameObjs.registries.PEContainerTypes;
 import com.yaskulsky.equivox.gameObjs.sound.MovingSoundSWRG;
 import com.yaskulsky.equivox.network.commands.client.DumpMissingEmc;
 import com.yaskulsky.equivox.gameObjs.registries.PEBlockEntityTypes;
+import com.yaskulsky.equivox.gameObjs.registries.PEEntityTypes;
+import com.yaskulsky.equivox.rendering.HomingArrowRenderer;
 import com.yaskulsky.equivox.rendering.PedestalRenderer;
 import com.yaskulsky.equivox.rendering.TransmutationRenderingOverlay;
 import com.yaskulsky.equivox.utils.ClientKeyHelper;
@@ -124,6 +126,7 @@ public class PEClient {
 
 	private void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerBlockEntityRenderer(PEBlockEntityTypes.DARK_MATTER_PEDESTAL.get(), PedestalRenderer::new);
+		event.registerEntityRenderer(PEEntityTypes.HOMING_ARROW.get(), HomingArrowRenderer::new);
 	}
 
 	private void addLayers(EntityRenderersEvent.AddLayers event) {

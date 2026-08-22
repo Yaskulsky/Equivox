@@ -52,7 +52,6 @@ public class EntityHomingArrow extends ThrowableProjectile {
 	protected void onHitEntity(@NotNull EntityHitResult result) {
 		super.onHitEntity(result);
 		if (!level().isClientSide() && result.getEntity() instanceof LivingEntity living) {
-			living.invulnerableTime = 0;
 			Entity owner = getOwner();
 			living.hurt(damageSources().mobProjectile(this, owner instanceof LivingEntity livingOwner ? livingOwner : null), damage);
 		}
@@ -87,15 +86,17 @@ public class EntityHomingArrow extends ThrowableProjectile {
 			Entity target = getTarget();
 			if (target != null && !stuck) {
 				Vec3 arrowMotion = getDeltaMovement();
-				Vec3 particlePos = position().add(arrowMotion.scale(0.25));
-				Vec3 particleSpeed = arrowMotion.scale(-0.5).add(0, 0.2, 0);
-				level().addParticle(ParticleTypes.FLAME, particlePos.x(), particlePos.y(), particlePos.z(), particleSpeed.x(), particleSpeed.y(), particleSpeed.z());
-				level().addParticle(ParticleTypes.FLAME, particlePos.x(), particlePos.y(), particlePos.z(), particleSpeed.x(), particleSpeed.y(), particleSpeed.z());
-
-				Vec3 targetLoc = target.position().add(0, target.getBbHeight() / 2, 0);
-				Vec3 lookVec = targetLoc.subtract(position());
-				Vector3d adjustedLookVec = transform(arrowMotion, lookVec);
-				setDeltaMovement(adjustedLookVec.x, adjustedLookVec.y, adjustedLookVec.z);
+				if (level().isClientSide()) {
+					Vec3 particlePos = position().add(arrowMotion.scale(0.25));
+					Vec3 particleSpeed = arrowMotion.scale(-0.5).add(0, 0.2, 0);
+					level().addParticle(ParticleTypes.FLAME, particlePos.x(), particlePos.y(), particlePos.z(), particleSpeed.x(), particleSpeed.y(), particleSpeed.z());
+					level().addParticle(ParticleTypes.FLAME, particlePos.x(), particlePos.y(), particlePos.z(), particleSpeed.x(), particleSpeed.y(), particleSpeed.z());
+				} else {
+					Vec3 targetLoc = target.position().add(0, target.getBbHeight() / 2, 0);
+					Vec3 lookVec = targetLoc.subtract(position());
+					Vector3d adjustedLookVec = transform(arrowMotion, lookVec);
+					setDeltaMovement(adjustedLookVec.x, adjustedLookVec.y, adjustedLookVec.z);
+				}
 			}
 		}
 		super.tick();
@@ -103,10 +104,11 @@ public class EntityHomingArrow extends ThrowableProjectile {
 
 	private Vector3d transform(Vec3 arrowMotion, Vec3 lookVec) {
 		Vector3d normal = new Vector3d(arrowMotion.x, arrowMotion.y, arrowMotion.z);
-		Vec3 axis = arrowMotion.cross(lookVec).normalize();
-		if (axis == Vec3.ZERO) {
+		Vec3 cross = arrowMotion.cross(lookVec);
+		if (cross.lengthSqr() < 1.0E-7D) {
 			return normal;
 		}
+		Vec3 axis = cross.normalize();
 		Vector3d look = new Vector3d(lookVec.x, lookVec.y, lookVec.z);
 		double angle = Mth.clamp(normal.angle(look), -MAX_MAGNITUDE, MAX_MAGNITUDE);
 		return new Matrix3d().rotation(angle, axis.x, axis.y, axis.z).transform(normal);
