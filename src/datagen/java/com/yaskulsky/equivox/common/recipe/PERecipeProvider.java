@@ -18,8 +18,8 @@ import com.yaskulsky.equivox.utils.Constants;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.Criterion;
-import net.minecraft.advancements.criterion.InventoryChangeTrigger;
-import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.advancements.triggers.InventoryChangeTrigger;
+import net.minecraft.advancements.predicates.ItemPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -1057,24 +1057,7 @@ public class PERecipeProvider extends RecipeProvider {
 	}
 
 	private static ItemLike getWool(DyeColor color) {
-		return switch (color) {
-			case WHITE -> Items.WHITE_WOOL;
-			case ORANGE -> Items.ORANGE_WOOL;
-			case MAGENTA -> Items.MAGENTA_WOOL;
-			case LIGHT_BLUE -> Items.LIGHT_BLUE_WOOL;
-			case YELLOW -> Items.YELLOW_WOOL;
-			case LIME -> Items.LIME_WOOL;
-			case PINK -> Items.PINK_WOOL;
-			case GRAY -> Items.GRAY_WOOL;
-			case LIGHT_GRAY -> Items.LIGHT_GRAY_WOOL;
-			case CYAN -> Items.CYAN_WOOL;
-			case PURPLE -> Items.PURPLE_WOOL;
-			case BLUE -> Items.BLUE_WOOL;
-			case BROWN -> Items.BROWN_WOOL;
-			case GREEN -> Items.GREEN_WOOL;
-			case RED -> Items.RED_WOOL;
-			case BLACK -> Items.BLACK_WOOL;
-		};
+		return Items.WOOL.pick(color);
 	}
 
 	private void addConversionRecipes(RecipeOutput recipeOutput) {

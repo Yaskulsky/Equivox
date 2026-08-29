@@ -1,8 +1,8 @@
 ![](/src/main/resources/logo.png?raw=true)
 
-# Equivox — MC 26.1.2 / NeoForge
+# Equivox — MC 26.2 / NeoForge
 
-**Equivox** (`modId`: `equivox`) for **Minecraft 26.1.2** / **NeoForge**.  
+**Equivox** (`modId`: `equivox`) for **Minecraft 26.2** / **NeoForge**.  
 Maintained by **Yaskulsky**.
 
 Transmutation tables, collectors, condensers, rings, EMC — EE2-style gameplay.
@@ -13,8 +13,8 @@ Transmutation tables, collectors, condensers, rings, EMC — EE2-style gameplay.
 |---|---|
 | **Mod version** | 1.3.0 |
 | **modId** | `equivox` |
-| **Minecraft** | 26.1.2 |
-| **NeoForge** | 26.1.2.21-beta+ (built against 26.1.2.76) |
+| **Minecraft** | 26.2 |
+| **NeoForge** | 26.2.0+ (built against 26.2.0.49-beta) |
 | **License** | MIT |
 
 **Upstream code (MIT):** [sinkillerj/ProjectE](https://github.com/sinkillerj/ProjectE) — Sin Tachikawa and contributors.

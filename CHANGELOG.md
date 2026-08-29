@@ -4,6 +4,8 @@ All notable changes to [Yaskulsky/projecte-26-port](https://github.com/Yaskulsky
 
 ## [1.3.0] — 2026-08-14
 
+Also published for **Minecraft 26.2** / NeoForge `26.2.0.49-beta` (`26.2-port` branch).
+
 ### Added
 - **Transmutation Provider** — place under a Transmutation Table; AE2/RS storage buses see the owner's learned items paid from personal EMC (`KnowledgeExportHandler` / `KnowledgeProvideHelper`).
 - **Transmutation Provider ONLINE** — blockstate + dim textures when offline; table linked, owner online, export active.

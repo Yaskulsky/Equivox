@@ -10,6 +10,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.monster.Enemy;
@@ -161,7 +162,7 @@ public class StellarCondenserBlockEntity extends EmcBlockEntity {
 
 	public static boolean isBoss(LivingEntity entity) {
 		EntityType<?> type = entity.getType();
-		return type == EntityType.WITHER || type == EntityType.ENDER_DRAGON;
+		return type == EntityTypes.WITHER || type == EntityTypes.ENDER_DRAGON;
 	}
 
 	public static long echoEmcFor(LivingEntity entity) {
@@ -169,22 +170,22 @@ public class StellarCondenserBlockEntity extends EmcBlockEntity {
 			return StellarCondenserBalance.BOSS_EMC;
 		}
 		EntityType<?> type = entity.getType();
-		if (type == EntityType.ZOMBIE || type == EntityType.HUSK || type == EntityType.DROWNED || type == EntityType.ZOMBIE_VILLAGER) {
+		if (type == EntityTypes.ZOMBIE || type == EntityTypes.HUSK || type == EntityTypes.DROWNED || type == EntityTypes.ZOMBIE_VILLAGER) {
 			return StellarCondenserBalance.EMC_ZOMBIE;
 		}
-		if (type == EntityType.WITHER_SKELETON) {
+		if (type == EntityTypes.WITHER_SKELETON) {
 			return StellarCondenserBalance.EMC_WITHER_SKELETON;
 		}
-		if (type == EntityType.SKELETON || type == EntityType.STRAY || type == EntityType.BOGGED || type == EntityType.PARCHED) {
+		if (type == EntityTypes.SKELETON || type == EntityTypes.STRAY || type == EntityTypes.BOGGED || type == EntityTypes.PARCHED) {
 			return StellarCondenserBalance.EMC_SKELETON;
 		}
-		if (type == EntityType.CREEPER) {
+		if (type == EntityTypes.CREEPER) {
 			return StellarCondenserBalance.EMC_CREEPER;
 		}
-		if (type == EntityType.ENDERMAN) {
+		if (type == EntityTypes.ENDERMAN) {
 			return StellarCondenserBalance.EMC_ENDERMAN;
 		}
-		if (type == EntityType.PIGLIN || type == EntityType.PIGLIN_BRUTE) {
+		if (type == EntityTypes.PIGLIN || type == EntityTypes.PIGLIN_BRUTE) {
 			return StellarCondenserBalance.EMC_PIGLIN;
 		}
 		if (entity instanceof Animal) {

@@ -139,8 +139,12 @@ public class PEItemTagsProvider extends ItemTagsProvider {
 				Items.BUDDING_AMETHYST, Items.SMALL_AMETHYST_BUD, Items.MEDIUM_AMETHYST_BUD, Items.LARGE_AMETHYST_BUD,
 				//Blocks that have no emc because it is less than one:
 				Items.STONE_SLAB, Items.COBBLESTONE_SLAB, Items.SMOOTH_STONE_SLAB, Items.STONE_BRICK_SLAB, Items.END_STONE_BRICK_SLAB,
-				Items.GLASS_PANE, Items.CYAN_STAINED_GLASS_PANE, Items.GREEN_STAINED_GLASS_PANE, Items.LIME_STAINED_GLASS_PANE, Items.MAGENTA_STAINED_GLASS_PANE,
-				Items.PINK_STAINED_GLASS_PANE
+				Items.GLASS_PANE,
+				Items.STAINED_GLASS_PANE.pick(DyeColor.CYAN),
+				Items.STAINED_GLASS_PANE.pick(DyeColor.GREEN),
+				Items.STAINED_GLASS_PANE.pick(DyeColor.LIME),
+				Items.STAINED_GLASS_PANE.pick(DyeColor.MAGENTA),
+				Items.STAINED_GLASS_PANE.pick(DyeColor.PINK)
 		).addTags(Tags.Items.CLUSTERS, Tags.Items.HIDDEN_FROM_RECIPE_VIEWERS);
 		for (Item item : BuiltInRegistries.ITEM) {
 			if (item instanceof SpawnEggItem || item instanceof MobBucketItem) {

@@ -1,5 +1,7 @@
 package com.yaskulsky.equivox.gameObjs.items.rings;
 
+import net.minecraft.world.phys.Vec3;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -172,7 +174,7 @@ public class HarvestGoddess extends PEToggleItem implements IPedestalItem {
 				} else if (stack.is(PETags.Items.PLANTABLE_SEEDS) && stack.getItem() instanceof BlockItem blockItem) {
 					if (placeContext == null) {
 						placeContext = new BlockPlaceContext(level, player, InteractionHand.MAIN_HAND, stack, new BlockHitResult(
-								currentPos.getCenter().relative(Direction.UP, 0.5), Direction.UP, currentPos, false
+								Vec3.atCenterOf(currentPos).relative(Direction.UP, 0.5), Direction.UP, currentPos, false
 						));
 						//Note: We don't want to replace the block we are trying to place against
 						placeContext.replaceClicked = false;

@@ -1,5 +1,7 @@
 package com.yaskulsky.equivox.gameObjs.items.armor;
 
+import net.minecraft.world.phys.Vec3;
+
 import java.util.function.Consumer;
 import com.yaskulsky.equivox.config.EquivoxConfig;
 import com.yaskulsky.equivox.gameObjs.registries.PEDataComponentTypes;
@@ -87,7 +89,7 @@ public class GemHelmet extends GemArmorBase {
 				BlockPos strikePos = strikeResult.getBlockPos();
 				Level level = player.level();
 				if (level instanceof ServerLevel serverLevel) {
-					LightningBolt lightning = LevelHelper.createLightning(serverLevel, strikePos.getCenter());
+					LightningBolt lightning = LevelHelper.createLightning(serverLevel, Vec3.atCenterOf(strikePos));
 					lightning.setCause((ServerPlayer) player);
 					serverLevel.addFreshEntity(lightning);
 				}

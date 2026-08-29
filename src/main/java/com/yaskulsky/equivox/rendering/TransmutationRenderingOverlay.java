@@ -1,7 +1,6 @@
 package com.yaskulsky.equivox.rendering;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import it.unimi.dsi.fastutil.objects.Object2ReferenceMap;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +12,7 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.ShapeRenderer;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.state.level.LevelRenderState;
 import net.minecraft.client.renderer.state.level.BlockOutlineRenderState;
 import net.minecraft.core.BlockPos;
@@ -55,7 +53,7 @@ public class TransmutationRenderingOverlay implements GuiLayer {
 
 	@Override
 	public void render(@NotNull GuiGraphicsExtractor graphics, @NotNull DeltaTracker delta) {
-		if (!mc.options.hideGui && transmutationResult != null) {
+		if (!mc.gui.hud.isHidden() && transmutationResult != null) {
 			graphics.item(new ItemStack(transmutationResult), 1, 1);
 			long gameTime = mc.level == null ? 0 : mc.level.getGameTime();
 			if (lastGameTime != gameTime) {
@@ -128,20 +126,19 @@ public class TransmutationRenderingOverlay implements GuiLayer {
 
 	private final CustomBlockOutlineRenderer OUTLINE_RENDERER = this::renderTransmutationOutlines;
 
-	private boolean renderTransmutationOutlines(BlockOutlineRenderState renderState, MultiBufferSource.BufferSource buffer, PoseStack poseStack,
-			boolean translucentPass, LevelRenderState levelRenderState) {
+	private boolean renderTransmutationOutlines(BlockOutlineRenderState renderState, SubmitNodeCollector collector, PoseStack poseStack,
+			LevelRenderState levelRenderState) {
 		List<OutlineTarget> targets = outlineTargets;
 		if (targets.isEmpty()) {
 			return false;
 		}
 		Vec3 viewPosition = levelRenderState.cameraRenderState.pos;
-		VertexConsumer builder = buffer.getBuffer(PERenderType.TRANSMUTATION_OVERLAY);
 		int color = ((int) (outlineAlpha * 255) << 24) | 0xFFFFFF;
 		for (OutlineTarget target : targets) {
 			BlockPos pos = target.pos;
 			poseStack.pushPose();
 			poseStack.translate(pos.getX() - viewPosition.x, pos.getY() - viewPosition.y, pos.getZ() - viewPosition.z);
-			ShapeRenderer.renderShape(poseStack, builder, target.shape, 0, 0, 0, color, 2.0F);
+			collector.submitShapeOutline(poseStack, target.shape, PERenderType.TRANSMUTATION_OVERLAY, color, 2.0F, true);
 			poseStack.popPose();
 		}
 		return false;
