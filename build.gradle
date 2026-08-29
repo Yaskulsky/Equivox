@@ -65,8 +65,8 @@ sourceSets {
         main {
             java {
                 exclude '**/integration/crafttweaker/**'
-                exclude '**/integration/recipe_viewer/**'
-                // Jade stays compiled: soft-dep for Device Online/Offline look-at (AE2-style)
+                // JEI transfer compiles; EMI 26.1 API is unpublished (ResourceLocation vs Identifier)
+                exclude '**/integration/recipe_viewer/emi/**'
                 exclude '**/integration/wthit/**'
                 exclude '**/integration/top/**'
             }
@@ -278,14 +278,14 @@ dependencies {
 
     // Jade: always compile (optional at runtime) so Provider shows Device Online/Offline in the same tooltip as AE2
     compileOnly("curse.maven:jade-324717:${jade_id}")
+    // JEI / EMI APIs: always compile so transmutation/arcane tablet + transfer ships in ATM JARs
+    compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
 
     if (enableOptionalIntegrations) {
-        compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
         if (recipe_viewer == 'jei' || recipe_viewer == 'hybrid') {
             localRuntime("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
         }
 
-        compileOnly("dev.emi:emi-neoforge:${emi_version}+${minecraft_version}:api")
         def emi = "dev.emi:emi-neoforge:${emi_version}+${minecraft_version}"
         datagenCompileOnly(emi)
         if (recipe_viewer == 'emi' || recipe_viewer == 'hybrid') {

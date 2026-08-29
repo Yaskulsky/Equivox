@@ -1,7 +1,7 @@
 package com.yaskulsky.equivox.network.packets.to_server;
 
 import com.yaskulsky.equivox.PECore;
-import com.yaskulsky.equivox.gameObjs.container.ArcaneTabletContainer;
+import com.yaskulsky.equivox.gameObjs.container.IArcaneCraftingMenu;
 import com.yaskulsky.equivox.network.packets.IPEPacket;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -32,7 +32,7 @@ public record ArcaneTabletRecipeTransferPKT(List<List<ItemStack>> recipe, boolea
 	@Override
 	public void handle(IPayloadContext context) {
 		Player player = context.player();
-		if (player.containerMenu instanceof ArcaneTabletContainer container) {
+		if (player.containerMenu instanceof IArcaneCraftingMenu container) {
 			container.onRecipeTransfer(recipe, transferAll);
 		}
 	}

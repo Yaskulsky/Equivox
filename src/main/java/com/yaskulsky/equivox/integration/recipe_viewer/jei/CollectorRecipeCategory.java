@@ -13,6 +13,7 @@ import mezz.jei.api.recipe.IRecipeManager;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import mezz.jei.api.recipe.types.IRecipeType;
 import com.yaskulsky.equivox.PECore;
 import com.yaskulsky.equivox.gameObjs.registries.PEBlocks;
 import com.yaskulsky.equivox.integration.recipe_viewer.FuelUpgradeRecipe;
@@ -33,7 +34,7 @@ public class CollectorRecipeCategory implements IRecipeCategory<FuelUpgradeRecip
 
 	@NotNull
 	@Override
-	public RecipeType<FuelUpgradeRecipe> getRecipeType() {
+	public IRecipeType<FuelUpgradeRecipe> getRecipeType() {
 		return RECIPE_TYPE;
 	}
 

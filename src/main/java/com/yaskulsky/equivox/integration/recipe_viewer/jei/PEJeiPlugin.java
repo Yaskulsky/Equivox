@@ -16,11 +16,16 @@ import mezz.jei.api.registration.IRecipeTransferRegistration;
 import mezz.jei.api.registration.ISubtypeRegistration;
 import com.yaskulsky.equivox.PECore;
 import com.yaskulsky.equivox.api.capabilities.item.IModeChanger;
+import com.yaskulsky.equivox.gameObjs.container.ArcaneTabletContainer;
 import com.yaskulsky.equivox.gameObjs.container.PhilosStoneContainer;
+import com.yaskulsky.equivox.gameObjs.container.TransmutationContainer;
 import com.yaskulsky.equivox.gameObjs.gui.AbstractCollectorScreen;
+import com.yaskulsky.equivox.gameObjs.gui.GUIArcaneTablet;
 import com.yaskulsky.equivox.gameObjs.gui.GUIDMFurnace;
 import com.yaskulsky.equivox.gameObjs.gui.GUIRMFurnace;
+import com.yaskulsky.equivox.gameObjs.gui.GUITransmutation;
 import com.yaskulsky.equivox.gameObjs.registries.PEBlocks;
+import com.yaskulsky.equivox.gameObjs.registries.PEContainerTypes;
 import com.yaskulsky.equivox.gameObjs.registries.PEDataComponentTypes;
 import com.yaskulsky.equivox.gameObjs.registries.PEItems;
 import com.yaskulsky.equivox.integration.IntegrationHelper;
@@ -56,24 +61,6 @@ public class PEJeiPlugin implements IModPlugin {
 				return mode;
 			}
 			return null;
-		}
-
-		@NotNull
-		@Override
-		public String getLegacyStringSubtypeInfo(@NotNull ItemStack stack, @NotNull UidContext context) {
-			if (context == UidContext.Ingredient) {
-				Object mode = null;
-				if (stack.getItem() instanceof IModeChanger<?> modeChanger) {
-					mode = modeChanger.getMode(stack);
-				}
-				Long stored = stack.get(PEDataComponentTypes.STORED_EMC);
-				if (stored != null && stored > 0) {
-					return mode == null ? stored.toString() : mode + ";" + stored;
-				} else if (mode != null) {
-					return mode.toString();
-				}
-			}
-			return "";
 		}
 	};
 
@@ -112,31 +99,36 @@ public class PEJeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerRecipeTransferHandlers(@NotNull IRecipeTransferRegistration registration) {
-		if (shouldLoad()) {
-			registration.addRecipeTransferHandler(PhilosStoneContainer.class, MenuType.CRAFTING, RecipeTypes.CRAFTING, 1, 9, 10, 36);
-			// Arcane Tablet: custom transfer that can pull from knowledge / EMC
-			registration.addRecipeTransferHandler(new ArcaneTabletRecipeTransferHandler(), RecipeTypes.CRAFTING);
-		}
+		// Always register crafting transfer so ATM11 (JEI + EMI) still gets the + button.
+		registration.addRecipeTransferHandler(PhilosStoneContainer.class, MenuType.CRAFTING, RecipeTypes.CRAFTING, 1, 9, 10, 36);
+		registration.addRecipeTransferHandler(new CraftingTabletRecipeTransferHandler<>(ArcaneTabletContainer.class,
+				PEContainerTypes.ARCANE_TABLET_CONTAINER.get()), RecipeTypes.CRAFTING);
+		registration.addRecipeTransferHandler(new CraftingTabletRecipeTransferHandler<>(TransmutationContainer.class,
+				PEContainerTypes.TRANSMUTATION_CONTAINER.get()), RecipeTypes.CRAFTING);
 	}
 
 	@Override
 	public void registerRecipeCatalysts(@NotNull IRecipeCatalystRegistration registry) {
+		registry.addRecipeCatalyst(PEItems.ARCANE_TABLET.asStack(), RecipeTypes.CRAFTING);
+		registry.addRecipeCatalyst(PEItems.TRANSMUTATION_TABLET.asStack(), RecipeTypes.CRAFTING);
+		registry.addRecipeCatalyst(new ItemStack(PEBlocks.TRANSMUTATION_TABLE), RecipeTypes.CRAFTING);
 		if (shouldLoad()) {
 			registry.addRecipeCatalyst(PEItems.PHILOSOPHERS_STONE.asStack(), RecipeTypes.CRAFTING, WorldTransmuteRecipeCategory.RECIPE_TYPE);
-			registry.addRecipeCatalyst(PEItems.ARCANE_TABLET.asStack(), RecipeTypes.CRAFTING);
 			registry.addRecipeCatalyst(new ItemStack(PEBlocks.COLLECTOR), CollectorRecipeCategory.RECIPE_TYPE);
 			registry.addRecipeCatalyst(new ItemStack(PEBlocks.COLLECTOR_MK2), CollectorRecipeCategory.RECIPE_TYPE);
 			registry.addRecipeCatalyst(new ItemStack(PEBlocks.COLLECTOR_MK3), CollectorRecipeCategory.RECIPE_TYPE);
-			registry.addRecipeCatalyst(new ItemStack(PEBlocks.DARK_MATTER_FURNACE), RecipeTypes.SMELTING, RecipeTypes.FUELING);
-			registry.addRecipeCatalyst(new ItemStack(PEBlocks.RED_MATTER_FURNACE), RecipeTypes.SMELTING, RecipeTypes.FUELING);
+			registry.addRecipeCatalyst(new ItemStack(PEBlocks.DARK_MATTER_FURNACE), RecipeTypes.SMELTING, RecipeTypes.SMELTING_FUEL);
+			registry.addRecipeCatalyst(new ItemStack(PEBlocks.RED_MATTER_FURNACE), RecipeTypes.SMELTING, RecipeTypes.SMELTING_FUEL);
 		}
 	}
 
 	@Override
 	public void registerGuiHandlers(@NotNull IGuiHandlerRegistration registry) {
+		registry.addRecipeClickArea(GUITransmutation.class, -59, 17, 54, 54, RecipeTypes.CRAFTING);
+		registry.addRecipeClickArea(GUIArcaneTablet.class, -59, 17, 54, 54, RecipeTypes.CRAFTING);
 		if (shouldLoad()) {
-			registry.addRecipeClickArea(GUIDMFurnace.class, 73, 34, 25, 16, RecipeTypes.SMELTING, RecipeTypes.FUELING);
-			registry.addRecipeClickArea(GUIRMFurnace.class, 88, 35, 25, 17, RecipeTypes.SMELTING, RecipeTypes.FUELING);
+			registry.addRecipeClickArea(GUIDMFurnace.class, 73, 34, 25, 16, RecipeTypes.SMELTING, RecipeTypes.SMELTING_FUEL);
+			registry.addRecipeClickArea(GUIRMFurnace.class, 88, 35, 25, 17, RecipeTypes.SMELTING, RecipeTypes.SMELTING_FUEL);
 			registry.addRecipeClickArea(AbstractCollectorScreen.MK1.class, 138, 31, 10, 24, CollectorRecipeCategory.RECIPE_TYPE);
 			registry.addRecipeClickArea(AbstractCollectorScreen.MK2.class, 138 + 16, 31, 10, 24, CollectorRecipeCategory.RECIPE_TYPE);
 			registry.addRecipeClickArea(AbstractCollectorScreen.MK3.class, 138 + 34, 31, 10, 24, CollectorRecipeCategory.RECIPE_TYPE);

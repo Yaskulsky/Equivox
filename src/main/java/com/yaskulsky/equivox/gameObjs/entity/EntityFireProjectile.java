@@ -84,4 +84,9 @@ public class EntityFireProjectile extends NoGravityThrowableProjectile {
 		super.addAdditionalSaveData(output);
 		output.putBoolean("fromArcana", fromArcana);
 	}
+
+	@Override
+	public @NotNull ItemStack getItem() {
+		return PEItems.IGNITION_RING.asStack();
+	}
 }

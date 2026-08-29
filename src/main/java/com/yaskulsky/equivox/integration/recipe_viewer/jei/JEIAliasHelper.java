@@ -1,14 +1,15 @@
 package com.yaskulsky.equivox.integration.recipe_viewer.jei;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import net.minecraft.core.Holder;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.registration.IIngredientAliasRegistration;
 import com.yaskulsky.equivox.PECore;
 import com.yaskulsky.equivox.integration.recipe_viewer.alias.RVAliasHelper;
 import com.yaskulsky.equivox.utils.text.IHasTranslationKey;
-import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -33,11 +34,11 @@ public class JEIAliasHelper implements RVAliasHelper<ItemStack> {
 
 	@Override
 	public List<ItemStack> tagContents(TagKey<Item> tag) {
-		return BuiltInRegistries.ITEM.getTag(tag)
-				.stream()
-				.flatMap(HolderSet::stream)
-				.map(ItemStack::new)
-				.toList();
+		List<ItemStack> stacks = new ArrayList<>();
+		for (Holder<Item> holder : BuiltInRegistries.ITEM.getTagOrEmpty(tag)) {
+			stacks.add(new ItemStack(holder));
+		}
+		return stacks;
 	}
 
 	@Override

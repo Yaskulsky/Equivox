@@ -13,6 +13,7 @@ import java.util.Set;
 import com.yaskulsky.equivox.api.capabilities.item.IModeChanger;
 import com.yaskulsky.equivox.gameObjs.PETags;
 import com.yaskulsky.equivox.gameObjs.registries.PEBlocks;
+import com.yaskulsky.equivox.gameObjs.registries.PEContainerTypes;
 import com.yaskulsky.equivox.gameObjs.registries.PEDataComponentTypes;
 import com.yaskulsky.equivox.gameObjs.registries.PEItems;
 import com.yaskulsky.equivox.integration.recipe_viewer.FuelUpgradeRecipe;
@@ -52,9 +53,15 @@ public class PEEmiPlugin implements EmiPlugin {
 
 		//Workstations for vanilla categories
 		registry.addWorkstation(VanillaEmiRecipeCategories.CRAFTING, EmiStack.of(PEItems.PHILOSOPHERS_STONE));
+		registry.addWorkstation(VanillaEmiRecipeCategories.CRAFTING, EmiStack.of(PEItems.ARCANE_TABLET));
+		registry.addWorkstation(VanillaEmiRecipeCategories.CRAFTING, EmiStack.of(PEItems.TRANSMUTATION_TABLET));
+		registry.addWorkstation(VanillaEmiRecipeCategories.CRAFTING, EmiStack.of(PEBlocks.TRANSMUTATION_TABLE));
 		registry.addWorkstation(VanillaEmiRecipeCategories.SMELTING, EmiIngredient.of(PETags.Items.MATTER_FURNACES));
 		registry.addWorkstation(CollectorEmiRecipe.CATEGORY, EmiIngredient.of(PETags.Items.COLLECTORS));
 		registry.addWorkstation(WorldTransmuteEmiRecipe.CATEGORY, EmiStack.of(PEItems.PHILOSOPHERS_STONE));
+
+		registry.addRecipeHandler(PEContainerTypes.ARCANE_TABLET_CONTAINER.get(), new CraftingTabletEmiRecipeHandler<>());
+		registry.addRecipeHandler(PEContainerTypes.TRANSMUTATION_CONTAINER.get(), new CraftingTabletEmiRecipeHandler<>());
 
 		registerItemSubtypes(registry, PEItems.ITEMS.getEntries());
 		registerItemSubtypes(registry, PEBlocks.BLOCKS.getSecondaryEntries());
