@@ -32,6 +32,7 @@ import com.yaskulsky.equivox.impl.TransmutationOffline;
 import com.yaskulsky.equivox.impl.capability.AlchBagImpl;
 import com.yaskulsky.equivox.impl.capability.KnowledgeImpl;
 import com.yaskulsky.equivox.integration.IntegrationHelper;
+import com.yaskulsky.equivox.integration.refinedstorage.RsIntegration;
 import com.yaskulsky.equivox.network.PacketHandler;
 import com.yaskulsky.equivox.network.ThreadCheckUUID;
 import com.yaskulsky.equivox.network.ThreadCheckUpdate;
@@ -79,6 +80,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
@@ -182,6 +184,9 @@ public class PECore {
 	public void registerCapabilities(RegisterCapabilitiesEvent event) {
 		event.registerEntity(PECapabilities.ALCH_BAG_CAPABILITY, EntityType.PLAYER, (player, context) -> new AlchBagImpl(player));
 		event.registerEntity(PECapabilities.KNOWLEDGE_CAPABILITY, EntityType.PLAYER, (player, context) -> new KnowledgeImpl(player));
+		if (ModList.get().isLoaded(IntegrationHelper.RS_MODID)) {
+			RsIntegration.registerCapabilities(event);
+		}
 	}
 
 	private void commonSetup(FMLCommonSetupEvent event) {

@@ -280,6 +280,8 @@ dependencies {
     compileOnly("curse.maven:jade-324717:${jade_id}")
     // JEI / EMI APIs: always compile so transmutation/arcane tablet + transfer ships in ATM JARs
     compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
+    // Refined Storage: Transmutation Provider attaches to RS Grid (optional at runtime)
+    compileOnly(files(rootProject.file('.rs-ref/refinedstorage-neoforge-3.2.1.jar')))
 
     if (enableOptionalIntegrations) {
         if (recipe_viewer == 'jei' || recipe_viewer == 'hybrid') {
