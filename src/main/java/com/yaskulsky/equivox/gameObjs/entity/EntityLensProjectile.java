@@ -2,6 +2,7 @@ package com.yaskulsky.equivox.gameObjs.entity;
 
 import com.yaskulsky.equivox.gameObjs.items.HyperkineticLens.ExplosiveLensCharge;
 import com.yaskulsky.equivox.gameObjs.registries.PEEntityTypes;
+import com.yaskulsky.equivox.gameObjs.registries.PEItems;
 import com.yaskulsky.equivox.utils.WorldHelper;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.level.storage.ValueInput;
@@ -11,6 +12,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
@@ -57,5 +59,10 @@ public class EntityLensProjectile extends NoGravityThrowableProjectile {
 	protected void readAdditionalSaveData(@NotNull ValueInput input) {
 		super.readAdditionalSaveData(input);
 		charge = ExplosiveLensCharge.BY_ID.apply(input.getIntOr("charge", 0));
+	}
+
+	@Override
+	public @NotNull ItemStack getItem() {
+		return PEItems.HYPERKINETIC_LENS.asStack();
 	}
 }

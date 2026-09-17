@@ -23,7 +23,7 @@ public interface RVAliasHelper<ITEM> {
 
 	default void addAliases(TagKey<Item> tag, IHasTranslationKey... aliases) {
 		if (aliases.length == 0) {
-			PECore.LOGGER.warn("Expected to have at least one alias for item tag: {}", tag.identifier());
+			PECore.LOGGER.warn("Expected to have at least one alias for item tag: {}", tag.location());
 		} else {
 			addAliases(tagContents(tag), aliases);
 		}

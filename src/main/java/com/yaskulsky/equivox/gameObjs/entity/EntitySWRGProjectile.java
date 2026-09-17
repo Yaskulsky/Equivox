@@ -105,4 +105,9 @@ public class EntitySWRGProjectile extends NoGravityThrowableProjectile {
 		super.addAdditionalSaveData(output);
 		output.putBoolean("fromArcana", fromArcana);
 	}
+
+	@Override
+	public @NotNull ItemStack getItem() {
+		return PEItems.SWIFTWOLF_RENDING_GALE.asStack();
+	}
 }

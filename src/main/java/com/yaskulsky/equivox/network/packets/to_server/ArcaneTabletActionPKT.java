@@ -2,7 +2,7 @@ package com.yaskulsky.equivox.network.packets.to_server;
 
 import java.util.function.IntFunction;
 import com.yaskulsky.equivox.PECore;
-import com.yaskulsky.equivox.gameObjs.container.ArcaneTabletContainer;
+import com.yaskulsky.equivox.gameObjs.container.IArcaneCraftingMenu;
 import com.yaskulsky.equivox.network.packets.IPEPacket;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -27,7 +27,7 @@ public record ArcaneTabletActionPKT(Action action) implements IPEPacket {
 	@Override
 	public void handle(IPayloadContext context) {
 		Player player = context.player();
-		if (!(player.containerMenu instanceof ArcaneTabletContainer container)) {
+		if (!(player.containerMenu instanceof IArcaneCraftingMenu container)) {
 			return;
 		}
 		switch (action) {

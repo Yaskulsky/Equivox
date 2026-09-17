@@ -89,4 +89,9 @@ public class EntityLavaProjectile extends NoGravityThrowableProjectile {
 			}
 		}
 	}
+
+	@Override
+	public @NotNull ItemStack getItem() {
+		return PEItems.VOLCANITE_AMULET.asStack();
+	}
 }

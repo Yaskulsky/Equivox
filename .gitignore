@@ -36,6 +36,7 @@ Desktop.ini
 $RECYCLE.BIN/
 
 # Local dev / extract (not in git)
+.rs-ref/
 .mc-src/
 .mc-src-extract/
 .nf-src/

@@ -1,6 +1,7 @@
 package com.yaskulsky.equivox.gameObjs.entity;
 
 import com.yaskulsky.equivox.gameObjs.registries.PEEntityTypes;
+import com.yaskulsky.equivox.gameObjs.registries.PEItems;
 import com.yaskulsky.equivox.utils.EMCHelper;
 import com.yaskulsky.equivox.utils.EntityRandomizerHelper;
 import net.minecraft.core.particles.ParticleTypes;
@@ -10,6 +11,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.neoforged.neoforge.event.EventHooks;
@@ -53,5 +55,10 @@ public class EntityMobRandomizer extends NoGravityThrowableProjectile {
 				}
 			}
 		}
+	}
+
+	@Override
+	public @NotNull ItemStack getItem() {
+		return PEItems.LIFE_STONE.asStack();
 	}
 }

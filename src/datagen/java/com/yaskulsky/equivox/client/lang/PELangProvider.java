@@ -241,7 +241,7 @@ public class PELangProvider extends BaseLanguageProvider {
 		add(PEBlocks.ENTROPY_SINK_RED, "Red Entropy Sink");
 		add(PEBlocks.STELLAR_CONDENSER, "Stellar Condenser");
 		add(PEBlocks.TRANSMUTATION_PROVIDER, "Transmutation Provider");
-		add(PELang.TRANSMUTATION_PROVIDER_TOOLTIP, "Place under a Transmutation Table. Storage buses see your learned items (paid from EMC). Owner must be online.");
+		add(PELang.TRANSMUTATION_PROVIDER_TOOLTIP, "Place under a Transmutation Table. AE2/RS see learned items (paid from EMC). RS: connect cable for Grid access. Owner must be online.");
 		add(PELang.TRANSMUTATION_PROVIDER_ONLINE, "Device Online");
 		add(PELang.TRANSMUTATION_PROVIDER_OFFLINE, "Device Offline");
 		add(PELang.TRANSMUTATION_PROVIDER_LINKED, "Linked to table above");

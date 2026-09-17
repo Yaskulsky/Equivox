@@ -13,9 +13,10 @@ Bridge for **Transmutation Table knowledge / personal EMC**.
 1. Place the **Provider**.
 2. Place a **Transmutation Table on top of it** (Provider must be directly under the table).
 3. Stay online as the owner — buses only work while you are online.
-4. Attach an AE2/RS **storage bus / external storage** to the Provider.
+4. **AE2:** attach a **Storage Bus** to the Provider (cable alone is not enough).
+5. **Refined Storage:** connect **cable** to the Provider (any side). With RS loaded, the Provider is a network node — learned items show in **Grid / Wireless Grid** like terminal storage (no separate External Storage required). External Storage on the Provider still works if you prefer that setup.
 
-Learned items appear as virtual stock **only if you can afford at least 1** from personal EMC (burn valuables in the Transmutation Table). Amounts track your EMC; extract spends it. Use a **Storage Bus** on the Provider (a cable alone is not enough).
+Learned items appear as virtual stock **only if you can afford at least 1** from personal EMC (burn valuables in the Transmutation Table). Amounts track your EMC; extract spends it.
 
 **Tome of Knowledge:** full-knowledge players are not indexed (EMC map is too large). Learn items normally, or remove the tome, for bus export.
 

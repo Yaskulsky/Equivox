@@ -28,6 +28,8 @@ import com.yaskulsky.equivox.rendering.PedestalRenderer;
 import com.yaskulsky.equivox.rendering.TransmutationRenderingOverlay;
 import com.yaskulsky.equivox.utils.ClientKeyHelper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.renderer.entity.TntRenderer;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.Commands;
 import net.neoforged.api.distmarker.Dist;
@@ -126,7 +128,15 @@ public class PEClient {
 
 	private void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerBlockEntityRenderer(PEBlockEntityTypes.DARK_MATTER_PEDESTAL.get(), PedestalRenderer::new);
+		event.registerEntityRenderer(PEEntityTypes.FIRE_PROJECTILE.get(), ThrownItemRenderer::new);
 		event.registerEntityRenderer(PEEntityTypes.HOMING_ARROW.get(), HomingArrowRenderer::new);
+		event.registerEntityRenderer(PEEntityTypes.LAVA_PROJECTILE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(PEEntityTypes.LENS_PROJECTILE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(PEEntityTypes.MOB_RANDOMIZER.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(PEEntityTypes.SWRG_PROJECTILE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(PEEntityTypes.WATER_PROJECTILE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(PEEntityTypes.NOVA_CATALYST_PRIMED.get(), TntRenderer::new);
+		event.registerEntityRenderer(PEEntityTypes.NOVA_CATACLYSM_PRIMED.get(), TntRenderer::new);
 	}
 
 	private void addLayers(EntityRenderersEvent.AddLayers event) {

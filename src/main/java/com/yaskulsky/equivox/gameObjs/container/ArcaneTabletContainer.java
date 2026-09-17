@@ -2,17 +2,11 @@ package com.yaskulsky.equivox.gameObjs.container;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.HashMultiset;
-import com.google.common.collect.Multiset;
 import com.yaskulsky.equivox.api.capabilities.IKnowledgeProvider;
 import com.yaskulsky.equivox.api.capabilities.PECapabilities;
 import com.yaskulsky.equivox.api.proxy.IEMCProxy;
-import com.yaskulsky.equivox.config.EquivoxConfig;
 import com.yaskulsky.equivox.gameObjs.container.inventory.TransmutationInventory;
 import com.yaskulsky.equivox.gameObjs.container.slots.arcane.ArcaneCraftingSlot;
 import com.yaskulsky.equivox.gameObjs.container.slots.arcane.ArcaneResultSlot;
@@ -28,8 +22,6 @@ import com.yaskulsky.equivox.network.packets.to_server.ArcaneTabletActionPKT;
 import com.yaskulsky.equivox.network.packets.to_server.SearchUpdatePKT;
 import com.yaskulsky.equivox.utils.ItemCapabilityHelper;
 import com.yaskulsky.equivox.utils.ItemHelper;
-import net.minecraft.core.component.DataComponentPatch;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.server.level.ServerPlayer;
@@ -37,17 +29,12 @@ import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerInput;
-import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.inventory.ResultContainer;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.inventory.TransientCraftingContainer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingInput;
-import net.minecraft.world.item.crafting.CraftingRecipe;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
@@ -56,9 +43,7 @@ import org.jetbrains.annotations.NotNull;
  * Transmutation tablet + 3x3 crafting that can consume learned items / EMC.
  * Layout and behavior adapted from ProjectExpansion Arcane Tablet (MIT).
  */
-public class ArcaneTabletContainer extends PEHandContainer {
-
-	private static final int[] ROTATION_SLOTS = {0, 1, 2, 5, 8, 7, 6, 3};
+public class ArcaneTabletContainer extends PEHandContainer implements IArcaneCraftingMenu {
 
 	private static final int INPUT = 0;
 	private static final int LOCK = 8;
@@ -146,6 +131,59 @@ public class ArcaneTabletContainer extends PEHandContainer {
 
 	public IKnowledgeProvider getProvider() {
 		return provider;
+	}
+
+	@Override
+	public Player getCraftingPlayer() {
+		return player;
+	}
+
+	@Override
+	public Inventory getCraftingPlayerInventory() {
+		return playerInv;
+	}
+
+	@Override
+	public TransmutationInventory transmutationInventory() {
+		return transmutationInventory;
+	}
+
+	@Override
+	public TransientCraftingContainer getCraftSlots() {
+		return craftSlots;
+	}
+
+	@Override
+	public ResultContainer getResultSlots() {
+		return resultSlots;
+	}
+
+	@Override
+	public boolean isSkipRefill() {
+		return skipRefill;
+	}
+
+	@Override
+	public void setSkipRefill(boolean skip) {
+		this.skipRefill = skip;
+	}
+
+	@Override
+	public void setCrafting(boolean crafting) {
+		this.isCrafting = crafting;
+	}
+
+	@Override
+	public AbstractContainerMenu asMenu() {
+		return this;
+	}
+
+	@Override
+	public void applyCraftingResult(ItemStack stack) {
+		setRemoteSlot(resultSlotIndex, stack);
+		if (player instanceof ServerPlayer serverPlayer) {
+			serverPlayer.connection.send(new ClientboundContainerSetSlotPacket(containerId, incrementStateId(), resultSlotIndex, stack));
+		}
 	}
 
 	public int getResultSlotIndex() {
@@ -275,7 +313,7 @@ public class ArcaneTabletContainer extends PEHandContainer {
 
 	@Override
 	public void clickPostValidate(int slotIndex, int dragType, @NotNull ContainerInput clickType, @NotNull Player player) {
-		if (player.level().isClientSide() && transmutationInventory.getHandlerForSlot(slotIndex) == transmutationInventory.outputs) {
+		if (player.level().isClientSide() && slotIndex <= 26 && transmutationInventory.getHandlerForSlot(slotIndex) == transmutationInventory.outputs) {
 			Slot slot = tryGetSlot(slotIndex);
 			if (slot != null) {
 				ClientPacketDistributor.sendToServer(new SearchUpdatePKT(transmutationInventory.getIndexFromSlot(slotIndex), slot.getItem()));
@@ -303,241 +341,13 @@ public class ArcaneTabletContainer extends PEHandContainer {
 
 	@Override
 	public void slotsChanged(@NotNull Container container) {
-		slotChangedCraftingGrid(this, player.level(), player, craftSlots, resultSlots);
+		ArcaneCraftingLogic.slotChangedCraftingGrid(this);
 		super.slotsChanged(container);
-	}
-
-	protected static void slotChangedCraftingGrid(ArcaneTabletContainer menu, Level level, Player player,
-			CraftingContainer crafting, ResultContainer result) {
-		if (level.isClientSide()) {
-			return;
-		}
-		CraftingInput input = CraftingInput.of(3, 3, crafting.getItems());
-		ServerPlayer serverPlayer = (ServerPlayer) player;
-		ItemStack stack = ItemStack.EMPTY;
-		Optional<RecipeHolder<CraftingRecipe>> optional = Objects.requireNonNull(level.getServer())
-				.getRecipeManager().getRecipeFor(RecipeType.CRAFTING, input, level);
-		if (optional.isPresent()) {
-			RecipeHolder<CraftingRecipe> recipe = optional.get();
-			stack = recipe.value().assemble(input);
-			result.setRecipeUsed(recipe);
-		}
-		result.setItem(0, stack);
-		menu.setRemoteSlot(menu.resultSlotIndex, stack);
-		serverPlayer.connection.send(new ClientboundContainerSetSlotPacket(menu.containerId, menu.incrementStateId(), menu.resultSlotIndex, stack));
 	}
 
 	@Override
 	public boolean canTakeItemForPickAll(@NotNull ItemStack stack, Slot slot) {
 		return slot.container != resultSlots && super.canTakeItemForPickAll(stack, slot);
-	}
-
-	public void onRecipeTransfer(List<List<ItemStack>> recipe, boolean transferAll) {
-		clearCrafting(false);
-		fillCraftingSlots(recipe, transferAll);
-	}
-
-	public void fillCraftingSlots(List<List<ItemStack>> recipe, boolean transferAll) {
-		int max = Math.min(recipe.size(), craftSlots.getContainerSize());
-		transferItems(recipe, max);
-		if (transferAll) {
-			for (int i = 0; i < 63; i++) {
-				transferItems(recipe, max);
-			}
-		}
-		if (player instanceof ServerPlayer serverPlayer) {
-			provider.syncEmc(serverPlayer);
-		}
-		slotChangedCraftingGrid(this, player.level(), player, craftSlots, resultSlots);
-	}
-
-	private boolean transferFromTablet(int slot, List<ItemStack> possibilities) {
-		List<ItemStack> sorted = new ArrayList<>(possibilities);
-		sorted.sort(Comparator.comparingLong(IEMCProxy.INSTANCE::getValue));
-		for (ItemStack stack : sorted) {
-			ItemStack cleaned = ArcaneTabletHelper.cleanStack(stack);
-			if (!provider.hasKnowledge(cleaned)) {
-				continue;
-			}
-			long value = IEMCProxy.INSTANCE.getValue(cleaned);
-			if (value <= 0 || provider.getEmc().compareTo(BigInteger.valueOf(value)) < 0) {
-				continue;
-			}
-			ItemStack slotItem = craftSlots.getItem(slot);
-			if (slotItem.isEmpty()) {
-				craftSlots.setItem(slot, cleaned);
-			} else if (slotItem.getCount() < slotItem.getMaxStackSize()
-					&& ArcaneTabletHelper.areStacksEqual(slotItem, cleaned)) {
-				slotItem.grow(1);
-			} else {
-				continue;
-			}
-			provider.setEmc(provider.getEmc().subtract(BigInteger.valueOf(value)));
-			return true;
-		}
-		return false;
-	}
-
-	private boolean transferFromInventory(int slot, List<ItemStack> possibilities) {
-		for (ItemStack possibility : possibilities) {
-			ItemStack cleaned = ArcaneTabletHelper.cleanStack(possibility);
-			for (int j = 0; j < playerInv.getContainerSize(); j++) {
-				ItemStack stack = playerInv.getItem(j);
-				if (!ArcaneTabletHelper.areStacksEqual(cleaned, ArcaneTabletHelper.cleanStack(stack))) {
-					continue;
-				}
-				ItemStack slotItem = craftSlots.getItem(slot);
-				if (slotItem.isEmpty()) {
-					craftSlots.setItem(slot, stack.copyWithCount(1));
-				} else if (slotItem.getCount() < slotItem.getMaxStackSize()
-						&& ArcaneTabletHelper.areStacksEqual(slotItem, stack)) {
-					slotItem.grow(1);
-				} else {
-					continue;
-				}
-				stack.shrink(1);
-				if (stack.isEmpty()) {
-					playerInv.setItem(j, ItemStack.EMPTY);
-				}
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public void transferItems(List<List<ItemStack>> recipe, int max) {
-		for (int i = 0; i < max; i++) {
-			if (recipe.get(i) != null && !recipe.get(i).isEmpty()) {
-				transferFromInventory(i, recipe.get(i));
-			}
-		}
-		for (int i = 0; i < max; i++) {
-			if (recipe.get(i) != null && !recipe.get(i).isEmpty()) {
-				transferFromTablet(i, recipe.get(i));
-			}
-		}
-	}
-
-	/** @apiNote server only */
-	public void clearCrafting(boolean force) {
-		boolean emcUpdate = false;
-		for (int i = 0; i < craftSlots.getContainerSize(); i++) {
-			ItemStack stack = craftSlots.getItem(i);
-			if (stack.isEmpty()) {
-				continue;
-			}
-			if (EquivoxConfig.server.difficulty.covalenceLoss.get() >= 1.0D && IEMCProxy.INSTANCE.hasValue(stack)
-					&& ArcaneTabletHelper.tryLearnAndConvertToEmc(player, provider, stack)) {
-				emcUpdate = true;
-				craftSlots.setItem(i, ItemStack.EMPTY);
-				continue;
-			}
-			craftSlots.setItem(i, ArcaneTabletHelper.returnToInventory(playerInv, player, stack, force));
-		}
-		if (emcUpdate && player instanceof ServerPlayer serverPlayer) {
-			provider.syncEmc(serverPlayer);
-		}
-		slotsChanged(craftSlots);
-		craftSlots.setChanged();
-	}
-
-	/** @apiNote server only */
-	public void rotateCrafting(boolean clockwise) {
-		ItemStack[] stacks = new ItemStack[ROTATION_SLOTS.length];
-		if (clockwise) {
-			for (int i = 0; i < ROTATION_SLOTS.length; i++) {
-				int j = i - 1;
-				if (j < 0) {
-					j = ROTATION_SLOTS.length - 1;
-				}
-				stacks[i] = craftSlots.getItem(ROTATION_SLOTS[j]);
-			}
-		} else {
-			for (int i = 0; i < ROTATION_SLOTS.length; i++) {
-				stacks[i] = craftSlots.getItem(ROTATION_SLOTS[(i + 1) % ROTATION_SLOTS.length]);
-			}
-		}
-		for (int i = 0; i < ROTATION_SLOTS.length; i++) {
-			craftSlots.setItem(ROTATION_SLOTS[i], stacks[i]);
-		}
-		slotsChanged(craftSlots);
-		craftSlots.setChanged();
-	}
-
-	/** @apiNote server only */
-	public void balanceCrafting() {
-		ArrayListMultimap<String, ItemStack> map = ArrayListMultimap.create();
-		Multiset<String> itemCount = HashMultiset.create();
-		for (int i = 0; i < craftSlots.getContainerSize(); i++) {
-			ItemStack stack = craftSlots.getItem(i);
-			if (!stack.isEmpty() && stack.getMaxStackSize() > 1) {
-				String key = stackKey(stack);
-				map.put(key, stack);
-				itemCount.add(key, stack.getCount());
-			}
-		}
-		for (String key : map.keySet()) {
-			List<ItemStack> list = map.get(key);
-			int totalCount = itemCount.count(key);
-			int countPerStack = totalCount / list.size();
-			int restCount = totalCount % list.size();
-			for (ItemStack stack : list) {
-				stack.setCount(countPerStack);
-			}
-			int idx = 0;
-			while (restCount > 0) {
-				ItemStack stack = list.get(idx);
-				if (stack.getCount() < stack.getMaxStackSize()) {
-					stack.grow(1);
-					restCount--;
-				}
-				idx++;
-				if (idx >= list.size()) {
-					idx = 0;
-				}
-			}
-		}
-		slotsChanged(craftSlots);
-		craftSlots.setChanged();
-	}
-
-	/** @apiNote server only */
-	public void spreadCrafting() {
-		while (true) {
-			ItemStack biggestStack = null;
-			int biggestSize = 1;
-			for (int i = 0; i < craftSlots.getContainerSize(); i++) {
-				ItemStack stack = craftSlots.getItem(i);
-				if (!stack.isEmpty() && stack.getCount() > biggestSize) {
-					biggestStack = stack;
-					biggestSize = stack.getCount();
-				}
-			}
-			if (biggestStack == null) {
-				return;
-			}
-			boolean emptyBiggestSlot = false;
-			for (int i = 0; i < craftSlots.getContainerSize(); i++) {
-				ItemStack stack = craftSlots.getItem(i);
-				if (stack.isEmpty()) {
-					if (biggestStack.getCount() > 1) {
-						craftSlots.setItem(i, biggestStack.split(1));
-					} else {
-						emptyBiggestSlot = true;
-					}
-				}
-			}
-			if (!emptyBiggestSlot) {
-				break;
-			}
-		}
-		balanceCrafting();
-	}
-
-	private static String stackKey(ItemStack stack) {
-		String id = BuiltInRegistries.ITEM.getKey(stack.getItem()).toString();
-		DataComponentPatch patch = stack.getComponentsPatch();
-		return id + "|" + patch;
 	}
 
 	/** @apiNote client only */

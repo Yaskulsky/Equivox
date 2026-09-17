@@ -2,6 +2,7 @@ package com.yaskulsky.equivox.gameObjs.entity;
 
 import com.yaskulsky.equivox.config.EquivoxConfig;
 import com.yaskulsky.equivox.gameObjs.registries.PEEntityTypes;
+import com.yaskulsky.equivox.gameObjs.registries.PEItems;
 import com.yaskulsky.equivox.utils.LevelHelper;
 import com.yaskulsky.equivox.utils.PlayerHelper;
 import com.yaskulsky.equivox.utils.WorldHelper;
@@ -11,6 +12,7 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -94,5 +96,10 @@ public class EntityWaterProjectile extends NoGravityThrowableProjectile {
 			}
 			ent.push(getDeltaMovement().scale(2));
 		}
+	}
+
+	@Override
+	public @NotNull ItemStack getItem() {
+		return PEItems.EVERTIDE_AMULET.asStack();
 	}
 }

@@ -13,6 +13,7 @@ import com.yaskulsky.equivox.gameObjs.container.TransmutationProviderContainer;
 import com.yaskulsky.equivox.gameObjs.registration.impl.BlockEntityTypeRegistryObject;
 import com.yaskulsky.equivox.gameObjs.registries.PEBlockEntityTypes;
 import com.yaskulsky.equivox.gameObjs.registries.PEBlocks;
+import com.yaskulsky.equivox.integration.refinedstorage.TransmutationRsNetwork;
 import com.yaskulsky.equivox.utils.EmcDepositHelper;
 import com.yaskulsky.equivox.utils.KnowledgeExportHandler;
 import com.yaskulsky.equivox.utils.text.TextComponentUtil;
@@ -31,6 +32,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.fml.ModList;
+import com.yaskulsky.equivox.integration.IntegrationHelper;
 import net.neoforged.neoforge.capabilities.ICapabilityProvider;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
@@ -46,6 +49,8 @@ public class TransmutationProviderBlockEntity extends EmcBlockEntity implements 
 			(provider, side) -> provider.isExportActive() ? provider.exportHandler : null;
 
 	private final KnowledgeExportHandler exportHandler = new KnowledgeExportHandler(this);
+	@Nullable
+	private TransmutationRsNetwork rsNetwork;
 	private final List<ItemInfo> exposedKnowledge = new ArrayList<>();
 	@Nullable
 	private UUID owner;
@@ -86,6 +91,17 @@ public class TransmutationProviderBlockEntity extends EmcBlockEntity implements 
 
 	public boolean isExportActive() {
 		return tableLinked && ownerOnline && !tomeBlocked;
+	}
+
+	public KnowledgeExportHandler getKnowledgeExportHandler() {
+		return exportHandler;
+	}
+
+	public TransmutationRsNetwork rsNetwork() {
+		if (rsNetwork == null && ModList.get().isLoaded(IntegrationHelper.RS_MODID)) {
+			rsNetwork = new TransmutationRsNetwork(this);
+		}
+		return rsNetwork;
 	}
 
 	@NotNull
@@ -196,6 +212,28 @@ public class TransmutationProviderBlockEntity extends EmcBlockEntity implements 
 
 	private void invalidateExport(Level level) {
 		level.invalidateCapabilities(worldPosition);
+		TransmutationRsNetwork network = rsNetwork();
+		if (network != null) {
+			network.refresh(level);
+		}
+	}
+
+	@Override
+	public void setLevel(@NotNull Level level) {
+		super.setLevel(level);
+		TransmutationRsNetwork network = rsNetwork();
+		if (network != null) {
+			network.onLoad(level);
+		}
+	}
+
+	@Override
+	public void setRemoved() {
+		TransmutationRsNetwork network = rsNetwork();
+		if (network != null) {
+			network.onRemoved(getLevel());
+		}
+		super.setRemoved();
 	}
 
 	@Override

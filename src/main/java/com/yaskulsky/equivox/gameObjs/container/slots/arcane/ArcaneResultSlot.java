@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import com.yaskulsky.equivox.api.proxy.IEMCProxy;
-import com.yaskulsky.equivox.gameObjs.container.ArcaneTabletContainer;
+import com.yaskulsky.equivox.gameObjs.container.IArcaneCraftingMenu;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.CraftingContainer;
@@ -21,9 +21,9 @@ public class ArcaneResultSlot extends ResultSlot {
 
 	private final CraftingContainer craftSlots;
 	private final Player player;
-	private final ArcaneTabletContainer tablet;
+	private final IArcaneCraftingMenu tablet;
 
-	public ArcaneResultSlot(Player player, CraftingContainer craftSlots, ResultContainer container, ArcaneTabletContainer tablet,
+	public ArcaneResultSlot(Player player, CraftingContainer craftSlots, ResultContainer container, IArcaneCraftingMenu tablet,
 			int slot, int x, int y) {
 		super(player, craftSlots, container, slot, x, y);
 		this.craftSlots = craftSlots;
@@ -47,12 +47,12 @@ public class ArcaneResultSlot extends ResultSlot {
 
 	private void learnResult(ItemStack stack) {
 		if (player instanceof ServerPlayer && IEMCProxy.INSTANCE.hasValue(stack)) {
-			tablet.transmutationInventory.handleKnowledge(stack);
+			tablet.transmutationInventory().handleKnowledge(stack);
 		}
 	}
 
 	private void refillAfterTake(List<ItemStack> previousItems) {
-		if (player.level().isClientSide() || tablet.skipRefill) {
+		if (player.level().isClientSide() || tablet.isSkipRefill()) {
 			return;
 		}
 		List<ItemStack> currentItems = craftSlots.getItems().stream().map(ItemStack::copy).collect(Collectors.toCollection(ArrayList::new));
@@ -62,9 +62,9 @@ public class ArcaneResultSlot extends ResultSlot {
 				continue;
 			}
 			if (IEMCProxy.INSTANCE.hasValue(stack)) {
-				tablet.transmutationInventory.handleKnowledge(stack);
+				tablet.transmutationInventory().handleKnowledge(stack);
 				long value = IEMCProxy.INSTANCE.getValue(stack);
-				tablet.transmutationInventory.addEmc(BigInteger.valueOf(value).multiply(BigInteger.valueOf(stack.getCount())));
+				tablet.transmutationInventory().addEmc(BigInteger.valueOf(value).multiply(BigInteger.valueOf(stack.getCount())));
 				craftSlots.setItem(i, ItemStack.EMPTY);
 				continue;
 			}
@@ -78,6 +78,6 @@ public class ArcaneResultSlot extends ResultSlot {
 	@Override
 	public void set(@NotNull ItemStack stack) {
 		super.set(stack);
-		tablet.isCrafting = !stack.isEmpty();
+		tablet.setCrafting(!stack.isEmpty());
 	}
 }
