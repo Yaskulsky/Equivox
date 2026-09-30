@@ -29,6 +29,10 @@ public interface IArcaneCraftingMenu {
 
 	int getResultSlotIndex();
 
+	default int getCraftingSlotStart() {
+		return getResultSlotIndex() + 1;
+	}
+
 	boolean isSkipRefill();
 
 	void setSkipRefill(boolean skip);
