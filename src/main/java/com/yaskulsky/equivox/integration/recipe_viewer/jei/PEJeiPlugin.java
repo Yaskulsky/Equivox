@@ -101,8 +101,12 @@ public class PEJeiPlugin implements IModPlugin {
 	public void registerRecipeTransferHandlers(@NotNull IRecipeTransferRegistration registration) {
 		// Always register crafting transfer so ATM11 (JEI + EMI) still gets the + button.
 		registration.addRecipeTransferHandler(PhilosStoneContainer.class, MenuType.CRAFTING, RecipeTypes.CRAFTING, 1, 9, 10, 36);
+		registration.addRecipeTransferHandler(
+				new ArcaneCraftingRecipeTransferInfo<>(ArcaneTabletContainer.class, PEContainerTypes.ARCANE_TABLET_CONTAINER.get()));
 		registration.addRecipeTransferHandler(new CraftingTabletRecipeTransferHandler<>(ArcaneTabletContainer.class,
 				PEContainerTypes.ARCANE_TABLET_CONTAINER.get()), RecipeTypes.CRAFTING);
+		registration.addRecipeTransferHandler(
+				new ArcaneCraftingRecipeTransferInfo<>(TransmutationContainer.class, PEContainerTypes.TRANSMUTATION_CONTAINER.get()));
 		registration.addRecipeTransferHandler(new CraftingTabletRecipeTransferHandler<>(TransmutationContainer.class,
 				PEContainerTypes.TRANSMUTATION_CONTAINER.get()), RecipeTypes.CRAFTING);
 	}
