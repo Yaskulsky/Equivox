@@ -1,8 +1,0 @@
-{
-  "type": "energizedpower:energizer",
-  "energy": 32768,
-  "ingredient": "#c:ingots/copper",
-  "result": {
-    "id": "energizedpower:energized_copper_ingot"
-  }
-}
