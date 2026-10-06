@@ -20,7 +20,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;
-import org.lwjgl.glfw.GLFW;
 
 public class GUITransmutation extends PEContainerScreen<TransmutationContainer> {
 
@@ -82,9 +81,7 @@ public class GUITransmutation extends PEContainerScreen<TransmutationContainer> 
 	}
 
 	private static boolean isShiftDown() {
-		var window = Minecraft.getInstance().getWindow();
-		return InputConstants.isKeyDown(window, GLFW.GLFW_KEY_LEFT_SHIFT)
-				|| InputConstants.isKeyDown(window, GLFW.GLFW_KEY_RIGHT_SHIFT);
+		return Minecraft.getInstance().hasShiftDown();
 	}
 
 	@Override
@@ -178,7 +175,7 @@ public class GUITransmutation extends PEContainerScreen<TransmutationContainer> 
 	public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
 		double x = event.x();
 		double y = event.y();
-		if (textBoxFilter.isMouseOver(x, y) && event.button() == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
+		if (textBoxFilter.isMouseOver(x, y) && event.button() == 1) {
 			this.textBoxFilter.setValue("");
 			setFocused(this.textBoxFilter);
 			return true;

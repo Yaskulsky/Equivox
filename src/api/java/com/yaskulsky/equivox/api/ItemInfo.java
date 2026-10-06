@@ -175,13 +175,8 @@ public final class ItemInfo {
 	 * @apiNote This might return null if the item has the component as a default component and the component is at that default value.
 	 */
 	@Nullable
-	@SuppressWarnings("OptionalAssignedToNull")
 	public <T> T getOrNull(DataComponentType<? extends T> type) {
-		Optional<? extends T> storedComponent = componentsPatch.getPatch(type);
-		if (storedComponent == null || storedComponent.isEmpty()) {
-			return null;
-		}
-		return storedComponent.get();
+		return componentsPatch.get(item.value().components(), type);
 	}
 
 	/**

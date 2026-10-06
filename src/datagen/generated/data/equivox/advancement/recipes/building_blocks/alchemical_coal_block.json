@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "equivox:alchemical_coal_block"
+        "recipes": "equivox:alchemical_coal_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

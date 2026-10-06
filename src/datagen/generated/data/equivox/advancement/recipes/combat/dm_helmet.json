@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "equivox:dm_helmet"
+        "recipes": "equivox:dm_helmet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

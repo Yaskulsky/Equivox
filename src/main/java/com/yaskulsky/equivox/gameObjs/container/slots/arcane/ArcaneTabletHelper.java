@@ -11,8 +11,9 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
 
 /**
  * Small helpers for Arcane Tablet crafting / inventory return.
@@ -75,20 +76,20 @@ public final class ArcaneTabletHelper {
 		if (stack.isEmpty()) {
 			return ItemStack.EMPTY;
 		}
-		IItemHandler inv = ItemCapabilityHelper.getPlayerInventory(player);
+		ResourceHandler<ItemResource> inv = ItemCapabilityHelper.getPlayerInventory(player);
 		if (inv != null) {
-			ItemStack leftover = ItemHandlerHelper.insertItemStacked(inv, stack.copy(), false);
+			ItemStack leftover = PEItemStacksHandler.insertStackedRemainder(inv, stack.copy(), false);
 			if (leftover.isEmpty()) {
 				return ItemStack.EMPTY;
 			}
 			if (force) {
-				player.drop(leftover, false);
+				player.drop(leftover, false, net.minecraft.util.Prediction.SERVER_ONLY);
 				return ItemStack.EMPTY;
 			}
 			return leftover;
 		}
 		if (force) {
-			playerInv.placeItemBackInInventory(stack);
+			playerInv.placeItemBackInInventory(stack, net.minecraft.util.Prediction.SERVER_ONLY);
 			return ItemStack.EMPTY;
 		}
 		return stack;

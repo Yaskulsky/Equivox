@@ -21,7 +21,7 @@ import com.yaskulsky.equivox.gameObjs.items.ItemPE;
 import com.yaskulsky.equivox.gameObjs.items.tools.PEPickaxe.PickaxeMode;
 import com.yaskulsky.equivox.gameObjs.registries.PEDamageTypes;
 import com.yaskulsky.equivox.gameObjs.registries.PESoundEvents;
-import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.advancements.triggers.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
@@ -78,6 +78,17 @@ public class ToolHelper {
 	public static final ItemAbility HAMMER_DIG = ItemAbility.get("hammer_dig");
 	public static final ItemAbility KATAR_DIG = ItemAbility.get("katar_dig");
 	public static final ItemAbility MORNING_STAR_DIG = ItemAbility.get("morning_star_dig");
+	public static final ItemAbility HOE_TILL = ItemAbility.get("hoe_till");
+	public static final ItemAbility SHOVEL_FLATTEN = ItemAbility.get("shovel_flatten");
+	public static final ItemAbility AXE_STRIP = ItemAbility.get("axe_strip");
+	public static final ItemAbility AXE_SCRAPE = ItemAbility.get("axe_scrape");
+	public static final ItemAbility AXE_WAX_OFF = ItemAbility.get("axe_wax_off");
+
+	public static final Set<ItemAbility> KATAR_TOOL_ACTIONS = of(
+			HOE_TILL, SHOVEL_FLATTEN, AXE_STRIP, AXE_SCRAPE, AXE_WAX_OFF, ItemAbilities.SWORD_SWEEP,
+			ItemAbilities.SHEARS_DIG, ItemAbilities.SHEARS_HARVEST, ItemAbilities.SHEARS_CARVE, ItemAbilities.SHEARS_TRIM,
+			KATAR_DIG);
+	public static final Set<ItemAbility> MORNING_STAR_TOOL_ACTIONS = of(SHOVEL_FLATTEN, ItemAbilities.SHOVEL_DOUSE, HAMMER_DIG, MORNING_STAR_DIG);
 
 	public static final Set<ItemAbility> DEFAULT_PE_HAMMER_ACTIONS = of(HAMMER_DIG);
 	public static final Set<ItemAbility> DEFAULT_PE_KATAR_ACTIONS = of(KATAR_DIG);
@@ -176,7 +187,6 @@ public class ToolHelper {
 			if (!level.isClientSide()) {
 				level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1.0F, 1.0F);
 			}
-			CampfireBlock.dowse(player, level, pos, state);
 			if (!level.isClientSide()) {
 				level.setBlock(pos, state.setValue(CampfireBlock.LIT, Boolean.FALSE), Block.UPDATE_ALL_IMMEDIATE);
 			}
@@ -189,7 +199,7 @@ public class ToolHelper {
 	 * Tills in an AOE using a hoe. Charge affects the AOE. Optional per-block EMC cost.
 	 */
 	public static InteractionResult tillAOE(UseOnContext context, BlockState clickedState, long emcCost) {
-		return useAOE(context, clickedState, emcCost, ItemAbilities.HOE_TILL, SoundEvents.HOE_TILL, -1, new HoeToolAOEData());
+		return useAOE(context, clickedState, emcCost, HOE_TILL, SoundEvents.HOE_TILL.value(), -1, new HoeToolAOEData());
 	}
 
 	/**
@@ -201,22 +211,22 @@ public class ToolHelper {
 			//Don't allow flattening a block from underneath
 			return InteractionResult.PASS;
 		}
-		return useAOE(context, clickedState, emcCost, ItemAbilities.SHOVEL_FLATTEN, SoundEvents.SHOVEL_FLATTEN, -1, new ShovelToolAOEData());
+		return useAOE(context, clickedState, emcCost, SHOVEL_FLATTEN, SoundEvents.SHOVEL_FLATTEN.value(), -1, new ShovelToolAOEData());
 	}
 
 	/**
 	 * Strips logs in an AOE using an axe (ex: log to stripped log). Charge affects the AOE. Optional per-block EMC cost.
 	 */
 	public static InteractionResult stripLogsAOE(UseOnContext context, BlockState clickedState, long emcCost) {
-		return useAxeAOE(context, clickedState, emcCost, ItemAbilities.AXE_STRIP, SoundEvents.AXE_STRIP, -1);
+		return useAxeAOE(context, clickedState, emcCost, AXE_STRIP, SoundEvents.AXE_STRIP.value(), -1);
 	}
 
 	public static InteractionResult scrapeAOE(UseOnContext context, BlockState clickedState, long emcCost) {
-		return useAxeAOE(context, clickedState, emcCost, ItemAbilities.AXE_SCRAPE, SoundEvents.AXE_SCRAPE, -1);
+		return useAxeAOE(context, clickedState, emcCost, AXE_SCRAPE, SoundEvents.AXE_SCRAPE.value(), -1);
 	}
 
 	public static InteractionResult waxOffAOE(UseOnContext context, BlockState clickedState, long emcCost) {
-		return useAxeAOE(context, clickedState, emcCost, ItemAbilities.AXE_WAX_OFF, SoundEvents.AXE_WAX_OFF, -1);
+		return useAxeAOE(context, clickedState, emcCost, AXE_WAX_OFF, SoundEvents.AXE_WAX_OFF.value(), -1);
 	}
 
 	private static InteractionResult useAxeAOE(UseOnContext context, BlockState clickedState, long emcCost, ItemAbility action, SoundEvent sound, int particle) {

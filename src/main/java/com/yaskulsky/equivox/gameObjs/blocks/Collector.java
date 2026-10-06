@@ -27,7 +27,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.items.IItemHandler;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -94,11 +96,11 @@ public class Collector extends BlockDirection implements PEEntityBlock<Collector
 		if (collector == null) {
 			return 0;
 		}
-		IItemHandler handler = WorldHelper.getItemHandler(level, pos, state, collector, Direction.UP);
+		ResourceHandler<ItemResource> handler = WorldHelper.getItemHandler(level, pos, state, collector, Direction.UP);
 		if (handler == null) {
 			return 0;
 		}
-		ItemStack charging = handler.getStackInSlot(CollectorMK1BlockEntity.UPGRADING_SLOT);
+		ItemStack charging = PEItemStacksHandler.getStack(handler, CollectorMK1BlockEntity.UPGRADING_SLOT);
 		if (charging.isEmpty()) {
 			return MathUtils.scaleToRedstone(collector.getStoredEmc(), collector.getMaximumEmc());
 		}

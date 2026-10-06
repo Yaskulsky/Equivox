@@ -5,26 +5,10 @@ import com.yaskulsky.equivox.api.capabilities.PECapabilities;
 import com.yaskulsky.equivox.api.proxy.IEMCProxy;
 import com.yaskulsky.equivox.emc.FuelMapper;
 import com.yaskulsky.equivox.utils.ItemHelper;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.flag.FeatureFlags;
-import net.minecraft.world.level.block.entity.FuelValues;
 
 public final class SlotPredicates {
-
-	private static FuelValues furnaceFuelValues;
-
-	private static FuelValues getFurnaceFuelValues() {
-		FuelValues values = furnaceFuelValues;
-		if (values == null) {
-			values = FuelValues.vanillaBurnTimes(RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY), FeatureFlags.DEFAULT_FLAGS);
-			furnaceFuelValues = values;
-		}
-		return values;
-	}
 
 	public static final Predicate<ItemStack> ALWAYS_FALSE = input -> false;
 
@@ -35,13 +19,11 @@ public final class SlotPredicates {
 	public static final Predicate<ItemStack> COLLECTOR_INV = input -> input.getCapability(PECapabilities.EMC_HOLDER_ITEM_CAPABILITY) != null ||
 																	  (FuelMapper.isStackFuel(input) && !FuelMapper.isStackMaxFuel(input));
 
-	// slotrelayklein, slotmercurialklein
 	public static final Predicate<ItemStack> EMC_HOLDER = input -> input.getCapability(PECapabilities.EMC_HOLDER_ITEM_CAPABILITY) != null;
 
-	// slotrelayinput
 	public static final Predicate<ItemStack> RELAY_INV = input -> EMC_HOLDER.test(input) || HAS_EMC.test(input);
 
-	public static final Predicate<ItemStack> FURNACE_FUEL = input -> EMC_HOLDER.test(input) || input.getBurnTime(RecipeType.SMELTING, getFurnaceFuelValues()) > 0;
+	public static final Predicate<ItemStack> FURNACE_FUEL = input -> EMC_HOLDER.test(input) || FuelMapper.isStackFuel(input);
 
 	public static final Predicate<ItemStack> MERCURIAL_TARGET = input -> {
 		if (input.isEmpty()) {

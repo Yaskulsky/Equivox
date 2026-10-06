@@ -49,6 +49,7 @@ import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.BonemealSource;
 import net.minecraft.world.level.block.BucketPickup;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.CactusBlock;
@@ -79,8 +80,8 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.util.ItemStackMap;
 import net.minecraft.world.level.ServerExplosion;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.fluid.FluidResource;
 import net.neoforged.neoforge.transfer.item.ItemResource;
@@ -199,10 +200,10 @@ public final class WorldHelper {
 		}
 	}
 
-	public static void dropInventory(@Nullable IItemHandler inv, Level level, BlockPos pos) {
+	public static void dropInventory(@Nullable ResourceHandler<ItemResource> inv, Level level, BlockPos pos) {
 		if (inv != null) {
-			for (int i = 0, slots = inv.getSlots(); i < slots; i++) {
-				ItemStack stack = inv.getStackInSlot(i);
+			for (int i = 0, slots = inv.size(); i < slots; i++) {
+				ItemStack stack = com.yaskulsky.equivox.api.inventory.PEItemStacksHandler.getStack(inv, i);
 				if (!stack.isEmpty()) {
 					level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), stack));
 				}
@@ -296,8 +297,8 @@ public final class WorldHelper {
 
 	public static void copySignData(Level level, BlockPos pos, SignBlockEntity oldSign) {
 		if (oldSign != null && level.getBlockEntity(pos) instanceof SignBlockEntity newSign) {
-			newSign.setText(oldSign.getText(true), true);
-			newSign.setText(oldSign.getText(false), false);
+			newSign.setText(oldSign.getText(net.minecraft.world.level.block.entity.SignTextSlot.FRONT), net.minecraft.world.level.block.entity.SignTextSlot.FRONT);
+			newSign.setText(oldSign.getText(net.minecraft.world.level.block.entity.SignTextSlot.BACK), net.minecraft.world.level.block.entity.SignTextSlot.BACK);
 			newSign.setAllowedPlayerEditor(oldSign.getPlayerWhoMayEdit());
 			newSign.setWaxed(oldSign.isWaxed());
 		}
@@ -423,11 +424,11 @@ public final class WorldHelper {
 			BlockState state = level.getBlockState(currentPos);
 			if (state.getBlock() instanceof BonemealableBlock growable) {
 				//Note: We intentionally don't fire the bone meal used event, as we aren't actually applying bone meal to the target
-				if (growable.isValidBonemealTarget(level, currentPos, state)) {
+				if (growable.isValidBonemealTarget(level, currentPos, state, BonemealSource.INTERACTION)) {
 					if (EquivoxConfig.server.items.harvBandIndirect.get() || !onlyAffectsOtherBlocks(state.getBlock())) {
 						//Based on our chance, apply bonemeal if the subchance for that growable also passes
-						if (level.getRandom().nextInt(chance) == 0 && growable.isBonemealSuccess(level, level.getRandom(), currentPos, state)) {
-							growable.performBonemeal(serverLevel, level.getRandom(), currentPos, state);
+						if (level.getRandom().nextInt(chance) == 0 && growable.isBonemealSuccess(level, level.getRandom(), currentPos, state, BonemealSource.INTERACTION)) {
+							growable.performBonemeal(serverLevel, level.getRandom(), currentPos, state, BonemealSource.INTERACTION);
 						}
 					}
 				} else {
@@ -704,7 +705,7 @@ public final class WorldHelper {
 			} else if (state.isFlammable(level, pos, side)) {
 				if (!level.isClientSide() && PlayerHelper.hasBreakPermission((ServerPlayer) player, level, pos)) {
 					// Ignite the block
-					state.onCaughtFire(level, pos, side, player);
+					state.onCaughtFire(level, pos, side, player, player.getMainHandItem());
 					if (state.getBlock() instanceof TntBlock) {
 						level.removeBlock(pos, false);
 					}
@@ -822,25 +823,24 @@ public final class WorldHelper {
 	}
 
 	@Nullable
-	public static IItemHandler getItemHandler(@Nullable Level level, BlockPos pos, @Nullable Direction side) {
+	public static ResourceHandler<ItemResource> getItemHandler(@Nullable Level level, BlockPos pos, @Nullable Direction side) {
 		return getItemHandler(level, pos, null, null, side);
 	}
 
 	@Nullable
-	public static IItemHandler getItemHandler(@Nullable Level level, BlockPos pos, @Nullable BlockState state, @Nullable BlockEntity blockEntity, @Nullable Direction side) {
+	public static ResourceHandler<ItemResource> getItemHandler(@Nullable Level level, BlockPos pos, @Nullable BlockState state, @Nullable BlockEntity blockEntity, @Nullable Direction side) {
 		ResourceHandler<ItemResource> handler = getCapability(level, Capabilities.Item.BLOCK, pos, state, blockEntity, side);
-		return handler == null ? null : IItemHandler.of(handler);
+		return handler == null ? null : handler;
 	}
 
 	@Nullable
-	public static IFluidHandler getFluidHandler(@Nullable Level level, BlockPos pos, @Nullable Direction side) {
+	public static ResourceHandler<FluidResource> getFluidHandler(@Nullable Level level, BlockPos pos, @Nullable Direction side) {
 		return getFluidHandler(level, pos, null, null, side);
 	}
 
 	@Nullable
-	public static IFluidHandler getFluidHandler(@Nullable Level level, BlockPos pos, @Nullable BlockState state, @Nullable BlockEntity blockEntity, @Nullable Direction side) {
-		ResourceHandler<FluidResource> handler = getCapability(level, Capabilities.Fluid.BLOCK, pos, state, blockEntity, side);
-		return handler == null ? null : IFluidHandler.of(handler);
+	public static ResourceHandler<FluidResource> getFluidHandler(@Nullable Level level, BlockPos pos, @Nullable BlockState state, @Nullable BlockEntity blockEntity, @Nullable Direction side) {
+		return getCapability(level, Capabilities.Fluid.BLOCK, pos, state, blockEntity, side);
 	}
 
 	/**

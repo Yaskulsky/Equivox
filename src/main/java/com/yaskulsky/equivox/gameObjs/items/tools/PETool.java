@@ -70,7 +70,7 @@ public abstract class PETool extends ItemPE implements IItemCharge, IBarHelper {
 	}
 
 	@Override
-	public <T extends LivingEntity> int damageItem(@NotNull ItemStack stack, int amount, T entity, @NotNull Consumer<Item> onBroken) {
+	public <T extends LivingEntity> int damageItem(@NotNull ItemStack stack, int amount, T entity, @NotNull Consumer<ItemStack> onBroken) {
 		return 0;
 	}
 

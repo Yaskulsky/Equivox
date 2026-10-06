@@ -36,9 +36,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidType;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.transfer.InfiniteResourceHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.ResourceHandlerUtil;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
 import org.jetbrains.annotations.NotNull;
 
 public class VolcaniteAmulet extends ItemPE implements IProjectileShooter, IPedestalItem, IFireProtector, ICapabilityAware, ISelfCraftingRemainder {
@@ -59,9 +62,9 @@ public class VolcaniteAmulet extends ItemPE implements IProjectileShooter, IPede
 		ItemStack stack = ctx.getItemInHand();
 		if (!level.isClientSide() && PlayerHelper.hasEditPermission(player, level, pos) && consumeFuel(player, stack, 32, true)) {
 			Direction sideHit = ctx.getClickedFace();
-			IFluidHandler fluidHandler = WorldHelper.getFluidHandler(level, pos, sideHit);
+			ResourceHandler<FluidResource> fluidHandler = WorldHelper.getFluidHandler(level, pos, sideHit);
 			if (fluidHandler != null) {
-				fluidHandler.fill(new FluidStack(Fluids.LAVA, FluidType.BUCKET_VOLUME), IFluidHandler.FluidAction.EXECUTE);
+				ResourceHandlerUtil.insertStacking(fluidHandler, FluidResource.of(Fluids.LAVA), FluidType.BUCKET_VOLUME, null);
 				return InteractionResult.CONSUME;
 			}
 			WorldHelper.placeFluid(player, level, pos, sideHit, Fluids.LAVA, false);

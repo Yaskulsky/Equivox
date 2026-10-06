@@ -7,11 +7,11 @@ import java.util.function.IntSupplier;
 import com.yaskulsky.equivox.PECore;
 import com.yaskulsky.equivox.config.EquivoxConfig;
 import com.yaskulsky.equivox.gameObjs.registries.PEItems;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
 import com.yaskulsky.equivox.integration.IntegrationHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
-import net.minecraft.network.protocol.game.ClientboundAnimatePacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -34,7 +34,8 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.util.BlockSnapshot;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.level.BlockEvent.EntityMultiPlaceEvent;
-import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 
 /**
  * Helper class for player-related methods. Notice: Please try to keep methods tidy and alphabetically ordered. Thanks!
@@ -127,10 +128,10 @@ public final class PlayerHelper {
 		if (!offhand.isEmpty() && checker.test(player, offhand)) {
 			return true;
 		}
-		IItemHandler curios = IntegrationHelper.getCurioItemHandler(player);
+		ResourceHandler<ItemResource> curios = IntegrationHelper.getCurioItemHandler(player);
 		if (curios != null) {
-			for (int i = 0, slots = curios.getSlots(); i < slots; i++) {
-				ItemStack stack = curios.getStackInSlot(i);
+			for (int i = 0, slots = PEItemStacksHandler.getSlotCount(curios); i < slots; i++) {
+				ItemStack stack = PEItemStacksHandler.getStack(curios, i);
 				if (!stack.isEmpty() && checker.test(player, stack)) {
 					return true;
 				}
@@ -182,10 +183,7 @@ public final class PlayerHelper {
 	}
 
 	public static void swingItem(Player player, InteractionHand hand) {
-		if (player.level() instanceof ServerLevel level) {
-			int action = hand == InteractionHand.MAIN_HAND ? ClientboundAnimatePacket.SWING_MAIN_HAND : ClientboundAnimatePacket.SWING_OFF_HAND;
-			level.getChunkSource().sendToTrackingPlayersAndSelf(player, new ClientboundAnimatePacket(player, action));
-		}
+		player.swing(hand, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
 	}
 
 	public static void updateScore(ServerPlayer player, ObjectiveCriteria objective, BigInteger value) {

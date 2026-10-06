@@ -470,6 +470,6 @@ public class PEModelProvider extends ModelProvider {
 		Item item = itemProvider.asItem();
 		Identifier model = ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(item),
 				TextureMapping.layer0(texture(texture)), itemModels.modelOutput);
-		itemModels.generateDynamicTrimmableItem(item, model, trimPrefix);
+		itemModels.generateTrimmableItem(item, model, false, java.util.Map.of());
 	}
 }

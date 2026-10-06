@@ -5,10 +5,10 @@ import com.yaskulsky.equivox.components.GemData;
 import com.yaskulsky.equivox.gameObjs.registries.PEDataComponentTypes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackLinkedSet;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
 import org.jetbrains.annotations.NotNull;
 
-public class EternalDensityInventory extends ItemStackHandler {
+public class EternalDensityInventory extends PEItemStacksHandler {
 
 	private final ItemStack invItem;
 	private final boolean remote;

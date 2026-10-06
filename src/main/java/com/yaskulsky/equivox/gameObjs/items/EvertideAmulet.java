@@ -14,7 +14,6 @@ import com.yaskulsky.equivox.utils.ClientKeyHelper;
 import com.yaskulsky.equivox.utils.LevelHelper;
 import com.yaskulsky.equivox.utils.MathUtils;
 import com.yaskulsky.equivox.utils.PEKeybind;
-import com.yaskulsky.equivox.utils.LegacyFluidHandlerResourceHandler;
 import com.yaskulsky.equivox.utils.PlayerHelper;
 import com.yaskulsky.equivox.utils.WorldHelper;
 import com.yaskulsky.equivox.utils.text.PELang;
@@ -39,10 +38,11 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.server.level.ServerLevel;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
+import net.neoforged.neoforge.transfer.InfiniteResourceHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.ResourceHandlerUtil;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
 import org.jetbrains.annotations.NotNull;
 
 public class EvertideAmulet extends ItemPE implements IProjectileShooter, IPedestalItem, ICapabilityAware, ISelfCraftingRemainder {
@@ -62,9 +62,9 @@ public class EvertideAmulet extends ItemPE implements IProjectileShooter, IPedes
 		BlockPos pos = ctx.getClickedPos();
 		if (!level.isClientSide() && PlayerHelper.hasEditPermission(player, level, pos)) {
 			Direction sideHit = ctx.getClickedFace();
-			IFluidHandler fluidHandler = WorldHelper.getFluidHandler(level, pos, sideHit);
+			ResourceHandler<FluidResource> fluidHandler = WorldHelper.getFluidHandler(level, pos, sideHit);
 			if (fluidHandler != null) {
-				fluidHandler.fill(new FluidStack(Fluids.WATER, FluidType.BUCKET_VOLUME), IFluidHandler.FluidAction.EXECUTE);
+				ResourceHandlerUtil.insertStacking(fluidHandler, FluidResource.of(Fluids.WATER), FluidType.BUCKET_VOLUME, null);
 				return InteractionResult.CONSUME;
 			}
 			WorldHelper.placeFluid(player, level, pos, sideHit, Fluids.WATER, !EquivoxConfig.server.items.opEvertide.get());
@@ -125,58 +125,7 @@ public class EvertideAmulet extends ItemPE implements IProjectileShooter, IPedes
 
 	@Override
 	public void attachCapabilities(RegisterCapabilitiesEvent event) {
-		event.registerItem(Capabilities.Fluid.ITEM, (stack, context) -> LegacyFluidHandlerResourceHandler.ofItem(new InfiniteFluidHandler(stack)), this);
+		event.registerItem(Capabilities.Fluid.ITEM, (stack, context) -> new InfiniteResourceHandler<>(FluidResource.of(Fluids.WATER)), this);
 		IntegrationHelper.registerCuriosCapability(event, this);
-	}
-
-	private record InfiniteFluidHandler(ItemStack stack) implements IFluidHandlerItem {
-
-		@NotNull
-		@Override
-		public ItemStack getContainer() {
-			return stack;
-		}
-
-		@Override
-		public int getTanks() {
-			return 1;
-		}
-
-		@NotNull
-		@Override
-		public FluidStack getFluidInTank(int tank) {
-			return tank == 0 ? new FluidStack(Fluids.WATER, Integer.MAX_VALUE) : FluidStack.EMPTY;
-		}
-
-		@Override
-		public int getTankCapacity(int tank) {
-			return tank == 0 ? Integer.MAX_VALUE : 0;
-		}
-
-		@Override
-		public boolean isFluidValid(int tank, @NotNull FluidStack stack) {
-			return isWater(stack);
-		}
-
-		@Override
-		public int fill(@NotNull FluidStack resource, @NotNull FluidAction action) {
-			return isWater(resource) ? resource.getAmount() : 0;
-		}
-
-		@NotNull
-		@Override
-		public FluidStack drain(@NotNull FluidStack resource, @NotNull FluidAction action) {
-			return isWater(resource) ? resource : FluidStack.EMPTY;
-		}
-
-		private boolean isWater(FluidStack stack) {
-			return stack.is(FluidTags.WATER);
-		}
-
-		@NotNull
-		@Override
-		public FluidStack drain(int maxDrain, @NotNull FluidAction action) {
-			return new FluidStack(Fluids.WATER, maxDrain);
-		}
 	}
 }

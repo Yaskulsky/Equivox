@@ -20,7 +20,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-import net.neoforged.neoforge.items.IItemHandler;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
 
 @EventBusSubscriber(modid = PECore.MODID)
 public class TickEvents {
@@ -32,7 +32,7 @@ public class TickEvents {
 		if (provider != null) {
 			Set<DyeColor> colorsChanged = EnumSet.noneOf(DyeColor.class);
 			for (DyeColor color : getBagColorsPresent(player)) {
-				IItemHandler inv = provider.getBag(color);
+				PEItemStacksHandler inv = provider.getBag(color);
 				for (int i = 0, slots = inv.getSlots(); i < slots; i++) {
 					ItemStack current = inv.getStackInSlot(i);
 					IAlchBagItem alchBagItem = current.getCapability(PECapabilities.ALCH_BAG_ITEM_CAPABILITY);

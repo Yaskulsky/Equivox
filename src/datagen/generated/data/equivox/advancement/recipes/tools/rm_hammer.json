@@ -16,7 +16,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "equivox:rm_hammer"
+        "recipes": "equivox:rm_hammer"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

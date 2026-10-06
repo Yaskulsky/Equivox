@@ -57,7 +57,7 @@ public class EntitySWRGProjectile extends NoGravityThrowableProjectile {
 			ItemStack found = PlayerHelper.findFirstItem(player, fromArcana ? PEItems.ARCANA_RING : PEItems.SWIFTWOLF_RENDING_GALE);
 			if (!found.isEmpty() && ItemPE.consumeFuel(player, found, 768, true)) {
 				BlockPos pos = result.getBlockPos();
-				LightningBolt lightning = LevelHelper.createLightning(serverLevel, pos.getCenter());
+				LightningBolt lightning = LevelHelper.createLightning(serverLevel, net.minecraft.world.phys.Vec3.atCenterOf(pos));
 				lightning.setCause(player);
 				level().addFreshEntity(lightning);
 				if (level().isThundering()) {
@@ -86,7 +86,7 @@ public class EntitySWRGProjectile extends NoGravityThrowableProjectile {
 				// Fake onGround before knockBack, so you can re-launch mobs that have already been launched
 				boolean oldOnGround = e.onGround();
 				e.setOnGround(true);
-				e.knockback(5F, -getDeltaMovement().x() * 0.25, -getDeltaMovement().z() * 0.25);
+				e.knockback(5F, -getDeltaMovement().x() * 0.25, -getDeltaMovement().z() * 0.25, level().damageSources().playerAttack(player), 1.0F);
 				e.setOnGround(oldOnGround);
 				e.setDeltaMovement(e.getDeltaMovement().multiply(1, 3, 1));
 			}

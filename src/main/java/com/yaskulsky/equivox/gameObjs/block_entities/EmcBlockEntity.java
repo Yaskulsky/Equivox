@@ -19,7 +19,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.status.ChunkStatus;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
@@ -140,7 +140,7 @@ public abstract class EmcBlockEntity extends BaseEmcBlockEntity {
 		return sentEmc;
 	}
 
-	protected class StackHandler extends ItemStackHandler {
+	protected class StackHandler extends PEItemStacksHandler {
 
 		protected StackHandler(int size) {
 			super(size);

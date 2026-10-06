@@ -3,6 +3,7 @@ package com.yaskulsky.equivox.gameObjs.items.rings;
 import java.util.List;
 import com.yaskulsky.equivox.api.block_entity.IDMPedestal;
 import com.yaskulsky.equivox.api.capabilities.item.IExtraFunction;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
 import com.yaskulsky.equivox.api.capabilities.item.IPedestalItem;
 import com.yaskulsky.equivox.gameObjs.items.GemEternalDensity;
 import com.yaskulsky.equivox.gameObjs.registries.PEItems;
@@ -25,7 +26,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult.Type;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.EntityTeleportEvent;
-import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -84,7 +86,7 @@ public class VoidRing extends GemEternalDensity implements IPedestalItem, IExtra
 	}
 
 	@Override
-	public boolean updateInAlchBag(@NotNull IItemHandler inv, @NotNull Player player, @NotNull ItemStack stack) {
+	public boolean updateInAlchBag(@NotNull PEItemStacksHandler inv, @NotNull Player player, @NotNull ItemStack stack) {
 		// super is Gem of Eternal Density
 		return super.updateInAlchBag(inv, player, stack) | PEItems.BLACK_HOLE_BAND.get().updateInAlchBag(inv, player, stack);
 	}

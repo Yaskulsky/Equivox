@@ -56,7 +56,7 @@ public class PedestalRenderer implements BlockEntityRenderer<DMPedestalBlockEnti
 		poseStack.translate(0, bob, 0);
 		poseStack.scale(0.75F, 0.75F, 0.75F);
 		float angle = (state.gameTime + state.partialTick) / SharedConstants.TICKS_PER_SECOND;
-		poseStack.mulPose(Axis.YP.rotation(angle));
+		poseStack.rotateDegrees(Axis.YP, angle * (180.0F / (float) Math.PI));
 
 		ItemStackRenderState itemRenderState = new ItemStackRenderState();
 		var level = Minecraft.getInstance().level;

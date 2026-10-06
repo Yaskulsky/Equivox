@@ -16,7 +16,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "equivox:aeternalis_fuel"
+        "recipes": "equivox:aeternalis_fuel"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

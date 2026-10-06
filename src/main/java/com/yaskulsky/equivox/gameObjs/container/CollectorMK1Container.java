@@ -13,7 +13,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerInput;
 import net.minecraft.world.inventory.DataSlot;
 import net.minecraft.world.inventory.Slot;
-import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 import org.jetbrains.annotations.NotNull;
 
 public class CollectorMK1Container extends PEContainer {
@@ -41,8 +42,8 @@ public class CollectorMK1Container extends PEContainer {
 	}
 
 	void initSlots() {
-		IItemHandler aux = collector.getAux();
-		IItemHandler main = collector.getInput();
+		ResourceHandler<ItemResource> aux = collector.getAux();
+		ResourceHandler<ItemResource> main = collector.getInput();
 
 		//Klein Star Slot
 		this.addSlot(new ValidatedSlot(aux, CollectorMK1BlockEntity.UPGRADING_SLOT, 124, 58, SlotPredicates.COLLECTOR_INV));

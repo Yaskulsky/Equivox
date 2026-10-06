@@ -144,7 +144,7 @@ public class PEBlocks {
 
 	public static final BlockRegistryObject<MatterBlock, BlockItem> RED_MATTER = registerMatterBlock("red_matter_block", EnumMatterType.RED_MATTER, 2_000_000, 6_000_000);
 
-	public static final WallOrFloorBlockRegistryObject<InterdictionTorch, InterdictionTorchWall, StandingAndWallBlockItem> INTERDICTION_TORCH = BLOCKS.registerWallOrFloorItem("interdiction_torch", InterdictionTorch::new, InterdictionTorchWall::new, id -> PERegistryUtil.blockProps(id).pushReaction(PushReaction.DESTROY).noCollision().instabreak().strength(0).lightLevel(state -> 14).randomTicks());
+	public static final WallOrFloorBlockRegistryObject<InterdictionTorch, InterdictionTorchWall, StandingAndWallBlockItem> INTERDICTION_TORCH = BLOCKS.registerWallOrFloorItem("interdiction_torch", InterdictionTorch::new, InterdictionTorchWall::new, id -> PERegistryUtil.blockProps(id).pushReaction(PushReaction.POPPED).noCollision().instabreak().strength(0).lightLevel(state -> 14).randomTicks());
 
 	public static final BlockRegistryObject<EquivoxTNT, BlockItem> NOVA_CATALYST = registerExplosive("nova_catalyst", EntityNovaCatalystPrimed::new);
 

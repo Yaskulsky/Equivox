@@ -22,21 +22,21 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import com.yaskulsky.equivox.utils.LegacyItemHandlerResourceHandler;
 import net.neoforged.neoforge.capabilities.ICapabilityProvider;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
-import net.neoforged.neoforge.items.ItemStackHandler;
-import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
+import com.yaskulsky.equivox.utils.PECombinedItemStacks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class RelayMK1BlockEntity extends EmcBlockEntity implements MenuProvider, IRelay {
 
 	public static final ICapabilityProvider<RelayMK1BlockEntity, @Nullable Direction, ResourceHandler<ItemResource>> INVENTORY_PROVIDER = (relay, side) -> {
-		IItemHandler handler;
+		ResourceHandler<ItemResource> handler;
 		if (side == null) {
 			handler = relay.joined;
 		} else if (side.getAxis().isVertical()) {
@@ -44,15 +44,15 @@ public class RelayMK1BlockEntity extends EmcBlockEntity implements MenuProvider,
 		} else {
 			handler = relay.automationInput;
 		}
-		return LegacyItemHandlerResourceHandler.of(handler);
+		return handler;
 	};
 
 	private final CompactableStackHandler input;
-	private final ItemStackHandler output = new StackHandler(1);
+	private final PEItemStacksHandler output = new StackHandler(1);
 
-	private final IItemHandlerModifiable automationOutput;
-	private final IItemHandlerModifiable automationInput;
-	private final IItemHandler joined;
+	private final WrappedItemHandler automationOutput;
+	private final WrappedItemHandler automationInput;
+	private final ResourceHandler<ItemResource> joined;
 
 	private final long chargeRate;
 
@@ -92,7 +92,7 @@ public class RelayMK1BlockEntity extends EmcBlockEntity implements MenuProvider,
 				return super.extractItem(slot, amount, simulate);
 			}
 		};
-		this.joined = new CombinedInvWrapper(automationInput, automationOutput);
+		this.joined = new PECombinedItemStacks(automationInput, automationOutput);
 	}
 
 	@Override
@@ -108,11 +108,11 @@ public class RelayMK1BlockEntity extends EmcBlockEntity implements MenuProvider,
 		return input.getStackInSlot(0);
 	}
 
-	public IItemHandler getInput() {
+	public ResourceHandler<ItemResource> getInput() {
 		return input;
 	}
 
-	public IItemHandler getOutput() {
+	public ResourceHandler<ItemResource> getOutput() {
 		return output;
 	}
 

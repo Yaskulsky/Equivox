@@ -11,6 +11,7 @@ import com.yaskulsky.equivox.utils.text.PELang;
 import net.minecraft.ChatFormatting;
 import net.minecraft.SharedConstants;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -87,7 +88,7 @@ public class GemHelmet extends GemArmorBase {
 				BlockPos strikePos = strikeResult.getBlockPos();
 				Level level = player.level();
 				if (level instanceof ServerLevel serverLevel) {
-					LightningBolt lightning = LevelHelper.createLightning(serverLevel, strikePos.getCenter());
+					LightningBolt lightning = LevelHelper.createLightning(serverLevel, Vec3.atCenterOf(strikePos));
 					lightning.setCause((ServerPlayer) player);
 					serverLevel.addFreshEntity(lightning);
 				}

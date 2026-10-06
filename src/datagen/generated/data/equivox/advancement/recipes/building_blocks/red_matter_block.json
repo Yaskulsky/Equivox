@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "equivox:red_matter_block"
+        "recipes": "equivox:red_matter_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

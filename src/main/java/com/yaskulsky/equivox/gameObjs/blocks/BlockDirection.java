@@ -17,7 +17,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
 import org.jetbrains.annotations.NotNull;
@@ -46,7 +47,7 @@ public abstract class BlockDirection extends Block {
 	public void onBlockStateChange(LevelReader level, BlockPos pos, BlockState oldState, BlockState newState) {
 		if (oldState.getBlock() != newState.getBlock() && level instanceof Level world && !world.isClientSide()) {
 			ResourceHandler<ItemResource> resourceHandler = world.getCapability(Capabilities.Item.BLOCK, pos, oldState, null, null);
-			IItemHandler handler = resourceHandler == null ? null : IItemHandler.of(resourceHandler);
+			ResourceHandler<ItemResource> handler = resourceHandler == null ? null : /*ResourceHandler<ItemResource>.of*/(resourceHandler);
 			WorldHelper.dropInventory(handler, world, pos);
 		}
 	}

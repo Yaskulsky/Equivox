@@ -8,6 +8,7 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.function.IntFunction;
 import com.yaskulsky.equivox.api.capabilities.PECapabilities;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
 import com.yaskulsky.equivox.api.capabilities.block_entity.IEmcStorage.EmcAction;
 import com.yaskulsky.equivox.api.capabilities.item.IExtraFunction;
 import com.yaskulsky.equivox.api.capabilities.item.IItemEmcHolder;
@@ -20,7 +21,6 @@ import com.yaskulsky.equivox.gameObjs.registries.PESoundEvents;
 import com.yaskulsky.equivox.utils.Constants;
 import com.yaskulsky.equivox.utils.ItemCapabilityHelper;
 import com.yaskulsky.equivox.utils.ItemHelper;
-import com.yaskulsky.equivox.utils.LegacyItemHandlerResourceHandler;
 import com.yaskulsky.equivox.utils.PlayerHelper;
 import com.yaskulsky.equivox.utils.WorldHelper;
 import com.yaskulsky.equivox.utils.text.IHasTranslationKey;
@@ -54,9 +54,11 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.MutableDataComponentHolder;
-import net.neoforged.neoforge.items.ComponentItemHandler;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.IItemHandlerModifiable;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
+import net.minecraft.core.NonNullList;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -108,11 +110,11 @@ public class MercurialEye extends ItemMode<MercurialEyeMode> implements IExtraFu
 	}
 
 	private InteractionResult formBlocks(ItemStack eye, Player player, InteractionHand hand, Level level, BlockPos startingPos, @Nullable Direction facing) {
-		IItemHandler inventory = ItemCapabilityHelper.of(eye);
+		ResourceHandler<ItemResource> inventory = ItemCapabilityHelper.of(eye);
 		if (inventory == null) {
 			return InteractionResult.FAIL;
 		}
-		ItemStack klein = inventory.getStackInSlot(0);
+		ItemStack klein = PEItemStacksHandler.getStack(inventory, 0);
 		if (klein.getCapability(PECapabilities.EMC_HOLDER_ITEM_CAPABILITY) == null) {
 			playNoEMCSound(player);
 			return InteractionResult.FAIL;
@@ -120,16 +122,16 @@ public class MercurialEye extends ItemMode<MercurialEyeMode> implements IExtraFu
 
 		BlockState startingState = level.getBlockState(startingPos);
 		long startingBlockEmc = IEMCProxy.INSTANCE.getValue(startingState.getBlock());
-		ItemStack target = inventory.getStackInSlot(1);
+		ItemStack target = PEItemStacksHandler.getStack(inventory, 1);
 		BlockState newState;
 		long newBlockEmc;
 		MercurialEyeMode mode = getMode(eye);
 		BlockPlaceContext context;
 		BlockHitResult hitResult;
 		if (facing == null) {
-			hitResult = new BlockHitResult(startingPos.getCenter(), Direction.UP, startingPos, true);
+			hitResult = new BlockHitResult(Vec3.atCenterOf(startingPos), Direction.UP, startingPos, true);
 		} else {
-			hitResult = new BlockHitResult(startingPos.relative(facing).getCenter(), facing, startingPos, false);
+			hitResult = new BlockHitResult(Vec3.atCenterOf(startingPos.relative(facing)), facing, startingPos, false);
 		}
 		if (!target.isEmpty()) {
 			context = new BlockPlaceContext(level, player, hand, target.copy(), hitResult);
@@ -273,11 +275,11 @@ public class MercurialEye extends ItemMode<MercurialEyeMode> implements IExtraFu
 		if (oldState == newState || oldState.hasBlockEntity()) {
 			return false;
 		}
-		IItemHandler inventory = ItemCapabilityHelper.of(eye);
+		ResourceHandler<ItemResource> inventory = ItemCapabilityHelper.of(eye);
 		if (inventory == null) {
 			return false;
 		}
-		ItemStack klein = inventory.getStackInSlot(0);
+		ItemStack klein = PEItemStacksHandler.getStack(inventory, 0);
 		IItemEmcHolder emcHolder = klein.getCapability(PECapabilities.EMC_HOLDER_ITEM_CAPABILITY);
 		if (emcHolder == null || emcHolder.getStoredEmc(klein) < newEMC - oldEMC) {
 			playNoEMCSound(player);
@@ -300,7 +302,7 @@ public class MercurialEye extends ItemMode<MercurialEyeMode> implements IExtraFu
 				}
 				emcHolder.extractEmc(replacement, newEMC - oldEMC, EmcAction.EXECUTE);
 			}
-			if (inventory instanceof IItemHandlerModifiable modifiable) {
+			if (inventory instanceof PEItemStacksHandler modifiable) {
 				modifiable.setStackInSlot(0, replacement);
 			}
 			return true;
@@ -345,7 +347,7 @@ public class MercurialEye extends ItemMode<MercurialEyeMode> implements IExtraFu
 
 	@Override
 	public void attachCapabilities(RegisterCapabilitiesEvent event) {
-		event.registerItem(Capabilities.Item.ITEM, (stack, context) -> LegacyItemHandlerResourceHandler.of(new EyeItemHandler(stack)), this);
+		event.registerItem(Capabilities.Item.ITEM, (stack, context) -> new EyeItemHandler(stack), this);
 	}
 
 	@Override
@@ -358,10 +360,19 @@ public class MercurialEye extends ItemMode<MercurialEyeMode> implements IExtraFu
 		return MercurialEyeMode.CREATION;
 	}
 
-	private static class EyeItemHandler extends ComponentItemHandler {
+	private static class EyeItemHandler extends PEItemStacksHandler {
 
-		public EyeItemHandler(MutableDataComponentHolder parent) {
-			super(parent, PEDataComponentTypes.EYE_INVENTORY.get(), 2);
+		private final ItemStack parent;
+
+		public EyeItemHandler(ItemStack parent) {
+			super(loadContents(parent));
+			this.parent = parent;
+		}
+
+		private static NonNullList<ItemStack> loadContents(ItemStack parent) {
+			NonNullList<ItemStack> slots = NonNullList.withSize(2, ItemStack.EMPTY);
+			parent.getOrDefault(PEDataComponentTypes.EYE_INVENTORY.get(), ItemContainerContents.EMPTY).copyInto(slots);
+			return slots;
 		}
 
 		@Override
@@ -370,7 +381,7 @@ public class MercurialEye extends ItemMode<MercurialEyeMode> implements IExtraFu
 				return true;
 			} else if (slot == 0) {
 				return SlotPredicates.EMC_HOLDER.test(stack);
-			} //slot == 1
+			}
 			return SlotPredicates.MERCURIAL_TARGET.test(stack);
 		}
 
@@ -380,9 +391,13 @@ public class MercurialEye extends ItemMode<MercurialEyeMode> implements IExtraFu
 		}
 
 		@Override
-		protected void updateContents(@NotNull ItemContainerContents contents, @NotNull ItemStack stack, int slot) {
-			//Note: We just do a copy with count of one as the empty stack will stay empty
-			super.updateContents(contents, stack.copyWithCount(1), slot);
+		protected void onContentsChanged(int slot) {
+			parent.set(PEDataComponentTypes.EYE_INVENTORY.get(), ItemContainerContents.fromItems(copyToList().stream().toList()));
+		}
+
+		@Override
+		public void setStackInSlot(int slot, @NotNull ItemStack stack) {
+			super.setStackInSlot(slot, stack.copyWithCount(1));
 		}
 	}
 

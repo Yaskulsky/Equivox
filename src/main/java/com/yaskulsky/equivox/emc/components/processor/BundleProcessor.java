@@ -41,6 +41,6 @@ public class BundleProcessor extends SimpleContainerProcessor<BundleContents> {
 
 	@Override
 	protected Iterable<ItemStack> getStoredItems(BundleContents component) {
-		return component.itemCopyStream().toList();
+		return component.itemCopies().toList();
 	}
 }

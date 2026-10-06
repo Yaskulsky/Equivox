@@ -1,8 +1,6 @@
 package com.yaskulsky.equivox.gameObjs.blocks;
 
-import com.mojang.serialization.MapCodec;
 import com.yaskulsky.equivox.gameObjs.container.TransmutationContainer;
-import com.yaskulsky.equivox.gameObjs.registries.PEBlockTypes;
 import com.yaskulsky.equivox.utils.WorldHelper;
 import com.yaskulsky.equivox.utils.text.PELang;
 import net.minecraft.core.BlockPos;
@@ -48,12 +46,6 @@ public class TransmutationStone extends DirectionalBlock implements SimpleWaterl
 	public TransmutationStone(Properties props) {
 		super(props);
 		this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.UP).setValue(BlockStateProperties.WATERLOGGED, false));
-	}
-
-	@NotNull
-	@Override
-	protected MapCodec<? extends DirectionalBlock> codec() {
-		return PEBlockTypes.TRANSMUTATION_TABLE.value();
 	}
 
 	@Override

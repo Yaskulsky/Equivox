@@ -21,24 +21,24 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import com.yaskulsky.equivox.utils.LegacyItemHandlerResourceHandler;
 import net.neoforged.neoforge.capabilities.ICapabilityProvider;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class CondenserBlockEntity extends EmcChestBlockEntity {
 
 	public static final ICapabilityProvider<CondenserBlockEntity, @Nullable Direction, ResourceHandler<ItemResource>> INVENTORY_PROVIDER =
-			(condenser, side) -> LegacyItemHandlerResourceHandler.of(condenser.getAutomationHandler(side));
+			(condenser, side) -> condenser.getAutomationHandler(side);
 
-	protected final ItemStackHandler inputInventory = createInput();
-	private final ItemStackHandler outputInventory = createOutput();
+	protected final PEItemStacksHandler inputInventory = createInput();
+	private final PEItemStacksHandler outputInventory = createOutput();
 	@Nullable
 	private ItemInfo lockInfo;
 	private boolean isAcceptingEmc;
@@ -46,7 +46,7 @@ public class CondenserBlockEntity extends EmcChestBlockEntity {
 	public long requiredEmc;
 	//Start at one less than actual just to ensure we run initially after loading
 	private int loadIndex = EMCMappingHandler.getLoadIndex() - 1;
-	private final IItemHandler automationInventory;
+	private final ResourceHandler<ItemResource> automationInventory;
 
 	public CondenserBlockEntity(BlockPos pos, BlockState state) {
 		this(PEBlockEntityTypes.CONDENSER, pos, state);
@@ -62,7 +62,7 @@ public class CondenserBlockEntity extends EmcChestBlockEntity {
 	 * MK2 routes vertical faces to output and horizontal faces to input.
 	 */
 	@NotNull
-	protected IItemHandler getAutomationHandler(@Nullable Direction side) {
+	protected ResourceHandler<ItemResource> getAutomationHandler(@Nullable Direction side) {
 		return automationInventory;
 	}
 
@@ -87,24 +87,24 @@ public class CondenserBlockEntity extends EmcChestBlockEntity {
 		return lockInfo;
 	}
 
-	public ItemStackHandler getInput() {
+	public PEItemStacksHandler getInput() {
 		return inputInventory;
 	}
 
-	public ItemStackHandler getOutput() {
+	public PEItemStacksHandler getOutput() {
 		return outputInventory;
 	}
 
-	protected ItemStackHandler createInput() {
+	protected PEItemStacksHandler createInput() {
 		return new StackHandler(91);
 	}
 
-	protected ItemStackHandler createOutput() {
+	protected PEItemStacksHandler createOutput() {
 		return inputInventory;
 	}
 
 	@NotNull
-	protected IItemHandler createAutomationInventory() {
+	protected ResourceHandler<ItemResource> createAutomationInventory() {
 		return new WrappedItemHandler(inputInventory, WrappedItemHandler.WriteMode.IN_OUT) {
 			@NotNull
 			@Override
@@ -170,7 +170,7 @@ public class CondenserBlockEntity extends EmcChestBlockEntity {
 	protected final void pushStack() {
 		ItemInfo lockInfo = getLockInfo();
 		if (lockInfo != null) {
-			ItemHandlerHelper.insertItemStacked(outputInventory, lockInfo.createStack(), false);
+			PEItemStacksHandler.insertStackedRemainder(outputInventory, lockInfo.createStack(), false);
 		}
 	}
 

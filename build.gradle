@@ -152,6 +152,8 @@ java {
 neoForge {
     enable {
         version = neo_version
+        // Prebuilt game jar — NeoForm recompile breaks on JDK 25 (HolderSet.Named#contents)
+        disableRecompilation = true
         enabledSourceSets = sourceSets // All source sets use Minecraft code
     }
 
@@ -266,6 +268,9 @@ test {
     enabled = false
 }
 
+// JAR name / mods.toml MC range can be 26.3 while deps (JEI) still use 26.1.2 — set dep_minecraft_version
+def minecraftDepVersion = findProperty('dep_minecraft_version') ?: minecraft_version
+
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junit_version}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junit_version}")
@@ -279,16 +284,16 @@ dependencies {
     // Jade: always compile (optional at runtime) so Provider shows Device Online/Offline in the same tooltip as AE2
     compileOnly("curse.maven:jade-324717:${jade_id}")
     // JEI / EMI APIs: always compile so transmutation/arcane tablet + transfer ships in ATM JARs
-    compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
+    compileOnly("mezz.jei:jei-${minecraftDepVersion}-neoforge-api:${jei_version}")
     // Refined Storage: Transmutation Provider attaches to RS Grid (optional at runtime)
     compileOnly(files(rootProject.file('.rs-ref/refinedstorage-neoforge-3.2.1.jar')))
 
     if (enableOptionalIntegrations) {
         if (recipe_viewer == 'jei' || recipe_viewer == 'hybrid') {
-            localRuntime("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
+            localRuntime("mezz.jei:jei-${minecraftDepVersion}-neoforge:${jei_version}")
         }
 
-        def emi = "dev.emi:emi-neoforge:${emi_version}+${minecraft_version}"
+        def emi = "dev.emi:emi-neoforge:${emi_version}+${minecraftDepVersion}"
         datagenCompileOnly(emi)
         if (recipe_viewer == 'emi' || recipe_viewer == 'hybrid') {
             localRuntime(emi)
@@ -307,7 +312,7 @@ dependencies {
         localRuntime("curse.maven:jade-324717:${jade_id}")
         compileOnly("mcp.mobius.waila:wthit-api:forge-${wthit_version}")
 
-        def crt = "com.blamejared.crafttweaker:CraftTweaker-neoforge-${minecraft_version}:${crafttweaker_version}"
+        def crt = "com.blamejared.crafttweaker:CraftTweaker-neoforge-${minecraftDepVersion}:${crafttweaker_version}"
         compileOnly(crt)
         localRuntime(crt)
     }
@@ -330,6 +335,9 @@ tasks.named('processResources', ProcessResources) {
 
 //Make the various classes tasks depend on the corresponding replaceResources tasks in addition to the default processResources tasks they depend on
 tasks.named('classes') { dependsOn(replaceResources) }
+
+// Minecraft 26.3: datagen sources not fully ported (bootstrap registries, TagAppender ResourceKey, etc.).
+// Release JAR uses committed assets under src/datagen/generated/. Re-enable after porting datagen/.
 
 def getManifestAttributes() {
     return [

@@ -18,9 +18,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import com.yaskulsky.equivox.utils.LegacyItemHandlerResourceHandler;
 import net.neoforged.neoforge.capabilities.ICapabilityProvider;
-import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class AlchBlockEntityChest extends EmcChestBlockEntity {
 
-	public static final ICapabilityProvider<AlchBlockEntityChest, @Nullable Direction, ResourceHandler<ItemResource>> INVENTORY_PROVIDER = (chest, side) -> LegacyItemHandlerResourceHandler.of(chest.inventory);
+	public static final ICapabilityProvider<AlchBlockEntityChest, @Nullable Direction, ResourceHandler<ItemResource>> INVENTORY_PROVIDER = (chest, side) -> chest.inventory;
 
 	private final StackHandler inventory = new StackHandler(104) {
 		@Override
@@ -85,7 +85,7 @@ public class AlchBlockEntityChest extends EmcChestBlockEntity {
 		alchChest.updateComparators(level, pos);
 	}
 
-	public IItemHandler getInventory() {
+	public ResourceHandler<ItemResource> getInventory() {
 		return inventory;
 	}
 

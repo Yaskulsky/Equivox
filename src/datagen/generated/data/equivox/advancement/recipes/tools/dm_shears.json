@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "equivox:dm_shears"
+        "recipes": "equivox:dm_shears"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -1,11 +1,9 @@
 package com.yaskulsky.equivox.gameObjs.blocks;
 
-import com.mojang.serialization.MapCodec;
 import com.yaskulsky.equivox.gameObjs.EnumMatterType;
 import com.yaskulsky.equivox.gameObjs.block_entities.DMFurnaceBlockEntity;
 import com.yaskulsky.equivox.gameObjs.registration.impl.BlockEntityTypeRegistryObject;
 import com.yaskulsky.equivox.gameObjs.registries.PEBlockEntityTypes;
-import com.yaskulsky.equivox.gameObjs.registries.PEBlockTypes;
 import com.yaskulsky.equivox.utils.WorldHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
@@ -15,8 +13,9 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.ResourceHandlerUtil;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,12 +34,6 @@ public class MatterFurnace extends AbstractFurnaceBlock implements IMatterBlock,
 		return matterType == EnumMatterType.RED_MATTER ? PEBlockEntityTypes.RED_MATTER_FURNACE : PEBlockEntityTypes.DARK_MATTER_FURNACE;
 	}
 
-	@NotNull
-	@Override
-	protected MapCodec<MatterFurnace> codec() {
-		return PEBlockTypes.MATTER_FURNACE.value();
-	}
-
 	@Override
 	protected void openContainer(Level level, @NotNull BlockPos pos, @NotNull Player player) {
 		if (!level.isClientSide()) {
@@ -54,7 +47,7 @@ public class MatterFurnace extends AbstractFurnaceBlock implements IMatterBlock,
 	@Override
 	public void onBlockStateChange(LevelReader level, BlockPos pos, BlockState oldState, BlockState newState) {
 		if (oldState.getBlock() != newState.getBlock() && level instanceof Level world && !world.isClientSide()) {
-			IItemHandler handler = WorldHelper.getItemHandler(world, pos, oldState, null, null);
+			ResourceHandler<ItemResource> handler = WorldHelper.getItemHandler(world, pos, oldState, null, null);
 			WorldHelper.dropInventory(handler, world, pos);
 		}
 	}
@@ -62,7 +55,8 @@ public class MatterFurnace extends AbstractFurnaceBlock implements IMatterBlock,
 	@Override
 	@Deprecated
 	public int getAnalogOutputSignal(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Direction direction) {
-		return ItemHandlerHelper.calcRedstoneFromInventory(WorldHelper.getItemHandler(level, pos, state, null, null));
+		ResourceHandler<ItemResource> handler = WorldHelper.getItemHandler(level, pos, state, null, null);
+		return handler == null ? 0 : ResourceHandlerUtil.getRedstoneSignalFromResourceHandler(handler);
 	}
 
 	@Override

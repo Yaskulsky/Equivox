@@ -36,7 +36,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.inventory.TransientCraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -199,9 +199,9 @@ public class ArcaneTabletContainer extends PEHandContainer implements IArcaneCra
 		super.removed(player);
 		boolean disconnect = !player.isAlive() || player instanceof ServerPlayer serverPlayer && serverPlayer.hasDisconnected();
 		if (disconnect) {
-			player.drop(unlearn.getItem(), false);
+			player.drop(unlearn.getItem(), false, net.minecraft.util.Prediction.SERVER_ONLY);
 			for (ItemStack stack : craftSlots.getItems()) {
-				player.drop(stack, false);
+				player.drop(stack, false, net.minecraft.util.Prediction.SERVER_ONLY);
 			}
 		} else {
 			ArcaneTabletHelper.returnToInventoryOrEmc(playerInv, player, provider, unlearn.getItem(), true);
@@ -267,7 +267,7 @@ public class ArcaneTabletContainer extends PEHandContainer implements IArcaneCra
 						transmutationInventory.removeEmc(BigInteger.valueOf(itemEmc));
 					}
 					stack.setCount(1);
-					ItemHandlerHelper.insertItemStacked(ItemCapabilityHelper.getPlayerInventory(player), stack, false);
+					PEItemStacksHandler.insertStackedRemainder(ItemCapabilityHelper.getPlayerInventory(player), stack, false);
 				} else if (itemsRoomFor > 1) {
 					BigInteger availableEMC = transmutationInventory.getAvailableEmc();
 					BigInteger emc = BigInteger.valueOf(itemEmc);
@@ -284,7 +284,7 @@ public class ArcaneTabletContainer extends PEHandContainer implements IArcaneCra
 						transmutationInventory.removeEmc(totalEmc);
 					}
 					stack.setCount(itemsRoomFor);
-					ItemHandlerHelper.insertItemStacked(ItemCapabilityHelper.getPlayerInventory(player), stack, false);
+					PEItemStacksHandler.insertStackedRemainder(ItemCapabilityHelper.getPlayerInventory(player), stack, false);
 				}
 			}
 		} else if (slotIndex >= PLAYER && slotIndex < CRAFTING) {

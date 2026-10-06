@@ -52,17 +52,17 @@ import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.Hopper;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import com.yaskulsky.equivox.utils.LegacyItemHandlerResourceHandler;
 import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.ICapabilityProvider;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
-import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
+import com.yaskulsky.equivox.utils.PECombinedItemStacks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
@@ -72,7 +72,7 @@ public class DMFurnaceBlockEntity extends EmcBlockEntity implements MenuProvider
 	private static final Codec<Map<ResourceKey<Recipe<?>>, Integer>> RECIPES_USED_CODEC = Codec.unboundedMap(Recipe.KEY_CODEC, Codec.INT);
 
 	public static final ICapabilityProvider<DMFurnaceBlockEntity, @Nullable Direction, ResourceHandler<ItemResource>> INVENTORY_PROVIDER = (furnace, side) -> {
-		IItemHandler handler;
+		ResourceHandler<ItemResource> handler;
 		if (side == null) {
 			handler = furnace.joined;
 		} else if (side == Direction.UP) {
@@ -82,7 +82,7 @@ public class DMFurnaceBlockEntity extends EmcBlockEntity implements MenuProvider
 		} else {
 			handler = furnace.automationSides;
 		}
-		return LegacyItemHandlerResourceHandler.of(handler);
+		return handler;
 	};
 	private static final long EMC_CONSUMPTION = 2;
 
@@ -112,10 +112,10 @@ public class DMFurnaceBlockEntity extends EmcBlockEntity implements MenuProvider
 	private final CompactableStackHandler outputInventory = new CompactableStackHandler(getInvSize());
 	private final StackHandler fuelInv = new StackHandler(1);
 
-	private final IItemHandler joined;
-	private final IItemHandlerModifiable automationInput;
-	private final IItemHandlerModifiable automationOutput;
-	private final IItemHandler automationSides;
+	private final ResourceHandler<ItemResource> joined;
+	private final WrappedItemHandler automationInput;
+	private final WrappedItemHandler automationOutput;
+	private final ResourceHandler<ItemResource> automationSides;
 
 	protected final int ticksBeforeSmelt;
 	private final int efficiencyBonus;
@@ -150,15 +150,15 @@ public class DMFurnaceBlockEntity extends EmcBlockEntity implements MenuProvider
 			}
 		};
 		this.automationOutput = new WrappedItemHandler(outputInventory, WrappedItemHandler.WriteMode.OUT);
-		IItemHandlerModifiable automationFuel = new WrappedItemHandler(fuelInv, WrappedItemHandler.WriteMode.IN) {
+		WrappedItemHandler automationFuel = new WrappedItemHandler(fuelInv, WrappedItemHandler.WriteMode.IN) {
 			@NotNull
 			@Override
 			public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
 				return SlotPredicates.FURNACE_FUEL.test(stack) ? super.insertItem(slot, stack, simulate) : stack;
 			}
 		};
-		this.automationSides = new CombinedInvWrapper(automationFuel, automationOutput);
-		this.joined = new CombinedInvWrapper(automationInput, automationFuel, automationOutput);
+		this.automationSides = new PECombinedItemStacks(automationFuel, automationOutput);
+		this.joined = new PECombinedItemStacks(automationInput, automationFuel, automationOutput);
 	}
 
 	@Override
@@ -220,7 +220,7 @@ public class DMFurnaceBlockEntity extends EmcBlockEntity implements MenuProvider
 		return PELang.GUI_DARK_MATTER_FURNACE.translate();
 	}
 
-	public IItemHandler getFuel() {
+	public ResourceHandler<ItemResource> getFuel() {
 		return fuelInv;
 	}
 
@@ -232,11 +232,11 @@ public class DMFurnaceBlockEntity extends EmcBlockEntity implements MenuProvider
 		return fuelInv.getStackInSlot(0);
 	}
 
-	public IItemHandler getInput() {
+	public ResourceHandler<ItemResource> getInput() {
 		return inputInventory;
 	}
 
-	public IItemHandler getOutput() {
+	public ResourceHandler<ItemResource> getOutput() {
 		return outputInventory;
 	}
 
@@ -320,12 +320,12 @@ public class DMFurnaceBlockEntity extends EmcBlockEntity implements MenuProvider
 			return;
 		}
 		ResourceHandler<ItemResource> resourceHandler = pullTarget.getCapability();
-		IItemHandler handler = resourceHandler == null ? null : IItemHandler.of(resourceHandler);
+		ResourceHandler<ItemResource> handler = resourceHandler == null ? null : /*ResourceHandler<ItemResource>.of*/(resourceHandler);
 		if (handler != null) {
-			for (int i = 0, slots = handler.getSlots(); i < slots; i++) {
-				ItemStack extractTest = handler.extractItem(i, Integer.MAX_VALUE, true);
+			for (int i = 0, slots = PEItemStacksHandler.getSlotCount(handler); i < slots; i++) {
+				ItemStack extractTest = PEItemStacksHandler.extractItem(handler, i, Integer.MAX_VALUE, true);
 				if (!extractTest.isEmpty()) {
-					IItemHandler targetInv = SlotPredicates.FURNACE_FUEL.test(extractTest) ? fuelInv : inputInventory;
+					ResourceHandler<ItemResource> targetInv = SlotPredicates.FURNACE_FUEL.test(extractTest) ? fuelInv : inputInventory;
 					transferItem(targetInv, i, extractTest, handler);
 				}
 			}
@@ -337,7 +337,7 @@ public class DMFurnaceBlockEntity extends EmcBlockEntity implements MenuProvider
 			return;
 		}
 		ResourceHandler<ItemResource> pushResourceHandler = pushTarget.getCapability();
-		IItemHandler targetInv = pushResourceHandler == null ? null : IItemHandler.of(pushResourceHandler);
+		ResourceHandler<ItemResource> targetInv = pushResourceHandler == null ? null : /*ResourceHandler<ItemResource>.of*/(pushResourceHandler);
 		if (targetInv != null) {
 			for (int i = 0, slots = outputInventory.getSlots(); i < slots; i++) {
 				ItemStack extractTest = outputInventory.extractItem(i, Integer.MAX_VALUE, true);
@@ -348,12 +348,12 @@ public class DMFurnaceBlockEntity extends EmcBlockEntity implements MenuProvider
 		}
 	}
 
-	private void transferItem(IItemHandler targetInv, int i, ItemStack extractTest, IItemHandler outputInventory) {
-		ItemStack remainderTest = ItemHandlerHelper.insertItemStacked(targetInv, extractTest, true);
+	private void transferItem(ResourceHandler<ItemResource> targetInv, int i, ItemStack extractTest, ResourceHandler<ItemResource> outputInventory) {
+		ItemStack remainderTest = PEItemStacksHandler.insertStackedRemainder(targetInv, extractTest, true);
 		int successfullyTransferred = extractTest.getCount() - remainderTest.getCount();
 		if (successfullyTransferred > 0) {
-			ItemStack toInsert = outputInventory.extractItem(i, successfullyTransferred, false);
-			ItemStack result = ItemHandlerHelper.insertItemStacked(targetInv, toInsert, false);
+			ItemStack toInsert = PEItemStacksHandler.extractItem(outputInventory, i, successfullyTransferred, false);
+			ItemStack result = PEItemStacksHandler.insertStackedRemainder(targetInv, toInsert, false);
 			assert result.isEmpty();
 		}
 	}
@@ -384,7 +384,7 @@ public class DMFurnaceBlockEntity extends EmcBlockEntity implements MenuProvider
 		ItemStack toSmelt = getItemToSmelt();
 		ItemStack smeltResult = recipeResult.scaledResult(level.getRandom(), getDoubleChance(toSmelt));
 		if (!smeltResult.isEmpty()) {//Double-check the result isn't somehow empty
-			ItemHandlerHelper.insertItemStacked(outputInventory, smeltResult, false);
+			PEItemStacksHandler.insertStackedRemainder(outputInventory, smeltResult, false);
 
 			if (toSmelt.is(Items.WET_SPONGE)) {
 				//Hardcoded handling of wet sponge to filling a bucket with water
@@ -419,7 +419,15 @@ public class DMFurnaceBlockEntity extends EmcBlockEntity implements MenuProvider
 		if (level == null) {
 			return 0;
 		}
-		return stack.getBurnTime(RecipeType.SMELTING, level.fuelValues()) * ticksBeforeSmelt / AbstractFurnaceBlockEntity.BURN_TIME_STANDARD * efficiencyBonus;
+		if (!(level instanceof ServerLevel serverLevel)) {
+			return 0;
+		}
+		var lootParams = new net.minecraft.world.level.storage.loot.LootParams.Builder(serverLevel)
+				.create(net.minecraft.world.level.storage.loot.parameters.LootContextParamSets.EMPTY);
+		var lootContext = new net.minecraft.world.level.storage.loot.LootContext.Builder(lootParams).create(java.util.Optional.empty());
+		int burn = net.minecraft.world.level.storage.loot.providers.number.ints.ResolvableInt.getFromItem(
+				stack, net.minecraft.core.component.DataComponents.COOKING_FUEL, net.minecraft.world.item.component.CookingFuel::burnTime, lootContext, 0);
+		return burn * ticksBeforeSmelt / AbstractFurnaceBlockEntity.BURN_TIME_STANDARD * efficiencyBonus;
 	}
 
 	private int getTotalCookTime(RecipeResult recipeResult) {

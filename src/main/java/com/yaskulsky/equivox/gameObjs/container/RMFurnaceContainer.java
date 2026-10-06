@@ -1,12 +1,14 @@
 package com.yaskulsky.equivox.gameObjs.container;
 
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
 import com.yaskulsky.equivox.gameObjs.block_entities.RMFurnaceBlockEntity;
 import com.yaskulsky.equivox.gameObjs.container.slots.MatterFurnaceOutputSlot;
 import com.yaskulsky.equivox.gameObjs.container.slots.SlotPredicates;
 import com.yaskulsky.equivox.gameObjs.container.slots.ValidatedSlot;
 import com.yaskulsky.equivox.gameObjs.registries.PEContainerTypes;
 import net.minecraft.world.entity.player.Inventory;
-import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 
 public class RMFurnaceContainer extends DMFurnaceContainer {
 
@@ -16,9 +18,9 @@ public class RMFurnaceContainer extends DMFurnaceContainer {
 
 	@Override
 	void initSlots() {
-		IItemHandler fuel = furnace.getFuel();
-		IItemHandler input = furnace.getInput();
-		IItemHandler output = furnace.getOutput();
+		ResourceHandler<ItemResource> fuel = furnace.getFuel();
+		ResourceHandler<ItemResource> input = furnace.getInput();
+		ResourceHandler<ItemResource> output = furnace.getOutput();
 
 		//Fuel
 		this.addSlot(new ValidatedSlot(fuel, 0, 65, 53, SlotPredicates.FURNACE_FUEL));
@@ -34,7 +36,7 @@ public class RMFurnaceContainer extends DMFurnaceContainer {
 			}
 		}
 
-		counter = output.getSlots() - 1;
+		counter = PEItemStacksHandler.getSlotCount(output) - 1;
 
 		//Output(0)
 		this.addSlot(new MatterFurnaceOutputSlot(playerInv.player, furnace, output, counter--, 125, 35));

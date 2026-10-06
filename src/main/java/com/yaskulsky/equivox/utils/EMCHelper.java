@@ -10,6 +10,7 @@ import java.math.BigInteger;
 import java.text.NumberFormat;
 import java.util.Iterator;
 import com.yaskulsky.equivox.api.capabilities.PECapabilities;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
 import com.yaskulsky.equivox.api.capabilities.block_entity.IEmcStorage.EmcAction;
 import com.yaskulsky.equivox.api.capabilities.item.IItemEmcHolder;
 import com.yaskulsky.equivox.api.proxy.IEMCProxy;
@@ -25,7 +26,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
@@ -74,10 +76,10 @@ public final class EMCHelper {
 		if (player.isCreative() || minFuel == 0) {
 			return minFuel;
 		}
-		IItemHandler curios = IntegrationHelper.getCurioItemHandler(player);
+		ResourceHandler<ItemResource> curios = IntegrationHelper.getCurioItemHandler(player);
 		if (curios != null) {
-			for (int i = 0, slots = curios.getSlots(); i < slots; i++) {
-				long actualExtracted = tryExtract(curios.getStackInSlot(i), minFuel);
+			for (int i = 0, slots = PEItemStacksHandler.getSlotCount(curios); i < slots; i++) {
+				long actualExtracted = tryExtract(PEItemStacksHandler.getStack(curios, i), minFuel);
 				if (actualExtracted > 0) {
 					player.containerMenu.broadcastChanges();
 					return actualExtracted;
@@ -86,14 +88,14 @@ public final class EMCHelper {
 		}
 
 		//Note: The implementation of this will iterate in the order: Main inventory, Armor, Offhand
-		IItemHandler inv = ItemCapabilityHelper.getPlayerInventory(player);
+		ResourceHandler<ItemResource> inv = ItemCapabilityHelper.getPlayerInventory(player);
 		if (inv != null) {
 			//Ensure that we have an item handler capability, because if for example the player is dead we will not
 			Int2IntMap map = new Int2IntOpenHashMap();
 			boolean metRequirement = false;
 			long emcConsumed = 0;
-			for (int i = 0, slots = inv.getSlots(); i < slots; i++) {
-				ItemStack stack = inv.getStackInSlot(i);
+			for (int i = 0, slots = PEItemStacksHandler.getSlotCount(inv); i < slots; i++) {
+				ItemStack stack = PEItemStacksHandler.getStack(inv, i);
 				if (stack.isEmpty()) {
 					continue;
 				}
@@ -117,7 +119,7 @@ public final class EMCHelper {
 				for (Iterator<Int2IntMap.Entry> iterator = Int2IntMaps.fastIterator(map); iterator.hasNext(); ) {
 					Int2IntMap.Entry entry = iterator.next();
 					//TODO: Should we be validating we were able to actually extract the items?
-					inv.extractItem(entry.getIntKey(), entry.getIntValue(), false);
+					PEItemStacksHandler.extractItem(inv, entry.getIntKey(), entry.getIntValue(), false);
 				}
 				player.containerMenu.broadcastChanges();
 				return emcConsumed;

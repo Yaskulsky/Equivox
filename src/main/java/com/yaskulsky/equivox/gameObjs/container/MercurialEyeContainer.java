@@ -14,7 +14,8 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import com.yaskulsky.equivox.utils.ItemCapabilityHelper;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 import org.jetbrains.annotations.NotNull;
 
 public class MercurialEyeContainer extends PEHandContainer {
@@ -27,7 +28,7 @@ public class MercurialEyeContainer extends PEHandContainer {
 
 	public MercurialEyeContainer(int windowId, Inventory playerInv, InteractionHand hand, int selected) {
 		super(PEContainerTypes.MERCURIAL_EYE_CONTAINER, windowId, playerInv, hand, selected);
-		IItemHandler handler = Objects.requireNonNull(ItemCapabilityHelper.of(this.stack));
+		ResourceHandler<ItemResource> handler = Objects.requireNonNull(ItemCapabilityHelper.of(this.stack));
 		//Klein Star
 		this.addSlot(new InventoryContainerCopySlot(handler, 0, 50, 26));
 		//Target

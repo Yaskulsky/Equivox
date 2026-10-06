@@ -35,7 +35,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.inventory.TransientCraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
 import org.jetbrains.annotations.NotNull;
 
 public class TransmutationContainer extends PEHandContainer implements IArcaneCraftingMenu {
@@ -201,12 +201,12 @@ public class TransmutationContainer extends PEHandContainer implements IArcaneCr
 		super.removed(player);
 		boolean disconnect = !player.isAlive() || player instanceof ServerPlayer serverPlayer && serverPlayer.hasDisconnected();
 		if (disconnect) {
-			player.drop(unlearn.getItem(), false);
+			player.drop(unlearn.getItem(), false, net.minecraft.util.Prediction.SERVER_ONLY);
 			for (ItemStack stack : craftSlots.getItems()) {
-				player.drop(stack, false);
+				player.drop(stack, false, net.minecraft.util.Prediction.SERVER_ONLY);
 			}
 		} else {
-			player.getInventory().placeItemBackInInventory(unlearn.getItem());
+			player.getInventory().placeItemBackInInventory(unlearn.getItem(), net.minecraft.util.Prediction.SERVER_ONLY);
 			unlearn.set(ItemStack.EMPTY);
 			for (int i = 0; i < craftSlots.getContainerSize(); i++) {
 				ItemStack stack = craftSlots.getItem(i);
@@ -269,7 +269,7 @@ public class TransmutationContainer extends PEHandContainer implements IArcaneCr
 						transmutationInventory.removeEmc(BigInteger.valueOf(itemEmc));
 					}
 					stack.setCount(1);
-					ItemHandlerHelper.insertItemStacked(ItemCapabilityHelper.getPlayerInventory(player), stack, false);
+					PEItemStacksHandler.insertStackedRemainder(ItemCapabilityHelper.getPlayerInventory(player), stack, false);
 				} else if (itemsRoomFor > 1) {
 					BigInteger availableEMC = transmutationInventory.getAvailableEmc();
 					BigInteger emc = BigInteger.valueOf(itemEmc);
@@ -286,7 +286,7 @@ public class TransmutationContainer extends PEHandContainer implements IArcaneCr
 						transmutationInventory.removeEmc(totalEmc);
 					}
 					stack.setCount(itemsRoomFor);
-					ItemHandlerHelper.insertItemStacked(ItemCapabilityHelper.getPlayerInventory(player), stack, false);
+					PEItemStacksHandler.insertStackedRemainder(ItemCapabilityHelper.getPlayerInventory(player), stack, false);
 				}
 			}
 		} else if (slotIndex >= PLAYER && slotIndex < CRAFTING) {

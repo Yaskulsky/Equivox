@@ -17,7 +17,6 @@ import com.yaskulsky.equivox.gameObjs.items.IHasConditionalAttributes;
 import com.yaskulsky.equivox.gameObjs.registries.PEArmorMaterials;
 import com.yaskulsky.equivox.gameObjs.registries.PEAttachmentTypes;
 import com.yaskulsky.equivox.gameObjs.registries.PEBlockEntityTypes;
-import com.yaskulsky.equivox.gameObjs.registries.PEBlockTypes;
 import com.yaskulsky.equivox.gameObjs.registries.PEBlocks;
 import com.yaskulsky.equivox.gameObjs.registries.PEContainerTypes;
 import com.yaskulsky.equivox.gameObjs.registries.PECreativeTabs;
@@ -50,8 +49,9 @@ import com.yaskulsky.equivox.world_transmutation.WorldTransmutationManager;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.core.Direction;
-import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
@@ -65,7 +65,7 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ItemLike;
@@ -86,6 +86,8 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
@@ -95,7 +97,6 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.registries.ModifyRegistriesEvent;
 import net.neoforged.neoforge.registries.NewRegistryEvent;
@@ -146,7 +147,6 @@ public class PECore {
 		PEAttachmentTypes.ATTACHMENT_TYPES.register(modEventBus);
 		PEBlocks.BLOCKS.register(modEventBus);
 		PEBlockEntityTypes.BLOCK_ENTITY_TYPES.register(modEventBus);
-		PEBlockTypes.BLOCK_TYPES.register(modEventBus);
 		PEContainerTypes.CONTAINER_TYPES.register(modEventBus);
 		PECreativeTabs.CREATIVE_TABS.register(modEventBus);
 		PEDataComponentTypes.DATA_COMPONENT_TYPES.register(modEventBus);
@@ -182,8 +182,8 @@ public class PECore {
 	}
 
 	public void registerCapabilities(RegisterCapabilitiesEvent event) {
-		event.registerEntity(PECapabilities.ALCH_BAG_CAPABILITY, EntityType.PLAYER, (player, context) -> new AlchBagImpl(player));
-		event.registerEntity(PECapabilities.KNOWLEDGE_CAPABILITY, EntityType.PLAYER, (player, context) -> new KnowledgeImpl(player));
+		event.registerEntity(PECapabilities.ALCH_BAG_CAPABILITY, EntityTypes.PLAYER, (player, context) -> new AlchBagImpl(player));
+		event.registerEntity(PECapabilities.KNOWLEDGE_CAPABILITY, EntityTypes.PLAYER, (player, context) -> new KnowledgeImpl(player));
 		if (ModList.get().isLoaded(IntegrationHelper.RS_MODID)) {
 			RsIntegration.registerCapabilities(event);
 		}
@@ -218,14 +218,14 @@ public class PECore {
 						level.gameEvent(null, GameEvent.BLOCK_PLACE, pos);
 					} else {
 						Direction opposite = direction.getOpposite();
-						BlockHitResult hitResult = new BlockHitResult(pos.getCenter(), opposite, pos, false);
+						BlockHitResult hitResult = new BlockHitResult(Vec3.atCenterOf(pos), opposite, pos, false);
 						UseOnContext context = new UseOnContext(level, null, InteractionHand.MAIN_HAND, stack, hitResult);
 						BlockState modifiedState = state.getToolModifiedState(context, ItemAbilities.FIRESTARTER_LIGHT, false);
 						if (modifiedState != null) {
 							level.setBlockAndUpdate(pos, modifiedState);
 							level.gameEvent(null, GameEvent.BLOCK_CHANGE, pos);
 						} else if (state.isFlammable(level, pos, opposite)) {
-							state.onCaughtFire(level, pos, opposite, null);
+							state.onCaughtFire(level, pos, opposite, null, stack);
 							if (state.getBlock() instanceof TntBlock) {
 								level.removeBlock(pos, false);
 							}
@@ -245,9 +245,10 @@ public class PECore {
 					Level level = source.level();
 					Direction direction = source.state().getValue(DispenserBlock.FACING);
 					BlockPos pos = source.pos().relative(direction);
-					IFluidHandler fluidHandler = WorldHelper.getFluidHandler(level, pos, direction.getOpposite());
+					ResourceHandler<FluidResource> fluidHandler = WorldHelper.getFluidHandler(level, pos, direction.getOpposite());
 					if (fluidHandler != null) {
-						fluidHandler.fill(new FluidStack(Fluids.WATER, FluidType.BUCKET_VOLUME), IFluidHandler.FluidAction.EXECUTE);
+						net.neoforged.neoforge.transfer.ResourceHandlerUtil.insertStacking(
+								fluidHandler, net.neoforged.neoforge.transfer.fluid.FluidResource.of(Fluids.WATER), FluidType.BUCKET_VOLUME, null);
 						return stack;
 					}
 					WorldHelper.placeFluid(null, level, pos, Fluids.WATER, !EquivoxConfig.server.items.opEvertide.get());
@@ -269,9 +270,9 @@ public class PECore {
 			long start = System.currentTimeMillis();
 			//Clear the cached created tags
 			AbstractNSSTag.clearCreatedTags();
-			CustomEMCParser.init(emcUpdateResourceManager.registryAccess());
+			CustomEMCParser.init(emcUpdateResourceManager.registries());
 			try {
-				EMCMappingHandler.map(emcUpdateResourceManager.serverResources(), emcUpdateResourceManager.registryAccess(), emcUpdateResourceManager.resourceManager());
+				EMCMappingHandler.map(emcUpdateResourceManager.serverResources(), emcUpdateResourceManager.registries(), emcUpdateResourceManager.resourceManager());
 				PECore.LOGGER.info("Registered {} EMC values. (took {} ms)", EMCMappingHandler.getEmcMapSize(), System.currentTimeMillis() - start);
 			} catch (Throwable t) {
 				PECore.LOGGER.error("Error calculating EMC values", t);
@@ -302,7 +303,7 @@ public class PECore {
 	}
 
 	private void addReloadListeners(AddServerReloadListenersEvent event) {
-		event.addListener(PECore.rl("emc_update"), (ResourceManagerReloadListener) manager -> emcUpdateResourceManager = new EmcUpdateData(event.getServerResources(), event.getRegistryAccess(), manager));
+		event.addListener(PECore.rl("emc_update"), (ResourceManagerReloadListener) manager -> emcUpdateResourceManager = new EmcUpdateData(event.getServerResources(), event.getServerResources().getRegistryLookup(), manager));
 		event.addListener(PECore.rl("world_transmutation"), WorldTransmutationManager.INSTANCE);
 	}
 
@@ -342,6 +343,6 @@ public class PECore {
 		BuiltInRegistries.BLOCK.addCallback((ClearCallback<Block>) (registry, full) -> WorldHelper.clearCachedAgeProperties());
 	}
 
-	private record EmcUpdateData(ReloadableServerResources serverResources, RegistryAccess registryAccess, ResourceManager resourceManager) {
+	private record EmcUpdateData(ReloadableServerResources serverResources, HolderLookup.Provider registries, ResourceManager resourceManager) {
 	}
 }

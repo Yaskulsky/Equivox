@@ -34,8 +34,9 @@ import net.neoforged.neoforge.event.entity.EntityInvulnerabilityCheckEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
 
 @EventBusSubscriber(modid = PECore.MODID)
 public class PlayerEvents {
@@ -121,8 +122,8 @@ public class PlayerEvents {
 			IAlchBagProvider bagProvider = player.getCapability(PECapabilities.ALCH_BAG_CAPABILITY);
 			if (bagProvider != null) {
 				ItemStack stack = itemEntity.getItem();
-				IItemHandler handler = bagProvider.getBag(((AlchemicalBag) bag.getItem()).color);
-				ItemStack remainder = ItemHandlerHelper.insertItemStacked(handler, stack, false);
+				ResourceHandler<ItemResource> handler = bagProvider.getBag(((AlchemicalBag) bag.getItem()).color);
+				ItemStack remainder = PEItemStacksHandler.insertStackedRemainder(handler, stack, false);
 
 				int pickedUpCount = stack.getCount() - remainder.getCount();
 				if (pickedUpCount > 0) {

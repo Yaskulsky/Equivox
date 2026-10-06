@@ -128,8 +128,10 @@ public class PEJeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerGuiHandlers(@NotNull IGuiHandlerRegistration registry) {
-		registry.addRecipeClickArea(GUITransmutation.class, -59, 17, 54, 54, RecipeTypes.CRAFTING);
-		registry.addRecipeClickArea(GUIArcaneTablet.class, -59, 17, 54, 54, RecipeTypes.CRAFTING);
+		// Result slot only — a click area over the full 3x3 makes JEI open every crafting recipe (1/N)
+		// instead of recipes for the ingredient under the cursor.
+		registry.addRecipeClickArea(GUITransmutation.class, -23, 75, 18, 18, RecipeTypes.CRAFTING);
+		registry.addRecipeClickArea(GUIArcaneTablet.class, -23, 75, 18, 18, RecipeTypes.CRAFTING);
 		if (shouldLoad()) {
 			registry.addRecipeClickArea(GUIDMFurnace.class, 73, 34, 25, 16, RecipeTypes.SMELTING, RecipeTypes.SMELTING_FUEL);
 			registry.addRecipeClickArea(GUIRMFurnace.class, 88, 35, 25, 17, RecipeTypes.SMELTING, RecipeTypes.SMELTING_FUEL);

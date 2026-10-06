@@ -43,7 +43,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "equivox:rm_katar"
+        "recipes": "equivox:rm_katar"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

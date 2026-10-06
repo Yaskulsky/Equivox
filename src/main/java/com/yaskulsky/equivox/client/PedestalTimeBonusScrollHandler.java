@@ -31,7 +31,7 @@ public final class PedestalTimeBonusScrollHandler {
 	@SubscribeEvent
 	public static void onMouseScroll(InputEvent.MouseScrollingEvent event) {
 		Minecraft mc = Minecraft.getInstance();
-		if (mc.player == null || mc.level == null || mc.screen != null) {
+		if (mc.player == null || mc.level == null || !mc.canInterruptScreen()) {
 			return;
 		}
 		if (!mc.player.isShiftKeyDown()) {

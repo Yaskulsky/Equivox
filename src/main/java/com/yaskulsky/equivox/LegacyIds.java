@@ -70,7 +70,6 @@ public final class LegacyIds {
 		registerAliases(PEAttachmentTypes.ATTACHMENT_TYPES);
 		registerAliases(PEBlocks.BLOCKS);
 		registerAliases(PEBlockEntityTypes.BLOCK_ENTITY_TYPES);
-		registerAliases(PEBlockTypes.BLOCK_TYPES);
 		registerAliases(PEContainerTypes.CONTAINER_TYPES);
 		registerAliases(PECreativeTabs.CREATIVE_TABS);
 		registerAliases(PEDataComponentTypes.DATA_COMPONENT_TYPES);

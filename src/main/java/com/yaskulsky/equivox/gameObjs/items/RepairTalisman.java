@@ -6,6 +6,7 @@ import java.util.function.BiPredicate;
 import com.yaskulsky.equivox.api.block_entity.IDMPedestal;
 import com.yaskulsky.equivox.api.capabilities.PECapabilities;
 import com.yaskulsky.equivox.api.capabilities.item.IAlchBagItem;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
 import com.yaskulsky.equivox.api.capabilities.item.IAlchChestItem;
 import com.yaskulsky.equivox.api.capabilities.item.IPedestalItem;
 import com.yaskulsky.equivox.config.EquivoxConfig;
@@ -28,8 +29,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.IItemHandlerModifiable;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -39,7 +41,7 @@ public class RepairTalisman extends ItemPE implements IAlchBagItem, IAlchChestIt
 																							stack.getCapability(PECapabilities.MODE_CHANGER_ITEM_CAPABILITY) == null &&
 																							ItemHelper.isRepairableDamagedItem(stack);
 	private static final BiPredicate<ItemStack, Player> CAN_REPAIR_PLAYER_ITEM =
-			(stack, player) -> CAN_REPAIR_ITEM.test(stack, null) && (stack != player.getMainHandItem() || !player.swinging);
+			(stack, player) -> CAN_REPAIR_ITEM.test(stack, null) && (stack != player.getMainHandItem() || !player.isSwinging());
 
 	public RepairTalisman(Properties props) {
 		super(props.component(PEDataComponentTypes.COOLDOWN, (byte) 0));
@@ -81,7 +83,7 @@ public class RepairTalisman extends ItemPE implements IAlchBagItem, IAlchChestIt
 	@Override
 	public boolean updateInAlchChest(@NotNull Level level, @NotNull BlockPos pos, @NotNull ItemStack stack) {
 		if (!level.isClientSide()) {
-			IItemHandler inv = WorldHelper.getItemHandler(level, pos, null);
+			ResourceHandler<ItemResource> inv = WorldHelper.getItemHandler(level, pos, null);
 			if (inv != null) {
 				return updateInHandler(inv, stack);
 			}
@@ -90,11 +92,11 @@ public class RepairTalisman extends ItemPE implements IAlchBagItem, IAlchChestIt
 	}
 
 	@Override
-	public boolean updateInAlchBag(@NotNull IItemHandler inv, @NotNull Player player, @NotNull ItemStack stack) {
+	public boolean updateInAlchBag(@NotNull PEItemStacksHandler inv, @NotNull Player player, @NotNull ItemStack stack) {
 		return !player.level().isClientSide() && updateInHandler(inv, stack);
 	}
 
-	private boolean updateInHandler(@NotNull IItemHandler inv, @NotNull ItemStack stack) {
+	private boolean updateInHandler(@NotNull ResourceHandler<ItemResource> inv, @NotNull ItemStack stack) {
 		byte coolDown = stack.getOrDefault(PEDataComponentTypes.COOLDOWN, (byte) 0);
 		if (coolDown > 0) {
 			stack.set(PEDataComponentTypes.COOLDOWN, (byte) (coolDown - 1));
@@ -113,7 +115,7 @@ public class RepairTalisman extends ItemPE implements IAlchBagItem, IAlchChestIt
 
 	private static void repairAllItems(Player player) {
 		repairPlayerInventory(player.getInventory(), player);
-		IItemHandler curios = IntegrationHelper.getCurioItemHandler(player);
+		ResourceHandler<ItemResource> curios = IntegrationHelper.getCurioItemHandler(player);
 		if (curios != null) {
 			repairAllItems(curios, player, CAN_REPAIR_PLAYER_ITEM);
 		}
@@ -131,19 +133,19 @@ public class RepairTalisman extends ItemPE implements IAlchBagItem, IAlchChestIt
 		return hasAction;
 	}
 
-	private static <DATA> boolean repairAllItems(@Nullable IItemHandler inv, DATA data, BiPredicate<ItemStack, DATA> canRepairStack) {
+	private static <DATA> boolean repairAllItems(@Nullable ResourceHandler<ItemResource> inv, DATA data, BiPredicate<ItemStack, DATA> canRepairStack) {
 		if (inv == null) {
 			return false;
 		}
 		boolean hasAction = false;
-		for (int i = 0, slots = inv.getSlots(); i < slots; i++) {
-			ItemStack invStack = inv.getStackInSlot(i);
+		for (int i = 0, slots = PEItemStacksHandler.getSlotCount(inv); i < slots; i++) {
+			ItemStack invStack = PEItemStacksHandler.getStack(inv, i);
 			if (!canRepairStack.test(invStack, data)) {
 				continue;
 			}
 			ItemStack repaired = invStack.copy();
 			repaired.setDamageValue(repaired.getDamageValue() - 1);
-			if (inv instanceof IItemHandlerModifiable modifiable) {
+			if (inv instanceof PEItemStacksHandler modifiable) {
 				modifiable.setStackInSlot(i, repaired);
 			} else {
 				invStack.setDamageValue(invStack.getDamageValue() - 1);

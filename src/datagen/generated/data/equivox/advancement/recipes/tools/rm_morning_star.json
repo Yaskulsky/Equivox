@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "equivox:rm_morning_star"
+        "recipes": "equivox:rm_morning_star"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

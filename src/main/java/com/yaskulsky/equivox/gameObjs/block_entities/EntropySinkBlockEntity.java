@@ -11,7 +11,6 @@ import com.yaskulsky.equivox.gameObjs.EnumEntropySinkTier;
 import com.yaskulsky.equivox.gameObjs.container.slots.SlotPredicates;
 import com.yaskulsky.equivox.gameObjs.registration.impl.BlockEntityTypeRegistryObject;
 import com.yaskulsky.equivox.gameObjs.registries.PEBlockEntityTypes;
-import com.yaskulsky.equivox.utils.LegacyItemHandlerResourceHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.UUIDUtil;
@@ -26,8 +25,9 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.capabilities.ICapabilityProvider;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
 import org.jetbrains.annotations.NotNull;
@@ -57,17 +57,17 @@ public class EntropySinkBlockEntity extends EmcBlockEntity {
 	private static final int RATE_WINDOW_TICKS = 20;
 
 	public static final ICapabilityProvider<EntropySinkBlockEntity, @Nullable Direction, ResourceHandler<ItemResource>> INVENTORY_PROVIDER =
-			(sink, side) -> LegacyItemHandlerResourceHandler.of(sink.automationInventory);
+			(sink, side) -> sink.automationInventory;
 
 	private final EnumEntropySinkTier tier;
-	private final ItemStackHandler inventory = new StackHandler(INVENTORY_SIZE) {
+	private final PEItemStacksHandler inventory = new StackHandler(INVENTORY_SIZE) {
 		@NotNull
 		@Override
 		public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
 			return canBurn(stack) ? super.insertItem(slot, stack, simulate) : stack;
 		}
 	};
-	private final IItemHandler automationInventory = new WrappedItemHandler(inventory, WrappedItemHandler.WriteMode.IN);
+	private final ResourceHandler<ItemResource> automationInventory = new WrappedItemHandler(inventory, WrappedItemHandler.WriteMode.IN);
 
 	@Nullable
 	private UUID owner;

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "equivox:dm_axe"
+        "recipes": "equivox:dm_axe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

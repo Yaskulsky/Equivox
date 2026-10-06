@@ -17,14 +17,14 @@ import com.yaskulsky.equivox.gameObjs.registries.PEItems;
 import com.yaskulsky.equivox.utils.Constants;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
-import net.minecraft.advancements.Criterion;
-import net.minecraft.advancements.criterion.InventoryChangeTrigger;
-import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.advancements.predicates.ItemPredicate;
+import net.minecraft.advancements.triggers.Criterion;
+import net.minecraft.advancements.triggers.InventoryChangeTrigger;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -32,8 +32,10 @@ import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.data.recipes.SpecialRecipeBuilder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import com.yaskulsky.equivox.common.datagen.ColorCollections;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -49,13 +51,14 @@ import org.jetbrains.annotations.NotNull;
 
 public class PERecipeProvider extends RecipeProvider {
 
+	private static final TagKey<Item> FLOWER_ITEMS = TagKey.create(Registries.ITEM, BlockTags.FLOWERS.location());
+
 	private static ResourceKey<Recipe<?>> recipeKey(Identifier id) {
 		return ResourceKey.create(Registries.RECIPE, id);
 	}
 
-
-	public PERecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
-		super(registries, output);
+	public PERecipeProvider(BootstrapContext<Recipe<?>> recipeContext, BootstrapContext<Advancement> advancementContext) {
+		super(recipeContext, advancementContext);
 	}
 
 	@Override
@@ -727,7 +730,7 @@ public class PERecipeProvider extends RecipeProvider {
 				.pattern("SFS")
 				.define('S', ItemTags.SAPLINGS)
 				.define('D', PEItems.DARK_MATTER)
-				.define('F', ItemTags.FLOWERS)
+				.define('F', FLOWER_ITEMS)
 				.define('I', PEItems.IRON_BAND)
 				.unlockedBy("has_matter", has(PEItems.DARK_MATTER))
 				.save(recipeOutput);
@@ -1057,24 +1060,7 @@ public class PERecipeProvider extends RecipeProvider {
 	}
 
 	private static ItemLike getWool(DyeColor color) {
-		return switch (color) {
-			case WHITE -> Items.WHITE_WOOL;
-			case ORANGE -> Items.ORANGE_WOOL;
-			case MAGENTA -> Items.MAGENTA_WOOL;
-			case LIGHT_BLUE -> Items.LIGHT_BLUE_WOOL;
-			case YELLOW -> Items.YELLOW_WOOL;
-			case LIME -> Items.LIME_WOOL;
-			case PINK -> Items.PINK_WOOL;
-			case GRAY -> Items.GRAY_WOOL;
-			case LIGHT_GRAY -> Items.LIGHT_GRAY_WOOL;
-			case CYAN -> Items.CYAN_WOOL;
-			case PURPLE -> Items.PURPLE_WOOL;
-			case BLUE -> Items.BLUE_WOOL;
-			case BROWN -> Items.BROWN_WOOL;
-			case GREEN -> Items.GREEN_WOOL;
-			case RED -> Items.RED_WOOL;
-			case BLACK -> Items.BLACK_WOOL;
-		};
+		return ColorCollections.woolItem(color);
 	}
 
 	private void addConversionRecipes(RecipeOutput recipeOutput) {

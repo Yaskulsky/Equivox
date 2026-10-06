@@ -8,7 +8,8 @@ import net.neoforged.fml.ModList;
 import net.neoforged.fml.event.lifecycle.InterModEnqueueEvent;
 import net.neoforged.neoforge.capabilities.EntityCapability;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
 import org.jetbrains.annotations.Nullable;
@@ -24,10 +25,10 @@ public class IntegrationHelper {
 	private static EntityCapability<ResourceHandler<ItemResource>, Void> curioItemHandlerCapability;
 
 	/**
-	 * @return The player's curios inventory as a legacy {@link IItemHandler}, or null if Curios is not loaded.
+	 * @return The player's curios inventory as a legacy {@link ResourceHandler<ItemResource>}, or null if Curios is not loaded.
 	 */
 	@Nullable
-	public static IItemHandler getCurioItemHandler(Player player) {
+	public static ResourceHandler<ItemResource> getCurioItemHandler(Player player) {
 		if (!ModList.get().isLoaded(CURIO_MODID)) {
 			return null;
 		}

@@ -12,13 +12,12 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
-import net.minecraft.data.tags.TagAppender;
+import com.yaskulsky.equivox.common.datagen.RegistryKeyTagAppender;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
 
-@SuppressWarnings("unchecked")
 public class PEBlockTagsProvider extends BlockTagsProvider {
 
 	public PEBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
@@ -26,9 +25,14 @@ public class PEBlockTagsProvider extends BlockTagsProvider {
 	}
 
 	@Override
+	protected RegistryKeyTagAppender<Block> tag(TagKey<Block> tagKey) {
+		return RegistryKeyTagAppender.wrap(super.tag(tagKey), BuiltInRegistries.BLOCK);
+	}
+
+	@Override
 	protected void addTags(@NotNull HolderLookup.Provider provider) {
 		tag(PETags.Blocks.FARMING_OVERRIDE).add(Blocks.PINK_PETALS);
-		TagAppender<Block, Block> blacklistHarvest = tag(PETags.Blocks.BLACKLIST_HARVEST);
+		RegistryKeyTagAppender<Block> blacklistHarvest = tag(PETags.Blocks.BLACKLIST_HARVEST);
 		//Add blocks that sometimes return false from isValidBonemealTarget, but that we don't actually want to be broken
 		blacklistHarvest.add(
 				//If there is no neighboring nylium we don't want to cause the netherrack to be broken
@@ -44,16 +48,15 @@ public class PEBlockTagsProvider extends BlockTagsProvider {
 				Blocks.BIG_DRIPLEAF,
 				Blocks.BIG_DRIPLEAF_STEM
 		);
-		TagAppender<Block, Block> overridePlantable = tag(PETags.Blocks.OVERRIDE_PLANTABLE);
+		RegistryKeyTagAppender<Block> overridePlantable = tag(PETags.Blocks.OVERRIDE_PLANTABLE);
 		overridePlantable.addTags(
 				BlockTags.LEAVES,
 				//Note: All vanilla tall flowers are bonemealable, so will get handled before being used by this tag
 				// but if a mod adds a tall flower that doesn't inherit the class hierarchy, having this could be useful
 				BlockTags.FLOWERS,
 				Tags.Blocks.PUMPKINS_NORMAL
-		).add(
-				Blocks.MELON
 		);
+		overridePlantable.add(Blocks.MELON);
 		for (Block block : BuiltInRegistries.BLOCK) {
 			if (WorldHelper.isPlantableImplementation(block)) {
 				overridePlantable.add(block);
@@ -149,14 +152,17 @@ public class PEBlockTagsProvider extends BlockTagsProvider {
 				//Blocks supported by vanilla swords
 				Blocks.COBWEB
 		);
-		tag(PETags.Blocks.MINEABLE_WITH_PE_KATAR).addTags(
+		RegistryKeyTagAppender<Block> katar = tag(PETags.Blocks.MINEABLE_WITH_PE_KATAR);
+		katar.addTags(
 				PETags.Blocks.MINEABLE_WITH_KATAR,
 				BlockTags.MINEABLE_WITH_AXE,
 				BlockTags.MINEABLE_WITH_HOE,
 				PETags.Blocks.MINEABLE_WITH_PE_SHEARS,
 				PETags.Blocks.MINEABLE_WITH_PE_SWORD
-		).add(Blocks.COBWEB);//Sword items
-		tag(PETags.Blocks.MINEABLE_WITH_PE_MORNING_STAR).addTags(
+		);
+		katar.add(Blocks.COBWEB);//Sword items
+		RegistryKeyTagAppender<Block> morningStar = tag(PETags.Blocks.MINEABLE_WITH_PE_MORNING_STAR);
+		morningStar.addTags(
 				PETags.Blocks.MINEABLE_WITH_MORNING_STAR,
 				PETags.Blocks.MINEABLE_WITH_PE_HAMMER,//Note: Pickaxe is inherited from hammer
 				BlockTags.MINEABLE_WITH_SHOVEL

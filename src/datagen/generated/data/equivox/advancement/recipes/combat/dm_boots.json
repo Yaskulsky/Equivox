@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "equivox:dm_boots"
+        "recipes": "equivox:dm_boots"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

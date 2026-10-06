@@ -9,9 +9,11 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.IItemHandlerModifiable;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
+import net.neoforged.neoforge.transfer.IndexModifier;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,28 +37,32 @@ public final class ItemHelper {
 	 *
 	 * @return True if the inventory was empty.
 	 */
-	public static boolean compactInventory(IItemHandlerModifiable inventory) {
+	public static boolean compactInventory(PEItemStacksHandler inventory) {
+		return compactInventory(inventory, inventory);
+	}
+
+	public static boolean compactInventory(ResourceHandler<ItemResource> inventory, IndexModifier<ItemResource> modifier) {
 		List<ItemStack> temp = new ArrayList<>();
-		for (int i = 0, slots = inventory.getSlots(); i < slots; i++) {
-			ItemStack stackInSlot = inventory.getStackInSlot(i);
+		for (int i = 0, slots = inventory.size(); i < slots; i++) {
+			ItemStack stackInSlot = PEItemStacksHandler.getStack(inventory, i);
 			if (!stackInSlot.isEmpty()) {
 				temp.add(stackInSlot);
-				inventory.setStackInSlot(i, ItemStack.EMPTY);
+				modifier.set(i, ItemResource.EMPTY, 0);
 			}
 		}
 		for (ItemStack s : temp) {
-			ItemHandlerHelper.insertItemStacked(inventory, s, false);
+			PEItemStacksHandler.insertStackedRemainder(inventory, s, false);
 		}
 		return temp.isEmpty();
 	}
 
-	public static IItemHandlerModifiable immutableCopy(IItemHandler toCopy) {
-		int slots = toCopy.getSlots();
+	public static PEItemStacksHandler immutableCopy(ResourceHandler<ItemResource> toCopy) {
+		int slots = toCopy.size();
 		final List<ItemStack> list = new ArrayList<>(slots);
 		for (int i = 0; i < slots; i++) {
-			list.add(toCopy.getStackInSlot(i).copy());
+			list.add(PEItemStacksHandler.getStack(toCopy, i).copy());
 		}
-		return new IItemHandlerModifiable() {
+		return new PEItemStacksHandler(slots) {
 			@Override
 			public void setStackInSlot(int slot, @NotNull ItemStack stack) {
 			}

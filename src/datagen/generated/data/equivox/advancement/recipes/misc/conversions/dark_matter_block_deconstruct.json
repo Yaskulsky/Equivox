@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "equivox:conversions/dark_matter_block_deconstruct"
+        "recipes": "equivox:conversions/dark_matter_block_deconstruct"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

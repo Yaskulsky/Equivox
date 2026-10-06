@@ -37,6 +37,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.SpecialPlantable;
 import net.neoforged.neoforge.event.EventHooks;
 import net.neoforged.neoforge.event.entity.player.BonemealEvent;
@@ -104,7 +105,8 @@ public class HarvestGoddess extends PEToggleItem implements IPedestalItem {
 			boolean wasSuccessful = false;
 			BlockState state = level.getBlockState(currentPos);
 			//TODO: Do we want to fire this with a different stack if we have already used the four that we accounted?
-			BonemealEvent event = EventHooks.fireBonemealEvent(player, level, currentPos, state, stack);
+			net.minecraft.world.level.block.BonemealSource bonemealSource = net.minecraft.world.level.block.BonemealSource.INTERACTION;
+			BonemealEvent event = EventHooks.fireBonemealEvent(player, level, currentPos, state, bonemealSource, stack);
 			if (event.isCanceled()) {
 				wasSuccessful = event.isSuccessful();
 			} else if (event.isValidBonemealTarget()) {
@@ -112,8 +114,8 @@ public class HarvestGoddess extends PEToggleItem implements IPedestalItem {
 				if (level instanceof ServerLevel serverLevel) {
 					//Note: We mirror vanilla only checking isBonemealSuccess on the server side
 					BonemealableBlock growable = (BonemealableBlock) state.getBlock();
-					if (growable.isBonemealSuccess(level, level.getRandom(), currentPos, state)) {
-						growable.performBonemeal(serverLevel, level.getRandom(), currentPos, state);
+					if (growable.isBonemealSuccess(level, level.getRandom(), currentPos, state, bonemealSource)) {
+						growable.performBonemeal(serverLevel, level.getRandom(), currentPos, state, bonemealSource);
 						player.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
 						level.levelEvent(LevelEvent.PARTICLES_AND_SOUND_PLANT_GROWTH, currentPos, 0);
 					}
@@ -172,7 +174,7 @@ public class HarvestGoddess extends PEToggleItem implements IPedestalItem {
 				} else if (stack.is(PETags.Items.PLANTABLE_SEEDS) && stack.getItem() instanceof BlockItem blockItem) {
 					if (placeContext == null) {
 						placeContext = new BlockPlaceContext(level, player, InteractionHand.MAIN_HAND, stack, new BlockHitResult(
-								currentPos.getCenter().relative(Direction.UP, 0.5), Direction.UP, currentPos, false
+								Vec3.atCenterOf(currentPos).relative(Direction.UP, 0.5), Direction.UP, currentPos, false
 						));
 						//Note: We don't want to replace the block we are trying to place against
 						placeContext.replaceClicked = false;

@@ -19,10 +19,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import com.yaskulsky.equivox.utils.LegacyItemHandlerResourceHandler;
 import net.neoforged.neoforge.capabilities.ICapabilityProvider;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.IItemHandlerModifiable;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
 import org.jetbrains.annotations.NotNull;
@@ -30,7 +30,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class DMPedestalBlockEntity extends EmcBlockEntity implements IDMPedestal {
 
-	public static final ICapabilityProvider<DMPedestalBlockEntity, @Nullable Direction, ResourceHandler<ItemResource>> INVENTORY_PROVIDER = (pedestal, side) -> LegacyItemHandlerResourceHandler.of(pedestal.inventory);
+	public static final ICapabilityProvider<DMPedestalBlockEntity, @Nullable Direction, ResourceHandler<ItemResource>> INVENTORY_PROVIDER = (pedestal, side) -> pedestal.inventory;
 	private static final int RANGE = 4;
 
 	private final StackHandler inventory = new StackHandler(1) {
@@ -203,7 +203,7 @@ public class DMPedestalBlockEntity extends EmcBlockEntity implements IDMPedestal
 		markDirty(level, pos, true);
 	}
 
-	public IItemHandlerModifiable getInventory() {
+	public PEItemStacksHandler getInventory() {
 		return inventory;
 	}
 }

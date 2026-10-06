@@ -16,18 +16,19 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.IItemHandlerModifiable;
-import net.neoforged.neoforge.items.ItemStackHandler;
-import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
+import com.yaskulsky.equivox.utils.PECombinedItemStacks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class CondenserMK2BlockEntity extends CondenserBlockEntity {
 
-	private IItemHandler automationInput;
-	private IItemHandler automationOutput;
-	private IItemHandler automationJoined;
+	private ResourceHandler<ItemResource> automationInput;
+	private ResourceHandler<ItemResource> automationOutput;
+	private ResourceHandler<ItemResource> automationJoined;
 
 	public CondenserMK2BlockEntity(BlockPos pos, BlockState state) {
 		super(PEBlockEntityTypes.CONDENSER_MK2, pos, state);
@@ -35,7 +36,7 @@ public class CondenserMK2BlockEntity extends CondenserBlockEntity {
 
 	@NotNull
 	@Override
-	protected IItemHandler createAutomationInventory() {
+	protected ResourceHandler<ItemResource> createAutomationInventory() {
 		this.automationInput = new WrappedItemHandler(getInput(), WrappedItemHandler.WriteMode.IN) {
 			@NotNull
 			@Override
@@ -44,15 +45,15 @@ public class CondenserMK2BlockEntity extends CondenserBlockEntity {
 			}
 		};
 		this.automationOutput = new WrappedItemHandler(getOutput(), WrappedItemHandler.WriteMode.OUT);
-		this.automationJoined = new CombinedInvWrapper(
-				(IItemHandlerModifiable) automationInput,
-				(IItemHandlerModifiable) automationOutput);
+		this.automationJoined = new PECombinedItemStacks(
+				(PEItemStacksHandler) automationInput,
+				(PEItemStacksHandler) automationOutput);
 		return automationJoined;
 	}
 
 	@NotNull
 	@Override
-	protected IItemHandler getAutomationHandler(@Nullable Direction side) {
+	protected ResourceHandler<ItemResource> getAutomationHandler(@Nullable Direction side) {
 		if (side == null) {
 			return automationJoined;
 		}
@@ -61,12 +62,12 @@ public class CondenserMK2BlockEntity extends CondenserBlockEntity {
 	}
 
 	@Override
-	protected ItemStackHandler createInput() {
+	protected PEItemStacksHandler createInput() {
 		return new StackHandler(42);
 	}
 
 	@Override
-	protected ItemStackHandler createOutput() {
+	protected PEItemStacksHandler createOutput() {
 		return new StackHandler(42);
 	}
 

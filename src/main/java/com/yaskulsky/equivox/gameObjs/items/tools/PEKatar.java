@@ -68,9 +68,7 @@ public class PEKatar extends PETool implements IItemMode<KatarMode>, IExtraFunct
 
 	@Override
 	public boolean canPerformAction(@NotNull ItemInstance stack, @NotNull ItemAbility toolAction) {
-		return ItemAbilities.DEFAULT_AXE_ACTIONS.contains(toolAction) || ItemAbilities.DEFAULT_SHEARS_ACTIONS.contains(toolAction) ||
-			   ItemAbilities.DEFAULT_HOE_ACTIONS.contains(toolAction) || toolAction == ItemAbilities.SWORD_SWEEP ||
-			   ToolHelper.DEFAULT_PE_KATAR_ACTIONS.contains(toolAction);
+		return ToolHelper.KATAR_TOOL_ACTIONS.contains(toolAction);
 	}
 
 	@NotNull

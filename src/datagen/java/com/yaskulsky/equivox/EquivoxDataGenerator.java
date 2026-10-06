@@ -1,20 +1,15 @@
 package com.yaskulsky.equivox;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import com.yaskulsky.equivox.client.PEModelProvider;
 import com.yaskulsky.equivox.client.PESpriteSourceProvider;
 import com.yaskulsky.equivox.client.lang.PELangProvider;
 import com.yaskulsky.equivox.client.sound.PESoundProvider;
-import com.yaskulsky.equivox.common.PEAdvancementsGenerator;
 import com.yaskulsky.equivox.common.PECustomConversionProvider;
 import com.yaskulsky.equivox.common.PEDataMapsProvider;
-import com.yaskulsky.equivox.common.PEDatapackRegistryProvider;
+import com.yaskulsky.equivox.common.PEDatapackRegistries;
 import com.yaskulsky.equivox.common.PEPackMetadataGenerator;
 import com.yaskulsky.equivox.common.PEWorldTransmutationProvider;
-import com.yaskulsky.equivox.common.loot.PEBlockLootTable;
-import com.yaskulsky.equivox.common.recipe.PERecipeProvider;
 import com.yaskulsky.equivox.common.tag.PEBlockEntityTypeTagsProvider;
 import com.yaskulsky.equivox.common.tag.PEBlockTagsProvider;
 import com.yaskulsky.equivox.common.tag.PEDamageTypeTagsProvider;
@@ -25,12 +20,6 @@ import com.yaskulsky.equivox.emc.EMCMappingHandler;
 import com.yaskulsky.equivox.integration.IntegrationHelper;
 import com.yaskulsky.equivox.utils.text.PELang;
 import net.minecraft.core.HolderLookup.Provider;
-import net.minecraft.data.advancements.AdvancementProvider;
-import net.minecraft.data.loot.LootTableProvider;
-import net.minecraft.data.loot.LootTableProvider.SubProviderEntry;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -43,8 +32,8 @@ public class EquivoxDataGenerator {
 	public static void gatherServerData(GatherDataEvent.Server event) {
 		EMCMappingHandler.loadMappers();
 
-		PEDatapackRegistryProvider drProvider = event.createProvider(PEDatapackRegistryProvider::new);
-		CompletableFuture<Provider> lookupProvider = drProvider.getRegistryProvider();
+		event.createReloadableRegistryObjects(PEDatapackRegistries.RELOADABLE, PEDatapackRegistries.MOD_NAMESPACES);
+		CompletableFuture<Provider> lookupProvider = event.getReloadableLookupProvider();
 
 		event.createProvider((output, lookup) -> new PEBlockTagsProvider(output, lookupProvider));
 		event.createProvider((output, lookup) -> new PEItemTagsProvider(output, lookupProvider));
@@ -52,21 +41,8 @@ public class EquivoxDataGenerator {
 		event.createProvider((output, lookup) -> new PEBlockEntityTypeTagsProvider(output, lookupProvider));
 		event.createProvider((output, lookup) -> new PEDamageTypeTagsProvider(output, lookupProvider));
 		event.createProvider((output, lookup) -> new PEPotionsTagsProvider(output, lookupProvider));
-		event.createProvider((output, lookup) -> new AdvancementProvider(output, lookupProvider, List.of(new PEAdvancementsGenerator())));
-		event.createProvider((output, lookup) -> new LootTableProvider(output, Collections.emptySet(), List.of(
-				new SubProviderEntry(PEBlockLootTable::new, LootContextParamSets.BLOCK)
-		), lookupProvider));
-		event.createProvider((output, lookup) -> new RecipeProvider.Runner(output, lookupProvider) {
-			@Override
-			protected RecipeProvider createRecipeProvider(Provider registries, RecipeOutput output) {
-				return new PERecipeProvider(registries, output);
-			}
-
-			@Override
-			public String getName() {
-				return "Equivox recipes";
-			}
-		});
+		// Advancements, loot tables, and recipes use registry bootstrap on MC 26.3 (not DataProvider).
+		// Committed output lives in src/datagen/generated/ until bootstrap wiring is added for runData.
 		event.createProvider((output, lookup) -> new PEDataMapsProvider(output, lookupProvider));
 		event.createProvider((output, lookup) -> new PECustomConversionProvider(output, lookupProvider));
 		event.createProvider((output, lookup) -> new PEWorldTransmutationProvider(output, lookupProvider));
@@ -76,8 +52,8 @@ public class EquivoxDataGenerator {
 	public static void gatherClientData(GatherDataEvent.Client event) {
 		EMCMappingHandler.loadMappers();
 
-		PEDatapackRegistryProvider drProvider = event.createProvider(PEDatapackRegistryProvider::new);
-		CompletableFuture<Provider> lookupProvider = drProvider.getRegistryProvider();
+		event.createReloadableRegistryObjects(PEDatapackRegistries.RELOADABLE, PEDatapackRegistries.MOD_NAMESPACES);
+		CompletableFuture<Provider> lookupProvider = event.getReloadableLookupProvider();
 
 		event.addProvider(new PEPackMetadataGenerator(event.getGenerator().getPackOutput(), PELang.PACK_DESCRIPTION));
 		event.createProvider(PELangProvider::new);

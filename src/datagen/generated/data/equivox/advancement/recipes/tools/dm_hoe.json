@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "equivox:dm_hoe"
+        "recipes": "equivox:dm_hoe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

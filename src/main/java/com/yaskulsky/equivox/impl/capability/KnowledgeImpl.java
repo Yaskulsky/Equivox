@@ -39,8 +39,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.attachment.IAttachmentHolder;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.items.IItemHandlerModifiable;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
+import com.yaskulsky.equivox.api.inventory.PEItemStacksHandler;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -207,7 +207,7 @@ public class KnowledgeImpl implements IKnowledgeProvider {
 
 	@NotNull
 	@Override
-	public IItemHandlerModifiable getInputAndLocks() {
+	public PEItemStacksHandler getInputAndLocks() {
 		return attachment().inputLocks;
 	}
 
@@ -319,16 +319,16 @@ public class KnowledgeImpl implements IKnowledgeProvider {
 				KnowledgeAttachment::new
 		);
 
-		private final ItemStackHandler inputLocks;
+		private final PEItemStacksHandler inputLocks;
 		private final Set<ItemInfo> knowledge;
 		private boolean fullKnowledge;
 		private BigInteger emc;
 
 		public KnowledgeAttachment() {
-			this(new HashSet<>(), new ItemStackHandler(LOCK_SLOTS), BigInteger.ZERO, false);
+			this(new HashSet<>(), new PEItemStacksHandler(LOCK_SLOTS), BigInteger.ZERO, false);
 		}
 
-		private KnowledgeAttachment(Set<ItemInfo> knowledge, ItemStackHandler inputLocks, BigInteger emc, boolean fullKnowledge) {
+		private KnowledgeAttachment(Set<ItemInfo> knowledge, PEItemStacksHandler inputLocks, BigInteger emc, boolean fullKnowledge) {
 			this.knowledge = knowledge;
 			this.inputLocks = inputLocks;
 			this.emc = emc;
@@ -338,7 +338,7 @@ public class KnowledgeImpl implements IKnowledgeProvider {
 		@Nullable
 		public KnowledgeAttachment copy(IAttachmentHolder holder, HolderLookup.Provider registries) {
 			//Note: ItemInfo and BigInteger are both immutable, so we can just add them directly
-			return new KnowledgeAttachment(new HashSet<>(knowledge), PEAttachmentTypes.copyHandler(inputLocks, ItemStackHandler::new), emc, fullKnowledge);
+			return new KnowledgeAttachment(new HashSet<>(knowledge), PEAttachmentTypes.copyHandler(inputLocks, PEItemStacksHandler::new), emc, fullKnowledge);
 		}
 	}
 }
