@@ -37,13 +37,23 @@ $RECYCLE.BIN/
 
 # Local dev / extract (not in git)
 .rs-ref/
+.mods-ref/
 .mc-src/
 .mc-src-extract/
 .nf-src/
 net/
 compile-*.txt
 build-latest.txt
+build-*.log
 _retexture_extract/
+_apoth_decompile/
+_apoth_tmp/
+energizedpower_recipes_extracted/
+energizedpower_recipes_list.txt
+recipe_data_*.json
+_be_uuid.txt
+_search_out2.txt
+scripts/_migrate_*.py
 
 # Cursor / IDE agent (local only)
 .cursor/
