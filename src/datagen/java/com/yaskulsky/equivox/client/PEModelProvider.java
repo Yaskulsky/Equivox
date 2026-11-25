@@ -74,8 +74,8 @@ public class PEModelProvider extends ModelProvider {
 		simpleBlocks(blockModels, PEBlocks.ALCHEMICAL_COAL, PEBlocks.MOBIUS_FUEL, PEBlocks.AETERNALIS_FUEL, PEBlocks.DARK_MATTER, PEBlocks.RED_MATTER);
 		registerTieredOrientable(blockModels, "collectors", PEBlocks.COLLECTOR, PEBlocks.COLLECTOR_MK2, PEBlocks.COLLECTOR_MK3);
 		registerTieredOrientable(blockModels, "relays", PEBlocks.RELAY, PEBlocks.RELAY_MK2, PEBlocks.RELAY_MK3);
-		registerTieredOrientable(blockModels, "entropy_sink", PEBlocks.ENTROPY_SINK, PEBlocks.ENTROPY_SINK_DARK, PEBlocks.ENTROPY_SINK_RED);
-		registerOrientable(blockModels, PEBlocks.STELLAR_CONDENSER, "stellar_condenser", "top");
+		registerFiveFaceOrientable(blockModels, "entropy_sink", PEBlocks.ENTROPY_SINK, PEBlocks.ENTROPY_SINK_DARK, PEBlocks.ENTROPY_SINK_RED);
+		registerFiveFaceOrientable(blockModels, "stellar_condenser", PEBlocks.STELLAR_CONDENSER);
 		registerProviderOnline(blockModels);
 		registerFurnace(blockModels, PEBlocks.DARK_MATTER_FURNACE, "dm", "dark_matter_block");
 		registerFurnace(blockModels, PEBlocks.RED_MATTER_FURNACE, "rm", "red_matter_block");
@@ -173,10 +173,10 @@ public class PEModelProvider extends ModelProvider {
 						.face(Direction.WEST, face -> face.texture(CHEST).uvs(0, 1.25F, 0.25F, 0.25F))
 						.face(Direction.UP, face -> face.texture(CHEST).uvs(0.25F, 0.25F, 0.75F, 0))
 						.face(Direction.DOWN, face -> face.texture(CHEST).uvs(0.75F, 0.25F, 1.25F, 0)));
-		chestItemDisplay(builder, ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, 0.375F, 2.5F);
-		chestItemDisplay(builder, ItemDisplayContext.THIRD_PERSON_LEFT_HAND, 0.375F, 2.5F);
-		chestItemDisplay(builder, ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, 0.4F, 0F);
-		chestItemDisplay(builder, ItemDisplayContext.FIRST_PERSON_LEFT_HAND, 0.4F, 0F);
+		chestItemDisplay(builder, ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, 75, 0.375F, 2.5F);
+		chestItemDisplay(builder, ItemDisplayContext.THIRD_PERSON_LEFT_HAND, 75, 0.375F, 2.5F);
+		chestItemDisplay(builder, ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, 0, 0.4F, 0F);
+		chestItemDisplay(builder, ItemDisplayContext.FIRST_PERSON_LEFT_HAND, 0, 0.4F, 0F);
 		builder.transform(ItemDisplayContext.GROUND, transform -> transform
 				.translation(0, 3, 0)
 				.scale(0.25F));
@@ -188,9 +188,9 @@ public class PEModelProvider extends ModelProvider {
 		return builder;
 	}
 
-	private static void chestItemDisplay(ExtendedModelTemplateBuilder builder, ItemDisplayContext context, float scale, float yTranslation) {
+	private static void chestItemDisplay(ExtendedModelTemplateBuilder builder, ItemDisplayContext context, float rotX, float scale, float yTranslation) {
 		builder.transform(context, transform -> transform
-				.rotation(90, 45, 0)
+				.rotation(rotX, 45, 0)
 				.translation(0, yTranslation, 0)
 				.scale(scale));
 	}
@@ -349,6 +349,24 @@ public class PEModelProvider extends ModelProvider {
 				.put(TextureSlot.TOP, texture("block/" + type + "/" + topTexture))
 				.put(TextureSlot.BOTTOM, side), ModelTemplates.CUBE_ORIENTABLE_TOP_BOTTOM);
 		blockModels.createHorizontallyRotatedBlock(block.getBlock(), provider);
+	}
+
+	/**
+	 * Horizontal orientable block with a dedicated texture per face (front / back / side / top / bottom).
+	 */
+	private void registerFiveFaceOrientable(BlockModelGenerators blockModels, String type, BlockRegistryObject<?, ?>... blocks) {
+		Material side = texture("block/" + type + "/side");
+		TexturedModel.Provider provider = TexturedModel.createDefault(b -> new TextureMapping()
+				.put(TextureSlot.PARTICLE, side)
+				.put(TextureSlot.NORTH, texture("block/" + type + "/front"))
+				.put(TextureSlot.SOUTH, texture("block/" + type + "/back"))
+				.put(TextureSlot.EAST, side)
+				.put(TextureSlot.WEST, side)
+				.put(TextureSlot.UP, texture("block/" + type + "/top"))
+				.put(TextureSlot.DOWN, texture("block/" + type + "/bottom")), ModelTemplates.CUBE);
+		for (BlockRegistryObject<?, ?> block : blocks) {
+			blockModels.createHorizontallyRotatedBlock(block.getBlock(), provider);
+		}
 	}
 
 	private void blockParentModel(ItemModelGenerators itemModels, BlockRegistryObject<?, ?>... blocks) {

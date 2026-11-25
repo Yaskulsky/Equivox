@@ -23,6 +23,7 @@ import com.yaskulsky.equivox.gameObjs.sound.MovingSoundSWRG;
 import com.yaskulsky.equivox.network.commands.client.DumpMissingEmc;
 import com.yaskulsky.equivox.gameObjs.registries.PEBlockEntityTypes;
 import com.yaskulsky.equivox.gameObjs.registries.PEEntityTypes;
+import com.yaskulsky.equivox.rendering.EmcHudOverlay;
 import com.yaskulsky.equivox.rendering.HomingArrowRenderer;
 import com.yaskulsky.equivox.rendering.PedestalRenderer;
 import com.yaskulsky.equivox.rendering.TransmutationRenderingOverlay;
@@ -124,6 +125,7 @@ public class PEClient {
 
 	private void registerOverlays(RegisterGuiLayersEvent event) {
 		event.registerAbove(VanillaGuiLayers.CROSSHAIR, PECore.rl("transmutation_result"), new TransmutationRenderingOverlay());
+		event.registerAbove(VanillaGuiLayers.CROSSHAIR, PECore.rl("emc_hud"), new EmcHudOverlay());
 	}
 
 	private void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {

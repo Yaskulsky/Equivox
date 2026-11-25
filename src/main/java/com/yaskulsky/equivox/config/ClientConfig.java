@@ -1,6 +1,7 @@
 package com.yaskulsky.equivox.config;
 
 import com.yaskulsky.equivox.config.value.CachedBooleanValue;
+import com.yaskulsky.equivox.config.value.CachedIntValue;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
@@ -19,11 +20,17 @@ public class ClientConfig extends BasePEConfig {
 	public final CachedBooleanValue tagToolTips;
 
 	public final CachedBooleanValue pulsatingOverlay;
+	public final CachedBooleanValue emcHud;
+	public final CachedIntValue emcHudX;
+	public final CachedIntValue emcHudY;
 
 	ClientConfig() {
 		ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
 
 		pulsatingOverlay = CachedBooleanValue.wrap(this, PEConfigTranslations.CLIENT_PHILO_OVERLAY.applyToBuilder(builder).define("pulsatingOverlay", false));
+		emcHud = CachedBooleanValue.wrap(this, PEConfigTranslations.CLIENT_EMC_HUD.applyToBuilder(builder).define("emcHud", true));
+		emcHudX = CachedIntValue.wrap(this, PEConfigTranslations.CLIENT_EMC_HUD_X.applyToBuilder(builder).defineInRange("emcHudX", 2, 0, 4000));
+		emcHudY = CachedIntValue.wrap(this, PEConfigTranslations.CLIENT_EMC_HUD_Y.applyToBuilder(builder).defineInRange("emcHudY", 11, 0, 4000));
 
 		PEConfigTranslations.CLIENT_TOOLTIPS.applyToBuilder(builder).push("tooltips");
 		emcToolTips = CachedBooleanValue.wrap(this, PEConfigTranslations.CLIENT_TOOLTIPS_EMC.applyToBuilder(builder).define("emc", true));

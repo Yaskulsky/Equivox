@@ -2,6 +2,14 @@
 
 All notable changes to [Yaskulsky/projecte-26-port](https://github.com/Yaskulsky/projecte-26-port) are documented here.
 
+## [Unreleased]
+
+### Changed
+- **Entropy Sink reworked into an FE → EMC converter** — accepts Forge Energy from any side and deposits EMC straight into the placing player's personal EMC (buffers while they are offline, stops taking FE when full). No item input, no pipe output. Rates: Basic 2000 FE/EMC (max 2k FE/t), Dark 1500 FE/EMC (16k FE/t), Red 1000 FE/EMC (128k FE/t); configurable in `server.toml → entropySink`.
+- Items left inside old Entropy Sinks are not kept after updating.
+
+---
+
 ## [1.3.0] — 2026-08-14
 
 ### Added

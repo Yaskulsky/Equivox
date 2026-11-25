@@ -191,6 +191,178 @@
           "tag": "c:ingots/cyanite"
         },
         "propagateTags": true
+      },
+      {
+        "count": 2,
+        "ingredients": [
+          {
+            "type": "equivox:item",
+            "tag": "c:ingots/iron"
+          }
+        ],
+        "output": {
+          "type": "equivox:item",
+          "tag": "c:ingots/zinc"
+        },
+        "propagateTags": true
+      },
+      {
+        "ingredients": [
+          {
+            "type": "equivox:item",
+            "amount": 2,
+            "tag": "c:ingots/iron"
+          }
+        ],
+        "output": {
+          "type": "equivox:item",
+          "tag": "c:ingots/steel"
+        },
+        "propagateTags": true
+      },
+      {
+        "count": 4,
+        "ingredients": [
+          {
+            "type": "equivox:item",
+            "amount": 3,
+            "tag": "c:ingots/copper"
+          },
+          {
+            "type": "equivox:item",
+            "tag": "c:ingots/zinc"
+          }
+        ],
+        "output": {
+          "type": "equivox:item",
+          "tag": "c:ingots/brass"
+        },
+        "propagateTags": true
+      },
+      {
+        "count": 2,
+        "ingredients": [
+          {
+            "type": "equivox:item",
+            "tag": "c:ingots/gold"
+          },
+          {
+            "type": "equivox:item",
+            "tag": "c:ingots/silver"
+          }
+        ],
+        "output": {
+          "type": "equivox:item",
+          "tag": "c:ingots/electrum"
+        },
+        "propagateTags": true
+      },
+      {
+        "count": 3,
+        "ingredients": [
+          {
+            "type": "equivox:item",
+            "amount": 2,
+            "tag": "c:ingots/iron"
+          },
+          {
+            "type": "equivox:item",
+            "tag": "c:ingots/nickel"
+          }
+        ],
+        "output": {
+          "type": "equivox:item",
+          "tag": "c:ingots/invar"
+        },
+        "propagateTags": true
+      },
+      {
+        "count": 2,
+        "ingredients": [
+          {
+            "type": "equivox:item",
+            "tag": "c:ingots/copper"
+          },
+          {
+            "type": "equivox:item",
+            "tag": "c:ingots/nickel"
+          }
+        ],
+        "output": {
+          "type": "equivox:item",
+          "tag": "c:ingots/constantan"
+        },
+        "propagateTags": true
+      },
+      {
+        "ingredients": [
+          {
+            "type": "equivox:item",
+            "amount": 16,
+            "tag": "c:ingots/iron"
+          }
+        ],
+        "output": {
+          "type": "equivox:item",
+          "tag": "c:ingots/titanium"
+        },
+        "propagateTags": true
+      },
+      {
+        "ingredients": [
+          {
+            "type": "equivox:item",
+            "amount": 32,
+            "tag": "c:ingots/iron"
+          }
+        ],
+        "output": {
+          "type": "equivox:item",
+          "tag": "c:ingots/tungsten"
+        },
+        "propagateTags": true
+      },
+      {
+        "ingredients": [
+          {
+            "type": "equivox:item",
+            "amount": 64,
+            "tag": "c:ingots/iron"
+          }
+        ],
+        "output": {
+          "type": "equivox:item",
+          "tag": "c:ingots/iridium"
+        },
+        "propagateTags": true
+      },
+      {
+        "ingredients": [
+          {
+            "type": "equivox:item",
+            "amount": 8,
+            "tag": "c:ingots/iron"
+          }
+        ],
+        "output": {
+          "type": "equivox:item",
+          "tag": "c:ingots/cobalt"
+        },
+        "propagateTags": true
+      },
+      {
+        "ingredients": [
+          {
+            "type": "equivox:item",
+            "amount": 8,
+            "tag": "c:ingots/iron"
+          }
+        ],
+        "output": {
+          "type": "equivox:item",
+          "tag": "c:ingots/chromium"
+        },
+        "propagateTags": true
       }
     ]
   }

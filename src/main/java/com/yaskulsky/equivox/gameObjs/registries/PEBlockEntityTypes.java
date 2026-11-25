@@ -100,17 +100,17 @@ public class PEBlockEntityTypes {
 	public static final BlockEntityTypeRegistryObject<EntropySinkBlockEntity> ENTROPY_SINK = BLOCK_ENTITY_TYPES.builder(PEBlocks.ENTROPY_SINK, EntropySinkBlockEntity::new)
 			.serverTicker(EntropySinkBlockEntity::tickServer)
 			.with(PECapabilities.EMC_STORAGE_CAPABILITY, (be, side) -> be)
-			.with(Capabilities.Item.BLOCK, EntropySinkBlockEntity.INVENTORY_PROVIDER)
+			.with(Capabilities.Energy.BLOCK, EntropySinkBlockEntity.ENERGY_PROVIDER)
 			.build();
 	public static final BlockEntityTypeRegistryObject<EntropySinkDarkBlockEntity> ENTROPY_SINK_DARK = BLOCK_ENTITY_TYPES.builder(PEBlocks.ENTROPY_SINK_DARK, EntropySinkDarkBlockEntity::new)
 			.serverTicker(EntropySinkBlockEntity::tickServer)
 			.with(PECapabilities.EMC_STORAGE_CAPABILITY, (be, side) -> be)
-			.with(Capabilities.Item.BLOCK, EntropySinkBlockEntity.INVENTORY_PROVIDER)
+			.with(Capabilities.Energy.BLOCK, EntropySinkBlockEntity.ENERGY_PROVIDER)
 			.build();
 	public static final BlockEntityTypeRegistryObject<EntropySinkRedBlockEntity> ENTROPY_SINK_RED = BLOCK_ENTITY_TYPES.builder(PEBlocks.ENTROPY_SINK_RED, EntropySinkRedBlockEntity::new)
 			.serverTicker(EntropySinkBlockEntity::tickServer)
 			.with(PECapabilities.EMC_STORAGE_CAPABILITY, (be, side) -> be)
-			.with(Capabilities.Item.BLOCK, EntropySinkBlockEntity.INVENTORY_PROVIDER)
+			.with(Capabilities.Energy.BLOCK, EntropySinkBlockEntity.ENERGY_PROVIDER)
 			.build();
 	public static final BlockEntityTypeRegistryObject<StellarCondenserBlockEntity> STELLAR_CONDENSER = BLOCK_ENTITY_TYPES.builder(PEBlocks.STELLAR_CONDENSER, StellarCondenserBlockEntity::new)
 			.serverTicker(StellarCondenserBlockEntity::tickServer)

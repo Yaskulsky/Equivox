@@ -1,9 +1,12 @@
 {
-  "parent": "minecraft:block/orientable_with_bottom",
+  "parent": "minecraft:block/cube",
   "textures": {
-    "bottom": "equivox:block/entropy_sink/other",
-    "front": "equivox:block/entropy_sink/front",
-    "side": "equivox:block/entropy_sink/other",
-    "top": "equivox:block/entropy_sink/top_1"
+    "down": "equivox:block/entropy_sink/bottom",
+    "east": "equivox:block/entropy_sink/side",
+    "north": "equivox:block/entropy_sink/front",
+    "particle": "equivox:block/entropy_sink/side",
+    "south": "equivox:block/entropy_sink/back",
+    "up": "equivox:block/entropy_sink/top",
+    "west": "equivox:block/entropy_sink/side"
   }
 }

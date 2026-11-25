@@ -1,9 +1,12 @@
 {
-  "parent": "minecraft:block/orientable_with_bottom",
+  "parent": "minecraft:block/cube",
   "textures": {
-    "bottom": "equivox:block/stellar_condenser/other",
-    "front": "equivox:block/stellar_condenser/front",
-    "side": "equivox:block/stellar_condenser/other",
-    "top": "equivox:block/stellar_condenser/top"
+    "down": "equivox:block/stellar_condenser/bottom",
+    "east": "equivox:block/stellar_condenser/side",
+    "north": "equivox:block/stellar_condenser/front",
+    "particle": "equivox:block/stellar_condenser/side",
+    "south": "equivox:block/stellar_condenser/back",
+    "up": "equivox:block/stellar_condenser/top",
+    "west": "equivox:block/stellar_condenser/side"
   }
 }

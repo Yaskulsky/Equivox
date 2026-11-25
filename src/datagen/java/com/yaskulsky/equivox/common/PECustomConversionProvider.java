@@ -8,6 +8,7 @@ import com.yaskulsky.equivox.api.nss.NormalizedSimpleStack;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
@@ -60,7 +61,19 @@ public class PECustomConversionProvider extends CustomConversionProvider {
 				.conversion(ingotTag("aluminum"), 2).ingredient(Tags.Items.INGOTS_IRON).propagateTags().end()
 				.conversion(ingotTag("platinum")).ingredient(Tags.Items.INGOTS_IRON, 16).propagateTags().end()
 				.conversion(ingotTag("cyanite"), 4).ingredient(ingotTag("uranium")).propagateTags().end()
+				.conversion(ingotTag("zinc"), 2).ingredient(Tags.Items.INGOTS_IRON).propagateTags().end()
+				.conversion(ingotTag("steel")).ingredient(Tags.Items.INGOTS_IRON, 2).propagateTags().end()
+				.conversion(ingotTag("brass"), 4).ingredient(Tags.Items.INGOTS_COPPER, 3).ingredient(ingotTag("zinc")).propagateTags().end()
+				.conversion(ingotTag("electrum"), 2).ingredient(Tags.Items.INGOTS_GOLD).ingredient(ingotTag("silver")).propagateTags().end()
+				.conversion(ingotTag("invar"), 3).ingredient(Tags.Items.INGOTS_IRON, 2).ingredient(ingotTag("nickel")).propagateTags().end()
+				.conversion(ingotTag("constantan"), 2).ingredient(Tags.Items.INGOTS_COPPER).ingredient(ingotTag("nickel")).propagateTags().end()
+				.conversion(ingotTag("titanium")).ingredient(Tags.Items.INGOTS_IRON, 16).propagateTags().end()
+				.conversion(ingotTag("tungsten")).ingredient(Tags.Items.INGOTS_IRON, 32).propagateTags().end()
+				.conversion(ingotTag("iridium")).ingredient(Tags.Items.INGOTS_IRON, 64).propagateTags().end()
+				.conversion(ingotTag("cobalt")).ingredient(Tags.Items.INGOTS_IRON, 8).propagateTags().end()
+				.conversion(ingotTag("chromium")).ingredient(Tags.Items.INGOTS_IRON, 8).propagateTags().end()
 		;
+		addPackCompatConversions();
 		NormalizedSimpleStack singleEMC = NSSFake.create("single_emc");
 		ItemStack waterBottle = PotionContents.createItemStack(Items.POTION, Potions.WATER);
 		createConversionBuilder(PECore.rl("defaults"))
@@ -399,6 +412,67 @@ public class PECustomConversionProvider extends CustomConversionProvider {
 
 	private ItemStack horn(HolderLookup.Provider registries, ResourceKey<Instrument> instrument) {
 		return InstrumentItem.create(Items.GOAT_HORN, registries.holderOrThrow(instrument));
+	}
+
+	/**
+	 * Seed EMC + conversions for mods shared by FTB Evolution 2 and ATM11 whose machines
+	 * are not covered by the vanilla crafting mapper (inscriber, charger, essences, etc.).
+	 * Unknown ids are ignored at mapping time if the mod is absent.
+	 */
+	private void addPackCompatConversions() {
+		NormalizedSimpleStack skyStone = item("ae2:sky_stone_block");
+		NormalizedSimpleStack certus = item("ae2:certus_quartz_crystal");
+		NormalizedSimpleStack chargedCertus = item("ae2:charged_certus_quartz_crystal");
+		NormalizedSimpleStack fluix = item("ae2:fluix_crystal");
+		NormalizedSimpleStack silicon = item("ae2:silicon");
+		NormalizedSimpleStack printedSilicon = item("ae2:printed_silicon");
+		NormalizedSimpleStack printedLogic = item("ae2:printed_logic_processor");
+		NormalizedSimpleStack printedCalc = item("ae2:printed_calculation_processor");
+		NormalizedSimpleStack printedEng = item("ae2:printed_engineering_processor");
+		NormalizedSimpleStack inferium = item("mysticalagriculture:inferium_essence");
+		NormalizedSimpleStack prudentium = item("mysticalagriculture:prudentium_essence");
+		NormalizedSimpleStack tertium = item("mysticalagriculture:tertium_essence");
+		NormalizedSimpleStack imperium = item("mysticalagriculture:imperium_essence");
+		NormalizedSimpleStack supremium = item("mysticalagriculture:supremium_essence");
+		NormalizedSimpleStack rsSilicon = item("refinedstorage:silicon");
+		createConversionBuilder(PECore.rl("pack_compat"))
+				.comment("Seed EMC for FTB Evolution 2 / ATM11 shared mods (AE2, Mystical Agriculture, Powah, Occultism, Just Dire Things, Refined Storage).")
+				.before(skyStone, 64)
+				.before(certus, 64)
+				.before(item("ae2:matter_ball"), 256)
+				.before(item("ae2:singularity"), 256_000)
+				.before(silicon, 32)
+				.before(item("mysticalagriculture:prosperity_shard"), 64)
+				.before(inferium, 16)
+				.before(item("powah:uraninite"), 4_096)
+				.before(item("powah:uraninite_raw"), 4_096)
+				.before(item("occultism:iesnium_ingot"), 2_048)
+				.before(item("occultism:otherworld_essence"), 128)
+				.before(item("justdirethings:ferricore_ingot"), 512)
+				.before(item("justdirethings:blazegold_ingot"), 2_048)
+				.before(item("justdirethings:celestigem"), 8_192)
+				.before(item("justdirethings:eclipsealloy_ingot"), 32_768)
+				.before(rsSilicon, 32)
+				.conversion(chargedCertus).ingredient(certus).end()
+				.conversion(fluix, 2).ingredient(chargedCertus).ingredient(Tags.Items.DUSTS_REDSTONE).ingredient(Tags.Items.GEMS_QUARTZ).end()
+				.conversion(printedSilicon).ingredient(silicon).end()
+				.conversion(printedLogic).ingredient(Tags.Items.INGOTS_GOLD).end()
+				.conversion(printedCalc).ingredient(certus).end()
+				.conversion(printedEng).ingredient(Tags.Items.GEMS_DIAMOND).end()
+				.conversion(item("ae2:logic_processor")).ingredient(printedLogic).ingredient(printedSilicon).ingredient(Tags.Items.DUSTS_REDSTONE).end()
+				.conversion(item("ae2:calculation_processor")).ingredient(printedCalc).ingredient(printedSilicon).ingredient(Tags.Items.DUSTS_REDSTONE).end()
+				.conversion(item("ae2:engineering_processor")).ingredient(printedEng).ingredient(printedSilicon).ingredient(Tags.Items.DUSTS_REDSTONE).end()
+				.conversion(prudentium).ingredient(inferium, 4).end()
+				.conversion(tertium).ingredient(prudentium, 4).end()
+				.conversion(imperium).ingredient(tertium, 4).end()
+				.conversion(supremium).ingredient(imperium, 4).end()
+				.conversion(item("mysticalagradditions:insanium_essence")).ingredient(supremium, 4).end()
+				.conversion(item("refinedstorage:quartz_enriched_iron")).ingredient(Tags.Items.INGOTS_IRON).ingredient(Tags.Items.GEMS_QUARTZ).end()
+		;
+	}
+
+	private static NormalizedSimpleStack item(String id) {
+		return NSSItem.createItem(Identifier.parse(id));
 	}
 
 	private static NormalizedSimpleStack ingotTag(String ingot) {

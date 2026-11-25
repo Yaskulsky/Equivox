@@ -20,6 +20,7 @@ public final class ServerConfig extends BasePEConfig {
 	public final Effects effects;
 	public final Misc misc;
 	public final Cooldown cooldown;
+	public final EntropySink entropySink;
 
 	ServerConfig() {
 		ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
@@ -28,6 +29,7 @@ public final class ServerConfig extends BasePEConfig {
 		effects = new Effects(this, builder);
 		items = new Items(this, builder);
 		misc = new Misc(this, builder);
+		entropySink = new EntropySink(this, builder);
 		configSpec = builder.build();
 	}
 
@@ -204,6 +206,24 @@ public final class ServerConfig extends BasePEConfig {
 					.define("unsafeKeyBinds", false));
 			lookingAtDisplay = CachedBooleanValue.wrap(config, PEConfigTranslations.SERVER_MISC_LOOKING_AT_DISPLAY.applyToBuilder(builder)
 					.define("lookingAtDisplay", true));
+			builder.pop();
+		}
+	}
+
+	public static class EntropySink {
+
+		public final CachedIntValue basicFePerEmc;
+		public final CachedIntValue darkFePerEmc;
+		public final CachedIntValue redFePerEmc;
+
+		private EntropySink(IPEConfig config, ModConfigSpec.Builder builder) {
+			PEConfigTranslations.SERVER_ENTROPY_SINK.applyToBuilder(builder).push("entropySink");
+			basicFePerEmc = CachedIntValue.wrap(config, PEConfigTranslations.SERVER_ENTROPY_SINK_BASIC.applyToBuilder(builder)
+					.defineInRange("basicFePerEmc", 2_000, 1, Integer.MAX_VALUE));
+			darkFePerEmc = CachedIntValue.wrap(config, PEConfigTranslations.SERVER_ENTROPY_SINK_DARK.applyToBuilder(builder)
+					.defineInRange("darkFePerEmc", 1_500, 1, Integer.MAX_VALUE));
+			redFePerEmc = CachedIntValue.wrap(config, PEConfigTranslations.SERVER_ENTROPY_SINK_RED.applyToBuilder(builder)
+					.defineInRange("redFePerEmc", 1_000, 1, Integer.MAX_VALUE));
 			builder.pop();
 		}
 	}

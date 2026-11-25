@@ -1,0 +1,311 @@
+{
+  "comment": "Seed EMC for FTB Evolution 2 / ATM11 shared mods (AE2, Mystical Agriculture, Powah, Occultism, Just Dire Things, Refined Storage).",
+  "values": {
+    "before": [
+      {
+        "type": "equivox:item",
+        "emc_value": 64,
+        "id": "ae2:sky_stone_block"
+      },
+      {
+        "type": "equivox:item",
+        "emc_value": 64,
+        "id": "ae2:certus_quartz_crystal"
+      },
+      {
+        "type": "equivox:item",
+        "emc_value": 256,
+        "id": "ae2:matter_ball"
+      },
+      {
+        "type": "equivox:item",
+        "emc_value": 256000,
+        "id": "ae2:singularity"
+      },
+      {
+        "type": "equivox:item",
+        "emc_value": 32,
+        "id": "ae2:silicon"
+      },
+      {
+        "type": "equivox:item",
+        "emc_value": 64,
+        "id": "mysticalagriculture:prosperity_shard"
+      },
+      {
+        "type": "equivox:item",
+        "emc_value": 16,
+        "id": "mysticalagriculture:inferium_essence"
+      },
+      {
+        "type": "equivox:item",
+        "emc_value": 4096,
+        "id": "powah:uraninite"
+      },
+      {
+        "type": "equivox:item",
+        "emc_value": 4096,
+        "id": "powah:uraninite_raw"
+      },
+      {
+        "type": "equivox:item",
+        "emc_value": 2048,
+        "id": "occultism:iesnium_ingot"
+      },
+      {
+        "type": "equivox:item",
+        "emc_value": 128,
+        "id": "occultism:otherworld_essence"
+      },
+      {
+        "type": "equivox:item",
+        "emc_value": 512,
+        "id": "justdirethings:ferricore_ingot"
+      },
+      {
+        "type": "equivox:item",
+        "emc_value": 2048,
+        "id": "justdirethings:blazegold_ingot"
+      },
+      {
+        "type": "equivox:item",
+        "emc_value": 8192,
+        "id": "justdirethings:celestigem"
+      },
+      {
+        "type": "equivox:item",
+        "emc_value": 32768,
+        "id": "justdirethings:eclipsealloy_ingot"
+      },
+      {
+        "type": "equivox:item",
+        "emc_value": 32,
+        "id": "refinedstorage:silicon"
+      }
+    ],
+    "conversion": [
+      {
+        "ingredients": [
+          {
+            "type": "equivox:item",
+            "id": "ae2:certus_quartz_crystal"
+          }
+        ],
+        "output": {
+          "type": "equivox:item",
+          "id": "ae2:charged_certus_quartz_crystal"
+        }
+      },
+      {
+        "count": 2,
+        "ingredients": [
+          {
+            "type": "equivox:item",
+            "id": "ae2:charged_certus_quartz_crystal"
+          },
+          {
+            "type": "equivox:item",
+            "tag": "c:dusts/redstone"
+          },
+          {
+            "type": "equivox:item",
+            "tag": "c:gems/quartz"
+          }
+        ],
+        "output": {
+          "type": "equivox:item",
+          "id": "ae2:fluix_crystal"
+        }
+      },
+      {
+        "ingredients": [
+          {
+            "type": "equivox:item",
+            "id": "ae2:silicon"
+          }
+        ],
+        "output": {
+          "type": "equivox:item",
+          "id": "ae2:printed_silicon"
+        }
+      },
+      {
+        "ingredients": [
+          {
+            "type": "equivox:item",
+            "tag": "c:ingots/gold"
+          }
+        ],
+        "output": {
+          "type": "equivox:item",
+          "id": "ae2:printed_logic_processor"
+        }
+      },
+      {
+        "ingredients": [
+          {
+            "type": "equivox:item",
+            "id": "ae2:certus_quartz_crystal"
+          }
+        ],
+        "output": {
+          "type": "equivox:item",
+          "id": "ae2:printed_calculation_processor"
+        }
+      },
+      {
+        "ingredients": [
+          {
+            "type": "equivox:item",
+            "tag": "c:gems/diamond"
+          }
+        ],
+        "output": {
+          "type": "equivox:item",
+          "id": "ae2:printed_engineering_processor"
+        }
+      },
+      {
+        "ingredients": [
+          {
+            "type": "equivox:item",
+            "id": "ae2:printed_logic_processor"
+          },
+          {
+            "type": "equivox:item",
+            "id": "ae2:printed_silicon"
+          },
+          {
+            "type": "equivox:item",
+            "tag": "c:dusts/redstone"
+          }
+        ],
+        "output": {
+          "type": "equivox:item",
+          "id": "ae2:logic_processor"
+        }
+      },
+      {
+        "ingredients": [
+          {
+            "type": "equivox:item",
+            "id": "ae2:printed_calculation_processor"
+          },
+          {
+            "type": "equivox:item",
+            "id": "ae2:printed_silicon"
+          },
+          {
+            "type": "equivox:item",
+            "tag": "c:dusts/redstone"
+          }
+        ],
+        "output": {
+          "type": "equivox:item",
+          "id": "ae2:calculation_processor"
+        }
+      },
+      {
+        "ingredients": [
+          {
+            "type": "equivox:item",
+            "id": "ae2:printed_engineering_processor"
+          },
+          {
+            "type": "equivox:item",
+            "id": "ae2:printed_silicon"
+          },
+          {
+            "type": "equivox:item",
+            "tag": "c:dusts/redstone"
+          }
+        ],
+        "output": {
+          "type": "equivox:item",
+          "id": "ae2:engineering_processor"
+        }
+      },
+      {
+        "ingredients": [
+          {
+            "type": "equivox:item",
+            "amount": 4,
+            "id": "mysticalagriculture:inferium_essence"
+          }
+        ],
+        "output": {
+          "type": "equivox:item",
+          "id": "mysticalagriculture:prudentium_essence"
+        }
+      },
+      {
+        "ingredients": [
+          {
+            "type": "equivox:item",
+            "amount": 4,
+            "id": "mysticalagriculture:prudentium_essence"
+          }
+        ],
+        "output": {
+          "type": "equivox:item",
+          "id": "mysticalagriculture:tertium_essence"
+        }
+      },
+      {
+        "ingredients": [
+          {
+            "type": "equivox:item",
+            "amount": 4,
+            "id": "mysticalagriculture:tertium_essence"
+          }
+        ],
+        "output": {
+          "type": "equivox:item",
+          "id": "mysticalagriculture:imperium_essence"
+        }
+      },
+      {
+        "ingredients": [
+          {
+            "type": "equivox:item",
+            "amount": 4,
+            "id": "mysticalagriculture:imperium_essence"
+          }
+        ],
+        "output": {
+          "type": "equivox:item",
+          "id": "mysticalagriculture:supremium_essence"
+        }
+      },
+      {
+        "ingredients": [
+          {
+            "type": "equivox:item",
+            "amount": 4,
+            "id": "mysticalagriculture:supremium_essence"
+          }
+        ],
+        "output": {
+          "type": "equivox:item",
+          "id": "mysticalagradditions:insanium_essence"
+        }
+      },
+      {
+        "ingredients": [
+          {
+            "type": "equivox:item",
+            "tag": "c:ingots/iron"
+          },
+          {
+            "type": "equivox:item",
+            "tag": "c:gems/quartz"
+          }
+        ],
+        "output": {
+          "type": "equivox:item",
+          "id": "refinedstorage:quartz_enriched_iron"
+        }
+      }
+    ]
+  }
+}

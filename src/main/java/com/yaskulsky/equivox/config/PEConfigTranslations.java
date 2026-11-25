@@ -9,6 +9,10 @@ import org.jetbrains.annotations.Nullable;
 public enum PEConfigTranslations implements IConfigTranslation {
 	//Client Config
 	CLIENT_PHILO_OVERLAY("client.philo_overlay", "Pulsating Overlay", "The Philosopher's Stone overlay softly pulsates."),
+	CLIENT_EMC_HUD("client.emc_hud", "EMC HUD",
+			"Show your available transmutation EMC on screen (the same personal EMC shown in the Transmutation Table). Default position matches the Project Infinity top-left EMC line."),
+	CLIENT_EMC_HUD_X("client.emc_hud.x", "EMC HUD X", "Horizontal pixel offset of the EMC HUD from the left of the screen. Default 2 matches the vanilla left overlay."),
+	CLIENT_EMC_HUD_Y("client.emc_hud.y", "EMC HUD Y", "Vertical pixel offset of the EMC HUD from the top of the screen. Default 11 is the second left-overlay line (under a pack name)."),
 
 	CLIENT_TOOLTIPS("client.tooltips", "Tooltip Settings", "Settings for configuring Tooltips provided by Equivox.", true),
 
@@ -108,6 +112,11 @@ public enum PEConfigTranslations implements IConfigTranslation {
 			"False requires your hand be empty for Gem Armor Offensive Abilities to be readied or triggered."),
 	SERVER_MISC_LOOKING_AT_DISPLAY("server.misc.looking_at_display", "Looking At Display",
 			"Shows the EMC value of blocks when looking at them in Jade, TOP, or WTHIT."),
+
+	SERVER_ENTROPY_SINK("server.entropy_sink", "Entropy Sink", "Settings for the Entropy Sink FE to EMC converters.", true),
+	SERVER_ENTROPY_SINK_BASIC("server.entropy_sink.basic", "Basic FE per EMC", "How much FE the Entropy Sink needs to produce 1 EMC."),
+	SERVER_ENTROPY_SINK_DARK("server.entropy_sink.dark", "Dark FE per EMC", "How much FE the Dark Entropy Sink needs to produce 1 EMC."),
+	SERVER_ENTROPY_SINK_RED("server.entropy_sink.red", "Red FE per EMC", "How much FE the Red Entropy Sink needs to produce 1 EMC."),
 
 	//EMC Mapping
 	MAPPING_DUMP_TO_FILE("mapping.dump_to_file", "Dump Everything To File",
